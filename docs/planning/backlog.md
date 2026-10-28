@@ -2,6 +2,8 @@
 
 Technical experiments and implementation work are unstarted. Scoping is in progress: the organizer supplied the guidelines and narrowed hands-on scope to A/B, with Model C and feature workspaces as explainers. Priorities describe proposed sequencing. No cloud tests have been run.
 
+The [learning-project handover review](handoff-review.md) records earlier reported lab success and reusable lessons. These inform V01/V08/V10/V11 but do not pass them. Review candidate/content correlation, runtime evidence, release-window locking/queue behavior, and forward recovery against the actual old implementation. Preserve the simpler proposed workshop branch model unless evidence justifies a change.
+
 ## Technical experiments before detailed tutorial authoring
 
 Record the tenant, date, tooling versions, runner, authentication method, source revision, steps, observed result, and evidence link for each experiment. Use synthetic data. A documentation citation informs an experiment; it does not pass it.

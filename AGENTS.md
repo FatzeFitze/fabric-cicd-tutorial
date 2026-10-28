@@ -20,6 +20,7 @@
 - Distinguish proposals, accepted user decisions, documentation evidence, and observed tenant behavior.
 - The current repository is a planning baseline. Do not describe unimplemented examples or unrun cloud checks as working.
 - Record durable choices and experiment results in repository files so separate chats can resume reliably.
+- For prior learning context, read docs/planning/handoff-review.md and its dated snapshot links. Earlier Section 3 success is historical reported evidence; it does not validate this workshop. Distinguish DataOps Models A/B/C from g-IT service Targets A/B.
 
 ## Implementation direction
 

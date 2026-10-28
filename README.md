@@ -13,6 +13,7 @@ Initial scoping baseline, 28 October 2026. Agreed direction: Models A and B are 
 - [Project files and collaboration context](docs/planning/project-layout.md): what to version, local checkout placement, and portable versus personal settings.
 - [Sources](docs/planning/sources.md): official documentation consulted and the limits of that evidence.
 - [Supplied guidelines](docs/source-guidelines/README.md): the organizer's three Working Version 1 documents.
+- [Learning-project handover review](docs/planning/handoff-review.md): imported historical findings, confidence limits, and how they inform the workshop; links to the preserved dated snapshot.
 
 ## Working agreement proposed for this project
 
