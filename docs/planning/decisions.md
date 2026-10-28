@@ -16,6 +16,8 @@ Date: 28 October 2026. Explicit user decisions are recorded below. Other recomme
 
 ## Confirmed in the scoping discussion
 
+- The organizer will act as the first tutorial participant in fresh Fabric workspaces and a fresh Azure DevOps project. Develop units sequentially, use reported outcomes to refine them, and persist instructions/starter assets and feedback in this repository. Unit 1 is drafted; execution is pending.
+
 - Hands-on scope is Models A and B. Cover Model C only in explainers.
 - Prefer shared Dev plus local feature-branch development where possible. Cover feature workspaces in explainers; do not require them for the mock project.
 - Interpret shared Dev as shared within each team; this is a planning assumption pending any contrary instruction.
@@ -47,6 +49,7 @@ Date: 28 October 2026. Explicit user decisions are recorded below. Other recomme
 | D13 | Manual Fabric/bootstrap steps, then add selected starter files gradually | Match day-to-day adoption without handing out a completed solution | Rehearse from an empty participant repo |
 | D14 | Core tutorial follows one developer sequentially; pair concurrency is optional | Reduce branches and runtime states needed for teaching and rehearsal | Timed solo and pair pilot |
 | D15 | Prefer pipeline-published integration Dev for the Model B local feature, subject to feasibility | Use one controlled publisher and one selected source revision | Compare with current code; controlled Git-update Dev remains an alternative |
+| D16 | Provision the nine role/environment workspaces from Unit 1; introduce their use gradually | Address the organizer's request to consider the full layout immediately and avoid a later topology-migration exercise | Pilot timing and explicit native-promotion/dependency experiment |
 
 ## Missing inputs, in priority order
 

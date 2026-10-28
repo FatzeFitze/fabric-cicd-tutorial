@@ -2,6 +2,8 @@
 
 Updated 28 October 2026. The organizer confirmed the separation between workshop preparation and participant work. Repository layout and the precise Model B synchronization mechanism remain recommendations to validate.
 
+Pilot update: Unit 1 provisions nine role/environment workspaces immediately. The optional combined `/fabric/initial` workspace/folder transition described below belongs to the earlier proposal and is not the current pilot path. We will choose the first role-specific Git mapping when capturing actual assets.
+
 ## Two different purposes
 
 | Context | Owner | Starting point | Contents |

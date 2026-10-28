@@ -1,0 +1,31 @@
+# DNA Fabric Days: participant tutorial
+
+This tutorial is being developed through an organizer-led participant pilot. Follow one unit, report the observed result, and revise the instructions before proceeding. A written unit is not yet a validated exercise.
+
+The working scenario is a small synthetic sales solution that progresses from controlled native promotion (Model A) to managed team delivery (Model B). Model C and feature workspaces remain explainer topics. The participant solution starts in its own Azure DevOps project/repository; this preparation repository supplies selected instructions and starter files as needed.
+
+## Start here
+
+| Unit | Outcome | Status |
+| --- | --- | --- |
+| [1. Prepare your project and environments](section-01-foundation/unit-01-project-and-environments.md) | Fresh repository, first README commit, nine capacity-backed role/environment workspaces | Draft ready for first participant pilot; not yet exercised |
+
+## Proposed sequence after Unit 1
+
+The following are planning placeholders, not available or validated units:
+
+1. Create the first lakehouse and notebook manually; run deterministic synthetic data.
+2. Capture supported definitions in Azure Repos and inspect source versus runtime state.
+3. Promote with native Fabric Deployment pipelines and verify target behavior.
+4. Make a local feature change, introduce PR review and useful CI checks.
+5. Coordinate releases across the pre-provisioned workspace roles and validate explicit dependency/environment mappings.
+6. Automate a pinned release through Test, approval and simulated Prod with runtime evidence.
+7. Diagnose a controlled failure, recover, and reuse the starter configuration.
+
+Unit boundaries and timing will change with pilot feedback. No future unit should assume the old reference lab's cloud behavior applies to this sample.
+
+## How to report a result
+
+Use the checkpoint at the end of the unit. Report what happened, the approximate time, confusing wording and any exact error text. A failed checkpoint is useful evidence; it is not a reason to invent an undocumented workaround.
+
+The facilitator keeps the [pilot record](../facilitator/pilot-log.md), including the document revision actually followed. Keep private setup details in local notes where needed.

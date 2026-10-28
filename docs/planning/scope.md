@@ -4,6 +4,8 @@ Status: scoping proposal updated with organizer decisions. Date: 28 October 2026
 
 Agreed scope: hands-on Models A and B. Model C appears only in explainer sections. Local feature-branch development plus shared Dev is the preferred path; feature workspaces are an explainer topic. See [control coverage](control-coverage.md).
 
+Pilot update: [Unit 1](../tutorial/section-01-foundation/unit-01-project-and-environments.md) now provisions all nine code/data/reporting × Dev/Test/Prod workspaces from the outset, following the organizer's request to consider the full topology immediately. Earlier suggestions below to start combined and migrate roles are superseded for this pilot. The teaching progression will add assets and controls gradually; cross-workspace dependencies still require experiments.
+
 ## Purpose and constraints
 
 Prepare 15–20 participants, working individually or in pairs, to choose and apply a suitable Microsoft Fabric ALM workflow. There are 10–12 hours available over two days. Participants have mixed prior ALM experience. The target automation platform is Azure DevOps.

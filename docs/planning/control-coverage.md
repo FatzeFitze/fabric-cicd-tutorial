@@ -2,6 +2,8 @@
 
 Updated 28 October 2026 from the organizer's supplied Working Version 1 guidelines and subsequent scope decisions.
 
+The current participant pilot provisions all nine role/environment workspaces from Unit 1. Model A/B progression increases control strength and coordination rather than requiring a move from combined workspaces into separate roles. The exact native-promotion exercise remains to be tested for the selected cross-workspace dependencies.
+
 ## Agreed teaching boundary
 
 - Model A: hands-on controlled native delivery, including source traceability.

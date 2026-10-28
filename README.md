@@ -4,6 +4,9 @@ Initial scoping baseline, 28 October 2026. Agreed direction: Models A and B are 
 
 ## Start here
 
+- [Participant tutorial](docs/tutorial/README.md): sequential units developed through the organizer's participant pilot; begin with Unit 1.
+- [Pilot record](docs/facilitator/pilot-log.md): actual outcomes, timing and revisions; initial run is pending.
+
 - [Scope and learning journey](docs/planning/scope.md): outcomes, sample project, timetable, reusable components, and repository design.
 - [Decision register](docs/planning/decisions.md): proposed decisions, assumptions, and missing inputs.
 - [Validation and delivery backlog](docs/planning/backlog.md): technical experiments, evidence requirements, delivery sequence, and readiness gates.
