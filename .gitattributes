@@ -1,0 +1,2 @@
+# Preserve the retained snapshot bytes so import-manifest checksums survive cloning.
+reference/initial-lab/2026-10-28/** -text
