@@ -1,0 +1,24 @@
+# Local credentials and machine-specific configuration
+.env
+.env.*
+!.env.example
+*.local.yml
+*.local.yaml
+*.local.json
+.envrc.local
+
+# Python and local tooling outputs
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Generated build outputs
+build/
+dist/
+*.egg-info/
+
+# Temporary local project work and tooling logs
+work/
+.codex-log/
