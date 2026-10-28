@@ -1,6 +1,6 @@
 # Project files and collaboration context
 
-Date: 28 October 2026. This is the recommended working convention for this preparation repository. The final local checkout location is still being discussed.
+Date: 28 October 2026. This is the recommended working convention for this preparation repository. The organizer accepted the local checkout outside OneDrive; relocation was completed and verified on this date.
 
 ## Local checkout
 
@@ -18,13 +18,13 @@ The organizer also proposed:
 C:\Users\matth\OneDrive\sw_dev\git_repos\fabric-cicd-tutorial
 ```
 
-That location is readable from this session. To use it as the normal project, attach the selected folder through the app; writing outside the current allowed project folders requires the corresponding access. Do not confuse current project permissions with an inherent inability to use another local path.
+The OneDrive location was considered; the organizer selected the location outside OneDrive. To use it as the normal project, attach the selected folder through the app; writing outside the current allowed project folders requires the corresponding access. Do not confuse current project permissions with an inherent inability to use another local path.
 
 Recommendation: keep active Git checkouts outside OneDrive. This is an engineering recommendation, not a statement that OneDrive repositories are categorically unsupported. File synchronization can copy files independently of Git's operations; Git metadata and generated environments add avoidable synchronization work. Microsoft's OneDrive troubleshooting guidance describes conflict-copy behavior for non-Office files [S20].
 
 Use Git commits and pushes to transfer versioned work between computers, with a separate clone on each computer. If using the OneDrive location anyway, keep the working copy available offline and avoid using that same file-synchronized checkout concurrently on different computers. Offline availability alone does not solve concurrent synchronization. Git ignore rules do not control OneDrive synchronization.
 
-Do not keep two competing editable copies after relocation. Verify the new copy, its Git state and remote, attach it as the project folder, and only then retire the old working location through a separate deliberate cleanup. No relocation has been performed as part of this discussion.
+Do not keep two competing editable copies after relocation. Verify the new copy, its Git state and remote, attach it as the project folder, and only then retire the old working location through a separate deliberate cleanup. The active checkout is now at the selected local development path above. App folder/project attachment remains a user-facing setup step.
 
 ## What belongs in the repository
 

@@ -18,7 +18,7 @@ The assistant can then configure author details locally for this repository, cre
 These commands are a reference; placeholders must be replaced before execution. Run them in this exact repository folder:
 
 ```powershell
-Set-Location -LiteralPath 'C:\Users\matth\Documents\Codex\2026-10-28\ok-now-it-is-time-to-2\outputs\dna-fabric-days'
+Set-Location -LiteralPath 'C:\Users\matth\sw_dev\git_repos\fabric-cicd-tutorial'
 git config --local user.name 'YOUR COMMIT AUTHOR NAME'
 git config --local user.email 'YOUR COMMIT AUTHOR EMAIL'
 git add README.md AGENTS.md .gitignore docs

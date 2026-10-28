@@ -26,7 +26,7 @@ Date: 28 October 2026. Explicit user decisions are recorded below. Other recomme
 - Participants will have admin access to their workshop workspaces.
 - This preparation repository contains tutorial/support assets. Each participant or pair starts with an unpopulated Azure DevOps project/repository; manual UI creation of Fabric assets and initial Git synchronization are intended learning activities.
 - The organizer is considering a full DevOps project per participant/pair, separate repositories versus role folders, and a sequential one-developer tutorial rather than required concurrent feature development. The recommendations below address these open choices.
-- The organizer supplied the GitHub destination `FatzeFitze/fabric-cicd-tutorial` and the desired commit author details. Remote and repository-local author settings are configured. Initial publication to `main` succeeded on 28 October 2026. The preferred permanent local checkout location is still being discussed; no relocation has occurred.
+- The organizer supplied the GitHub destination `FatzeFitze/fabric-cicd-tutorial` and the desired commit author details. Remote and repository-local author settings are configured. Initial publication to `main` succeeded on 28 October 2026. The organizer accepted an active checkout outside OneDrive and versioned project guidance alongside the code. The repository was relocated to `C:\Users\matth\sw_dev\git_repos\fabric-cicd-tutorial` on 28 October 2026; files, commit history, and clean Git status were verified. App project/folder attachment requires the user-facing folder selection step.
 
 ## Proposals to review
 
