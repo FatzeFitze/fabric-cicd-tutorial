@@ -1,6 +1,6 @@
 # Validation and delivery backlog
 
-Technical experiments and implementation work are unstarted. Scoping is in progress: the organizer supplied the guidelines and narrowed hands-on scope to A/B, with Model C and feature workspaces as explainers. Priorities describe proposed sequencing. No cloud tests have been run.
+V01 has an initial source inventory, targeted review and passing local definition/configuration checks; see the [codebase assessment](initial-codebase-review.md). Workshop implementation and cloud experiments remain unstarted. Hands-on scope is A/B, with Model C and feature workspaces as explainers. No workshop cloud tests have been run.
 
 The [learning-project handover review](handoff-review.md) records earlier reported lab success and reusable lessons. These inform V01/V08/V10/V11 but do not pass them. Review candidate/content correlation, runtime evidence, release-window locking/queue behavior, and forward recovery against the actual old implementation. Preserve the simpler proposed workshop branch model unless evidence justifies a change.
 

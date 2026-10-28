@@ -1,0 +1,322 @@
+name: fabric-cicd-lab-nonprod-$(Date:yyyyMMdd).$(Rev:r)
+
+parameters:
+  - name: executeNonProdRelease
+    displayName: Deploy and validate protected dev in TEST
+    type: boolean
+    default: false
+
+trigger: none
+pr: none
+
+variables:
+  - template: /config/tutorial-pipeline-resources.yml
+
+  - name: tutorialResourceConfig
+    value: config/tutorial-resources.json
+
+stages:
+  - stage: Preflight
+    displayName: Validate non-production release candidate
+    jobs:
+      - job: Validate
+        displayName: Validate code, identity, and TEST target
+        pool:
+          vmImage: ubuntu-latest
+
+        steps:
+          - checkout: self
+            displayName: Checkout protected dev
+            clean: true
+            fetchDepth: 1
+            persistCredentials: true
+
+          - task: UsePythonVersion@0
+            displayName: Use Python 3.12
+            inputs:
+              versionSpec: "3.12"
+              addToPath: true
+
+          - pwsh: |
+              $ErrorActionPreference = "Stop"
+
+              if ("$(Build.SourceBranch)" -ne "refs/heads/dev") {
+                  throw (
+                      "Non-production release must run from protected dev. " +
+                      "Actual source branch: $(Build.SourceBranch)"
+                  )
+              }
+
+              Write-Host "Azure DevOps source context"
+              Write-Host "==========================="
+              Write-Host "Build.SourceBranch : $(Build.SourceBranch)"
+              Write-Host "Build.SourceVersion: $(Build.SourceVersion)"
+              Write-Host "Git HEAD           : $(git rev-parse HEAD)"
+
+              $GitBranch = git branch --show-current
+
+              if ([string]::IsNullOrWhiteSpace($GitBranch)) {
+                  Write-Host "Git checkout       : detached HEAD"
+              }
+              else {
+                  Write-Host "Git checkout       : branch '$GitBranch'"
+              }
+            displayName: Show trusted code-state context
+
+          - script: |
+              python -m pip install --disable-pip-version-check \
+                --requirement requirements-cicd.txt
+
+              python -m compileall -q scripts
+              python scripts/validate_fabric_repo.py
+              python scripts/tutorial_config.py \
+                --config "$(tutorialResourceConfig)"
+            displayName: Validate repository and install release dependencies
+
+          - task: AzureCLI@2
+            displayName: Validate workload identity and TEST deployment plan
+            inputs:
+              # Participant-specific protected resource reference.
+              # Keep this literal so Azure DevOps can authorize it before the job starts.
+              azureSubscription: ${{ variables.nonProdServiceConnectionName }}
+              scriptType: pscore
+              scriptLocation: inlineScript
+              addSpnToEnvironment: true
+              useGlobalConfig: false
+              powerShellErrorActionPreference: stop
+              inlineScript: |
+                $ErrorActionPreference = "Stop"
+
+                $EvidencePath = (
+                    "$(Build.ArtifactStagingDirectory)" +
+                    "/section-3/unit-3/preflight"
+                )
+
+                New-Item `
+                  -Path $EvidencePath `
+                  -ItemType Directory `
+                  -Force |
+                  Out-Null
+
+                $ExpectedIdentityName = python scripts/tutorial_config.py `
+                  --config "$(tutorialResourceConfig)" `
+                  --get "deploymentIdentities.nonProductionManagedIdentityName"
+
+                if ($LASTEXITCODE -ne 0) {
+                    throw "Tutorial resource configuration is invalid."
+                }
+
+                python scripts/fabric_identity_preflight.py `
+                  --expected-tenant-id "$env:tenantId" `
+                  --expected-client-id "$env:servicePrincipalId" `
+                  --expected-identity-name "$ExpectedIdentityName" `
+                  --output "$EvidencePath/fabric-identity-preflight.json"
+
+                if ($LASTEXITCODE -ne 0) {
+                    throw "Fabric workload identity preflight failed."
+                }
+
+                python scripts/fabric_test_deploy.py `
+                  --tenant-id "$env:tenantId" `
+                  --expected-branch "dev" `
+                  --config "$(tutorialResourceConfig)" `
+                  --output "$EvidencePath/fabric-test-deployment-plan.json"
+
+                if ($LASTEXITCODE -ne 0) {
+                    throw "TEST deployment plan failed."
+                }
+
+          - task: PublishPipelineArtifact@1
+            displayName: Publish Unit 3 preflight evidence
+            condition: always()
+            inputs:
+              targetPath: "$(Build.ArtifactStagingDirectory)/section-3/unit-3/preflight"
+              artifact: fabric-cicd-lab-s3-u3-preflight
+              publishLocation: pipeline
+
+  - ${{ if eq(parameters.executeNonProdRelease, true) }}:
+      - stage: Deploy_TEST
+        displayName: Deploy protected dev to TEST
+        dependsOn: Preflight
+        condition: succeeded()
+
+        jobs:
+          - deployment: Deploy_TEST
+            displayName: Deploy Fabric solution to TEST
+            # Participant-specific protected resource reference.
+            # Keep this literal so Azure DevOps can authorize it before the job starts.
+            environment: ${{ variables.azureDevOpsTestEnvironmentName }}
+            pool:
+              vmImage: ubuntu-latest
+
+            strategy:
+              runOnce:
+                deploy:
+                  steps:
+                    - checkout: self
+                      displayName: Checkout protected dev
+                      clean: true
+                      fetchDepth: 1
+                      persistCredentials: true
+
+                    - task: UsePythonVersion@0
+                      displayName: Use Python 3.12
+                      inputs:
+                        versionSpec: "3.12"
+                        addToPath: true
+
+                    - script: |
+                        python -m pip install --disable-pip-version-check \
+                          --requirement requirements-cicd.txt
+
+                        python -m compileall -q scripts
+                        python scripts/validate_fabric_repo.py
+                        python scripts/tutorial_config.py \
+                          --config "$(tutorialResourceConfig)"
+                      displayName: Validate deployment source
+
+                    - task: AzureCLI@2
+                      displayName: Deploy TEST with workload identity
+                      inputs:
+                        # Must match the literal used by the Preflight stage.
+                        azureSubscription: ${{ variables.nonProdServiceConnectionName }}
+                        scriptType: pscore
+                        scriptLocation: inlineScript
+                        addSpnToEnvironment: true
+                        useGlobalConfig: false
+                        powerShellErrorActionPreference: stop
+                        inlineScript: |
+                          $ErrorActionPreference = "Stop"
+
+                          $EvidencePath = (
+                              "$(Build.ArtifactStagingDirectory)" +
+                              "/section-3/unit-3/deployment"
+                          )
+
+                          New-Item `
+                            -Path $EvidencePath `
+                            -ItemType Directory `
+                            -Force |
+                            Out-Null
+
+                          python scripts/fabric_test_deploy.py `
+                            --tenant-id "$env:tenantId" `
+                            --expected-branch "dev" `
+                            --config "$(tutorialResourceConfig)" `
+                            --execute `
+                            --confirmation "DEPLOY_DEV_TO_TEST_WITH_FABRIC_CICD" `
+                            --output "$EvidencePath/fabric-test-deployment.json"
+
+                          if ($LASTEXITCODE -ne 0) {
+                              throw "TEST deployment failed."
+                          }
+
+                    - task: PublishPipelineArtifact@1
+                      displayName: Publish TEST deployment evidence
+                      condition: always()
+                      inputs:
+                        targetPath: "$(Build.ArtifactStagingDirectory)/section-3/unit-3/deployment"
+                        artifact: fabric-cicd-lab-s3-u3-test-deployment
+                        publishLocation: pipeline
+
+      - stage: Validate_TEST
+        displayName: Execute TEST and create release candidate
+        dependsOn: Deploy_TEST
+        condition: succeeded()
+
+        jobs:
+          - job: Validate_TEST
+            displayName: Validate TEST runtime
+            pool:
+              vmImage: ubuntu-latest
+
+            steps:
+              - checkout: self
+                displayName: Checkout tested dev commit
+                clean: true
+                fetchDepth: 1
+                persistCredentials: true
+
+              - task: UsePythonVersion@0
+                displayName: Use Python 3.12
+                inputs:
+                  versionSpec: "3.12"
+                  addToPath: true
+
+              - script: |
+                  python -m pip install --disable-pip-version-check \
+                    --requirement requirements-cicd.txt
+
+                  python -m compileall -q scripts
+                  python scripts/tutorial_config.py \
+                    --config "$(tutorialResourceConfig)"
+                displayName: Install runtime-validation dependencies
+
+              - task: DownloadPipelineArtifact@2
+                displayName: Download TEST deployment evidence
+                inputs:
+                  buildType: current
+                  artifactName: fabric-cicd-lab-s3-u3-test-deployment
+                  targetPath: "$(Pipeline.Workspace)/s3-u3-test-deployment"
+
+              - task: AzureCLI@2
+                displayName: Execute and validate TEST Data Pipeline
+                inputs:
+                  # Must match the literal used by the Preflight and Deploy_TEST stages.
+                  azureSubscription: ${{ variables.nonProdServiceConnectionName }}
+                  scriptType: pscore
+                  scriptLocation: inlineScript
+                  addSpnToEnvironment: true
+                  useGlobalConfig: false
+                  powerShellErrorActionPreference: stop
+                  inlineScript: |
+                    $ErrorActionPreference = "Stop"
+
+                    $EvidencePath = (
+                        "$(Build.ArtifactStagingDirectory)" +
+                        "/section-3/unit-3/release-candidate"
+                    )
+
+                    New-Item `
+                      -Path $EvidencePath `
+                      -ItemType Directory `
+                      -Force |
+                      Out-Null
+
+                    Copy-Item `
+                      -Path (
+                          "$(Pipeline.Workspace)" +
+                          "/s3-u3-test-deployment/fabric-test-deployment.json"
+                      ) `
+                      -Destination (
+                          "$EvidencePath/fabric-test-deployment.json"
+                      )
+
+                    python scripts/fabric_test_runtime_validate.py `
+                      --tenant-id "$env:tenantId" `
+                      --expected-branch "dev" `
+                      --config "$(tutorialResourceConfig)" `
+                      --output "$EvidencePath/fabric-test-runtime-validation.json"
+
+                    if ($LASTEXITCODE -ne 0) {
+                        throw "TEST runtime validation failed."
+                    }
+
+                    python scripts/fabric_release_candidate.py `
+                      --expected-branch "dev" `
+                      --config "$(tutorialResourceConfig)" `
+                      --deployment-evidence "$EvidencePath/fabric-test-deployment.json" `
+                      --runtime-evidence "$EvidencePath/fabric-test-runtime-validation.json" `
+                      --output "$EvidencePath/fabric-release-candidate.json"
+
+                    if ($LASTEXITCODE -ne 0) {
+                        throw "Release-candidate creation failed."
+                    }
+
+              - task: PublishPipelineArtifact@1
+                displayName: Publish TEST release candidate
+                condition: always()
+                inputs:
+                  targetPath: "$(Build.ArtifactStagingDirectory)/section-3/unit-3/release-candidate"
+                  artifact: fabric-cicd-lab-s3-u3-release-candidate
+                  publishLocation: pipeline

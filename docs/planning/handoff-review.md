@@ -32,6 +32,8 @@ The workshop scope, A/B hands-on boundary, Model C and feature-workspace explain
 
 ## What the handover does not supply
 
+Subsequent update: the organizer has now supplied the test-project source separately. See the [codebase assessment](initial-codebase-review.md). The list below describes what the handover archive itself lacked; raw run evidence and full original authoring documents remain outstanding.
+
 - The original Section 3 repository/scripts, actual pipeline definitions, raw release evidence, or tenant configuration.
 - Full source contents of `CURRENT_TUTORIAL_STATE.md`, `TUTORIAL_CURRICULUM_MAP.md`, or `TUTORIAL_AUTHORING_GUIDE.md`.
 - The full original project instructions or hidden project memory.

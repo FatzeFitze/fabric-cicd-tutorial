@@ -1,0 +1,245 @@
+{
+  "sourceArchive": "fabric_cicd_test_repo_content_2026_10_28.zip",
+  "sourceArchiveSHA256": "991546B067AA7F63855882DC334443ECD0A1EC482D1DA9E5AC12560BF365A2B3",
+  "status": "historical-reference-not-workshop-toolkit",
+  "excluded": [
+    "six __pycache__/*.pyc files",
+    "empty directory entries"
+  ],
+  "files": [
+    {
+      "path": ".azuredevops/pipelines/ci-fabric-definitions.yml",
+      "sourceSHA256": "b9565a09b863c641fed85ea197c336ea7cd895402ecaf2c8f71f4ecc6cb0beb1",
+      "referenceSHA256": "b9565a09b863c641fed85ea197c336ea7cd895402ecaf2c8f71f4ecc6cb0beb1",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": ".azuredevops/pipelines/release-fabric-nonprod.yml",
+      "sourceSHA256": "13c2e1c0d9371ec04179bb711665679a4581aa9a783a8dd710b7a6ff89b33c3f",
+      "referenceSHA256": "13c2e1c0d9371ec04179bb711665679a4581aa9a783a8dd710b7a6ff89b33c3f",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": ".azuredevops/pipelines/release-fabric-prod.yml",
+      "sourceSHA256": "79fa55acac47f444b7b3f2665beebe3e942839ad1c80bf774cb7f223a3b2d466",
+      "referenceSHA256": "79fa55acac47f444b7b3f2665beebe3e942839ad1c80bf774cb7f223a3b2d466",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": ".azuredevops/pipelines/test-fabric-private-cicd.yml",
+      "sourceSHA256": "a7ec8493d697a987f8c9a78af709d76247f72e57fa878e21a30a079136c53fba",
+      "referenceSHA256": "efff75b7c28254285f089c094d0b4aa0a3a73ac7b2936cee1950ca2f90e01ac2",
+      "environmentValuesReplaced": true
+    },
+    {
+      "path": "01_data_engineering/lh_cicd_lab.Lakehouse/.platform",
+      "sourceSHA256": "8ae1689375b0c67f8d110befb6878797f84d1d79a8e3ff9f46160f4590a2bab4",
+      "referenceSHA256": "8ae1689375b0c67f8d110befb6878797f84d1d79a8e3ff9f46160f4590a2bab4",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "01_data_engineering/lh_cicd_lab.Lakehouse/alm.settings.json",
+      "sourceSHA256": "df05ec60968ffb09de5d8e7729864ce6e8f55c9ee8618135b1c3666a2b5bce3c",
+      "referenceSHA256": "df05ec60968ffb09de5d8e7729864ce6e8f55c9ee8618135b1c3666a2b5bce3c",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "01_data_engineering/lh_cicd_lab.Lakehouse/lakehouse.metadata.json",
+      "sourceSHA256": "cd0de1c2fee529717b747e259e9cd68b86ed23608965004542f52bc220eb81a4",
+      "referenceSHA256": "cd0de1c2fee529717b747e259e9cd68b86ed23608965004542f52bc220eb81a4",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "01_data_engineering/lh_cicd_lab.Lakehouse/shortcuts.metadata.json",
+      "sourceSHA256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "referenceSHA256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "01_data_engineering/nb_01_seed_and_transform_cicd_lab.Notebook/.platform",
+      "sourceSHA256": "c778cb430bc3378af50c8cdd4ce64055215fbfae646e684642d7c97ac94de19e",
+      "referenceSHA256": "c778cb430bc3378af50c8cdd4ce64055215fbfae646e684642d7c97ac94de19e",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "01_data_engineering/nb_01_seed_and_transform_cicd_lab.Notebook/notebook-content.py",
+      "sourceSHA256": "39ef9e365e6dc6b5abfd6aaa308d1f8370b6fc87fd58eceedeed1c1fcadc7b20",
+      "referenceSHA256": "39ef9e365e6dc6b5abfd6aaa308d1f8370b6fc87fd58eceedeed1c1fcadc7b20",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "02_orchestration/pl_01_run_cicd_lab_transform.DataPipeline/.platform",
+      "sourceSHA256": "2dc380223ca5ed91d1be8dba37d29c2c4d9961a7c6cf26aeaf1867ba093f7b58",
+      "referenceSHA256": "2dc380223ca5ed91d1be8dba37d29c2c4d9961a7c6cf26aeaf1867ba093f7b58",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "02_orchestration/pl_01_run_cicd_lab_transform.DataPipeline/pipeline-content.json",
+      "sourceSHA256": "9212bc5e56fca854d85714bfdda907baa2ecf9e1778985bc9e1a276bbb63d635",
+      "referenceSHA256": "9212bc5e56fca854d85714bfdda907baa2ecf9e1778985bc9e1a276bbb63d635",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "99_admin/vl_cicd_lab_config.VariableLibrary/.platform",
+      "sourceSHA256": "9b10a82302ae2c57959aa44b00945c14eadd9c0c687c257da5c5a52aeca816d6",
+      "referenceSHA256": "9b10a82302ae2c57959aa44b00945c14eadd9c0c687c257da5c5a52aeca816d6",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "99_admin/vl_cicd_lab_config.VariableLibrary/settings.json",
+      "sourceSHA256": "452d4eaffdc578a0196415cfa42146440890cfe5bbbea8faa3ecdca4d9019dc1",
+      "referenceSHA256": "452d4eaffdc578a0196415cfa42146440890cfe5bbbea8faa3ecdca4d9019dc1",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "99_admin/vl_cicd_lab_config.VariableLibrary/valueSets/prod_environment_name.json",
+      "sourceSHA256": "5f86229c8ac5f9139bb9c41d1d0dfa59bc26c000f214ebd746153deb87277cc6",
+      "referenceSHA256": "5f86229c8ac5f9139bb9c41d1d0dfa59bc26c000f214ebd746153deb87277cc6",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "99_admin/vl_cicd_lab_config.VariableLibrary/valueSets/test_environment_name.json",
+      "sourceSHA256": "8f7d5a7d743a4eb3e553f94bd9b04df040bcd2267150cf4bca26409bdcf702df",
+      "referenceSHA256": "8f7d5a7d743a4eb3e553f94bd9b04df040bcd2267150cf4bca26409bdcf702df",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "99_admin/vl_cicd_lab_config.VariableLibrary/variables.json",
+      "sourceSHA256": "8b69b7d6ca308c0203c86abd2d4ec9182a0d0525c1f7584493c3b12a29015271",
+      "referenceSHA256": "8b69b7d6ca308c0203c86abd2d4ec9182a0d0525c1f7584493c3b12a29015271",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "config/tutorial-pipeline-resources.yml",
+      "sourceSHA256": "cef08e643f6ce70d22c722663ad7dd5ee1f0a8b35cb66a1f3ed6c4d3fd2e9cca",
+      "referenceSHA256": "fee4f30fa0b787a8ebbb5a5bcb49e4e15c206164121f489500e96f5a46bf5812",
+      "environmentValuesReplaced": true
+    },
+    {
+      "path": "config/tutorial-resources.json",
+      "sourceSHA256": "40a15cb8a7ccc56f0aac4f59c4c2531109e56c55d3bc8917855242decabfed1c",
+      "referenceSHA256": "8d817166702beee5604d354536aafc92c0f00ed9ec49f763d28965b30b164d2c",
+      "environmentValuesReplaced": true
+    },
+    {
+      "path": "helper_scripts/Allow-FabricWorkspacePublicInbound.ps1",
+      "sourceSHA256": "8376618ef9dbc04749171cc703176e13c5f2a9b77f7573c3dc1a43414e5bc57d",
+      "referenceSHA256": "a4738c770e888f02c74e510f76cc87869aa873ea12e54429c46f2b74826593b6",
+      "environmentValuesReplaced": true
+    },
+    {
+      "path": "requirements-cicd.txt",
+      "sourceSHA256": "6f33270f071ebdae742e06ae3444cb0eb438652e1cd6c76ea4497d13a51bd617",
+      "referenceSHA256": "6f33270f071ebdae742e06ae3444cb0eb438652e1cd6c76ea4497d13a51bd617",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "scripts/archive/legacy-release-automation/fabric_dev_materialize.py",
+      "sourceSHA256": "9dc2330937471246803f8b054199d4d4f3a8e39c698b3ed5cc1c8ee3527edade",
+      "referenceSHA256": "9dc2330937471246803f8b054199d4d4f3a8e39c698b3ed5cc1c8ee3527edade",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "scripts/archive/legacy-release-automation/fabric_git_credentials_preflight.py",
+      "sourceSHA256": "1c0b59497c2a889839f7f4b0c20c03a58924927370b06278266edec35ba2b27a",
+      "referenceSHA256": "eb87b748d6e898f477eecbdee314e2c959b9a4008322fb3b8c70ec02c3d38658",
+      "environmentValuesReplaced": true
+    },
+    {
+      "path": "scripts/archive/legacy-release-automation/fabric_prod_release.py",
+      "sourceSHA256": "5756820e3973b9c511fbf24f5ce2de33acb7ca9e0be576e90ff6144a372b7f1e",
+      "referenceSHA256": "70a39bb840366355a946f204d5277f9f439a6e909eb390f833b64dd221be8b7e",
+      "environmentValuesReplaced": true
+    },
+    {
+      "path": "scripts/archive/legacy-release-automation/fabric_release_manifest.py",
+      "sourceSHA256": "33c9361c880a239a7b3c7af2f2bbb724929c9f5fef2edad47c952c8a1560999b",
+      "referenceSHA256": "33c9361c880a239a7b3c7af2f2bbb724929c9f5fef2edad47c952c8a1560999b",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "scripts/fabric_deployment_pipeline_deploy.py",
+      "sourceSHA256": "0dd1c15d6630e6567acf9b6047ab0c529eedf87a5920b74445e3032c70720231",
+      "referenceSHA256": "b92d85e663c208a4a5c2b750a85b7f6887df6166534d20795a2219ccfcad5ba6",
+      "environmentValuesReplaced": true
+    },
+    {
+      "path": "scripts/fabric_deployment_pipeline_preflight.py",
+      "sourceSHA256": "6ec51f08a829de13f698f08316203ccf813e457f3b0e9ca9a57fcacaf1309cc1",
+      "referenceSHA256": "453d57a3a3c498716a068766008747fbb49af10d9d89bf1736f6d05ef7e0d355",
+      "environmentValuesReplaced": true
+    },
+    {
+      "path": "scripts/fabric_identity_preflight.py",
+      "sourceSHA256": "283f75c263893ca8d6622415e847edde7e858780d72804d0580632ab98697857",
+      "referenceSHA256": "283f75c263893ca8d6622415e847edde7e858780d72804d0580632ab98697857",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "scripts/fabric_nonprod_release.py",
+      "sourceSHA256": "91d1a670ff5dac970c1d2a5e475263068387a09a5af08511ceb51314ca2a176d",
+      "referenceSHA256": "91d1a670ff5dac970c1d2a5e475263068387a09a5af08511ceb51314ca2a176d",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "scripts/fabric_prod_deploy.py",
+      "sourceSHA256": "e916a6e0caf9bee1eea494a190fb5f3541d8566098046ba9053a95021c1eb16b",
+      "referenceSHA256": "e916a6e0caf9bee1eea494a190fb5f3541d8566098046ba9053a95021c1eb16b",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "scripts/fabric_prod_release_finalize.py",
+      "sourceSHA256": "1332332d73518aa196480f593cbafc583b5ca29ca7b1b7bd15d0f48e3f40f38f",
+      "referenceSHA256": "1332332d73518aa196480f593cbafc583b5ca29ca7b1b7bd15d0f48e3f40f38f",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "scripts/fabric_prod_release_preflight.py",
+      "sourceSHA256": "15c2fa842e276cf0428a5320feb913510c63ed2caf6a374b14e6195af829a65f",
+      "referenceSHA256": "15c2fa842e276cf0428a5320feb913510c63ed2caf6a374b14e6195af829a65f",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "scripts/fabric_prod_runtime_validate.py",
+      "sourceSHA256": "f579282c88ba76dacbc42e8a416c4761989da6e1c57083dcd8532a77a95a08fc",
+      "referenceSHA256": "f579282c88ba76dacbc42e8a416c4761989da6e1c57083dcd8532a77a95a08fc",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "scripts/fabric_release_candidate.py",
+      "sourceSHA256": "35427517ea58cca0668eccfd6cec58c8ded1f7c80303ae33a60958214d391562",
+      "referenceSHA256": "35427517ea58cca0668eccfd6cec58c8ded1f7c80303ae33a60958214d391562",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "scripts/fabric_test_deploy.py",
+      "sourceSHA256": "8f1eaefc8a405a296c27bc3d1fb342eae84094a016d30096af0e16eb1ee37982",
+      "referenceSHA256": "8f1eaefc8a405a296c27bc3d1fb342eae84094a016d30096af0e16eb1ee37982",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "scripts/fabric_test_runtime_validate.py",
+      "sourceSHA256": "59511a804c89df2cf70a5c25810ac839ec7bda5541af478783b4cb53f788141c",
+      "referenceSHA256": "59511a804c89df2cf70a5c25810ac839ec7bda5541af478783b4cb53f788141c",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "scripts/test_fabric_private_cicd.py",
+      "sourceSHA256": "15e197984ab214c6feaa38b2d8e8a06bdb34e0306ef0eb0e23c690142c4208fe",
+      "referenceSHA256": "15e197984ab214c6feaa38b2d8e8a06bdb34e0306ef0eb0e23c690142c4208fe",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "scripts/tutorial_config.py",
+      "sourceSHA256": "7ea467429bf00f6caefce55783b572f93951e4fc439469b39eb97d781d41a113",
+      "referenceSHA256": "7ea467429bf00f6caefce55783b572f93951e4fc439469b39eb97d781d41a113",
+      "environmentValuesReplaced": false
+    },
+    {
+      "path": "scripts/validate_fabric_repo.py",
+      "sourceSHA256": "9e94218857e37be7387ec485fe9f8c1a850d6d3d558072954e88a532fa4b7266",
+      "referenceSHA256": "9e94218857e37be7387ec485fe9f8c1a850d6d3d558072954e88a532fa4b7266",
+      "environmentValuesReplaced": false
+    }
+  ]
+}

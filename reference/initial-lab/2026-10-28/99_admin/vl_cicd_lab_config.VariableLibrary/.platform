@@ -1,0 +1,14 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "VariableLibrary",
+    "displayName": "vl_cicd_lab_config"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "e68b5167-469f-a144-45d4-af8d963aee04",
+    "type": "Lakehouse",
+    "displayName": "lh_cicd_lab",
+    "description": "Store raw and curated Delta tables for the demo project."
+  }
+}

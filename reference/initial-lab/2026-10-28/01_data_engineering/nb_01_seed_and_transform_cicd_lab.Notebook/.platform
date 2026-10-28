@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Notebook",
+    "displayName": "nb_01_seed_and_transform_cicd_lab",
+    "description": "Generate deterministic demo sales data and write raw, curated, and aggregated Delta tables to lh_cicd_lab."
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "493d18d6-4618-a270-47a1-285530c2cff7"
+  }
+}

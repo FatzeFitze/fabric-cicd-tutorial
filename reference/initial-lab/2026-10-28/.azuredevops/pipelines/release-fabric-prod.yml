@@ -1,0 +1,336 @@
+name: fabric-cicd-lab-prod-$(Date:yyyyMMdd).$(Rev:r)
+
+parameters:
+  - name: candidateRunId
+    displayName: TEST-validated non-production pipeline Run ID
+    type: string
+    default: ""
+
+  - name: executeProdRelease
+    displayName: Deploy protected main to PROD after approval
+    type: boolean
+    default: false
+
+trigger: none
+pr: none
+
+variables:
+  - template: /config/tutorial-pipeline-resources.yml
+
+  - name: tutorialResourceConfig
+    value: config/tutorial-resources.json
+
+  - name: candidateArtifactName
+    value: fabric-cicd-lab-s3-u3-release-candidate
+
+stages:
+  - stage: Preflight
+    displayName: Validate main against TEST release candidate
+    jobs:
+      - job: Validate
+        displayName: Validate code authority and candidate evidence
+        pool:
+          vmImage: ubuntu-latest
+
+        steps:
+          - checkout: self
+            displayName: Checkout protected main
+            clean: true
+            fetchDepth: 1
+            persistCredentials: true
+
+          - task: UsePythonVersion@0
+            displayName: Use Python 3.12
+            inputs:
+              versionSpec: "3.12"
+              addToPath: true
+
+          - pwsh: |
+              $ErrorActionPreference = "Stop"
+
+              if ("$(Build.SourceBranch)" -ne "refs/heads/main") {
+                  throw (
+                      "Production release must run from protected main. " +
+                      "Actual source branch: $(Build.SourceBranch)"
+                  )
+              }
+
+              if ([string]::IsNullOrWhiteSpace("${{ parameters.candidateRunId }}")) {
+                  throw "candidateRunId is required."
+              }
+
+              if ("${{ parameters.candidateRunId }}" -notmatch '^[0-9]+$') {
+                  throw "candidateRunId must be the numeric Azure DevOps Run ID."
+              }
+
+              Write-Host "Production source context"
+              Write-Host "========================="
+              Write-Host "Build.SourceBranch : $(Build.SourceBranch)"
+              Write-Host "Build.SourceVersion: $(Build.SourceVersion)"
+              Write-Host "Git HEAD           : $(git rev-parse HEAD)"
+              Write-Host "Candidate Run ID   : ${{ parameters.candidateRunId }}"
+            displayName: Validate requested Production source context
+
+          - script: |
+              python -m pip install --disable-pip-version-check \
+                --requirement requirements-cicd.txt
+
+              python -m compileall -q scripts
+              python scripts/validate_fabric_repo.py
+              python scripts/tutorial_config.py \
+                --config "$(tutorialResourceConfig)"
+            displayName: Validate repository and configuration
+
+          - pwsh: |
+              $ErrorActionPreference = "Stop"
+
+              $CandidateRoot = "$(Pipeline.Workspace)/candidate"
+              New-Item -Path $CandidateRoot -ItemType Directory -Force | Out-Null
+
+              az pipelines runs show `
+                --id "${{ parameters.candidateRunId }}" `
+                --organization "$(System.TeamFoundationCollectionUri)" `
+                --project "$(System.TeamProject)" `
+                --output json `
+                > "$CandidateRoot/candidate-run.json"
+
+              if ($LASTEXITCODE -ne 0) {
+                  throw "Could not read the selected non-production pipeline run."
+              }
+
+              az pipelines runs artifact download `
+                --run-id "${{ parameters.candidateRunId }}" `
+                --artifact-name "$(candidateArtifactName)" `
+                --path $CandidateRoot `
+                --organization "$(System.TeamFoundationCollectionUri)" `
+                --project "$(System.TeamProject)"
+
+              if ($LASTEXITCODE -ne 0) {
+                  throw "Could not download the selected release-candidate artifact."
+              }
+
+              $CandidateFile = Get-ChildItem `
+                -Path $CandidateRoot `
+                -Filter "fabric-release-candidate.json" `
+                -Recurse `
+                -File | Select-Object -First 1
+
+              if ($null -eq $CandidateFile) {
+                  throw "fabric-release-candidate.json was not found in the selected run."
+              }
+
+              Write-Host "Candidate evidence: $($CandidateFile.FullName)"
+              Write-Host "##vso[task.setvariable variable=candidateEvidencePath]$($CandidateFile.FullName)"
+              Write-Host "##vso[task.setvariable variable=candidateRunMetadataPath]$CandidateRoot/candidate-run.json"
+            displayName: Download exact TEST release-candidate evidence
+            env:
+              AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
+
+          - pwsh: |
+              $ErrorActionPreference = "Stop"
+
+              $EvidencePath = (
+                  "$(Build.ArtifactStagingDirectory)" +
+                  "/section-3/unit-5/preflight"
+              )
+              New-Item -Path $EvidencePath -ItemType Directory -Force | Out-Null
+
+              python scripts/fabric_prod_release_preflight.py `
+                --candidate-evidence "$(candidateEvidencePath)" `
+                --candidate-run-metadata "$(candidateRunMetadataPath)" `
+                --candidate-run-id "${{ parameters.candidateRunId }}" `
+                --expected-branch "main" `
+                --config "$(tutorialResourceConfig)" `
+                --output "$EvidencePath/fabric-prod-release-plan.json"
+
+              if ($LASTEXITCODE -ne 0) {
+                  throw "Production release preflight failed."
+              }
+
+              Copy-Item `
+                -Path "$(candidateEvidencePath)" `
+                -Destination "$EvidencePath/fabric-release-candidate.json"
+
+              Copy-Item `
+                -Path "$(candidateRunMetadataPath)" `
+                -Destination "$EvidencePath/candidate-run.json"
+            displayName: Prove TEST candidate equals protected main
+
+          - task: PublishPipelineArtifact@1
+            displayName: Publish Production preflight evidence
+            condition: always()
+            inputs:
+              targetPath: "$(Build.ArtifactStagingDirectory)/section-3/unit-5/preflight"
+              artifact: fabric-cicd-lab-s3-u5-prod-preflight
+              publishLocation: pipeline
+
+  - ${{ if eq(parameters.executeProdRelease, true) }}:
+      - stage: Deploy_PROD
+        displayName: Deploy and validate approved main in PROD
+        dependsOn: Preflight
+        condition: succeeded()
+        lockBehavior: runLatest
+
+        jobs:
+          - deployment: Deploy_PROD
+            displayName: Deploy Fabric solution to PROD
+            environment: ${{ variables.azureDevOpsProdEnvironmentName }}
+            pool:
+              vmImage: ubuntu-latest
+
+            strategy:
+              runOnce:
+                deploy:
+                  steps:
+                    - download: none
+
+                    - checkout: self
+                      displayName: Checkout protected main
+                      clean: true
+                      fetchDepth: 1
+                      persistCredentials: true
+
+                    - task: UsePythonVersion@0
+                      displayName: Use Python 3.12
+                      inputs:
+                        versionSpec: "3.12"
+                        addToPath: true
+
+                    - script: |
+                        python -m pip install --disable-pip-version-check \
+                          --requirement requirements-cicd.txt
+
+                        python -m compileall -q scripts
+                        python scripts/validate_fabric_repo.py
+                        python scripts/tutorial_config.py \
+                          --config "$(tutorialResourceConfig)"
+                      displayName: Revalidate Production deployment source
+
+                    - download: current
+                      artifact: fabric-cicd-lab-s3-u5-prod-preflight
+                      displayName: Download validated Production release plan
+
+                    - task: AzureCLI@2
+                      displayName: Deploy PROD with Production workload identity
+                      inputs:
+                        azureSubscription: ${{ variables.prodServiceConnectionName }}
+                        scriptType: pscore
+                        scriptLocation: inlineScript
+                        addSpnToEnvironment: true
+                        useGlobalConfig: false
+                        powerShellErrorActionPreference: stop
+                        inlineScript: |
+                          $ErrorActionPreference = "Stop"
+
+                          $PreflightPath = (
+                              "$(Pipeline.Workspace)" +
+                              "/fabric-cicd-lab-s3-u5-prod-preflight"
+                          )
+                          $ReleasePlan = "$PreflightPath/fabric-prod-release-plan.json"
+                          $CandidateFile = "$PreflightPath/fabric-release-candidate.json"
+
+                          $EvidencePath = (
+                              "$(Build.ArtifactStagingDirectory)" +
+                              "/section-3/unit-5/deployment"
+                          )
+                          New-Item -Path $EvidencePath -ItemType Directory -Force | Out-Null
+
+                          $ExpectedIdentityName = python scripts/tutorial_config.py `
+                            --config "$(tutorialResourceConfig)" `
+                            --get "deploymentIdentities.productionManagedIdentityName"
+
+                          if ($LASTEXITCODE -ne 0) {
+                              throw "Tutorial resource configuration is invalid."
+                          }
+
+                          python scripts/fabric_identity_preflight.py `
+                            --expected-tenant-id "$env:tenantId" `
+                            --expected-client-id "$env:servicePrincipalId" `
+                            --expected-identity-name "$ExpectedIdentityName" `
+                            --output "$EvidencePath/fabric-prod-identity-preflight.json"
+
+                          if ($LASTEXITCODE -ne 0) {
+                              throw "Production workload identity preflight failed."
+                          }
+
+                          python scripts/fabric_prod_deploy.py `
+                            --tenant-id "$env:tenantId" `
+                            --candidate-evidence $CandidateFile `
+                            --release-plan $ReleasePlan `
+                            --expected-branch "main" `
+                            --config "$(tutorialResourceConfig)" `
+                            --execute `
+                            --confirmation "DEPLOY_MAIN_TO_PROD_WITH_FABRIC_CICD" `
+                            --output "$EvidencePath/fabric-prod-deployment.json"
+
+                          if ($LASTEXITCODE -ne 0) {
+                              throw "PROD deployment failed."
+                          }
+
+                    - task: PublishPipelineArtifact@1
+                      displayName: Publish PROD deployment evidence
+                      condition: always()
+                      inputs:
+                        targetPath: "$(Build.ArtifactStagingDirectory)/section-3/unit-5/deployment"
+                        artifact: fabric-cicd-lab-s3-u5-prod-deployment
+                        publishLocation: pipeline
+
+                    - task: AzureCLI@2
+                      displayName: Validate PROD runtime with Production workload identity
+                      inputs:
+                        azureSubscription: ${{ variables.prodServiceConnectionName }}
+                        scriptType: pscore
+                        scriptLocation: inlineScript
+                        addSpnToEnvironment: true
+                        useGlobalConfig: false
+                        powerShellErrorActionPreference: stop
+                        inlineScript: |
+                          $ErrorActionPreference = "Stop"
+
+                          $PreflightPath = (
+                              "$(Pipeline.Workspace)" +
+                              "/fabric-cicd-lab-s3-u5-prod-preflight"
+                          )
+                          $ReleasePlan = "$PreflightPath/fabric-prod-release-plan.json"
+                          $CandidateFile = "$PreflightPath/fabric-release-candidate.json"
+                          $DeploymentEvidence = (
+                              "$(Build.ArtifactStagingDirectory)" +
+                              "/section-3/unit-5/deployment/fabric-prod-deployment.json"
+                          )
+                          $RuntimePath = (
+                              "$(Build.ArtifactStagingDirectory)" +
+                              "/section-3/unit-6/runtime"
+                          )
+                          New-Item -Path $RuntimePath -ItemType Directory -Force | Out-Null
+
+                          python scripts/fabric_prod_runtime_validate.py `
+                            --tenant-id "$env:tenantId" `
+                            --deployment-evidence $DeploymentEvidence `
+                            --release-plan $ReleasePlan `
+                            --expected-branch "main" `
+                            --config "$(tutorialResourceConfig)" `
+                            --output "$RuntimePath/fabric-prod-runtime-validation.json"
+
+                          if ($LASTEXITCODE -ne 0) {
+                              throw "PROD runtime validation failed."
+                          }
+
+                          python scripts/fabric_prod_release_finalize.py `
+                            --candidate-evidence $CandidateFile `
+                            --release-plan $ReleasePlan `
+                            --deployment-evidence $DeploymentEvidence `
+                            --runtime-evidence "$RuntimePath/fabric-prod-runtime-validation.json" `
+                            --config "$(tutorialResourceConfig)" `
+                            --output "$RuntimePath/fabric-prod-release.json"
+
+                          if ($LASTEXITCODE -ne 0) {
+                              throw "Production release evidence finalization failed."
+                          }
+
+                    - task: PublishPipelineArtifact@1
+                      displayName: Publish final PROD runtime and release evidence
+                      condition: always()
+                      inputs:
+                        targetPath: "$(Build.ArtifactStagingDirectory)/section-3/unit-6/runtime"
+                        artifact: fabric-cicd-lab-s3-u6-prod-release
+                        publishLocation: pipeline

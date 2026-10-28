@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataPipeline",
+    "displayName": "pl_01_run_cicd_lab_transform",
+    "description": "Orchestrate execution of nb_01_seed_and_transform_cicd_lab."
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "098d2bbe-c3df-ba4a-456e-084993931af0"
+  }
+}

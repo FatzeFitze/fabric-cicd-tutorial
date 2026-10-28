@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 2,
+  "azureDevOps": {
+    "repositoryName": "fabric_cicd_reference_lab"
+  },
+  "fabric": {
+    "deploymentPipelineName": "dp_fabric_cicd_lab",
+    "workspaces": {
+      "dev": "ws_reference_lab_dev",
+      "test": "ws_reference_lab_test",
+      "prod": "ws_reference_lab_prod"
+    }
+  },
+  "deploymentIdentities": {
+    "nonProductionManagedIdentityName": "id-reference-nonprod",
+    "productionManagedIdentityName": "id-reference-prod"
+  }
+}

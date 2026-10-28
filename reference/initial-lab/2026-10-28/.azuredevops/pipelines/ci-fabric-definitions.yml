@@ -1,0 +1,51 @@
+name: fabric-cicd-lab-ci-$(Date:yyyyMMdd).$(Rev:r)
+
+trigger:
+  branches:
+    include:
+      - dev
+      - main
+  paths:
+    include:
+      - 01_data_engineering/*
+      - 01_data_engineering/**
+      - 02_orchestration/*
+      - 02_orchestration/**
+      - scripts/*
+      - scripts/**
+      - config/*
+      - config/**
+      - requirements-cicd.txt
+      - .azuredevops/pipelines/*
+      - .azuredevops/pipelines/**
+
+# Azure Repos PR validation is configured through a branch policy,
+# not through a YAML "pr:" trigger.
+pr: none
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - checkout: self
+    clean: true
+    fetchDepth: 1
+
+  - task: UsePythonVersion@0
+    displayName: Use Python 3.12
+    inputs:
+      versionSpec: "3.12"
+      addToPath: true
+  
+  - script: |
+      python -m compileall -q scripts
+    displayName: Validate Python script syntax
+
+  - script: |
+      python scripts/tutorial_config.py \
+        --config config/tutorial-resources.json
+    displayName: Validate tutorial resource configuration
+  
+  - script: |
+      python scripts/validate_fabric_repo.py
+    displayName: Validate Fabric repository definitions

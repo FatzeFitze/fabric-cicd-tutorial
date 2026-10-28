@@ -1,6 +1,6 @@
 # DNA Fabric Days: workshop planning
 
-Initial scoping baseline, 28 October 2026. Agreed direction: Models A and B are hands-on; Model C and feature workspaces are explainer topics. Use local feature branches and shared Dev workspaces where supported. Other recommendations remain proposals. This repository currently contains planning documents only; it contains no working deployment implementation or validated workshop exercises.
+Initial scoping baseline, 28 October 2026. Agreed direction: Models A and B are hands-on; Model C and feature workspaces are explainer topics. Use local feature branches and shared Dev workspaces where supported. Other recommendations remain proposals. This repository contains planning documents and historical reference source; it contains no validated workshop deployment implementation or exercises.
 
 ## Start here
 
@@ -14,6 +14,7 @@ Initial scoping baseline, 28 October 2026. Agreed direction: Models A and B are 
 - [Sources](docs/planning/sources.md): official documentation consulted and the limits of that evidence.
 - [Supplied guidelines](docs/source-guidelines/README.md): the organizer's three Working Version 1 documents.
 - [Learning-project handover review](docs/planning/handoff-review.md): imported historical findings, confidence limits, and how they inform the workshop; links to the preserved dated snapshot.
+- [Initial codebase assessment](docs/planning/initial-codebase-review.md): retained source, reuse decisions, bootstrap/topology gaps and local verification results.
 
 ## Working agreement proposed for this project
 

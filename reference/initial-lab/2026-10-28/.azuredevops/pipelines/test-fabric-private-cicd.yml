@@ -1,0 +1,87 @@
+name: fabric-private-cicd-probe-$(Date:yyyyMMdd).$(Rev:r)
+
+trigger: none
+pr: none
+
+parameters:
+- name: workspaceId
+  displayName: Fabric workspace ID
+  type: string
+  default: 00000000-0000-0000-0000-000000000002
+
+- name: expectedPrivateApiIp
+  displayName: Private Endpoint IP for the w.api hostname (leave empty only when private DNS already works)
+  type: string
+  default: '192.0.2.10'
+
+- name: performWriteProbe
+  displayName: Create/update the CI/CD canary Notebook
+  type: boolean
+  default: false
+
+- name: cleanupCanary
+  displayName: Soft-delete the canary after validation
+  type: boolean
+  default: false
+
+- name: requirePublicEndpointBlocked
+  displayName: Require the generic public Items endpoint to be blocked
+  type: boolean
+  default: true
+
+jobs:
+- job: ProbeFabricPrivateCicd
+  displayName: Probe private Fabric CI/CD capabilities
+  timeoutInMinutes: 20
+
+  pool:
+    name: Default
+    demands:
+      - Agent.Name -equals reference-private-agent
+
+  steps:
+  - checkout: self
+    clean: true
+
+  - bash: |
+      set -euo pipefail
+
+      mkdir -p "$(Build.ArtifactStagingDirectory)/fabric-private-cicd-probe"
+      python3 --version
+      command -v az
+      command -v curl
+      python3 -m py_compile scripts/test_fabric_private_cicd.py
+    displayName: Validate Ubuntu agent prerequisites
+
+  - task: AzureCLI@2
+    displayName: Validate private route and Fabric Item APIs
+    inputs:
+      # Keep the protected resource reference literal so Azure DevOps can
+      # authorize the service connection before the job starts.
+      azureSubscription: sc-reference-private-test
+      scriptType: bash
+      scriptLocation: inlineScript
+      addSpnToEnvironment: true
+      useGlobalConfig: false
+      inlineScript: |
+        set -euo pipefail
+
+        evidence_dir="$(Build.ArtifactStagingDirectory)/fabric-private-cicd-probe"
+
+        python3 scripts/test_fabric_private_cicd.py \
+          --workspace-id '${{ parameters.workspaceId }}' \
+          --expected-private-api-ip '${{ parameters.expectedPrivateApiIp }}' \
+          --perform-write-probe '${{ parameters.performWriteProbe }}' \
+          --cleanup-canary '${{ parameters.cleanupCanary }}' \
+          --require-public-endpoint-blocked '${{ parameters.requirePublicEndpointBlocked }}' \
+          --expected-tenant-id "$tenantId" \
+          --expected-client-id "$servicePrincipalId" \
+          --output "$evidence_dir/fabric-private-cicd-probe.json"
+
+  - task: PublishPipelineArtifact@1
+    displayName: Publish private CI/CD probe evidence
+    condition: always()
+    inputs:
+      targetPath: $(Build.ArtifactStagingDirectory)/fabric-private-cicd-probe
+      artifact: fabric-private-cicd-probe
+      publishLocation: pipeline

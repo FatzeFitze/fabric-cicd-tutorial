@@ -1,0 +1,45 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "493d18d6-4618-a270-47a1-285530c2cff7",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "environment_name": {
+              "value": {
+                "value": "@pipeline().libraryVariables.vl_cicd_lab_config_environment_name",
+                "type": "Expression"
+              },
+              "type": "string"
+            },
+            "release_candidate_label": {
+              "value": {
+                "value": "@pipeline().RunId",
+                "type": "Expression"
+              },
+              "type": "string"
+            }
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "act_run_seed_and_transform_notebook",
+        "dependsOn": []
+      }
+    ],
+    "libraryVariables": {
+      "vl_cicd_lab_config_environment_name": {
+        "type": "String",
+        "variableName": "environment_name",
+        "libraryName": "vl_cicd_lab_config"
+      }
+    }
+  }
+}

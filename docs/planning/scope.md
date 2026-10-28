@@ -10,7 +10,7 @@ Prepare 15–20 participants, working individually or in pairs, to choose and ap
 
 The organizer can provision capacity-backed Fabric workspaces, Azure DevOps projects or repositories, managed identities, and Confluence pages. Workshop workspaces will not use private links. The g-IT separation into code, data, and reporting workspaces and its permissions are confirmed in principle; the detailed permission mapping has not yet been supplied. Identity and networking designs remain open. Participants will have admin access to their own workshop workspaces.
 
-The organizer supplied the three Working Version 1 DataOps guidelines, now retained in [source-guidelines](../source-guidelines/README.md). These define the models and MS-01–MS-14. The older target-picture Section 3 and current codebase have not been inspected. The event is less than a month away; the organizer can provision validation setups immediately. The exact event date is not yet recorded.
+The organizer supplied the three Working Version 1 DataOps guidelines, now retained in [source-guidelines](../source-guidelines/README.md). These define the models and MS-01–MS-14. A historical handover and the current test-project code snapshot have now been imported; see the [source assessment](initial-codebase-review.md). The original cloud evidence and complete earlier authoring material remain unavailable. The event is less than a month away; test setups can be provisioned immediately. The exact event date is not yet recorded.
 
 The lab itself is training/sandbox under Gate 0. It demonstrates controls for fictional productive solutions; workshop workspace admin permissions and public connectivity must be called out when assessing which controls are actually enforced. Workspace count and local-versus-public connectivity do not determine Model A/B/C classification.
 
@@ -40,7 +40,7 @@ Azure Pipelines can also run against a GitHub repository if an Azure DevOps orga
 
 Use one authoritative remote for each release line rather than continuous two-way synchronization. Once company delivery starts, define how selected generic improvements return to the community source. Keep restricted company documents and configurations in company-controlled storage; private GitHub visibility alone does not authorize their transfer.
 
-Proposed eventual structure; only planning files exist today:
+Proposed eventual implementation structure; current contents include planning documents and dated historical reference source:
 
 ```text
 README.md

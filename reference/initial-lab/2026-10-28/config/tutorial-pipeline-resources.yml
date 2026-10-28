@@ -1,0 +1,10 @@
+variables:
+  - name: nonProdServiceConnectionName
+    value: "sc-reference-nonprod"
+  - name: prodServiceConnectionName
+    value: "sc-reference-prod"
+
+  - name: azureDevOpsTestEnvironmentName
+    value: "fabric-cicd-lab-test"
+  - name: azureDevOpsProdEnvironmentName
+    value: "fabric-cicd-lab-prod"

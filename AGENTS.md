@@ -18,7 +18,8 @@
 - docs/source-guidelines contains the organizer-supplied Working Version 1 baseline. Do not silently rewrite its obligations while implementing tutorial guidance.
 - Use MS-01 through MS-14 to trace tutorial coverage.
 - Distinguish proposals, accepted user decisions, documentation evidence, and observed tenant behavior.
-- The current repository is a planning baseline. Do not describe unimplemented examples or unrun cloud checks as working.
+- The current repository contains planning and historical reference source. Do not describe imported reference code as a validated workshop implementation or unrun cloud checks as working.
+- Read docs/planning/initial-codebase-review.md before extracting reusable code. Keep reference/initial-lab separate from the active toolkit. Its networking helpers, deployment commands and private probes are not offline tests.
 - Record durable choices and experiment results in repository files so separate chats can resume reliably.
 - For prior learning context, read docs/planning/handoff-review.md and its dated snapshot links. Earlier Section 3 success is historical reported evidence; it does not validate this workshop. Distinguish DataOps Models A/B/C from g-IT service Targets A/B.
 

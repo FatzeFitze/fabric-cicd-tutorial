@@ -50,11 +50,11 @@ Date: 28 October 2026. Explicit user decisions are recorded below. Other recomme
 
 ## Missing inputs, in priority order
 
-A [dated learning-project handover](handoff-review.md) now supplies a historical Section 3 architecture summary and g-IT discussion context. It does not supply the original implementation, raw evidence, or complete original authoring/source documents. It introduces no new accepted workshop decisions.
+A [dated learning-project handover](handoff-review.md) supplies historical architecture and g-IT context. The subsequently supplied test-project source ZIP is now retained and assessed in the [initial codebase review](initial-codebase-review.md). Original raw cloud evidence and complete original authoring/source documents remain unavailable. These imports introduce no new accepted workshop architecture decisions.
 
-1. Original Section 3 implementation and retained release evidence to review against the supplied historical architecture summary; complete original tutorial state/curriculum/authoring sources where relevant. The high-level architecture is no longer wholly missing.
+1. Retained cloud release evidence and original tutorial state/curriculum/authoring sources where relevant. Current test-project source is supplied and initially reviewed; do not request it again as missing.
 2. Exact workshop date and the first arranged Azure DevOps/Fabric validation setup. Provisioning is available now.
-3. Current deployment code and an explanation of its entry points, supported items, configuration, identity handling, and known problems. Company material needs an authorized location.
+3. Any omitted infrastructure/permission setup or prior run results needed to reproduce the supplied source's historical behavior; code entry points, reuse choices and observed local gaps are documented in the codebase assessment.
 4. Detailed g-IT role/permission mapping: placement of each item type, ownership, shared versus environment-specific resources, connections, networking, agent location, and identity approach. Workspace-role separation and permissions are already confirmed in principle.
 5. Participant profile: Git/Python/Power BI/Fabric experience, expected asset types, laptop software, installation restrictions, and access/licensing constraints.
 6. Delivery operations: final pairing mix, facilitator capacity, budget/capacity SKU, provisioning owner, and who can change tenant settings and DevOps policies.
