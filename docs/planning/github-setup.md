@@ -1,6 +1,6 @@
 # Publish this preparation repository to GitHub
 
-The organizer supplied [the destination repository](https://github.com/FatzeFitze/fabric-cicd-tutorial) and commit author details. `origin` and local author settings are configured. Git authentication and first-publication verification are the remaining setup steps. The instructions below describe initial setup; check current Git state before repeating commands.
+Published on 28 October 2026 to [the destination repository](https://github.com/FatzeFitze/fabric-cicd-tutorial). `origin` and repository-local author settings are configured, Git authentication succeeded, and `main` was pushed with upstream tracking. The instructions below are retained as a reference for initial setup; do not repeat initialization against the existing remote.
 
 ## Guided route
 
