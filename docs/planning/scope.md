@@ -4,7 +4,7 @@ Status: scoping proposal updated with organizer decisions. Date: 28 October 2026
 
 Agreed scope: hands-on Models A and B. Model C appears only in explainer sections. Local feature-branch development plus shared Dev is the preferred path; feature workspaces are an explainer topic. See [control coverage](control-coverage.md).
 
-Pilot update: the facilitator pre-provisions all nine code/data/reporting × Dev/Test/Prod workspaces. Participants begin with [Unit 0](../tutorial/section-01-foundation/unit-00-observe-and-test-the-setup.md), observing/testing that setup. Provisioning/access checks are reported successful; the new explanatory text and learner timing await feedback. Earlier combined-workspace migration suggestions are superseded for this pilot. Assets and controls are introduced gradually; cross-workspace dependencies still require experiments.
+Pilot update: the facilitator pre-provisions all nine code/data/reporting × Dev/Test/Prod workspaces. Participants begin with [Unit 0](../tutorial/section-01-foundation/unit-00-observe-and-test-the-setup/README.md), observing/testing that setup. Provisioning/access checks are reported successful; Unit 0 is parked after organizer review; learner timing remains unmeasured. Earlier combined-workspace migration suggestions are superseded for this pilot. Assets and controls are introduced gradually; cross-workspace dependencies still require experiments.
 
 ## Purpose and constraints
 
@@ -50,7 +50,7 @@ AGENTS.md                      # durable project working instructions
 docs/
   planning/                    # scope, decisions, validation evidence
   prereads/                    # short ALM introduction and glossary
-  tutorial/                    # section folders, one Markdown file per unit
+  tutorial/                    # section and unit folders; README.md per lesson
   facilitator/                 # provisioning, timing, recovery, answer key
   reference/                   # starter configuration and component contracts
 sample/

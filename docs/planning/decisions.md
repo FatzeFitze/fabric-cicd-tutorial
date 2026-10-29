@@ -16,6 +16,8 @@ Date: 28 October 2026. Explicit user decisions are recorded below. Other recomme
 
 ## Confirmed in the scoping discussion
 
+- 29 October: organizer reviewed Unit 0 as looking good and asked to park it as-is and proceed. Each participant unit will have its own folder, with a README.md lesson and optional colocated resources. Shared reusable assets remain in canonical repository locations. No learner walkthrough time or additional runtime results were supplied with this review.
+
 - 29 October follow-up: organizer confirmed workspace/repository access, Dev Source control access, empty workspaces and native Deployment pipelines availability. DevOps access was added separately and works; provisioning took about one minute without private endpoints. Managed identity creation is planned for a later factory extension, not reported complete.
 - Participants start with Unit 0, observing/testing the supplied setup and learning component interactions. Move provisioning detail to facilitator documentation; introduce manual asset creation in the next participant Unit 1. Existing access checks are reported passed, while the new explanatory text and learner timing await feedback.
 

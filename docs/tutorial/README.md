@@ -8,7 +8,23 @@ The working scenario is a small synthetic sales solution that progresses from co
 
 | Unit | Outcome | Status |
 | --- | --- | --- |
-| [0. Observe and test the setup](section-01-foundation/unit-00-observe-and-test-the-setup.md) | Explain the components and inspect the provided workspace/repository layout | Access checks reported successful; new narrative and learner timing awaiting feedback |
+| [0. Observe and test the setup](section-01-foundation/unit-00-observe-and-test-the-setup/README.md) | Explain the components and inspect the provided workspace/repository layout | Parked as-is after organizer review; access checks reported successful; learner timing unmeasured |
+
+## Unit folder convention
+
+Each participant unit has its own folder. `README.md` is the main lesson, with unit-specific resources kept alongside it. Create supporting folders only when they contain actual resources.
+
+```text
+docs/tutorial/
+  section-01-foundation/
+    unit-00-observe-and-test-the-setup/
+      README.md
+    unit-01-<topic>/             # created when the next unit is authored
+      README.md
+      resources/                # optional inputs, snippets or diagrams for that unit
+```
+
+Files needed only for one exercise belong in its unit folder. Reusable deployment code, shared sample definitions, pipeline templates and multi-unit examples remain in `toolkit/`, `sample/`, `pipelines/` or `examples/`, and units link to their canonical files. Avoid maintaining duplicate copies of shared code beside each lesson. The old setup-draft redirect is retained for historical links and is not an active participant unit.
 
 ## Proposed sequence after Unit 0
 

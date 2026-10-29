@@ -1,6 +1,6 @@
 # Facilitator reference — Prepare projects and environments
 
-Status: retained from the earlier Unit 1 setup draft. Participants now begin with [Unit 0](../tutorial/section-01-foundation/unit-00-observe-and-test-the-setup.md). The organizer reports successful access/feature checks and about one minute of provisioning without private endpoints. See the [review](provisioning-review-2026-10-29.md). This manual alternative is a facilitator reference, not an additional required participant unit.
+Status: retained from the earlier Unit 1 setup draft. Participants now begin with [Unit 0](../tutorial/section-01-foundation/unit-00-observe-and-test-the-setup/README.md). The organizer reports successful access/feature checks and about one minute of provisioning without private endpoints. See the [review](provisioning-review-2026-10-29.md). This manual alternative is a facilitator reference, not an additional required participant unit.
 
 Estimated learner time: 15–25 minutes once resources are provisioned. For this organizer pilot, allow additional provisioning time and record it separately. This unit uses browser interfaces; local Python, Git clients and pipeline agents are not prerequisites yet.
 

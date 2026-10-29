@@ -28,7 +28,7 @@
 
 ## Implementation direction
 
-- Markdown is the documentation source; one file per tutorial unit. Confluence is a publishing target.
+- Markdown is the documentation source. Each tutorial unit has a folder with README.md and any unit-specific resources; shared code/assets stay in canonical toolkit/sample/pipeline/example locations. Confluence is a publishing target. Unit 0 is parked after organizer review; retain its content unless new feedback requires changes.
 - Azure DevOps/Azure Pipelines is the delivery target regardless of where Git is hosted.
 - Prefer a thin reusable layer around supported tooling. Prove cross-workspace bindings before expanding custom abstractions.
 - Separate sample business logic from reusable components and environment configuration.

@@ -110,7 +110,7 @@ Unclear explanations, errors or deviations:
 Optional README edit commit, if made:
 ```
 
-Do not repeat checks already completed in the pilot; report only missing observations or corrections. Do not include credentials in feedback. If blocked, record the operation and message and ask the facilitator for help. Provisioning instructions are in the [facilitator reference](../../facilitator/project-and-environment-provisioning.md).
+Do not repeat checks already completed in the pilot; report only missing observations or corrections. Do not include credentials in feedback. If blocked, record the operation and message and ask the facilitator for help. Provisioning instructions are in the [facilitator reference](../../../facilitator/project-and-environment-provisioning.md).
 
 Next: create the first Fabric assets manually in the relevant Dev roles. That unit is prepared from this checkpoint; sample execution and Git sync are not considered passed by this inspection.
 
