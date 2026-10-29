@@ -1,6 +1,6 @@
 # Unit 1 — Prepare your project and environments
 
-Status: draft for the first participant pilot. No participant execution has been recorded yet.
+Status: draft under participant pilot. Provisioning evidence was supplied on 29 October 2026; user-side access, feature checks and timing remain pending. See the [facilitator review](../../facilitator/provisioning-review-2026-10-29.md).
 
 Estimated learner time: 15–25 minutes once resources are provisioned. For this organizer pilot, allow additional provisioning time and record it separately. This unit uses browser interfaces; local Python, Git clients and pipeline agents are not prerequisites yet.
 
@@ -50,6 +50,8 @@ All environments, including simulated Prod, contain only workshop data. They are
 
 ## 2. Create or open the empty Azure DevOps project
 
+**If pre-provisioned:** open the supplied project and repository/repositories. Keep an existing README, `dev` branch and Dev workspace bindings. Do not recreate them to match the example names or branch. For the first pilot, the factory supplied three role repositories; record that mapping. The final one-repository versus multi-repository release choice will be settled before Model B automation.
+
 1. Sign in to your intended Azure DevOps organization.
 2. If the training project has not already been provisioned, create a **private** project using **Git** version control. The work-item process is not material to this exercise; retain the normal organizational default.
 3. Open the project and select **Repos → Files**.
@@ -59,6 +61,8 @@ All environments, including simulated Prod, contain only workshop data. They are
 **Expected result:** You can open the solution repository and create its initial content. Do not import the preparation or historical reference repository as the learner solution.
 
 ## 3. Make the first source-controlled change
+
+**If the factory already initialized the repo:** update the existing README through your participant account, on its existing integration branch (`dev` in the first pilot). Use the starter as a guide; preserve useful existing content. Record this new participant-authored commit and the actual branch. Do not create `main` solely for this unit. With multiple repos, update one README for this checkpoint and verify access to the others. This tests Azure Repos contribution, not yet Fabric Git synchronization.
 
 1. Initialize the repository with a root `README.md`. If the UI offers initialization with a README, use that; otherwise use its new-file action.
 2. Use `main` as the initial branch where the UI permits it. If an existing organizational default creates a different branch, record the actual branch at the checkpoint so we can align before connecting Fabric.
@@ -79,11 +83,11 @@ There is no need to create empty Fabric role folders yet. The initial Git folder
 4. Verify that no solution items have been created yet. If a reused workspace contains existing items or is attached to another solution, use a fresh training workspace rather than deleting unknown content.
 5. Record the workspace names and capacity assignment in your notes; correct the README if your actual names differ.
 
-**Expected result:** Nine distinct, empty workspaces are available on the intended capacity, with your training account able to manage them. This unit does not connect all workspaces to Git or create native Deployment pipelines.
+**Expected result:** Nine distinct, empty workspaces are available on the intended capacity, with your training account able to manage them. Existing pre-provisioned Dev Git bindings may remain. No new Git bindings or native Deployment pipelines are required in this unit.
 
 ## 5. Inspect feature entry points
 
-In **Dev code**, inspect the workspace settings for **Git integration** and check whether Azure DevOps is offered. Also check whether the Fabric Deployment pipelines entry point is available to your account. Do not connect Git, assign pipeline stages or deploy anything yet.
+In **Dev code**, inspect the workspace settings for **Git integration** and check whether Azure DevOps is offered. If Dev workspaces are already connected, inspect all three Dev mappings (repository, branch and Git directory) and open their Source control panes as the participant. Complete your own sign-in if prompted; record access errors without disconnecting/rebinding. Also check whether the Fabric Deployment pipelines entry point is available to your account. Do not assign pipeline stages or deploy anything yet.
 
 Record these as **visible**, **not visible**, or **blocked with an error**. Visibility is a preliminary access check, not proof that authentication, workspace assignment or deployment succeeds. We will test those actions in their own units. Git integration requires capacity and tenant enablement; pipeline/workspace permissions are separate concerns.
 
@@ -108,6 +112,10 @@ Result: passed / blocked / passed with deviations
 Azure DevOps project:
 Repository:
 Initial branch:
+Additional role repositories / branches / Git folders, if pre-provisioned:
+Provisioning identity different from participant: yes / no
+Participant can open/contribute to intended repos: yes / no / not checked
+Prebound Dev Source control panes: accessible / authentication needed / blocked / not applicable
 README commit ID:
 Code workspaces (Dev / Test / simulated Prod):
 Data workspaces (Dev / Test / simulated Prod):

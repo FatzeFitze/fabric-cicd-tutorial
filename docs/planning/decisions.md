@@ -16,6 +16,8 @@ Date: 28 October 2026. Explicit user decisions are recorded below. Other recomme
 
 ## Confirmed in the scoping discussion
 
+- 29 October 2026 pilot provisioning feedback: supplied factory manifest and three successful create records describe nine workspaces, one Azure DevOps project, three role-specific repos, default/integration branch `dev`, and initialized Dev Git bindings. This is the observed pilot layout, not acceptance of three repositories as the final tutorial architecture. Participant-side operation is still to be tested; see docs/facilitator/provisioning-review-2026-10-29.md.
+
 - The organizer will act as the first tutorial participant in fresh Fabric workspaces and a fresh Azure DevOps project. Develop units sequentially, use reported outcomes to refine them, and persist instructions/starter assets and feedback in this repository. Unit 1 is drafted; execution is pending.
 
 - Hands-on scope is Models A and B. Cover Model C only in explainers.
