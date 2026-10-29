@@ -4,8 +4,8 @@ Initial scoping baseline, 28 October 2026. Agreed direction: Models A and B are 
 
 ## Start here
 
-- [Participant tutorial](docs/tutorial/README.md): sequential units developed through the organizer's participant pilot; begin with Unit 1.
-- [Pilot record](docs/facilitator/pilot-log.md): provisioning evidence received; participant-side access checks and timing remain pending.
+- [Participant tutorial](docs/tutorial/README.md): begin with Unit 0 to observe and understand the pre-provisioned setup.
+- [Pilot record](docs/facilitator/pilot-log.md): access/feature checks reported passed; setup took about one minute, while learner inspection timing and the new explanatory text await feedback.
 - [Provisioning feedback review](docs/facilitator/provisioning-review-2026-10-29.md): factory code, supplied run records, Git credentials and pilot-layout differences.
 
 - [Scope and learning journey](docs/planning/scope.md): outcomes, sample project, timetable, reusable components, and repository design.

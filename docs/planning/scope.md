@@ -4,7 +4,7 @@ Status: scoping proposal updated with organizer decisions. Date: 28 October 2026
 
 Agreed scope: hands-on Models A and B. Model C appears only in explainer sections. Local feature-branch development plus shared Dev is the preferred path; feature workspaces are an explainer topic. See [control coverage](control-coverage.md).
 
-Pilot update: [Unit 1](../tutorial/section-01-foundation/unit-01-project-and-environments.md) now provisions all nine code/data/reporting × Dev/Test/Prod workspaces from the outset, following the organizer's request to consider the full topology immediately. Earlier suggestions below to start combined and migrate roles are superseded for this pilot. The teaching progression will add assets and controls gradually; cross-workspace dependencies still require experiments.
+Pilot update: the facilitator pre-provisions all nine code/data/reporting × Dev/Test/Prod workspaces. Participants begin with [Unit 0](../tutorial/section-01-foundation/unit-00-observe-and-test-the-setup.md), observing/testing that setup. Provisioning/access checks are reported successful; the new explanatory text and learner timing await feedback. Earlier combined-workspace migration suggestions are superseded for this pilot. Assets and controls are introduced gradually; cross-workspace dependencies still require experiments.
 
 ## Purpose and constraints
 

@@ -16,9 +16,12 @@ Date: 28 October 2026. Explicit user decisions are recorded below. Other recomme
 
 ## Confirmed in the scoping discussion
 
-- 29 October 2026 pilot provisioning feedback: supplied factory manifest and three successful create records describe nine workspaces, one Azure DevOps project, three role-specific repos, default/integration branch `dev`, and initialized Dev Git bindings. This is the observed pilot layout, not acceptance of three repositories as the final tutorial architecture. Participant-side operation is still to be tested; see docs/facilitator/provisioning-review-2026-10-29.md.
+- 29 October follow-up: organizer confirmed workspace/repository access, Dev Source control access, empty workspaces and native Deployment pipelines availability. DevOps access was added separately and works; provisioning took about one minute without private endpoints. Managed identity creation is planned for a later factory extension, not reported complete.
+- Participants start with Unit 0, observing/testing the supplied setup and learning component interactions. Move provisioning detail to facilitator documentation; introduce manual asset creation in the next participant Unit 1. Existing access checks are reported passed, while the new explanatory text and learner timing await feedback.
 
-- The organizer will act as the first tutorial participant in fresh Fabric workspaces and a fresh Azure DevOps project. Develop units sequentially, use reported outcomes to refine them, and persist instructions/starter assets and feedback in this repository. Unit 1 is drafted; execution is pending.
+- 29 October 2026 pilot provisioning feedback: supplied factory manifest and three successful create records describe nine workspaces, one Azure DevOps project, three role-specific repos, default/integration branch `dev`, and initialized Dev Git bindings. This is the observed pilot layout, not acceptance of three repositories as the final tutorial architecture. Access checks were subsequently confirmed as above; actual Fabric item synchronization remains to be tested. See docs/facilitator/provisioning-review-2026-10-29.md.
+
+- The organizer acts as the first participant in fresh Fabric workspaces and a fresh Azure DevOps project. Develop units sequentially, refine from reported results, and persist assets/feedback here. The setup inspection is reported successful; Unit 0's revised teaching content and subsequent asset work remain pending.
 
 - Hands-on scope is Models A and B. Cover Model C only in explainers.
 - Prefer shared Dev plus local feature-branch development where possible. Cover feature workspaces in explainers; do not require them for the mock project.

@@ -8,11 +8,13 @@ The working scenario is a small synthetic sales solution that progresses from co
 
 | Unit | Outcome | Status |
 | --- | --- | --- |
-| [1. Prepare your project and environments](section-01-foundation/unit-01-project-and-environments.md) | Fresh repository, first README commit, nine capacity-backed role/environment workspaces | Draft ready for first participant pilot; not yet exercised |
+| [0. Observe and test the setup](section-01-foundation/unit-00-observe-and-test-the-setup.md) | Explain the components and inspect the provided workspace/repository layout | Access checks reported successful; new narrative and learner timing awaiting feedback |
 
-## Proposed sequence after Unit 1
+## Proposed sequence after Unit 0
 
 The following are planning placeholders, not available or validated units:
+
+Provisioning belongs to the [facilitator reference](../facilitator/project-and-environment-provisioning.md), outside learner exercise time. The earlier setup Unit 1 is superseded; the first manual-asset unit will be Unit 1 and has not yet been authored.
 
 1. Create the first lakehouse and notebook manually; run deterministic synthetic data.
 2. Capture supported definitions in Azure Repos and inspect source versus runtime state.

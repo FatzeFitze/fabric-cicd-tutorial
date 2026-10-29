@@ -3,7 +3,7 @@
 ## Current scope
 
 - Develop the participant tutorial sequentially with the organizer as the first learner. Use docs/tutorial/README.md and docs/facilitator/pilot-log.md; record actual checkpoints before claiming a unit passed. Prepare the next unit from the reported results rather than assuming cloud success.
-- The current Unit 1 pilot design provisions nine workspaces (code/data/reporting × Dev/Test/Prod) up front. Introduce assets and controls gradually; the earlier three-workspace introductory shortcut is superseded for this pilot. Cross-workspace deployment/binding remains unvalidated.
+- Participants begin with Unit 0 to observe/test the setup. The facilitator pre-provisions nine workspaces (code/data/reporting × Dev/Test/Prod); provisioning instructions are in docs/facilitator/project-and-environment-provisioning.md. Access checks are reported passed, while the new Unit 0 narrative/learner timing and actual Git sync/runtime remain untested. Next participant Unit 1 will create assets.
 
 - Read README.md and docs/planning/decisions.md before substantive work.
 - Hands-on workshop scope is Model A and Model B. Model C is explainer material only.
