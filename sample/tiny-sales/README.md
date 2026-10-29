@@ -22,3 +22,9 @@ The initial rule includes returned orders in revenue. A later feature exercise w
 Each run overwrites the disposable training `sales` table in the checked default lakehouse. It does not append rows, ingest an external source, or persist the three input collections as separate tables. This deliberate full-rebuild sample is not a productive incremental-load or data-recovery strategy.
 
 Maintain this file as the canonical starter source; unit instructions link here rather than keeping another copy of its code. Participant-created Fabric definitions will be captured from their own workspaces in Unit 2.
+
+## Native-promotion preparation
+
+[environment-aware-target-cell.py](environment-aware-target-cell.py) is a candidate replacement for Cell 1 only, introduced by the [organizer's Test rehearsal](../../docs/facilitator/unit-03-native-promotion-rehearsal.md). It keeps the same `check_target()` entry point and explicitly declares the three allowed Code/Data pairs, so the guard can reject Test/Prod references to Dev while using one common source definition. Configure all six workspace names in Dev; do not remove the guard or customize source separately in the target stages.
+
+The candidate passes local positive/negative context checks; its Fabric/native-deployment behavior is not yet observed. Keep using the original starter for Unit 1. The replacement becomes part of the participant promotion exercise only after the rehearsal establishes its actual binding/runtime path.

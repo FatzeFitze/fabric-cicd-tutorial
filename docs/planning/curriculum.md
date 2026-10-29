@@ -152,6 +152,8 @@ The actual automated order may include create-then-bind steps: storage prerequis
 
 ## Decisions and evidence before detailed authoring
 
+The next concrete preparation asset is the [organizer's native Test rehearsal](../facilitator/unit-03-native-promotion-rehearsal.md), with a locally checked candidate first-cell replacement. It addresses the Dev-only guard and explicit native target rule before we finalize participant Unit 3. It has no observed native result and is not an additional mandatory learner unit.
+
 1. **Native boundary (V03/V04/V07):** prove the two-role lakehouse/notebook exercise and its target settings. Reporting is intentionally not a prerequisite for completing Model A in this proposal.
 2. **Reporting path (V06):** select one model mode/report representation, required client tools, deployment/identity support and a fast authoring route. Validate it before committing to Unit 4 instructions.
 3. **Source layout (V17):** settle one repo/role folders versus the current three-repo pilot. Preserve what the pilot actually demonstrated and document release revision selection accordingly.
