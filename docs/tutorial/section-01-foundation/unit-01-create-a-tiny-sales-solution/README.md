@@ -71,14 +71,24 @@ If a Spark session was already running when you changed the default lakehouse, s
 
 ## 3. Add the notebook cells and check the target
 
-1. Add a Markdown cell above the code. Write **Tiny Sales — initial build**, your name/team and a sentence describing the notebook's purpose.
+1. Add a **Markdown cell** at the top of the notebook, separate from the Python code cells. Paste the following text and replace the owner placeholder with your name/team:
+
+   ```markdown
+   # Tiny Sales — initial build
+
+   Owner: <your name or team>
+
+   Builds and validates the Tiny Sales table in the Data Dev lakehouse.
+   ```
+
+   Render the cell and confirm you see the heading **Tiny Sales — initial build**. This introductory cell is added manually; it is **not included in the Python starter**.
 2. Open the [notebook starter](../../../../sample/tiny-sales/unit-01-notebook.py). It has four sections marked `# %% Cell 1` through `# %% Cell 4`.
 3. Copy each section into its own PySpark code cell, preserving their order. Copy the Python source, without adding Markdown code fences. The `# %%` markers are comments and may remain in the cells.
 4. In **Cell 1**, replace `REPLACE_WITH_YOUR_CODE_DEV_WORKSPACE_NAME` and `REPLACE_WITH_YOUR_DATA_DEV_WORKSPACE_NAME` with your exact assigned workspace names. Keep `EXPECTED_LAKEHOUSE` and `TABLE_NAME` as `sales`.
 5. Run **Cell 1 only**. The first run starts a Spark session and can take longer than subsequent cells.
 6. Compare its printed workspace/lakehouse names with your assignment.
 
-**Expected result:** Cell 1 prints your Code Dev workspace, Data Dev workspace and default lakehouse `sales`, with no error. It has not written any data.
+**Expected result:** The notebook has one introductory Markdown cell followed by four PySpark code cells. Cell 1 prints your Code Dev workspace, Data Dev workspace and default lakehouse `sales`, with no error. It has not written any data.
 
 The code reads [NotebookUtils runtime context](https://learn.microsoft.com/en-us/fabric/data-engineering/notebookutils/notebookutils-runtime) and checks the target before writing. The two workspace names are explicit temporary configuration. Later units replace manual environment handling with documented configuration and reusable automation. The check uses your declared names; it supports the exercise but does not enforce a production security boundary.
 
@@ -152,6 +162,7 @@ Your working Dev solution is not yet a reproducible release. Git capture, target
 
 - [ ] `sales` is a schema-enabled lakehouse in Data Dev.
 - [ ] `build_sales` is a notebook in Code Dev, with that Data Dev lakehouse pinned as default.
+- [ ] A separate introductory Markdown cell displays **Tiny Sales — initial build**, your name/team and the notebook's purpose.
 - [ ] The target check prints the intended workspace/lakehouse names.
 - [ ] Both runs end with `UNIT_01_PASS`; the persisted table still has six rows and revenue 342.20.
 - [ ] You can explain why successful execution, Git capture and deployment are separate steps.

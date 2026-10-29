@@ -4,6 +4,8 @@
 
 Open [the notebook starter](unit-01-notebook.py) and copy its four numbered cell sections into your Fabric notebook. Replace the two workspace-name placeholders in Cell 1 before execution. The file is ordinary PySpark starter source, not an exported Fabric notebook definition or a local command-line program. It uses the Fabric-provided `spark`, `notebookutils` and `display` objects.
 
+The introductory **Markdown cell is separate**: add it manually using Unit 1, Section 3. The Python starter supplies the four code cells only. Your completed notebook has the rendered heading **Tiny Sales — initial build** above those cells.
+
 The fixtures are embedded once in the starter: three customers, three products and six orders. Prices start as integer cents and are converted to decimal amounts. Customer names and transactions are fictional. All monetary amounts use one illustrative currency.
 
 | Baseline check | Expected |

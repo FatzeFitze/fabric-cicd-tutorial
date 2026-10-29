@@ -1,5 +1,6 @@
 # Copy each numbered section into a separate PySpark cell in build_sales.
 # This is starter source for manual authoring, not a Fabric item export.
+# Add the separate introductory Markdown cell from Unit 1 before these code cells.
 
 # %% Cell 1 - Check the execution target
 from decimal import Decimal

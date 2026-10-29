@@ -1,12 +1,12 @@
 # DNA Fabric Days: workshop planning
 
-Workshop preparation started 28 October 2026. Agreed direction: Models A and B are hands-on; Model C and feature workspaces are explainer topics. Use local feature branches and shared Dev workspaces where supported. The repository contains planning documents, historical reference source, Units 0–2 and a Tiny Sales starter. The organizer reports successful Unit 1 execution in 20–30 minutes including reading; Unit 2's Git-sync walkthrough and workshop deployment automation remain untested.
+Workshop preparation started 28 October 2026. Agreed direction: Models A and B are hands-on; Model C and feature workspaces are explainer topics. Use local feature branches and shared Dev workspaces where supported. The repository contains planning documents, historical reference source, Units 0–2 and a Tiny Sales starter. The organizer reports successful Unit 1 execution and Unit 2 Git round trip; clean-target promotion and workshop deployment automation remain untested.
 
 ## Start here
 
 - [Participant tutorial](docs/tutorial/README.md): begin with Unit 0 to observe and understand the pre-provisioned setup.
 - [Unit 1: create a tiny sales solution](docs/tutorial/section-01-foundation/unit-01-create-a-tiny-sales-solution/README.md): successful organizer walkthrough reported; deterministic sample and corrected OneLake catalog attachment steps.
-- [Unit 2: capture the solution in Git](docs/tutorial/section-01-foundation/unit-02-capture-the-solution-in-git/README.md): commit definitions, inspect source/data boundaries, apply a Git update and record exact revisions; pilot pending.
+- [Unit 2: capture the solution in Git](docs/tutorial/section-01-foundation/unit-02-capture-the-solution-in-git/README.md): successful organizer walkthrough reported; commit-diff review and open-editor update guidance refined.
 - [Tutorial authoring convention](docs/facilitator/tutorial-authoring-guide.md): clean participant lessons with organizer validation notes kept separately.
 - [Pilot record](docs/facilitator/pilot-log.md): access/feature checks reported passed; setup took about one minute, while Unit 0 is parked after organizer review and learner inspection timing remains unmeasured.
 - [Provisioning feedback review](docs/facilitator/provisioning-review-2026-10-29.md): factory code, supplied run records, Git credentials and pilot-layout differences.

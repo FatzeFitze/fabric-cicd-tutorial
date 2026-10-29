@@ -65,7 +65,7 @@ The workflow is documented in [Commit changes to Git](https://learn.microsoft.co
 
 ## 3. Commit the notebook definition from Code Dev
 
-1. Open `build_sales` and wait for its save indicator to finish. Return to **Code Dev → Source control → Changes**.
+1. Open `build_sales`. Confirm its introductory **Markdown cell** displays **Tiny Sales — initial build** above the four code cells. If it is missing, add it using [Unit 1, Section 3](../unit-01-create-a-tiny-sales-solution/README.md#3-add-the-notebook-cells-and-check-the-target); that cell is not part of the Python starter. Wait for the save indicator to finish, then return to **Code Dev → Source control → Changes**.
 2. Select the whole `build_sales` **Notebook** item. Review the generated changes if available.
 3. Enter **`Add Tiny Sales notebook baseline`** and **Commit** to the connected `dev` branch.
 4. Wait for synchronization, then refresh the Code repository in **Azure DevOps → Repos → Files**.
@@ -100,18 +100,25 @@ A **logical ID** identifies an item in its source-control representation; a **ph
 
 ## 5. Apply a harmless Git change back to Fabric
 
-1. Confirm **Code Dev** has no uncommitted changes before you edit the repository.
+1. Confirm **Code Dev** has no uncommitted changes. Wait for notebook edits to save, then close `build_sales` in Fabric, including any other open editor tabs for it. Keep the workspace item list open for the later Git update. If you are sharing the workspace, agree that nobody will edit this notebook during the round trip.
 2. In the Code repository on `dev`, open the exported **`notebook-content.py`** and select **Edit**.
-3. Find the introductory Markdown title you added in Unit 1: **Tiny Sales — initial build**. Add **` (source controlled)`** to that title only. Preserve the existing comment prefixes, cell separators, metadata and Python code.
-4. Commit this one-file edit to `dev` with the message **`Document Tiny Sales source-control baseline`**. Inspect the changed lines before committing.
-5. Return to **Code Dev → Source control** and refresh. Inspect **Updates**: the incoming change should be the notebook edit you just committed.
-6. Select **Update** to apply it. Updates apply the connected folder's incoming source rather than a selected file; proceed only when the listed incoming changes are the ones you expect and the workspace has no pending edits/conflicts.
-7. Reopen or refresh `build_sales`. Confirm its introductory Markdown now includes **`(source controlled)`** and that its default lakehouse still points to Data Dev.
-8. Run the notebook cells in order. Confirm **`UNIT_01_PASS`**, six rows and revenue **342.20** still result.
+3. Find the introductory Markdown title **Tiny Sales — initial build**. Add **` (source controlled)`** to that title only. Preserve the existing comment prefixes, cell separators, metadata and Python code. If the title is absent from the exported source, follow the recovery note below before editing it.
+4. Reread the edited title and commit this one-file edit to `dev` with the message **`Document Tiny Sales source-control baseline`**. The web editor's Commit dialog is not our diff-review step.
+5. In **Azure DevOps → Repos → Commits**, open the commit you just created. Select `notebook-content.py` in its changed-files view and inspect its diff against the parent commit. Confirm that only the intended Markdown title changed. If anything else changed, correct it in a follow-up commit and review that result before applying source to Fabric. See [Azure Repos commit details](https://learn.microsoft.com/en-us/azure/devops/repos/git/commit-details?view=azure-devops).
+6. Return to **Code Dev → Source control** and refresh. Inspect **Updates**: the incoming change should be the notebook edit you just reviewed.
+7. Select **Update** to apply it. Updates apply the connected folder's incoming source rather than a selected file; proceed only when the listed incoming changes are the ones you expect and the workspace has no pending edits/conflicts.
+8. Reopen `build_sales` from the workspace item list after Update completes. Confirm its introductory Markdown now includes **`(source controlled)`** and that its default lakehouse still points to Data Dev. If a saved-version/other-user warning appears, use the guidance below before editing or running it.
+9. Run the notebook cells in order. Confirm **`UNIT_01_PASS`**, six rows and revenue **342.20** still result.
 
 **Expected result:** The source change appears in the Fabric notebook, its Source control state is synchronized, and the unchanged business calculation still passes. Updating a definition and running that definition were two explicit actions.
 
+**If the introductory title is missing:** return to the Fabric notebook and add the separate Markdown cell from [Unit 1, Section 3](../unit-01-create-a-tiny-sales-solution/README.md#3-add-the-notebook-cells-and-check-the-target). Save it, then commit the notebook from Code Dev with **`Add Tiny Sales notebook introduction`**. Refresh `notebook-content.py` in Azure Repos and continue this assignment from step 2. Create the cell through Fabric so its exported cell structure is generated for you.
+
 This exercise writes only a documentation change to source. The subsequent notebook run still overwrites the disposable training table, as in Unit 1. If the incoming update contains unrelated edits, deletes or a conflict, stop and reconcile it with the facilitator; do not choose a force/overwrite option to get past it. Microsoft's [Git integration process](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/git-integration-process) explains changes, updates and conflicts.
+
+**If the open notebook shows an old version or an other-user warning:** first preserve any unsaved edits you actually intended to keep. In this exercise there should be none, because you saved and closed the editor before Update. Close/reopen the notebook or refresh its browser page to load the stored version, then compare the title with the reviewed Git commit. Do not overwrite the newly synchronized definition with an older editor copy. If the warning persists, the content is still wrong, or Source control now lists unexpected changes/conflicts, ask the facilitator to inspect the versions before saving again. An editor warning and a Git conflict listed in Source control are different observations.
+
+Fabric supports [autosaved collaborative notebook editing](https://learn.microsoft.com/en-us/fabric/data-engineering/how-to-use-notebook#collaborate-in-a-notebook). For this exercise, explicitly taking turns between source editing and workspace editing makes the expected version easier to verify. Later, PR review gives us a review gate before integrating changes; the direct commit here is a small bootstrap exercise.
 
 ## 6. Record the baseline and explain the state
 
@@ -141,6 +148,8 @@ This exercise writes only a documentation change to source. The subsequent noteb
 | Azure Repos looks empty after committing | Check the selected repository, `dev` branch and connected Git directory, then refresh. Repository default branch and workspace branch need not be the same. |
 | The notebook source has an unexpected representation | Check that you opened the Fabric-exported notebook item, not the tutorial starter. If `notebook-content.py` or `.platform` is absent, record the generated file list and ask the facilitator before changing formats. |
 | Update reports a conflict | Keep both versions for review. Do not use Undo, force update or regenerate logical IDs as a shortcut. |
+| No diff is visible in the Azure Repos web editor's Commit dialog | Commit the deliberate small edit, then open **Repos → Commits → your commit → changed file** to review its diff before Fabric Update. The file's **Compare** view can also compare committed versions. |
+| Notebook shows older content or a saved-version/other-user warning after Update | Preserve any intended unsaved work, close/reopen or refresh the editor, and check the stored content against the reviewed commit. Do not save an old editor copy over it. Treat a listed Source control conflict separately. |
 | Notebook rerun fails after the update | Confirm that only Markdown changed and inspect the pinned lakehouse/session. Preserve the exact error; do not weaken the data checks. |
 
 ## Completion checkpoint

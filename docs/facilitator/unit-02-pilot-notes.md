@@ -1,6 +1,6 @@
 # Unit 2 preparation and pilot checks
 
-Date: 29 October 2026. Status: participant lesson/worksheet authored; Fabric-to-Git commit, Git-to-Fabric update and timing are not yet reported.
+Date: 29 October 2026. Status: organizer reports successful Unit 2 completion after adding the missing introductory cell. Documentation adjusted for commit-diff review and an open-editor version warning; revised sequence not yet replayed. Unit 2 duration was not supplied.
 
 Participant entry point: [Unit 2](../tutorial/section-01-foundation/unit-02-capture-the-solution-in-git/README.md). Its [worksheet](../tutorial/section-01-foundation/unit-02-capture-the-solution-in-git/resources/source-baseline.md) is unit-specific evidence capture, not an implemented deployment schema.
 
@@ -19,6 +19,16 @@ The curriculum's original Unit 2 slot is 25 minutes. Participant guidance allows
 
 ## Checks to collect during the walkthrough
 
+First in-progress feedback: organizer could not locate the introductory Markdown text referenced by Unit 2. Unit 1 Section 3 step 1 requested it manually, but the Python starter contains only code cells. Clarified Unit 1 with exact Markdown content, a separate-cell explanation and checkpoint; added a reminder in the starter and a Unit 2 pre-commit/recovery route. This does not establish that the organizer omitted the cell or that Fabric lost it; actual notebook/export was not inspected. Revised wording and the round trip remain unconfirmed.
+
+### Reported completion and revised guidance
+
+The organizer subsequently added the Markdown cell, synchronized it to the repo and completed the rest of Unit 2, reporting that everything else was consistent and worked. This is evidence by organizer report of Fabric-to-Git commits, the Git-to-Fabric round trip and runtime checks; actual exports/commit IDs, separate-user identity details and duration were not supplied.
+
+- **Azure Repos review:** organizer could not locate a pre-commit diff in the direct web-file editor. Official documentation supports reviewing a completed commit against its parent and comparing committed file versions. The lesson now commits the deliberate small edit, reviews **Repos → Commits → changed file**, and only then applies the source to Fabric. It does not claim the editor has no pre-commit diff in every UI/version. PR review before integration remains the later Model B pattern.
+- **Notebook editor warning:** organizer observed an other-user/version-conflict dialog when opening a notebook after updating from Git with the workspace browser tab already open. Refresh revealed the new content. Exact message, screenshot and unsaved-editor state were not supplied, so a stale/coediting client is a plausible interpretation, not a proven root cause or a certified platform bug. Official docs cover autosaved coediting and version history, but the documented checkpoint-restore limitation is not proof of this Git-update mechanism. No community Q&A is used as authoritative evidence.
+- **Lesson adjustment:** save/close notebook editors before changing Git, update from the workspace list, reopen and inspect the reviewed source. Preserve intended unsaved edits before refresh; never instruct blind Keep mine/overwrite. An editor warning is distinct from a conflict reported by Fabric Source control. Record recurrence under the revised sequence if observed.
+
 1. Existing mapping and participant authentication allow the two full-item commits without reconnecting. Record whether the participant differs from the provisioner; author metadata alone does not prove the credential used.
 2. Record exact Source control labels and generated folder/file lists for both assets. Expected current notebook format is `.platform` plus `notebook-content.py`; do not fabricate a full lakehouse file inventory from documentation.
 3. Inspect the real notebook default-lakehouse reference: physical IDs, logical IDs and settings actually exported. No cross-workspace remapping claim follows from merely seeing `.platform`.
@@ -26,7 +36,7 @@ The curriculum's original Unit 2 slot is 25 minutes. Participant guidance allows
 5. Verify the Markdown-only repo edit appears as a known incoming update, applies cleanly, preserves the target attachment and passes `UNIT_01_PASS` on rerun with six rows/revenue 342.20.
 6. Capture final full commit IDs/links per repo, identity observations, total time and any UI/authentication/policy friction. Retain private source/context in appropriate local notes; do not publish raw company credentials or configs.
 
-No raw export, sync result, commit IDs, cloud execution or independent identity run is supplied at authoring time. Local checks can validate Markdown links/structure only; they cannot pass these checkpoints.
+No raw export, commit IDs or independent identity run was supplied. Completion is organizer-reported rather than assistant-observed. Local documentation checks do not independently verify the revised browser sequence.
 
 ## Control coverage and limits
 
