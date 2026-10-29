@@ -1,6 +1,6 @@
 # Unit 1 preparation and pilot checks
 
-Date: 29 October 2026. Status: participant lesson and starter authored; no Fabric execution or timed learner attempt reported.
+Date: 29 October 2026. Status: organizer reports successful Unit 1 completion in approximately 20–30 minutes including reading. Picker wording corrected after the walkthrough; starter code unchanged.
 
 Participant entry point: [Unit 1](../tutorial/section-01-foundation/unit-01-create-a-tiny-sales-solution/README.md). Canonical starter: [unit-01-notebook.py](../../sample/tiny-sales/unit-01-notebook.py). The [authoring guide](tutorial-authoring-guide.md) records the clean participant-document convention.
 
@@ -20,14 +20,20 @@ Local verification should parse the starter, independently calculate its fixture
 
 Baseline: six distinct orders, quantity 13, two returned orders, gross revenue/revenue 342.20 and no invalid rows. Returned-order exclusion later yields 189.70. Keep these sample-specific numbers separate from historical lab expectations.
 
-## What to confirm during the organizer walkthrough
+## Organizer walkthrough outcome
+
+The organizer reports that everything worked, with one UI correction: attaching a lakehouse uses **Add data items → From OneLake catalog**. This supports the initial Dev notebook/lakehouse execution and rerun path as organizer-reported behavior, not independent assistant observation. Exact session outputs, item links and followed commit were not supplied. A deliberate wrong-target run and a separate non-provisioner account test were not reported.
+
+Section 2 now uses that observed path. Official notebook attachment examples document the same menu, with **Connect** or **Add** as the picker confirmation label. They also warn to choose the Lakehouse item, not the SQL analytics endpoint. The revised text has not had a separate walkthrough. Keep the participant estimate/budget of 45 minutes for mixed experience; the 20–30 minute result is the organizer's first measured range, not a novice-class average.
+
+## Checklist for subsequent walkthroughs
 
 1. The Fabric creation/picker labels and schema-enabled lakehouse choice match the instructions.
 2. The notebook is in Code Dev and can select Data Dev's lakehouse with the participant account. Report whether the account differs from the provisioner's; do not infer it.
 3. Runtime context exposes `currentWorkspaceName`, `defaultLakehouseWorkspaceName` and `defaultLakehouseName` as expected; correct names pass, a wrong setting stops before persistence.
 4. `saveAsTable("sales")` resolves to the attached schema-enabled Data Dev lakehouse's `dbo.sales`, and its preview contains the expected six rows. Record any schema/session or cross-workspace catalog differences instead of adding a substitute Code lakehouse.
 5. The target check, prepared-result check and persisted-result check all pass; rerun still produces six rows. Record the final success message and item locations.
-6. Record total learner time, Spark startup/wait separately, code-copy friction, unclear wording and exact failures. The 45-minute estimate is unmeasured.
+6. Record total learner time, Spark startup/wait separately, code-copy friction, unclear wording and exact failures. Compare with the organizer's 20–30 minute range and the 45-minute planning allowance; startup time was not separately supplied for the first attempt.
 
 Collect enough evidence for V04/V07 at this initial Dev stage, but do not mark their clean-target deployment requirements passed. Stop the Spark session when the learner is finished if useful for capacity; preserve notebook/lakehouse/data.
 
@@ -39,7 +45,7 @@ Collect enough evidence for V04/V07 at this initial Dev stage, but do not mark t
 | MS-04 | Code/Data roles and Dev selected explicitly | No Test/Prod deployment yet |
 | MS-06 | Default lakehouse and two target-name settings made explicit | Temporary Dev configuration; reusable config comes later |
 | MS-07 / MS-12 | Interactive participant identity needs both workspaces | Admin lab permissions; workload identity not tested |
-| MS-08 | Expected metrics checked before and after persistence | Runtime checks authored, pending actual Fabric run |
+| MS-08 | Expected metrics checked before and after persistence; unit completed by organizer report | No raw runtime outputs supplied; no promoted-target validation yet |
 | MS-05 / MS-11 | Deterministic overwrite and rerun discussed | Not a proven fresh-target bootstrap or productive data recovery |
 
 ## Dependencies for later units
@@ -51,4 +57,4 @@ Collect enough evidence for V04/V07 at this initial Dev stage, but do not mark t
 
 ## Documentation basis
 
-Official notebook/lakehouse, schema and runtime-context references are linked in the participant lesson and registered in [sources.md](../planning/sources.md). They support the proposed mechanics; actual tenant observations remain pending.
+Official notebook/lakehouse, schema, runtime-context and updated picker references are linked in the participant lesson and registered in [sources.md](../planning/sources.md). Organizer-reported completion supports the Dev slice; target deployment, automated identities and other broader experiments remain pending.

@@ -59,11 +59,13 @@ Schemas organize tables inside a lakehouse. Here, `sales` is the lakehouse name 
 2. Select **New item**, search for **Notebook**, and create a notebook.
 3. Rename it **`build_sales`** using the notebook title/menu.
 4. Select **PySpark (Python)** as the code language. Use the workspace's supplied Spark environment; this exercise does not require a custom Environment item.
-5. In the notebook's lakehouse/data explorer, choose **Add lakehouse** and select an **existing** lakehouse.
-6. Browse to your **Data Dev** workspace and select **`sales`**. Check the workspace as well as the item name.
+5. In the notebook's **Explorer** pane, select **Add data items → From OneLake catalog**.
+6. In the catalog, locate **`sales`** in your **Data Dev** workspace. Select the **Lakehouse** item, rather than its SQL analytics endpoint, and confirm with **Connect** (labelled **Add** in some catalog dialogs). Check the workspace as well as the item name.
 7. Make it the notebook's **default lakehouse** using the pin/default action. Verify that the explorer identifies the Data Dev lakehouse you selected.
 
 **Expected result:** `build_sales` belongs to Code Dev and its pinned default lakehouse is `sales` in Data Dev. Do not create another lakehouse in Code Dev to make the attachment work.
+
+Microsoft's [notebook attachment example](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/map/tutorial-real-time-work-order-routing-application) illustrates the **Add data items → From OneLake catalog** path and the distinction between the lakehouse and its SQL analytics endpoint.
 
 If a Spark session was already running when you changed the default lakehouse, stop/restart the session before executing the code. Changing the pin can require a restart; see [Connect lakehouses and notebooks](https://learn.microsoft.com/en-us/fabric/data-engineering/how-to-use-notebook#connect-lakehouses-and-notebooks).
 
@@ -159,6 +161,7 @@ Keep the two item links and record your approximate completion time. If a check 
 ## References
 
 - [Explore lakehouse data with a notebook](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-notebook-explore) — lakehouse attachment and default selection.
+- [Notebook attachment example](https://learn.microsoft.com/en-us/fabric/real-time-intelligence/map/tutorial-real-time-work-order-routing-application) — the OneLake catalog picker; use its notebook-connection steps as a UI reference only.
 - [Use Fabric notebooks](https://learn.microsoft.com/en-us/fabric/data-engineering/how-to-use-notebook) — execution identity, code cells and session behavior.
 - [Lakehouse schemas](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-schemas) — `dbo` and default table-name resolution.
 - [NotebookUtils runtime context](https://learn.microsoft.com/en-us/fabric/data-engineering/notebookutils/notebookutils-runtime) — inspecting the notebook and attached lakehouse at runtime.

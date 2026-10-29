@@ -1,6 +1,6 @@
 # Curriculum and sample growth
 
-Status: organizer accepted the broad section/unit journey and minimal sample on 29 October 2026, with a Variable Library added to the core asset set and explicit gradual introduction of reusable automation and parameterization. Code-workspace placement and the consumer design below are implementation recommendations to validate. Timings remain estimates; mechanisms remain subject to the listed technical gates. Unit 0 is parked after organizer review. Unit 1 and its starter are authored, locally checked and awaiting Fabric walkthrough. Units 2–12 remain planning references, not available lessons.
+Status: organizer accepted the broad section/unit journey and minimal sample on 29 October 2026, with a Variable Library added to the core asset set and explicit gradual introduction of reusable automation and parameterization. Code-workspace placement and the consumer design below are implementation recommendations to validate. Timings remain estimates; mechanisms remain subject to the listed technical gates. Unit 0 is parked after organizer review. Unit 1 has a successful organizer-reported walkthrough in 20–30 minutes including reading; its OneLake picker wording was corrected afterward. Units 2–12 remain planning references, not available lessons.
 
 ## Teaching journey
 
@@ -108,7 +108,7 @@ Optional material: independent repo ownership, direct Git-connected versus pipel
 
 Use small versioned customers, products and orders fixtures or an equivalent deterministic generator. The notebook creates a single curated `sales` table containing the fields needed by the report. Store expected counts and monetary totals with the fixtures; choose and verify the actual numbers when implementing Unit 1. Do not reuse the historical lab's expected totals without reproducing its data.
 
-Unit 1 now supplies the [canonical starter](../../sample/tiny-sales/unit-01-notebook.py): three customers/products and six orders, quantity 13, two returned orders, baseline gross revenue/revenue 342.20. Independent local fixture arithmetic confirms these numbers and the later returned-order feature result of 189.70; actual Spark execution and persistence are pending. The fixture inputs are embedded in source and initially exist in memory, with only the curated table persisted.
+Unit 1 supplies the [canonical starter](../../sample/tiny-sales/unit-01-notebook.py): three customers/products and six orders, quantity 13, two returned orders, baseline gross revenue/revenue 342.20. Independent local fixture arithmetic confirms these numbers and the later returned-order feature result of 189.70. The organizer reports successful Dev execution/persistence and completion in 20–30 minutes; no raw runtime output was supplied. Keep the 45-minute mixed-experience unit budget for now. The fixture inputs are embedded in source and initially exist in memory, with only the curated table persisted.
 
 | Item | Workspace role | First created | Important relationship |
 | --- | --- | --- | --- |

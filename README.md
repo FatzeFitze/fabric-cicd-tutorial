@@ -1,11 +1,11 @@
 # DNA Fabric Days: workshop planning
 
-Workshop preparation started 28 October 2026. Agreed direction: Models A and B are hands-on; Model C and feature workspaces are explainer topics. Use local feature branches and shared Dev workspaces where supported. The repository contains planning documents, historical reference source, Units 0–1 and a Tiny Sales starter. Unit 1 is awaiting its first Fabric walkthrough; no workshop deployment implementation has been validated.
+Workshop preparation started 28 October 2026. Agreed direction: Models A and B are hands-on; Model C and feature workspaces are explainer topics. Use local feature branches and shared Dev workspaces where supported. The repository contains planning documents, historical reference source, Units 0–1 and a Tiny Sales starter. The organizer reports successful Unit 1 execution in 20–30 minutes including reading; Git sync and workshop deployment automation remain untested.
 
 ## Start here
 
 - [Participant tutorial](docs/tutorial/README.md): begin with Unit 0 to observe and understand the pre-provisioned setup.
-- [Unit 1: create a tiny sales solution](docs/tutorial/section-01-foundation/unit-01-create-a-tiny-sales-solution/README.md): participant-ready manual build, deterministic sample and expected checks; pilot pending.
+- [Unit 1: create a tiny sales solution](docs/tutorial/section-01-foundation/unit-01-create-a-tiny-sales-solution/README.md): successful organizer walkthrough reported; deterministic sample and corrected OneLake catalog attachment steps.
 - [Tutorial authoring convention](docs/facilitator/tutorial-authoring-guide.md): clean participant lessons with organizer validation notes kept separately.
 - [Pilot record](docs/facilitator/pilot-log.md): access/feature checks reported passed; setup took about one minute, while Unit 0 is parked after organizer review and learner inspection timing remains unmeasured.
 - [Provisioning feedback review](docs/facilitator/provisioning-review-2026-10-29.md): factory code, supplied run records, Git credentials and pilot-layout differences.

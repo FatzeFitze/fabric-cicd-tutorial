@@ -9,7 +9,7 @@ The working scenario is a small synthetic sales solution that progresses from co
 | Unit | Outcome | Status |
 | --- | --- | --- |
 | [0. Observe and test the setup](section-01-foundation/unit-00-observe-and-test-the-setup/README.md) | Explain the components and inspect the provided workspace/repository layout | Parked as-is after organizer review; access checks reported successful; learner timing unmeasured |
-| [1. Create a tiny sales solution](section-01-foundation/unit-01-create-a-tiny-sales-solution/README.md) | Create a cross-workspace lakehouse/notebook slice, validate six synthetic orders and rerun without duplication | Participant lesson/starter authored; local fixture/target-guard checks passed; Fabric walkthrough pending |
+| [1. Create a tiny sales solution](section-01-foundation/unit-01-create-a-tiny-sales-solution/README.md) | Create a cross-workspace lakehouse/notebook slice, validate six synthetic orders and rerun without duplication | Organizer reports successful walkthrough in 20–30 minutes including reading; OneLake picker wording corrected |
 
 ## Unit folder convention
 
