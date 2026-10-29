@@ -9,6 +9,7 @@ The working scenario is a small synthetic sales solution that progresses from co
 | Unit | Outcome | Status |
 | --- | --- | --- |
 | [0. Observe and test the setup](section-01-foundation/unit-00-observe-and-test-the-setup/README.md) | Explain the components and inspect the provided workspace/repository layout | Parked as-is after organizer review; access checks reported successful; learner timing unmeasured |
+| [1. Create a tiny sales solution](section-01-foundation/unit-01-create-a-tiny-sales-solution/README.md) | Create a cross-workspace lakehouse/notebook slice, validate six synthetic orders and rerun without duplication | Participant lesson/starter authored; local fixture/target-guard checks passed; Fabric walkthrough pending |
 
 ## Unit folder convention
 
@@ -19,26 +20,32 @@ docs/tutorial/
   section-01-foundation/
     unit-00-observe-and-test-the-setup/
       README.md
-    unit-01-<topic>/             # created when the next unit is authored
+    unit-01-create-a-tiny-sales-solution/
       README.md
-      resources/                # optional inputs, snippets or diagrams for that unit
+      resources/                # optional; create only for actual unit-specific files
 ```
 
 Files needed only for one exercise belong in its unit folder. Reusable deployment code, shared sample definitions, pipeline templates and multi-unit examples remain in `toolkit/`, `sample/`, `pipelines/` or `examples/`, and units link to their canonical files. Avoid maintaining duplicate copies of shared code beside each lesson. The old setup-draft redirect is retained for historical links and is not an active participant unit.
 
-## Proposed sequence after Unit 0
+From Unit 1 onward, lessons use a consistent participant-facing structure: outcomes/prerequisites, a short explanation, numbered assignments with expected results, troubleshooting, completion checkpoint and references. Organizer validation notes stay in [facilitator material](../facilitator/tutorial-authoring-guide.md).
 
-The following are planning placeholders, not available or validated units:
+## Agreed section and unit journey
 
-Provisioning belongs to the [facilitator reference](../facilitator/project-and-environment-provisioning.md), outside learner exercise time. The earlier setup Unit 1 is superseded; the first manual-asset unit will be Unit 1 and has not yet been authored.
+The broad journey and minimal sample are organizer-approved. Future rows are planning references, not available or validated units:
 
-1. Create the first lakehouse and notebook manually; run deterministic synthetic data.
-2. Capture supported definitions in Azure Repos and inspect source versus runtime state.
-3. Promote with native Fabric Deployment pipelines and verify target behavior.
-4. Make a local feature change, introduce PR review and useful CI checks.
-5. Coordinate releases across the pre-provisioned workspace roles and validate explicit dependency/environment mappings.
-6. Automate a pinned release through Test, approval and simulated Prod with runtime evidence.
-7. Diagnose a controlled failure, recover, and reuse the starter configuration.
+Provisioning belongs to the [facilitator reference](../facilitator/project-and-environment-provisioning.md), outside learner exercise time. The earlier setup Unit 1 is superseded by the manual-asset Unit 1 linked above.
+
+The [curriculum](../planning/curriculum.md) contains every unit's outcome, estimated time, MS-control touchpoints, asset-growth diagram/table and the staged introduction of reusable automation and parameterization.
+
+| Section | Planned units | Outcome |
+| --- | --- | --- |
+| 1. Understand the setup and build the first result | 0–2: setup inspection, lakehouse/notebook, Git baseline | Working deterministic Dev result and traceable source |
+| 2. Release the small solution with Model A | 3: native promotion and verification | Minimal two-role slice works in Test and simulated Prod |
+| 3. Grow the solution and introduce team development | 4–6: Variable Library, orchestration/reporting, local feature, reusable CI/PR controls | Full Dev sample and a reviewed, validated source change |
+| 4. Automate the Model B release | 7–10: environment/dependency configuration, shared Dev, Test, approved Prod | One selected source released with explicit target bindings and runtime evidence |
+| 5. Operate, recover and reuse | 11–12: failure/recovery, starter reuse and control selection | Verified recovery and a small configuration-based reuse exercise |
+
+The working time budget is nine core hours with 1.5 hours of support reserve, still to measure. The native lakehouse/notebook path, Variable Library consumer/active-set automation, later reporting format and Model B mechanisms need validation. Prepared generic components and their config examples are introduced in Units 6–10, after they have been built/tested here. Unit 0 remains parked; future units are not authored merely by appearing in this table.
 
 Unit boundaries and timing will change with pilot feedback. No future unit should assume the old reference lab's cloud behavior applies to this sample.
 

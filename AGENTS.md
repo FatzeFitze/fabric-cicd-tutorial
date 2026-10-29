@@ -3,7 +3,8 @@
 ## Current scope
 
 - Develop the participant tutorial sequentially with the organizer as the first learner. Use docs/tutorial/README.md and docs/facilitator/pilot-log.md; record actual checkpoints before claiming a unit passed. Prepare the next unit from the reported results rather than assuming cloud success.
-- Participants begin with Unit 0 to observe/test the setup. The facilitator pre-provisions nine workspaces (code/data/reporting × Dev/Test/Prod); provisioning instructions are in docs/facilitator/project-and-environment-provisioning.md. Access checks are reported passed, while the new Unit 0 narrative/learner timing and actual Git sync/runtime remain untested. Next participant Unit 1 will create assets.
+- Participants begin with Unit 0 to observe/test the setup. The facilitator pre-provisions nine workspaces (code/data/reporting × Dev/Test/Prod); provisioning instructions are in docs/facilitator/project-and-environment-provisioning.md. Access checks are reported passed; Unit 0 is parked. Unit 1's manual lakehouse/notebook exercise and Tiny Sales starter are authored with local checks, but actual Fabric runtime/Git sync and learner timing remain untested. See docs/facilitator/unit-01-pilot-notes.md before continuing.
+- Write new units directly for participants using docs/facilitator/tutorial-authoring-guide.md. Keep organizer validation notes in facilitator/planning files or chat. Unit 1's canonical code lives in sample/tiny-sales; do not duplicate its fixtures/implementation across lessons.
 
 - Read README.md and docs/planning/decisions.md before substantive work.
 - Hands-on workshop scope is Model A and Model B. Model C is explainer material only.

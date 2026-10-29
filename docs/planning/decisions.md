@@ -16,6 +16,11 @@ Date: 28 October 2026. Explicit user decisions are recorded below. Other recomme
 
 ## Confirmed in the scoping discussion
 
+- 29 October Unit 1 authoring request: write unit Markdown directly for tutorial participants, including explainers, official references and step-by-step assignments. Keep organizer checks in chat or separate facilitator material. Adopted working format is recorded in [the authoring guide](../facilitator/tutorial-authoring-guide.md). Unit 1 has now been authored with a Tiny Sales starter and explicit expected results; no participant Fabric run has yet been reported.
+
+- 29 October curriculum follow-up: organizer accepted the five-section/Units 0–12 journey and minimal sales sample, with a Variable Library required as a sixth authored item type. Code-workspace placement was suggested; the implementation plan recommends it beside its consumers, subject to validation. Introduce the library in Unit 4 and extend environment-specific use in Units 7–10; these detailed placements are implementation recommendations. Additional Fabric item types can be considered later.
+- Reusable CI/deployment components, Azure Pipelines templates and their parameterization must be built and tested in this preparation repo before the corresponding learner exercise. Introduce them gradually with explicit configuration examples; participants configure and reuse them rather than implement the generic layer from scratch. See the phasing table in [curriculum.md](curriculum.md). Broad journey acceptance does not validate timings, source layout, deployment mechanisms or runtime support.
+
 - 29 October: organizer reviewed Unit 0 as looking good and asked to park it as-is and proceed. Each participant unit will have its own folder, with a README.md lesson and optional colocated resources. Shared reusable assets remain in canonical repository locations. No learner walkthrough time or additional runtime results were supplied with this review.
 
 - 29 October follow-up: organizer confirmed workspace/repository access, Dev Source control access, empty workspaces and native Deployment pipelines availability. DevOps access was added separately and works; provisioning took about one minute without private endpoints. Managed identity creation is planned for a later factory extension, not reported complete.
@@ -44,7 +49,7 @@ Date: 28 October 2026. Explicit user decisions are recorded below. Other recomme
 | D01 | One local repository, then a private GitHub remote | Start immediately and keep docs/code aligned | Confirm generic content and remote ownership |
 | D02 | Azure Pipelines files from the start | Target the eventual delivery platform | First real Azure DevOps run |
 | D03 | One repository with an independently structured toolkit | Fast workshop iteration and later extraction | Second small sample uses the toolkit |
-| D04 | One evolving synthetic sales project | Visible outcomes and meaningful dependencies | Confirm relevance to migration asset mix |
+| D04 | Accepted 29 October: one evolving synthetic sales project, now including a Variable Library | Visible outcomes and meaningful dependencies | Asset mechanisms and timed pilot still to validate |
 | D05 | Nine core hours, 1.5 hours reserve, optional extensions | Protect the complete learning path | Timed pilot |
 | D06 | Prepared Model B starter with participant modifications | Managed team delivery is achievable within the event | Pilot across experience levels |
 | D07 | Thin reusable layer over supported tooling | Avoid rebuilding deployment and parameterization support | Compare current code with fabric-cicd and native features |
@@ -57,6 +62,7 @@ Date: 28 October 2026. Explicit user decisions are recorded below. Other recomme
 | D14 | Core tutorial follows one developer sequentially; pair concurrency is optional | Reduce branches and runtime states needed for teaching and rehearsal | Timed solo and pair pilot |
 | D15 | Prefer pipeline-published integration Dev for the Model B local feature, subject to feasibility | Use one controlled publisher and one selected source revision | Compare with current code; controlled Git-update Dev remains an alternative |
 | D16 | Provision the nine role/environment workspaces from Unit 1; introduce their use gradually | Address the organizer's request to consider the full layout immediately and avoid a later topology-migration exercise | Pilot timing and explicit native-promotion/dependency experiment |
+| D17 | Broad journey accepted 29 October: five sections and Units 0–12, minimal native lakehouse/notebook slice followed by orchestration, Variable Library and reporting | Make asset/control growth and reusable-automation adoption explicit | [curriculum.md](curriculum.md): mechanisms, detailed placement and timing await validation |
 
 ## Missing inputs, in priority order
 
@@ -75,7 +81,7 @@ A [dated learning-project handover](handoff-review.md) supplies historical archi
 | ID | Assumption | Consequence if false |
 | --- | --- | --- |
 | A01 | The final layout means three environments times three roles per team | Recalculate workspace inventory and transition exercises |
-| A02 | A supported report/model combination works in both the introductory and advanced paths | Adapt format, storage mode, or intro sample before authoring |
+| A02 | A supported report/model combination works in the full Model B path; the accepted introductory native slice omits reporting | Adapt format/storage mode or the reporting exercise before authoring |
 | A03 | The chosen runner can authenticate with an approved noninteractive identity | Change runner or identity design and rerun end-to-end tests |
 | A04 | The capacity can support realistic team concurrency | Reduce runtime work, stagger starts, or adjust capacity |
 | A05 | A small set of required dependency types can be inspected after deployment | Narrow validation promises or change the asset path |

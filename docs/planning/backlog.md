@@ -4,6 +4,8 @@ V01 has an initial source inventory, targeted review and passing local definitio
 
 W06 authoring and W08 piloting proceed incrementally. Provisioning and access/feature checks are now evidenced/reported successful, including about one minute provisioning without private endpoints. The participant entry point is [Unit 0](../tutorial/section-01-foundation/unit-00-observe-and-test-the-setup/README.md); its content is parked after organizer review and learner time remains unmeasured. The earlier setup draft is now a facilitator reference. See the [pilot record](../facilitator/pilot-log.md). Actual Git item sync, deployments and workload checks remain pending.
 
+[Unit 1](../tutorial/section-01-foundation/unit-01-create-a-tiny-sales-solution/README.md) and its four-cell starter are authored. Local syntax, independent fixture arithmetic and target-guard checks passed; Fabric picker/runtime/Delta behavior and learner time await the organizer walkthrough. [Unit 1 facilitator notes](../facilitator/unit-01-pilot-notes.md) identify evidence needed for V04/V07 and the Dev-only guard configuration that must evolve before native promotion. These local checks do not pass the cloud experiments.
+
 The [learning-project handover review](handoff-review.md) records earlier reported lab success and reusable lessons. These inform V01/V08/V10/V11 but do not pass them. Review candidate/content correlation, runtime evidence, release-window locking/queue behavior, and forward recovery against the actual old implementation. Preserve the simpler proposed workshop branch model unless evidence justifies a change.
 
 ## Technical experiments before detailed tutorial authoring
@@ -14,7 +16,7 @@ Record the tenant, date, tooling versions, runner, authentication method, source
 | --- | --- | --- | --- |
 | V01 | P0 | Guideline mapping and existing-code review | A/B controls mapped to exercises; Model C explainer boundary; older Section 3 checked for relevant implementation choices; retain/replace list |
 | V02 | P0 | Identity and runner feasibility | Chosen noninteractive identity can perform each required operation from the intended agent; runtime access also demonstrated |
-| V03 | P0 | Native stage asset compatibility | Selected report/model format and minimal project deploy through the intended stages and produce the expected target result |
+| V03 | P0 | Native stage asset compatibility | Minimal Data/Code lakehouse/notebook slice deploys through the intended stages with correct target binding and expected runtime result; reporting is introduced later and validated in V06 |
 | V04 | P0 | Notebook to separate-workspace lakehouse | Clean target deployment uses the target-environment lakehouse and successfully writes a known result |
 | V05 | P0 | Pipeline to notebook and connection dependencies | Activity targets and connections resolve to intended items; execution succeeds under runtime identity |
 | V06 | P0 | Semantic model and report dependencies | Chosen model mode reaches target data; report uses target model; any refresh/readiness steps are explicit |
@@ -30,6 +32,7 @@ Record the tenant, date, tooling versions, runner, authentication method, source
 | V16 | P0 | Local feature branches with shared Dev | Required feature edits locally, PR checks run without a feature workspace, merge updates shared Dev through one chosen mechanism, and integration tests record the selected revision |
 | V17 | P0 | Empty-repository bootstrap and Model B transition | One learner creates introductory Fabric assets manually, captures them in Git, transitions to role folders without losing identities, and uses one chosen Dev update mechanism; pair concurrency is not a core pass condition |
 | V18 | P1 | Optional pair concurrency | If offered, two local feature branches integrate in sequence with meaningful checks; deliberate conflicts and feature workspaces stay outside required completion |
+| V19 | P0 | Variable Library lifecycle and consumption | Code-role library captured in Git; same-workspace consumer passes a value to notebook under the chosen runtime identity; target active set explicitly configured/verified after fresh deployment and preserved/checked on rerun; wrong/missing setting detected; no assumption that deployment identity establishes runtime support |
 
 Relationship support matrix to fill from V04–V06:
 
@@ -37,6 +40,7 @@ Relationship support matrix to fill from V04–V06:
 | --- | --- | --- | --- | --- | --- | --- |
 | Notebook -> lakehouse | To inspect | To prove | To prove | To prove | To prove | Unvalidated |
 | Pipeline -> notebook | To inspect | To prove | To prove | To prove | To prove | Unvalidated |
+| Pipeline -> Variable Library -> notebook parameter | To inspect | To prove; active value set is separate workspace state | To prove | To prove | To prove | Required addition, unvalidated |
 | Pipeline -> connection | To inspect | To prove | To prove | To prove | To prove | Unvalidated |
 | Semantic model -> data source | Depends on chosen mode | To prove | To prove | To prove | To prove | Unvalidated |
 | Report -> semantic model | Depends on chosen format | To prove | To prove | To prove | To prove | Unvalidated |
@@ -55,6 +59,10 @@ Relationship support matrix to fill from V04–V06:
 | W08 | Timed pilot and revisions | W04–W07 | Representative novice solo learner completes the core from an empty repo within budget; a pair can follow together without required parallel feature work |
 | W09 | Workshop release | W08 and required validation | Named release/tag, frozen dependencies, recovery checkpoints, recorded known limitations |
 | W10 | Community extraction and publication preparation | W09, V14, ownership/license decision | Toolkit usable without workshop or private company configuration; publication terms selected |
+
+### Prepare before learner introduction
+
+The organizer accepted gradual adoption of generic components/configuration on 29 October. Follow the [curriculum phasing contract](curriculum.md#how-reusable-automation-enters-the-tutorial): prove Variable Library consumption before Unit 4 (V19); build/test reusable checks before Unit 6; document/validate environment and dependency inputs before Unit 7; prove one deployment entry point and parameterized Azure Pipelines template before Unit 8; prove pinned Test/Prod release and active-value-set checks before Units 9–10; rehearse recovery/reuse before Units 11–12. W02 must include V19 in its full-solution feasibility evidence. These are preparation gates, not participant tasks to write framework internals. Retain the nine-hour estimate until the measured pilot shows a necessary adjustment.
 
 ## Readiness gates
 

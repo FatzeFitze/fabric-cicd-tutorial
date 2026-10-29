@@ -1,14 +1,17 @@
 # DNA Fabric Days: workshop planning
 
-Initial scoping baseline, 28 October 2026. Agreed direction: Models A and B are hands-on; Model C and feature workspaces are explainer topics. Use local feature branches and shared Dev workspaces where supported. Other recommendations remain proposals. This repository contains planning documents and historical reference source; it contains no validated workshop deployment implementation or exercises.
+Workshop preparation started 28 October 2026. Agreed direction: Models A and B are hands-on; Model C and feature workspaces are explainer topics. Use local feature branches and shared Dev workspaces where supported. The repository contains planning documents, historical reference source, Units 0–1 and a Tiny Sales starter. Unit 1 is awaiting its first Fabric walkthrough; no workshop deployment implementation has been validated.
 
 ## Start here
 
 - [Participant tutorial](docs/tutorial/README.md): begin with Unit 0 to observe and understand the pre-provisioned setup.
+- [Unit 1: create a tiny sales solution](docs/tutorial/section-01-foundation/unit-01-create-a-tiny-sales-solution/README.md): participant-ready manual build, deterministic sample and expected checks; pilot pending.
+- [Tutorial authoring convention](docs/facilitator/tutorial-authoring-guide.md): clean participant lessons with organizer validation notes kept separately.
 - [Pilot record](docs/facilitator/pilot-log.md): access/feature checks reported passed; setup took about one minute, while Unit 0 is parked after organizer review and learner inspection timing remains unmeasured.
 - [Provisioning feedback review](docs/facilitator/provisioning-review-2026-10-29.md): factory code, supplied run records, Git credentials and pilot-layout differences.
 
 - [Scope and learning journey](docs/planning/scope.md): outcomes, sample project, timetable, reusable components, and repository design.
+- [Sections, units and sample growth](docs/planning/curriculum.md): agreed broad journey and minimal sample including a Variable Library; staged introduction of reusable automation/configuration. Timings and technical mechanisms await pilot validation.
 - [Decision register](docs/planning/decisions.md): proposed decisions, assumptions, and missing inputs.
 - [Validation and delivery backlog](docs/planning/backlog.md): technical experiments, evidence requirements, delivery sequence, and readiness gates.
 - [Control coverage and development workflow](docs/planning/control-coverage.md): A/B exercises, Model C explainers, and shared-Dev constraints.

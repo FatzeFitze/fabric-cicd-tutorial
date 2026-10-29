@@ -24,12 +24,19 @@ Consulted 28 October 2026. These references support technical scoping; no tenant
 | S18 | [OpenAI: local environments](https://learn.chatgpt.com/docs/environments/local-environment) | Portable app actions/setup can be shared through selected project configuration |
 | S19 | [OpenAI: customization](https://learn.chatgpt.com/docs/customization/overview) | Repository-specific skills and personal workflows have different locations/scopes |
 | S20 | [Microsoft: resolve OneDrive sync issues](https://learn.microsoft.com/en-us/troubleshoot/sharepoint/sync/troubleshoot-sync-issues) | Describes non-Office conflict copies; recommendation to avoid active Git checkouts in sync folders is an engineering inference |
+| S21 | [Notebook source control and deployment](https://learn.microsoft.com/en-us/fabric/data-engineering/notebook-source-control-deployment) | Checked 29 October 2026: notebook source representation, Git binding settings and target-stage deployment rules; exact separated-workspace behavior still needs testing |
+| S22 | [Variable Library CI/CD](https://learn.microsoft.com/en-us/fabric/cicd/variable-library/variable-library-cicd) | Checked 29 October: definitions/value sets in Git; active set is separate workspace state, initially Default on import; establish/check selection before runtime |
+| S23 | [NotebookUtils Variable Library utilities](https://learn.microsoft.com/en-us/fabric/data-engineering/notebookutils/notebookutils-variable-library) | Checked 29 October: same-workspace scope and documented service-principal limitation for notebook utilities; validate the actual runtime consumer/identity independently |
+| S24 | [Lakehouse/notebook exploration](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-notebook-explore) and [notebook usage](https://learn.microsoft.com/en-us/fabric/data-engineering/how-to-use-notebook) | Checked 29 October for Unit 1: default attachment, session restart and interactive identity; exact cross-workspace picker/runtime behavior remains untested |
+| S25 | [Lakehouse schemas](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-schemas) | Checked 29 October: portal schema-enabled creation, `dbo` default and unqualified table-name resolution |
+| S26 | [NotebookUtils runtime context](https://learn.microsoft.com/en-us/fabric/data-engineering/notebookutils/notebookutils-runtime) | Checked 29 October: current/default-lakehouse workspace names and IDs are exposed read-only; sample guard still needs tenant execution |
 
 The organizer-supplied guideline documents are maintained in [source-guidelines](../source-guidelines/README.md) and are the workshop's policy-design baseline. They are not Microsoft platform documentation.
 
 ## Interpretation limits
 
 - S3 describes definition-based dependency behavior and explicitly warns that cross-workspace references do not automatically bind. Specialized native features can differ; validate the precise mechanism and item pair selected for the workshop.
+- S4 rechecked 29 October 2026 also describes native cross-pipeline stage binding. Do not apply the definition-based warning as a universal statement about every native binding mechanism. The proposed two-role native notebook/lakehouse exercise still requires an observed tenant result.
 - S4 currently lists limitations affecting PBIR reports and Direct Lake target bindings. Do not infer that a particular exported report/model combination works in both Git-based and native promotion paths without testing it.
 - S6/S7 establish an existing deployment/configuration starting point. They do not prove the sample's cross-workspace orchestration, recovery, or post-deployment validation requirements are fully covered.
 - Identity support is specific to an operation, item type, runtime, and tenant settings. A general support table cannot establish the complete authentication chain.

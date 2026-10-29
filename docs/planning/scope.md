@@ -6,6 +6,8 @@ Agreed scope: hands-on Models A and B. Model C appears only in explainer section
 
 Pilot update: the facilitator pre-provisions all nine code/data/reporting × Dev/Test/Prod workspaces. Participants begin with [Unit 0](../tutorial/section-01-foundation/unit-00-observe-and-test-the-setup/README.md), observing/testing that setup. Provisioning/access checks are reported successful; Unit 0 is parked after organizer review; learner timing remains unmeasured. Earlier combined-workspace migration suggestions are superseded for this pilot. Assets and controls are introduced gradually; cross-workspace dependencies still require experiments.
 
+The [29 October curriculum](curriculum.md) records the organizer-accepted broad journey: a native lakehouse/notebook slice first, then orchestration, a required Variable Library and reporting for Model B. Reusable automation and parameterization enter gradually. Detailed mechanisms and timing remain subject to validation; future units are not completed exercises.
+
 ## Purpose and constraints
 
 Prepare 15–20 participants, working individually or in pairs, to choose and apply a suitable Microsoft Fabric ALM workflow. There are 10–12 hours available over two days. Participants have mixed prior ALM experience. The target automation platform is Azure DevOps.
@@ -86,7 +88,7 @@ Target core asset set, subject to a successful compatibility experiment:
 | Data pipeline | Orchestration and execution references | A small number of activities |
 | Semantic model | Consumption dependency and refresh/readiness | Choose one validated storage mode |
 | Report | Visible outcome and model binding | One page with a few visuals |
-| Variable library or equivalent supported configuration | Environment-specific values | Include only if it simplifies the validated path |
+| Variable Library | Demonstrate runtime values, environment value sets and configuration state | Required by organizer; recommended in Code beside its consumers, introduced in Unit 4 and automated in Units 7–10 after feasibility testing |
 
 An Environment, Warehouse, Dataflow Gen2, or Real-Time Intelligence asset can be an optional extension selected from actual migration needs. Do not add all of them to the mandatory path. Report format, semantic model mode, and deployment support must be proven together before committing to the exercise. In particular, current Deployment pipeline documentation lists PBIR report and Direct Lake binding limitations [S4].
 
@@ -94,13 +96,13 @@ Progress the same business solution through:
 
 1. **Native promotion:** manually create a small introductory solution in Fabric, initialize the participant repository, capture supported definitions through Git integration, and compare/promote stages. Supplied input data can simplify setup; the normal path starts with an unpopulated participant repository.
 2. **Source control and CI:** export or synchronize supported definitions, introduce a branch and pull request, run configuration and transformation checks, and connect a source change to a controlled deployment.
-3. **Model B, separated workspaces and release control:** place data assets, executable assets, and reporting assets in their agreed roles. Resolve environment-specific references, deploy prerequisites in order, run readiness checks, and promote a pinned revision through Test and simulated Prod. Explain Model C escalation separately.
+3. **Model B, coordinated release control:** grow the assets already placed in their agreed workspace roles. Resolve environment-specific references, deploy prerequisites in order, run readiness checks, and promote a pinned revision through Test and simulated Prod. Explain Model C escalation separately.
 
 Model A includes a traceable Git source state for technically supported definitions, identified environment settings/identities, deliberate promotion, basic validation, and a documented bootstrap/recovery path. Git and control hygiene therefore begin in the introductory stage; feature branches, PR policies, and automated CI are introduced as Model B strengthens delivery.
 
 The fictional scenario changes from a low-risk reporting solution to normal team delivery with regular changes and shared consumers. Participants explain why Model B becomes appropriate. The mandatory exercise follows one developer sequentially; simultaneous feature development is optional. They also discuss a hypothetical critical/regulatory use case that would require Model C without building it.
 
-Provide starter and solution checkpoints for each stage as recovery resources. The normal path preserves the participant's work. Rehearse the transition to role folders and the final workspace layout, preserving intended logical identities and correcting path-based references. Use a documented helper or small guided change if needed; recovery checkpoints are a fallback, not a mandatory replacement of the learner-built repository. Preserve the earlier source revision for comparison.
+Provide starter and solution checkpoints for each stage as recovery resources. The normal path preserves the participant's work. Choose the source layout before finalizing bootstrap instructions, use the final workspace roles from the outset, and rehearse the transition from native authoring/promotion to the selected Model B publisher. Preserve intended logical identities and source revisions. Recovery checkpoints are a fallback, not a mandatory replacement of the learner-built repository.
 
 Suggested change story: add a returns indicator, change the net-revenue calculation, and add a data assertion. Suggested failure story: a required configuration value is absent, or a target dependency points to Dev. CI/preflight rejects the invalid state; the team fixes it and observes a successful run. Include a known-good redeployment exercise without claiming that reverting code reverses data changes.
 
@@ -108,18 +110,7 @@ Suggested change story: add a returns indicator, change the net-revenue calculat
 
 Proposed mandatory teaching and exercise time: 9 hours. Reserve 1.5 hours for support and overruns. Optional extensions fill up to another 1.5 hours if the full 12 hours are available. These are working-session hours; meal breaks are outside the estimate.
 
-| Day | Block | Hours | Observable output |
-| --- | --- | ---: | --- |
-| 1 | Foundations, classification, four state types, and preflight | 0.5 | Everyone can access their team resources |
-| 1 | Model A: manual asset creation, Git baseline and native promotion | 1.75 | Learner-built assets reach a target stage with a recorded source state |
-| 1 | Model B: local feature branches, shared Dev, and pull requests | 1.0 | A reviewed change in the repository |
-| 1 | CI and useful quality checks | 1.0 | One failing and one successful validation run |
-| 1 | Guided consolidation challenge | 0.25 | Team can explain and repeat the simple release path |
-| 2 | Workspace separation and dependency model | 0.75 | Team can identify target dependency bindings |
-| 2 | Azure DevOps release path | 1.75 | A pinned revision reaches Test and simulated Prod |
-| 2 | Failure, recovery, and rerun | 1.0 | Evidence of diagnosis and safe recovery |
-| 2 | Starter reuse, handover, and Model C/feature-workspace explainers | 0.5 | Starter reused and limits understood |
-| Both | Distributed support/overrun reserve | 1.5 | Recovery without cutting the final learning outcome |
+The detailed estimates live in the [curriculum proposal](curriculum.md#timing-and-supporting-material): Units 0–6 total 4 h 40 min for Day 1; Units 7–12 total 4 h 20 min for Day 2. These replace the earlier coarse block estimates for planning discussion and must be measured during piloting. Distribute the 1.5-hour reserve across both days.
 
 Write the core tutorial for a single developer. Pairs follow together and rotate who operates; required concurrency or merge-conflict exercises are excluded. Review and approval can involve a partner or facilitator. Provide a short ALM pre-read, glossary, setup checklist, and optional Git practice beforehand. Introduce concepts briefly again during the relevant exercise so completion does not depend on perfect pre-read uptake.
 
@@ -127,7 +118,7 @@ Write the core tutorial for a single developer. Pairs follow together and rotate
 
 If each team gets Dev/Test/Prod for each of code/data/reporting, the final layout is nine workspaces per team. Fifteen to twenty people imply 8–20 teams depending on pairing, or 72–180 workspaces. Pairing everyone gives 8–10 teams and 72–90 workspaces. Additional workspaces for the native stage, facilitator, or recovery would be extra unless deliberately reused.
 
-Choose whether the native-stage workspace triplet is reused as one role in the final topology. This reduces provisioning but requires a rehearsed cleanup or transition with no stale bindings. Use team/environment/role naming consistently. Workshop Prod is simulated production containing synthetic data. Shared Dev means shared within a team; teams do not share one global mutable Dev environment. The preferred core path provisions no feature workspaces.
+Use the pre-provisioned role/environment workspaces from the first asset-creation exercise; no combined-workspace migration is required. The curriculum proposal uses the Data and Code triplets for the small native slice and adds Reporting assets later. Rehearse the publisher transition with no stale bindings or competing writers. Use team/environment/role naming consistently. Workshop Prod is simulated production containing synthetic data. Shared Dev means shared within a team; teams do not share one global mutable Dev environment. The preferred core path provisions no feature workspaces.
 
 Participant admin access supports self-service pipeline/workspace setup. More precisely, workspace admin is required to assign a workspace to a Deployment pipeline; pipeline permissions are separate [S10]. Keep admin access for the lab as requested. Use a more restricted automation identity where supported and explain that broad human admin access can bypass its controlled route. Do not present the lab as proof of production permission enforcement.
 
