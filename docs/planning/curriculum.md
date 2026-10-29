@@ -1,6 +1,6 @@
 # Curriculum and sample growth
 
-Status: organizer accepted the broad section/unit journey and minimal sample on 29 October 2026, with a Variable Library added to the core asset set and explicit gradual introduction of reusable automation and parameterization. Code-workspace placement and the consumer design below are implementation recommendations to validate. Timings remain estimates; mechanisms remain subject to the listed technical gates. Unit 0 is parked after organizer review. Unit 1 has a successful organizer-reported walkthrough in 20–30 minutes including reading; its OneLake picker wording was corrected afterward. Units 2–12 remain planning references, not available lessons.
+Status: organizer accepted the broad section/unit journey and minimal sample on 29 October 2026, with a Variable Library added to the core asset set and explicit gradual introduction of reusable automation and parameterization. Code-workspace placement and the consumer design below are implementation recommendations to validate. Timings remain estimates; mechanisms remain subject to the listed technical gates. Unit 0 is parked after organizer review. Unit 1 has a successful organizer-reported walkthrough in 20–30 minutes including reading; its OneLake picker wording was corrected afterward. Unit 2 and its baseline worksheet are authored, pending first Git-sync walkthrough. Units 3–12 remain planning references, not available lessons.
 
 ## Teaching journey
 
@@ -20,7 +20,7 @@ Times below include introductions, exercises and checkpoints. They are estimates
 | --- | ---: | --- | --- |
 | **0. Observe and test the setup** | 20 | Inspect the nine workspaces, Azure DevOps resources, Git connections and access. Explain the three different kinds of pipeline and four types of state. Existing content stays parked. | MS-01, 04, 07, 12, 13 |
 | **1. Create a tiny sales solution** | 45 | Manually create a lakehouse in Data Dev and notebook in Code Dev. Attach the cross-workspace lakehouse, add supplied deterministic input/logic, run it and check a known sales result. Record owner and intended operating model. | MS-01, 04, 06, 07, 08 |
-| **2. Capture the solution in Git** | 25 | Commit supported definitions through Fabric using the participant's credentials. Inspect notebook source, item identities and workspace-role mappings. Explain why tables, execution history and credentials are different from versioned definitions. Record the source baseline. | MS-02, 03, 06, 14 |
+| **2. Capture the solution in Git** | 25 | Commit supported definitions through Fabric using participant credentials. Inspect source, identities and role mappings; distinguish definitions from runtime state. Apply a Markdown-only Git edit back to Fabric, rerun checks and record per-repo source baselines. Participant estimate is 25–35 minutes; measure any reserve needed above this original slot. | MS-02, 03, 06, 14 |
 
 ### Section 2 — Release the small solution with Model A
 

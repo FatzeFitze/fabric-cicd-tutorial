@@ -6,6 +6,8 @@ W06 authoring and W08 piloting proceed incrementally. Provisioning and access/fe
 
 [Unit 1](../tutorial/section-01-foundation/unit-01-create-a-tiny-sales-solution/README.md) and its four-cell starter have local checks plus organizer-reported successful Dev completion in 20–30 minutes including reading. Corrected the attachment wording to Add data items → From OneLake catalog; no runtime code changed. [Unit 1 facilitator notes](../facilitator/unit-01-pilot-notes.md) distinguish this initial Dev success from V04/V07's still-pending clean-target deployment requirements, and identify the Dev-only guard configuration to evolve before native promotion. Raw run outputs and a separately replayed corrected lesson were not supplied.
 
+[Unit 2](../tutorial/section-01-foundation/unit-02-capture-the-solution-in-git/README.md) is authored for the existing Dev bindings: first full-item commits, real source/identity inspection, a Markdown-only Git-to-Fabric round trip and per-repo revision worksheet. [Pilot notes](../facilitator/unit-02-pilot-notes.md) cover source/credential observations needed for V17. No sync result is reported; final event repo topology and V03/V04 promotion/configuration gates remain open.
+
 The [learning-project handover review](handoff-review.md) records earlier reported lab success and reusable lessons. These inform V01/V08/V10/V11 but do not pass them. Review candidate/content correlation, runtime evidence, release-window locking/queue behavior, and forward recovery against the actual old implementation. Preserve the simpler proposed workshop branch model unless evidence justifies a change.
 
 ## Technical experiments before detailed tutorial authoring

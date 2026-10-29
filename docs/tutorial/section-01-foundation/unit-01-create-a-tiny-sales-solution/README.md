@@ -166,4 +166,4 @@ Keep the two item links and record your approximate completion time. If a check 
 - [Lakehouse schemas](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-schemas) — `dbo` and default table-name resolution.
 - [NotebookUtils runtime context](https://learn.microsoft.com/en-us/fabric/data-engineering/notebookutils/notebookutils-runtime) — inspecting the notebook and attached lakehouse at runtime.
 
-[Previous: Unit 0](../unit-00-observe-and-test-the-setup/README.md) · [Tutorial index](../../README.md)
+[Previous: Unit 0](../unit-00-observe-and-test-the-setup/README.md) · [Next: Unit 2](../unit-02-capture-the-solution-in-git/README.md) · [Tutorial index](../../README.md)

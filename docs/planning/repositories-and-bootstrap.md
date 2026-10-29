@@ -2,7 +2,7 @@
 
 Updated 28 October 2026. The organizer confirmed the separation between workshop preparation and participant work. Repository layout and the precise Model B synchronization mechanism remain recommendations to validate.
 
-Pilot update: Unit 1 provisions nine role/environment workspaces immediately. The optional combined `/fabric/initial` workspace/folder transition described below belongs to the earlier proposal and is not the current pilot path. We will choose the first role-specific Git mapping when capturing actual assets.
+Pilot update, 29 October: the facilitator provisioned nine role/environment workspaces before Unit 0. Unit 1's manual Data/Code slice completed by organizer report. Unit 2 uses the actual existing three role-specific repos on `dev`, each at `/`, for first capture and a Markdown-only round trip; it does not migrate or reconnect them. The one-repo layout below remains the recommendation for final event/Model B selection, not a completed change. Combined `/fabric/initial` suggestions below are historical proposals, superseded for the current pilot.
 
 ## Two different purposes
 
