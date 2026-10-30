@@ -11,10 +11,13 @@ The working scenario is a small synthetic sales solution that progresses from co
 | [0. Observe and test the setup](section-01-foundation/unit-00-observe-and-test-the-setup/README.md) | Explain the components and inspect the provided workspace/repository layout | Parked as-is after organizer review; access checks reported successful; learner timing unmeasured |
 | [1. Create a tiny sales solution](section-01-foundation/unit-01-create-a-tiny-sales-solution/README.md) | Create a cross-workspace lakehouse/notebook slice, validate six synthetic orders and rerun without duplication | Organizer reports successful walkthrough in 20–30 minutes including reading; OneLake picker wording corrected |
 | [2. Capture the solution in Git](section-01-foundation/unit-02-capture-the-solution-in-git/README.md) | Capture real definitions, inspect identities/data boundaries, apply a Markdown-only Git update and record per-repo source revisions | Completed by organizer report; commit-diff review and open-editor guidance corrected; duration not supplied |
+| [3. Native promotion](section-02-model-a/unit-03-native-promotion/README.md) | Rehearse the environment-aware notebook and native Data/Code promotion into Test | Unit folder and linked rehearsal available; native validation pending, full participant lesson not finalized |
 
 ## Unit folder convention
 
 Each participant unit has its own folder. `README.md` is the main lesson, with unit-specific resources kept alongside it. Create supporting folders only when they contain actual resources.
+
+Create the unit folder and README entry point from the first preparation draft, including a rehearsal stage. Link existing rehearsal/shared assets rather than duplicating them. Commit/publish these files so the organizer can open the same materials from GitHub or the work-PC checkout; chat is not their only access route.
 
 ```text
 docs/tutorial/

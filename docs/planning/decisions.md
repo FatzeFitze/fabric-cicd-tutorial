@@ -16,6 +16,8 @@ Date: 28 October 2026. Explicit user decisions are recorded below. Other recomme
 
 ## Confirmed in the scoping discussion
 
+- 30 October: organizer needs every new unit/preparation draft in a dedicated repository folder immediately, with a README entry point and all linked materials available through GitHub/work-PC synchronization. Unit 3 now has its own tutorial folder linking the existing canonical rehearsal and sample cell. This is a discoverability/publishing convention, not acceptance of untested native behavior.
+
 - 29 October Unit 2 completion: organizer added the missing introductory cell, synced and completed the rest successfully. Updated guidance reviews the completed Azure Repos commit before Fabric Update, closes saved notebook editors before external updates, and preserves unsaved work before refresh/reopen if a version warning appears. Exact editor-warning cause and availability of pre-commit diff across editor versions remain unverified; reported workaround was browser refresh. Unit 2 timing/actual source revisions not supplied. Organizer authorizes committing/pushing these documentation adaptations, then proceeding toward Unit 3.
 
 - 29 October Unit 2 request: organizer reports pushing the first Unit 1 version and asks to continue. Unit 2 is authored against the already-provisioned three-role-repo pilot without changing its bindings; this preserves the reported setup rather than approving three repos as the final event/Model B layout. It captures both directions through a Markdown-only round trip and records each participating repo's revision separately. No actual Git sync result is reported yet.

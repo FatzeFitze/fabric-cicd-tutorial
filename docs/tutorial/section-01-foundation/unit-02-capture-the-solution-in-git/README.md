@@ -173,4 +173,4 @@ Keep the items, repositories and table in place. Retain your worksheet, approxim
 - [Fabric Git source format](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/source-code-format).
 - [Azure Repos commit details](https://learn.microsoft.com/en-us/azure/devops/repos/git/commit-details?view=azure-devops).
 
-[Previous: Unit 1](../unit-01-create-a-tiny-sales-solution/README.md) · [Tutorial index](../../README.md)
+[Previous: Unit 1](../unit-01-create-a-tiny-sales-solution/README.md) · [Next: Unit 3 rehearsal](../../section-02-model-a/unit-03-native-promotion/README.md) · [Tutorial index](../../README.md)

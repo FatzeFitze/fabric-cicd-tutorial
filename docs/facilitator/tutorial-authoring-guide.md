@@ -15,6 +15,8 @@ Working convention, 29 October 2026. The organizer asked for participant-ready M
 
 Use ordinary Markdown headings, relative repository links, portable tables and Mermaid where appropriate. Each unit lives in its own folder with a `README.md`; resources used only by that lesson may live beside it. Reusable sample code, fixtures, toolkit and pipelines have canonical locations outside the unit. Avoid copying their implementation into multiple lessons. Code may be inline when the lesson is its single authoritative source.
 
+Create the unit folder and README entry point immediately, even during preparation/rehearsal. Link the canonical rehearsal and shared resources from there, label their validation status in the index, and publish the files with the authorized repository workflow. The organizer reads/tests on a work PC via GitHub; a chat-only link or a file hidden solely among facilitator material is insufficient navigation. A preparation entry point does not make a unit finalized or validated.
+
 ## Voice and depth
 
 - Address the learner as "you". Use plain English, short explanations and step-by-step assignments.
