@@ -1,6 +1,6 @@
 # Curriculum and sample growth
 
-Status: organizer accepted the broad section/unit journey and minimal sample on 29 October 2026, with a Variable Library added to the core asset set and explicit gradual introduction of reusable automation and parameterization. Code-workspace placement and the consumer design below are implementation recommendations to validate. Timings remain estimates; mechanisms remain subject to the listed technical gates. Unit 0 is parked after organizer review. Unit 1 has a successful organizer-reported walkthrough in 20–30 minutes including reading; its OneLake picker wording was corrected afterward. Unit 2 completed by organizer report; web-commit review and open-editor update guidance were refined. Unit 2 duration was not supplied. Unit 3 has a tutorial-folder entry point to its unvalidated Test rehearsal; its full participant lesson is not finalized. Units 4–12 remain planning references, not available lessons.
+Status: organizer accepted the broad section/unit journey and minimal sample on 29 October 2026, with a Variable Library added to the core asset set and explicit gradual introduction of reusable automation and parameterization. Code-workspace placement and the consumer design below are implementation recommendations to validate. Timings remain estimates; mechanisms remain subject to the listed technical gates. Unit 0 is parked after organizer review. Unit 1 has a successful organizer-reported walkthrough in 20–30 minutes including reading; its OneLake picker wording was corrected afterward. Unit 2 completed by organizer report; web-commit review and open-editor update guidance were refined. Unit 2 duration was not supplied. Unit 3 native Test rehearsal worked by organizer report on 30 October. Its full participant lesson now includes a Prod extension and conceptual explanations; Prod and the revised prose remain untested. Units 4–12 remain planning references, not available lessons.
 
 ## Teaching journey
 
@@ -30,7 +30,7 @@ Times below include introductions, exercises and checkpoints. They are estimates
 
 This is a bounded two-asset exercise. The expected result is working Test/Prod output with verified target references, not simply green deployment status. No native Reporting pipeline is required. A fresh lakehouse definition must not be assumed to contain Dev data. A brief rerun of one small change shows repeatability; the fuller recovery exercise comes in Unit 11.
 
-**Technical gate before authoring Unit 3:** prove this exact separated-workspace native path, including first deployment, target binding, repeat deployment and runtime validation. If it needs a manual target setting, make that setting a documented repeatable step and show its consequence. If it is too cumbersome for Model A teaching, revisit this unit's slice explicitly before building it; do not quietly add combined workspaces or present broken bindings as successful promotion.
+**Technical gate:** the organizer reports successful separated-workspace native Test bootstrap/binding/repeat execution. The full participant lesson now extends to Prod, whose result is still pending; do not mark the entire native chain passed until that checkpoint is reported. If it needs a manual target setting, make that setting a documented repeatable step and show its consequence. If it is too cumbersome for Model A teaching, revisit this unit's slice explicitly before building it; do not quietly add combined workspaces or present broken bindings as successful promotion.
 
 ### Section 3 — Grow the solution and introduce team development
 
@@ -152,7 +152,7 @@ The actual automated order may include create-then-bind steps: storage prerequis
 
 ## Decisions and evidence before detailed authoring
 
-The next concrete preparation asset is the [organizer's native Test rehearsal](../facilitator/unit-03-native-promotion-rehearsal.md), with a locally checked candidate first-cell replacement. It addresses the Dev-only guard and explicit native target rule before we finalize participant Unit 3. It has no observed native result and is not an additional mandatory learner unit.
+The [organizer's Test rehearsal](../facilitator/unit-03-native-promotion-rehearsal.md) now has reported success, and the [participant Unit 3](../tutorial/section-02-model-a/unit-03-native-promotion/README.md) incorporates it with a separate, untested Prod extension. The rehearsal is retained as evidence/preparation history, not an extra mandatory learner unit.
 
 1. **Native boundary (V03/V04/V07):** prove the two-role lakehouse/notebook exercise and its target settings. Reporting is intentionally not a prerequisite for completing Model A in this proposal.
 2. **Reporting path (V06):** select one model mode/report representation, required client tools, deployment/identity support and a fast authoring route. Validate it before committing to Unit 4 instructions.

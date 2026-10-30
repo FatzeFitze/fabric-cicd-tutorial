@@ -1,8 +1,8 @@
 # Unit 3 preparation — prove native promotion into Test
 
-Date: 29 October 2026. Status: organizer rehearsal instructions and a candidate target-guard cell, not a finalized participant lesson. No native deployment has been run for this sample. Unit 2 completed by organizer report; actual exported metadata and commit IDs were not supplied here.
+Prepared 29 October; updated 30 October 2026. Status: organizer reports the Test rehearsal worked, with corrections to target-stage navigation and rule explanations. Actual Test source revisions/outputs and duration were not supplied. Prod is untested. The complete participant lesson is now [Unit 3](../tutorial/section-02-model-a/unit-03-native-promotion/README.md); retain this file as the Test rehearsal/evidence reference.
 
-This is the next preparation step before finalizing the clean Unit 3 lesson. It tests the [curriculum's native gate](../planning/curriculum.md): Data/Code role separation, a fresh Test lakehouse, a target-aware shared notebook definition, and a default-lakehouse deployment rule. It does not require an Azure Pipeline, Variable Library or extra workspace. Preserve the existing Reporting triplet for later.
+This rehearsal tested the [curriculum's native gate](../planning/curriculum.md): Data/Code separation, a fresh Test lakehouse, shared environment-aware source and a default-lakehouse rule. It required no Azure Pipeline, Variable Library or extra workspace. The participant lesson incorporates the reported Test result and adds a Prod extension whose validation is still pending.
 
 ## What is supported by documentation and what needs observation
 
@@ -37,7 +37,7 @@ Record any UI differences, licensing/assignment problem or pre-existing pipeline
 
 ## 3. Deploy the Data prerequisite into Test
 
-1. In the Data pipeline, select the `sales` lakehouse in Dev and deploy it to the existing Test stage workspace.
+1. In the Data Deployment pipeline view, click the **Test target stage**, verify **Deploy from = Data Dev**, select the source `sales` Lakehouse shown there, review source/target and deploy into the existing Data Test workspace.
 2. Open the resulting **Lakehouse** item in Data Test, not its SQL analytics endpoint. Confirm schema support/default `dbo` exists and that the sample `sales` table/data has not been copied from Dev.
 3. Record its lakehouse item ID, display name and Data Test workspace ID from its actual item/workspace URL. These are target configuration for the notebook rule, not a source logical ID.
 
@@ -47,7 +47,7 @@ Expected result: Data Test has an empty matching lakehouse definition. If the ta
 
 1. Deploy `build_sales` from Code Dev to Code Test in the Code Deployment pipeline. This establishes the target item so its target-stage rule can be inspected/configured. **Do not run all cells yet.**
 2. Inspect the target notebook's default lakehouse without changing its source. Record what native promotion selected. Do not assume that a reference to Data Dev was remapped simply because deployment succeeded.
-3. On the **Code Test target-stage notebook**, open **Deployment rules** and add/configure its **Default lakehouse** rule. In the documented new UI, choose **Other** for the target and enter the **Data Test lakehouse's** ID, name and workspace ID collected above. Record actual field labels if they differ. If rules are unavailable, check item ownership and pipeline permissions before continuing.
+3. In the **Code Deployment pipeline view**, select its **Test target stage** and open the stage's **Deployment rules** pane. Select **build_sales → Default lakehouse**; this is not in the notebook editor. Choose **Other** for the target and enter the **Data Test lakehouse's** ID, name and workspace ID collected above. If rules are unavailable, check item ownership and pipeline permissions before continuing. The rule explicitly declares the target and overrides auto-binding; it does not mean all cross-workspace references always require manual rules. The participant lesson explains IDs/binding and native auto-binding separately.
 4. Save the rule, then redeploy the same selected Code Dev notebook to Code Test so the rule is applied. Keep any "continue if items fail" option off; inspect a failed deployment before proceeding.
 5. Close any old Test notebook editor; reopen the notebook from Code Test after deployment. If a prior session exists, restart it before checking a changed default lakehouse.
 6. Run **Cell 1 only**. It must identify environment `test`, Code Test and Data Test's lakehouse `sales`. Verify the logged physical IDs against the target lakehouse. If it still references Dev, the guard should stop; correct the deployment rule rather than weakening the guard or editing target notebook source.
@@ -61,7 +61,7 @@ Expected result: a repeatable target-stage rule binds the notebook to the separa
 3. Repeat the Code Dev → Code Test deployment without changing source or the configured rule. Reopen/restart as needed, run again, and confirm the target pairing and six-row result remain correct. Data overwrite comes from notebook execution; definition promotion itself must not be described as copying data.
 4. Record how changes in the deployment comparison were presented. Do not infer code drift merely because lakehouse binding metadata differs intentionally between stages.
 
-This establishes a Test-first slice. Leave Prod untouched until the Test result is understood. A complete Unit 3 will add deliberate Prod promotion with its own rule/smoke check, source/promotion evidence and a simple recovery/bootstrap explanation; no current evidence establishes those steps as working.
+The organizer reports this Test-first slice worked. Continue with **Section 6** of the participant Unit 3 only after confirming that the same source/configuration remains in place. It adds deliberate Prod promotion, a separate Prod rule and smoke check; those steps are authored but not yet reported successful.
 
 ## Report back
 
@@ -74,4 +74,4 @@ Keep the following in your private training notes and share the non-secret outco
 - Cell 1 Test context and final metrics; whether repeat deployment/rerun kept the expected target and six-row result.
 - Exact failed step/error if a checkpoint could not be completed. A sanitized file listing/default-lakehouse metadata excerpt is useful if it affects pairing or binding; do not send tokens or credentials.
 
-Do not call this Model A reference path validated until its target binding, initial bootstrap, repeat deployment and runtime checks are evidenced. Finalize the participant lesson from this rehearsal's actual behavior, then extend the validation to Prod. See V03/V04/V07 in [the backlog](../planning/backlog.md).
+The 30 October feedback supports Test target binding/bootstrap/repeat execution by organizer report. It does not establish Prod success, an automation identity or enforced productive controls. Keep V03/V04/V07 evidence scoped accordingly in [the backlog](../planning/backlog.md).

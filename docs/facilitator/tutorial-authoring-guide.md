@@ -21,6 +21,7 @@ Create the unit folder and README entry point immediately, even during preparati
 
 - Address the learner as "you". Use plain English, short explanations and step-by-step assignments.
 - Assume mixed ALM experience. Explain the reason for a control and let the learner observe it; avoid unexplained jargon or long theory before any result.
+- Explain unfamiliar Fabric responsibilities at the point of use, especially workspace/item identities, resource linkage and environment bindings that may have been hidden by a centrally managed on-premises setup. Give the location, purpose, alternatives and observable check for a setting; a click path alone is insufficient. Do not assume every on-premises platform lacked such controls.
 - Give runnable starter code for business logic that is not the teaching objective. Require learners to read the relevant part, create the Fabric items themselves and verify outputs.
 - Distinguish a Fabric Data Pipeline, native Deployment pipeline and Azure Pipeline by name.
 - State the identity/environment assumptions relevant to the current task. Label training simplifications at the point they matter.

@@ -23,8 +23,8 @@ Each run overwrites the disposable training `sales` table in the checked default
 
 Maintain this file as the canonical starter source; unit instructions link here rather than keeping another copy of its code. Participant-created Fabric definitions will be captured from their own workspaces in Unit 2.
 
-## Native-promotion preparation
+## Native promotion
 
-[environment-aware-target-cell.py](environment-aware-target-cell.py) is a candidate replacement for Cell 1 only, introduced by the [organizer's Test rehearsal](../../docs/facilitator/unit-03-native-promotion-rehearsal.md). It keeps the same `check_target()` entry point and explicitly declares the three allowed Code/Data pairs, so the guard can reject Test/Prod references to Dev while using one common source definition. Configure all six workspace names in Dev; do not remove the guard or customize source separately in the target stages.
+[environment-aware-target-cell.py](environment-aware-target-cell.py) replaces Cell 1 only in [Unit 3](../../docs/tutorial/section-02-model-a/unit-03-native-promotion/README.md). It keeps `check_target()` and declares the three allowed Code/Data pairs, so the guard can reject Test/Prod references to Dev while using one common source definition. Configure all six workspace names in Dev; do not remove the guard or customize source separately in target stages.
 
-The candidate passes local positive/negative context checks; its Fabric/native-deployment behavior is not yet observed. Keep using the original starter for Unit 1. The replacement becomes part of the participant promotion exercise only after the rehearsal establishes its actual binding/runtime path.
+Local positive/negative context checks passed, and the organizer reports successful native Test deployment/rule/rerun. Prod is authored but not yet tested. Keep using the original starter for Unit 1; introduce this replacement when the participant reaches Unit 3.
