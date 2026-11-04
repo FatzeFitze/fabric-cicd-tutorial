@@ -2,14 +2,16 @@
 
 Record what you observe in Unit 4. Keep actual workspace/connection details in your training notes; exclude credentials and tokens.
 
-| Item | Workspace | Item link / generated logical ID | Visible owner/creator label and principal, if exposed |
-| --- | --- | --- | --- |
-| `sales` Lakehouse | Data Dev | | |
-| `build_sales` Notebook | Code Dev | | |
-| `sales_config` Variable Library | Code Dev | | |
-| `run_sales` Data Pipeline | Code Dev | | |
-| `sales_model` Semantic model | Reporting Dev | | |
-| `sales_overview` Report | Reporting Dev | | |
+| Item | Workspace | Logical ID from `.platform` | Fabric item link / physical ID if unambiguous | Visible owner/creator label and principal, if exposed |
+| --- | --- | --- | --- | --- |
+| `sales` Lakehouse | Data Dev | | | |
+| `build_sales` Notebook | Code Dev | | | |
+| `sales_config` Variable Library | Code Dev | | | |
+| `run_sales` Pipeline | Code Dev | | | |
+| `sales_model` Semantic model | Reporting Dev | | | |
+| `sales_overview` Report | Reporting Dev | | | |
+
+Logical IDs are source identities; physical IDs identify deployed instances and are not required to appear in `.platform`. Retain the item link when its URL does not expose an unambiguous item ID. See the [ID reference](../../../reference/fabric-item-identities.md).
 
 ## Configuration and runtime
 

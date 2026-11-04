@@ -96,7 +96,7 @@ Fabric's [notebook source format](https://learn.microsoft.com/en-us/fabric/data-
 
 The input literals are in Git **because we put them in notebook source**. That does not make Git a backup of lakehouse runtime data. See [Lakehouse Git integration](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-git-deployment-pipelines).
 
-A **logical ID** identifies an item in its source-control representation; a **physical item ID** identifies a concrete item in a workspace. Preserving a logical ID supports continuity, but it does not configure every dependency, permission or data-access path. See [Fabric Git source format](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/source-code-format).
+A **logical ID** identifies an item in its source-control representation; a **physical item ID** identifies a concrete item in a workspace. Preserving a logical ID supports continuity, but it does not configure every dependency, permission or data-access path. See [Fabric Git source format](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/source-code-format). The [ID reference](../../reference/fabric-item-identities.md) shows where to find each kind and how the distinction will appear in later deployment records.
 
 ## 5. Apply a harmless Git change back to Fabric
 

@@ -1,6 +1,6 @@
 # DNA Fabric Days: workshop planning
 
-Workshop preparation started 28 October 2026. Agreed direction: Models A and B are hands-on; Model C and feature workspaces are explainer topics. Use local feature branches and shared Dev workspaces where supported. Units 0–4 and Tiny Sales starters are available. Unit 3 is parked as its first working version; Unit 4's Dev walkthrough is successful by organizer report, with UI/measure corrections applied. The new visible-change exercise and later managed deployment/ownership experiments await validation.
+Workshop preparation started 28 October 2026. Agreed direction: Models A and B are hands-on; Model C and feature workspaces are explainer topics. Use local feature branches and shared Dev workspaces where supported. Units 0–5 and Tiny Sales starters are available. Units 3–4 are accepted as their first working versions by the organizer. Unit 5's local feature/draft PR path and later managed deployment/ownership experiments await pilot validation.
 
 ## Start here
 
@@ -8,7 +8,9 @@ Workshop preparation started 28 October 2026. Agreed direction: Models A and B a
 - [Unit 1: create a tiny sales solution](docs/tutorial/section-01-foundation/unit-01-create-a-tiny-sales-solution/README.md): successful organizer walkthrough reported; deterministic sample and corrected OneLake catalog attachment steps.
 - [Unit 2: capture the solution in Git](docs/tutorial/section-01-foundation/unit-02-capture-the-solution-in-git/README.md): successful organizer walkthrough reported; commit-diff review and open-editor update guidance refined.
 - [Unit 3: native promotion](docs/tutorial/section-02-model-a/unit-03-native-promotion/README.md): full native chain accepted as first working version on 4 November.
-- [Unit 4: connect configuration, orchestration and reporting](docs/tutorial/section-03-team-delivery/unit-04-connect-orchestration-configuration-and-reporting/README.md): reported successful; clearer UI/identity inspection, Total Revenue measure and a new price-change/restore exercise to rehearse.
+- [Unit 4: connect configuration, orchestration and reporting](docs/tutorial/section-03-team-delivery/unit-04-connect-orchestration-configuration-and-reporting/README.md): first version accepted; source/deployed-ID wording clarified.
+- [Unit 5: make a local feature change](docs/tutorial/section-03-team-delivery/unit-05-make-a-local-feature-change/README.md): clone Code source, edit in an IDE, preserve metadata/IDs and open a draft PR; walkthrough pending.
+- [Logical and physical Fabric IDs](docs/tutorial/reference/fabric-item-identities.md): source identity versus deployed instance, lookup locations and later release evidence.
 - [Optional conflict recovery](docs/tutorial/auxiliary/aux-01-recover-from-source-conflicts/README.md): concepts and entry point; intentional-conflict lab awaits rehearsal after Unit 5's local Git workflow.
 - [Later identity/ownership experiment](docs/planning/identity-and-ownership-experiment.md): create a new Test/Prod asset through managed identities, compare creation with updates and verify runtime/access implications.
 - [Tutorial authoring convention](docs/facilitator/tutorial-authoring-guide.md): clean participant lessons with organizer validation notes kept separately.

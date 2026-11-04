@@ -167,7 +167,7 @@ The `Sample Check` measure checks only the known sample row/quantity/returns tot
 2. In **Reporting Dev Source control**, inspect its existing repo/branch/folder mapping from Unit 0, then commit `sales_model` and `sales_overview` together with **`Add Tiny Sales reporting baseline`**. Inspect the actual exported model/report files and preserve their generated logical IDs and relative references.
 3. Record the full Code and Reporting commit IDs. The Data definition did not need changing for this unit; retain its previous source baseline.
 4. Inspect the supported item details/settings for each new item. Where the UI exposes owner/creator or connection identity, record the exact label and principal shown in the Dev solution record. If it is not exposed, record that rather than using Take over to discover it.
-5. Inspect the report-to-model link and model-to-data source. Record any physical IDs, endpoint/database references or relative model paths visible in the exported definitions, without editing them yet. A successful Git commit does not prove those references will remap into another environment.
+5. Inspect the report-to-model link and model-to-data source in the exported definitions. Record the references actually present: logical IDs, endpoint/database references or relative paths. Finding **only logical IDs** in the item `.platform` files is expected; they are not a list of deployed physical IDs. For a concrete deployed item, retain its **Fabric item link** separately; where the URL clearly exposes its workspace/item IDs, record those as physical identity evidence. Do not infer an ID from an ambiguous URL or substitute a logical ID. See [logical versus physical IDs](../../reference/fabric-item-identities.md), including the API-based lookup we will use in later deployment work. A successful Git commit does not prove these dependencies will remap into another environment.
 
 **Expected result:** The Dev solution is versioned across the existing role repos, and its configuration/consumption links are documented. Current human-created item and connection observations give us a baseline for a later new-item deployment through managed identity.
 
@@ -215,4 +215,4 @@ Keep the final configuration correct, leave Dev items in place and record approx
 - [Web model editing](https://learn.microsoft.com/en-us/power-bi/transform-model/service-edit-data-models).
 - [Direct Lake security](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-security-integration).
 
-[Previous: Unit 3](../../section-02-model-a/unit-03-native-promotion/README.md) · [Tutorial index](../../README.md)
+[Previous: Unit 3](../../section-02-model-a/unit-03-native-promotion/README.md) · [Tutorial index](../../README.md) · [Next: Unit 5](../unit-05-make-a-local-feature-change/README.md)
