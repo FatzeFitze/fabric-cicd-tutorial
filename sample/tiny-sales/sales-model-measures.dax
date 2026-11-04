@@ -1,0 +1,17 @@
+// Create one measure at a time in sales_model, with sales as its home table.
+// Each definition below is a separate New measure entry, not one DAX query.
+
+Revenue = SUM('sales'[revenue])
+
+Order Count = DISTINCTCOUNT('sales'[order_id])
+
+Total Quantity = SUM('sales'[quantity])
+
+Returned Orders = CALCULATE([Order Count], 'sales'[is_returned] = TRUE())
+
+Sample Check =
+IF(
+    [Order Count] = 6 && [Total Quantity] = 13 && [Returned Orders] = 2,
+    "PASS",
+    "CHECK"
+)

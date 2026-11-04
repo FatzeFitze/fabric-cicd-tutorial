@@ -27,4 +27,10 @@ Maintain this file as the canonical starter source; unit instructions link here 
 
 [environment-aware-target-cell.py](environment-aware-target-cell.py) replaces Cell 1 only in [Unit 3](../../docs/tutorial/section-02-model-a/unit-03-native-promotion/README.md). It keeps `check_target()` and declares the three allowed Code/Data pairs, so the guard can reject Test/Prod references to Dev while using one common source definition. Configure all six workspace names in Dev; do not remove the guard or customize source separately in target stages.
 
-Local positive/negative context checks passed, and the organizer reports successful native Test deployment/rule/rerun. Prod is authored but not yet tested. Keep using the original starter for Unit 1; introduce this replacement when the participant reaches Unit 3.
+Local positive/negative context checks passed, and on 4 November the organizer accepted the full Unit 3 native chain as its first working version. Keep using the original starter for Unit 1; introduce this replacement in Unit 3.
+
+## Unit 4 configuration and reporting
+
+[unit-04-parameter-cells.py](unit-04-parameter-cells.py) supplies two **additional** cells for the existing notebook: a marked parameter cell before its target guard, and validation after the guard/before fixtures. Preserve the original guard/business/write cells. A pipeline passes `runtime_environment` and `run_label` from the same-workspace Variable Library; interactive defaults are Dev only.
+
+[sales-model-measures.dax](sales-model-measures.dax) contains five separate New measure definitions for the one-table report model. Copy one definition at a time; it is not one executable DAX query. Unit 4's cloud path and DAX evaluation remain to be piloted.

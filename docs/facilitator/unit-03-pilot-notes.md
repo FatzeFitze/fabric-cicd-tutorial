@@ -1,6 +1,10 @@
 # Unit 3 pilot notes
 
-Updated 30 October 2026. Participant lesson: [Unit 3](../tutorial/section-02-model-a/unit-03-native-promotion/README.md). The [Test rehearsal](unit-03-native-promotion-rehearsal.md) retains the initial technical sequence and its evidence basis.
+Updated 4 November 2026. Participant lesson: [Unit 3](../tutorial/section-02-model-a/unit-03-native-promotion/README.md). The organizer reports the unit now works nicely and accepts it as the first working version. Preserve its lesson body at `2fde5c0`; only a next-unit navigation link is added for Unit 4. The [Test rehearsal](unit-03-native-promotion-rehearsal.md) retains the initial sequence and evidence basis.
+
+## First-version acceptance
+
+The 4 November feedback accepts the full current lesson, including its Prod extension, and asks to proceed to Unit 4. Record full-chain success by organizer report; exact source/runtime IDs, outputs and elapsed time were not supplied. This acceptance validates the demonstrated human/native training path, not the upcoming workload-identity API release path or enforcement of productive controls. The remaining-pilot text below describes the prior 30 October preparation state and is retained as history.
 
 ## Observed/reported evidence
 

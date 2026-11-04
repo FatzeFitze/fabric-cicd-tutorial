@@ -2,7 +2,9 @@
 
 Updated 28 October 2026 from the organizer's supplied Working Version 1 guidelines and subsequent scope decisions.
 
-The current participant pilot provisions all nine role/environment workspaces from Unit 1. Model A/B progression increases control strength and coordination rather than requiring a move from combined workspaces into separate roles. The exact native-promotion exercise remains to be tested for the selected cross-workspace dependencies.
+The facilitator provisions all nine role/environment workspaces before Unit 0. Model A/B progression increases control strength and coordination rather than moving combined workspaces into separate roles. Unit 3's human/native path is accepted by organizer report as the first working version on 4 November; Unit 4 and subsequent automation need their own validation.
+
+The [ownership experiment](identity-and-ownership-experiment.md) adds explicit MS-01/05/07/08/10/11/12/14 coverage: record a human baseline in Unit 4, first-create a new target item under managed identity in Units 9–10, compare existing-item updates and verify runtime/access. Treat item-specific creator/owner/default/deploy/runtime/connection identities separately; the native path does not prove managed-identity behavior.
 
 ## Agreed teaching boundary
 

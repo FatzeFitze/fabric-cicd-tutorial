@@ -25,6 +25,7 @@ Create the unit folder and README entry point immediately, even during preparati
 - Give runnable starter code for business logic that is not the teaching objective. Require learners to read the relevant part, create the Fabric items themselves and verify outputs.
 - Distinguish a Fabric Data Pipeline, native Deployment pipeline and Azure Pipeline by name.
 - State the identity/environment assumptions relevant to the current task. Label training simplifications at the point they matter.
+- Keep creator, visible item owner, associated/default identity, deployment caller, runtime executor and connection/data-access identity distinct where relevant. Test first creation separately from updating an existing item; do not generalize one ownership result to every Fabric item/API.
 - Provide definite exercise instructions, while recording their untested status in the index/pilot log. Expected results are acceptance criteria, not claims that a cloud run occurred.
 
 ## Keep organizer material separate

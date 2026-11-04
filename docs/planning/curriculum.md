@@ -1,6 +1,6 @@
 # Curriculum and sample growth
 
-Status: organizer accepted the broad section/unit journey and minimal sample on 29 October 2026, with a Variable Library added to the core asset set and explicit gradual introduction of reusable automation and parameterization. Code-workspace placement and the consumer design below are implementation recommendations to validate. Timings remain estimates; mechanisms remain subject to the listed technical gates. Unit 0 is parked after organizer review. Unit 1 has a successful organizer-reported walkthrough in 20–30 minutes including reading; its OneLake picker wording was corrected afterward. Unit 2 completed by organizer report; web-commit review and open-editor update guidance were refined. Unit 2 duration was not supplied. Unit 3 native Test rehearsal worked by organizer report on 30 October. Its full participant lesson now includes a Prod extension and conceptual explanations; Prod and the revised prose remain untested. Units 4–12 remain planning references, not available lessons.
+Status, 4 November 2026: the broad A/B journey and six-item initial sample are agreed. Units 1–2 and the full Unit 3 native path have organizer-reported success; Unit 3 is parked as its first version. Unit 4 is authored with local checks, but its configuration/orchestration/reporting cloud path is untested. Units 5–12 remain planning references. Timings, managed deployment mechanisms and newly added ownership coverage require their own pilots.
 
 ## Teaching journey
 
@@ -30,17 +30,17 @@ Times below include introductions, exercises and checkpoints. They are estimates
 
 This is a bounded two-asset exercise. The expected result is working Test/Prod output with verified target references, not simply green deployment status. No native Reporting pipeline is required. A fresh lakehouse definition must not be assumed to contain Dev data. A brief rerun of one small change shows repeatability; the fuller recovery exercise comes in Unit 11.
 
-**Technical gate:** the organizer reports successful separated-workspace native Test bootstrap/binding/repeat execution. The full participant lesson now extends to Prod, whose result is still pending; do not mark the entire native chain passed until that checkpoint is reported. If it needs a manual target setting, make that setting a documented repeatable step and show its consequence. If it is too cumbersome for Model A teaching, revisit this unit's slice explicitly before building it; do not quietly add combined workspaces or present broken bindings as successful promotion.
+**Native gate outcome:** the organizer accepts the full Unit 3 human/native chain as its first working version on 4 November. This supports the declared two-role native bootstrap/binding/runtime path by report. Managed-identity deployment and new reporting/library relationships still need separate experiments; source rollback still does not imply data recovery.
 
 ### Section 3 — Grow the solution and introduce team development
 
 | Unit | Min | Work and observable checkpoint | Main controls |
 | --- | ---: | --- | --- |
-| **4. Connect orchestration, configuration and reporting** | 60 | Create a Variable Library and Fabric Data Pipeline in Code Dev. Read a small runtime setting from the library in the pipeline and pass it to the notebook through the proven parameter route. Create one explicit semantic model over curated data and a one-page report in Reporting Dev using guided steps and small starter snippets. Run end to end, reconcile metrics and capture the new definitions in Git. Explain why regular changes/shared consumers motivate Model B. | MS-02, 04, 06–08, 10 |
+| **4. Connect orchestration, configuration and reporting** | 60 | Create Code Dev Variable Library/Data Pipeline, pass scalar values into notebook parameters and validate a wrong-environment failure. Browser-create a Direct Lake on SQL model and one-page report in Reporting Dev, reconcile metrics and capture definitions plus the human identity/ownership baseline. The cloud path is pending pilot. | MS-02, 04, 06–08, 10, 14 |
 | **5. Make a local feature change** | 35 | Clone the source, create a local feature branch and change the supplied revenue calculation to account for returned orders. Keep the output schema compatible with the existing report. Inspect the diff and open a PR; integration is deliberately held until the checks are configured. No feature workspace is needed. | MS-02, 03, 08 |
 | **6. Add useful CI and PR controls** | 35 | Introduce the supplied validation starter and an Azure Repos build-validation policy. A deliberately wrong calculation fails a local/CI check; the corrected feature passes. Review and merge. Inspect the distinction between local checks and Fabric runtime tests. Shared Dev is not yet automatically updated. | MS-02, 03, 08, 14 |
 
-Use one sales table and a few measures/visuals. Semantic-model storage mode, report representation and client prerequisites must be chosen before writing Unit 4. The core feature edits notebook/calculation source locally; it does not require simultaneous UI editing or local reproduction of Fabric Spark.
+Use one sales table and a few measures/visuals. Unit 4 selects a browser-only Direct Lake on SQL pilot through the SQL endpoint creation dialog; actual reporting/Git representation and target identity support must still be observed before release automation is finalized. The core feature edits notebook/calculation source locally and does not require simultaneous UI editing or local Fabric Spark.
 
 ### Section 4 — Automate the Model B release
 
@@ -48,8 +48,8 @@ Use one sales table and a few measures/visuals. Semantic-model storage mode, rep
 | --- | ---: | --- | --- |
 | **7. Describe environments and dependencies** | 45 | Add environment/configuration examples, extend the Variable Library with Dev/Test/Prod value sets and inspect the dependency plan. Distinguish runtime values, deployment bindings and Azure Pipeline parameters. Separate logical items from physical IDs; reject an absent value or forbidden Dev reference. Add these files through a reviewed change. | MS-03, 04, 06, 08, 12 |
 | **8. Publish and validate shared Dev** | 65 | Add the prepared deployment entry point and Azure Pipelines template; configure their documented inputs and connect the validated runner/workload identity. Reconcile outstanding UI changes and retire the previous Dev writer. Deploy the selected source, explicitly establish/check the active Variable Library value set, inspect bindings, run/refresh as needed, and retain results. | MS-03, 05–08, 10, 12–14 |
-| **9. Release the same source to Test** | 45 | Deploy all workspace roles using one selected source snapshot, with prerequisites, bindings and readiness checks in the proven order. Run the sample and verify report/model targets and expected metrics. Reject an intentionally invalid dependency in a safe preflight; inspect the evidence before proceeding. | MS-04–08, 10, 13, 14 |
-| **10. Approve and release to simulated Prod** | 30 | Configure/use a real Azure DevOps resource approval, release the source already validated in Test, then run post-deployment checks. Read a release record connecting source, target items, approval and runtime results. Explain the limits of participant Admin access. | MS-03, 05, 07–10, 12, 14 |
+| **9. Release the same source to Test** | 45 | Deploy the selected snapshot across roles, with proven prerequisites/bindings/runtime checks. Introduce a small new read-only validation notebook and observe its first Test creation by managed identity, comparing its ownership/identity with an update to a human-created item. Record caller, target IDs and runtime/access evidence; reject invalid references. | MS-01, 04–08, 10–14 |
+| **10. Approve and release to simulated Prod** | 30 | Use a real resource approval and the source validated in Test. First-create the same new item through the Prod managed identity, inspect owner/default/runtime/connection identity observations and run post-deployment checks. Retain release evidence and explain Admin lab bypass limits. | MS-01, 03, 05, 07–12, 14 |
 
 The preferred Dev mechanism remains pipeline publishing, subject to validation. Controlled Git-update Dev is the alternative to assess, not a second required implementation. Native pipelines from Unit 3 become a comparison/reference path; normal Model B changes use the selected automation route. Do not keep competing native/manual and automated publishers active for the exercise.
 
@@ -63,6 +63,10 @@ The observed pilot has three repos, whereas the recommended participant architec
 | **12. Reuse the starter and choose the right controls** | 20 | Adapt a tiny supplied second example's configuration and project check; run its local validation/resolved-plan step without modifying toolkit internals. Locate the templates, configuration reference and support material. Classify a more critical scenario and identify Model C additions; explain when feature workspaces help. | MS-01–14 recap, especially 05, 09–12, 14 |
 
 The second example is a small reuse check, not another complete cloud deployment. Full starter portability needs its own organizer feasibility test. Model C explainers cover independently protected production capability, separation of duties, stronger identity boundaries, monitoring/evidence retention, private execution where required, and risk-appropriate recovery. These remain obligations from the supplied guidelines, not claims that the sandbox implements them.
+
+## Ownership as a thread through the series
+
+The organizer requested first creation of a new asset through managed-identity-only Test/Prod delivery. Unit 4 records the human baseline; Unit 8 establishes identity boundaries; Unit 9 adds a new validation notebook and observes first Test creation versus an existing-item update; Unit 10 repeats first creation in Prod with the same selected source. The [experiment plan](identity-and-ownership-experiment.md) defines evidence and implications without assuming universal creator/owner/runtime behavior. The initial six item types remain unchanged; the later addition reuses the Notebook type.
 
 ## How reusable automation enters the tutorial
 
@@ -152,7 +156,7 @@ The actual automated order may include create-then-bind steps: storage prerequis
 
 ## Decisions and evidence before detailed authoring
 
-The [organizer's Test rehearsal](../facilitator/unit-03-native-promotion-rehearsal.md) now has reported success, and the [participant Unit 3](../tutorial/section-02-model-a/unit-03-native-promotion/README.md) incorporates it with a separate, untested Prod extension. The rehearsal is retained as evidence/preparation history, not an extra mandatory learner unit.
+The [native Test rehearsal](../facilitator/unit-03-native-promotion-rehearsal.md) and full participant Unit 3 now have organizer-reported success; the lesson is parked as its first version. Unit 4 is the next pilot. Retain the rehearsal as evidence history, not an additional learner unit.
 
 1. **Native boundary (V03/V04/V07):** prove the two-role lakehouse/notebook exercise and its target settings. Reporting is intentionally not a prerequisite for completing Model A in this proposal.
 2. **Reporting path (V06):** select one model mode/report representation, required client tools, deployment/identity support and a fast authoring route. Validate it before committing to Unit 4 instructions.
@@ -164,3 +168,5 @@ The [organizer's Test rehearsal](../facilitator/unit-03-native-promotion-rehears
 Microsoft's [cross-workspace definition-binding guidance](https://learn.microsoft.com/en-us/fabric/cicd/cross-workspace-dependency-binding) warns against assuming that cross-workspace item references will remap. The [native deployment process](https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/understand-the-deployment-process) also describes specialized cross-pipeline stage binding. The [notebook guidance](https://learn.microsoft.com/en-us/fabric/data-engineering/notebook-source-control-deployment) describes target-stage deployment rules. These are mechanism-specific documentation claims, checked 29 October 2026; none passes our exact tenant experiment.
 
 Use the [validation backlog](backlog.md), [control coverage](control-coverage.md) and [pilot log](../facilitator/pilot-log.md) for evidence. Unit coverage above identifies teaching touchpoints, not a claim that every obligation of a listed MS control is implemented in that unit.
+
+Ownership preparation gate (V20): prove first creation, existing-item update, repeat deployment, exposed ownership/default identity and runtime/access under the selected managed Test/Prod identities. Keep ownership observation separate from takeover/identity reassignment; beta APIs are not required merely to demonstrate this topic.

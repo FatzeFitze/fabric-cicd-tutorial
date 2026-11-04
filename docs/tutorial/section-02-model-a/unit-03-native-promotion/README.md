@@ -188,4 +188,4 @@ Record completion time, UI differences and exact errors. Keep the assets for the
 - [Lakehouse metadata/data lifecycle](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-git-deployment-pipelines).
 - [Fabric source identities](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/source-code-format).
 
-[Previous: Unit 2](../../section-01-foundation/unit-02-capture-the-solution-in-git/README.md) · [Tutorial index](../../README.md)
+[Previous: Unit 2](../../section-01-foundation/unit-02-capture-the-solution-in-git/README.md) · [Next: Unit 4](../../section-03-team-delivery/unit-04-connect-orchestration-configuration-and-reporting/README.md) · [Tutorial index](../../README.md)
