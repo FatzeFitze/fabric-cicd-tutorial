@@ -1,8 +1,8 @@
 # Validation and delivery backlog
 
-V01 has an initial source inventory, targeted review and passing local checks; see the [codebase assessment](initial-codebase-review.md). Units 1–2 and the full Unit 3 native chain are accepted by organizer report as of 4 November. Unit 4 and managed-identity/API delivery/ownership experiments remain untested. Hands-on scope is A/B; C is explainer material.
+V01 has an initial source inventory, targeted review and passing local checks; see the [codebase assessment](initial-codebase-review.md). Units 1–4 have organizer-reported success as of 4 November. Unit 4 corrections/new refresh demonstration and managed-identity/API delivery/ownership experiments remain untested. Hands-on scope is A/B; C is explainer material.
 
-W06 authoring/W08 piloting proceed incrementally. Provisioning/access and Units 1–3 are reported successful; Unit 0 remains parked. Unit 3 lesson body is preserved as its first version. See the [pilot record](../facilitator/pilot-log.md). New Unit 4 Dev relationships, clean automated targets and workload identities require their own validation.
+W06 authoring/W08 piloting proceed incrementally. Provisioning/access and Units 1–4 are reported successful; Unit 0 remains parked. Unit 3 lesson body is preserved as its first version. See the [pilot record](../facilitator/pilot-log.md). Detailed Unit 4 source/connection evidence, revised steps, clean automated targets and workload identities require further validation.
 
 [Unit 1](../tutorial/section-01-foundation/unit-01-create-a-tiny-sales-solution/README.md) and its four-cell starter have local checks plus organizer-reported successful Dev completion in 20–30 minutes including reading. Corrected the attachment wording to Add data items → From OneLake catalog; no runtime code changed. [Unit 1 facilitator notes](../facilitator/unit-01-pilot-notes.md) distinguish this initial Dev success from V04/V07's still-pending clean-target deployment requirements, and identify the Dev-only guard configuration to evolve before native promotion. Raw run outputs and a separately replayed corrected lesson were not supplied.
 
@@ -12,7 +12,7 @@ Unit 3: the full native lesson is accepted as its first working version on 4 Nov
 
 The [learning-project handover review](handoff-review.md) records earlier reported lab success and reusable lessons. These inform V01/V08/V10/V11 but do not pass them. Review candidate/content correlation, runtime evidence, release-window locking/queue behavior, and forward recovery against the actual old implementation. Preserve the simpler proposed workshop branch model unless evidence justifies a change.
 
-Unit 4: [participant lesson](../tutorial/section-03-team-delivery/unit-04-connect-orchestration-configuration-and-reporting/README.md), parameter cells, DAX measures and Dev record are authored. Local parameter validation/fixture totals pass; pipeline/library consumption, chosen Direct Lake on SQL model/report, connections and Git exports require organizer testing. See [pilot notes](../facilitator/unit-04-pilot-notes.md) for V05/V06/V19 checkpoints. V20 parks the requested new-item ownership exercise in Units 9–10 after the managed path exists.
+Unit 4: original [participant lesson](../tutorial/section-03-team-delivery/unit-04-connect-orchestration-configuration-and-reporting/README.md) walkthrough reported successful; screenshot confirms pipeline success and injected library label. Corrected UI/measure/autosave guidance, expanded inspection and added temporary price-change/restore exercise need replay. Exact original connection selection and actual exports/source revisions are not retained here. See [pilot notes](../facilitator/unit-04-pilot-notes.md) for partial V05/V06/V19 evidence and remaining target/identity gates. V20 reserves new-item ownership in Units 9–10. Optional conflict recovery has an [entry point](../tutorial/auxiliary/aux-01-recover-from-source-conflicts/README.md) and [rehearsal plan](../facilitator/source-conflict-exercise-plan.md), with no deliberate conflict run yet.
 
 ## Technical experiments before detailed tutorial authoring
 
@@ -46,11 +46,11 @@ Relationship support matrix to fill from V04–V06:
 | Relationship | Source definition representation | Deployment/binding mechanism | Deploy identity | Runtime identity | Inspection method | Status |
 | --- | --- | --- | --- | --- | --- | --- |
 | Notebook -> lakehouse | Actual exported representation not supplied | Native target-stage rule, full Unit 3 reported working | Human/native path; automation pending | Interactive path; independent identity test pending | Target context and persisted table | Unit 3 accepted; API/workload path pending |
-| Pipeline -> notebook | To inspect | To prove | To prove | To prove | To prove | Unvalidated |
-| Pipeline -> Variable Library -> notebook parameter | To inspect | To prove; active value set is separate workspace state | To prove | To prove | To prove | Required addition, unvalidated |
-| Pipeline -> connection | To inspect | To prove | To prove | To prove | To prove | Unvalidated |
-| Semantic model -> data source | Depends on chosen mode | To prove | To prove | To prove | To prove | Unvalidated |
-| Report -> semantic model | Depends on chosen format | To prove | To prove | To prove | To prove | Unvalidated |
+| Pipeline -> notebook | Actual export to retain | Dev authored; target automation to prove | Automation pending | Human Submitter shown; full context to retain | Successful activity/notebook run | Dev reported working; targets pending |
+| Pipeline -> Variable Library -> notebook parameter | Actual export to retain | Dev consumption reported; target active set to prove | Automation pending | Human baseline; workload variant pending | Injected tiny_sales_dev value shown | Dev progress; fresh target/rerun pending |
+| Pipeline -> connection | Actual selection/export to confirm | Optional explicit reference; chosen default path needs confirmation | Automation pending | Last editor/default versus explicit connection to record | UI selection, last editor and run Submitter | Successful run shown; exact selection unresolved |
+| Semantic model -> data source | Direct Lake on SQL selected; expression/export to retain | Dev authored; target binding to prove | Automation pending | Actual connection/SSO to retain | New endpoint/connection/TMDL inspection steps | Dev reported working; expanded checks pending |
+| Report -> semantic model | Actual format/reference to retain | Dev authored; target binding to prove | Automation pending | Workload variant pending | Report reconciliation; new price-change exercise pending | Dev reported working; targets pending |
 
 ## Delivery workstreams
 

@@ -1,6 +1,6 @@
 # Curriculum and sample growth
 
-Status, 4 November 2026: the broad A/B journey and six-item initial sample are agreed. Units 1–2 and the full Unit 3 native path have organizer-reported success; Unit 3 is parked as its first version. Unit 4 is authored with local checks, but its configuration/orchestration/reporting cloud path is untested. Units 5–12 remain planning references. Timings, managed deployment mechanisms and newly added ownership coverage require their own pilots.
+Status, 4 November 2026: the broad A/B journey and six-item initial sample are agreed. Units 1–4 have organizer-reported success; Unit 3 is parked as its first version. Unit 4 UI/measure corrections, expanded inspection and a new visible-price-change/restore exercise need replay. Units 5–12 remain planning references. Timings, managed deployment mechanisms and ownership coverage require their own pilots.
 
 ## Teaching journey
 
@@ -36,11 +36,13 @@ This is a bounded two-asset exercise. The expected result is working Test/Prod o
 
 | Unit | Min | Work and observable checkpoint | Main controls |
 | --- | ---: | --- | --- |
-| **4. Connect orchestration, configuration and reporting** | 60 | Create Code Dev Variable Library/Data Pipeline, pass scalar values into notebook parameters and validate a wrong-environment failure. Browser-create a Direct Lake on SQL model and one-page report in Reporting Dev, reconcile metrics and capture definitions plus the human identity/ownership baseline. The cloud path is pending pilot. | MS-02, 04, 06–08, 10, 14 |
-| **5. Make a local feature change** | 35 | Clone the source, create a local feature branch and change the supplied revenue calculation to account for returned orders. Keep the output schema compatible with the existing report. Inspect the diff and open a PR; integration is deliberately held until the checks are configured. No feature workspace is needed. | MS-02, 03, 08 |
+| **4. Connect orchestration, configuration and reporting** | 60 | Create Code Dev Variable Library/Pipeline, pass scalar values into notebook parameters and validate a wrong-environment failure. Browser-create a Direct Lake on SQL model and report in Reporting Dev, reconcile Total Revenue and capture definitions/identity baseline. Temporarily change a fixture price, refresh to see the difference, then restore it. Original walkthrough reported successful; revised steps need replay. | MS-02, 04, 06–08, 10, 14 |
+| **5. Make a local feature change** | 35 | Clone the source into an ordinary local Git working folder, open it in an IDE such as VS Code, create a feature branch and change the supplied revenue calculation to account for returned orders. Preserve generated Fabric metadata and the output schema. Inspect the diff and open a PR; integration is held until checks are configured. Explain local source edits versus live VFS workspace saves and remote runtime tests. No feature workspace is needed. | MS-02, 03, 08 |
 | **6. Add useful CI and PR controls** | 35 | Introduce the supplied validation starter and an Azure Repos build-validation policy. A deliberately wrong calculation fails a local/CI check; the corrected feature passes. Review and merge. Inspect the distinction between local checks and Fabric runtime tests. Shared Dev is not yet automatically updated. | MS-02, 03, 08, 14 |
 
 Use one sales table and a few measures/visuals. Unit 4 selects a browser-only Direct Lake on SQL pilot through the SQL endpoint creation dialog; actual reporting/Git representation and target identity support must still be observed before release automation is finalized. The core feature edits notebook/calculation source locally and does not require simultaneous UI editing or local Fabric Spark.
+
+An [optional conflict-recovery companion](../tutorial/auxiliary/aux-01-recover-from-source-conflicts/README.md) has its own entry point. Rehearse local branch conflicts and Fabric workspace-versus-Git conflicts with safe text edits before publishing its hands-on steps. It remains outside the nine-hour core; no pair concurrency or extra workspace is required. See the [facilitator plan](../facilitator/source-conflict-exercise-plan.md).
 
 ### Section 4 — Automate the Model B release
 
@@ -156,7 +158,7 @@ The actual automated order may include create-then-bind steps: storage prerequis
 
 ## Decisions and evidence before detailed authoring
 
-The [native Test rehearsal](../facilitator/unit-03-native-promotion-rehearsal.md) and full participant Unit 3 now have organizer-reported success; the lesson is parked as its first version. Unit 4 is the next pilot. Retain the rehearsal as evidence history, not an additional learner unit.
+The [native Test rehearsal](../facilitator/unit-03-native-promotion-rehearsal.md) and full participant Unit 3 have organizer-reported success; the lesson is parked as its first version. Unit 4's original walkthrough is also reported successful; replay its corrections/new visible-change exercise and retain actual exports for Unit 5. Retain the native rehearsal as evidence history, not an additional learner unit.
 
 1. **Native boundary (V03/V04/V07):** prove the two-role lakehouse/notebook exercise and its target settings. Reporting is intentionally not a prerequisite for completing Model A in this proposal.
 2. **Reporting path (V06):** select one model mode/report representation, required client tools, deployment/identity support and a fast authoring route. Validate it before committing to Unit 4 instructions.

@@ -33,4 +33,6 @@ Local positive/negative context checks passed, and on 4 November the organizer a
 
 [unit-04-parameter-cells.py](unit-04-parameter-cells.py) supplies two **additional** cells for the existing notebook: a marked parameter cell before its target guard, and validation after the guard/before fixtures. Preserve the original guard/business/write cells. A pipeline passes `runtime_environment` and `run_label` from the same-workspace Variable Library; interactive defaults are Dev only.
 
-[sales-model-measures.dax](sales-model-measures.dax) contains five separate New measure definitions for the one-table report model. Copy one definition at a time; it is not one executable DAX query. Unit 4's cloud path and DAX evaluation remain to be piloted.
+[sales-model-measures.dax](sales-model-measures.dax) contains five separate New measure definitions for the one-table report model. Copy one definition at a time; it is not one executable DAX query. Use **Total Revenue** as the measure name; the source column stays `revenue`. The organizer reports the original Unit 4 walkthrough successful; corrected instructions and the new visible-change/restore exercise await replay.
+
+Pipeline execution adds a generated cell below the authored parameter cell to override its defaults. Keep only the one authored parameter cell in source. Unit 4's temporary P01 price change produces revenue 357.20, then restores 342.20 before Git capture; the canonical fixtures here remain unchanged for Units 1–3 and the later returned-order feature.

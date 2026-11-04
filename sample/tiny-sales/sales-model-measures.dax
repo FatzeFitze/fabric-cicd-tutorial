@@ -1,7 +1,8 @@
 // Create one measure at a time in sales_model, with sales as its home table.
 // Each definition below is a separate New measure entry, not one DAX query.
 
-Revenue = SUM('sales'[revenue])
+// Use a distinct measure name: the table already contains the revenue column.
+Total Revenue = SUM('sales'[revenue])
 
 Order Count = DISTINCTCOUNT('sales'[order_id])
 
