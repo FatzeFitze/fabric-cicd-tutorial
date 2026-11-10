@@ -143,6 +143,11 @@ Resource names and commit IDs are enough for this checkpoint. Do not include cre
 | Deployment pipeline entry point is absent | Record the symptom; account licensing and feature permissions may need checking |
 | Branch name differs from `main` | Report it; no history rewrite or workaround is needed in this unit |
 
+## Unit 8 identity handoff
+
+- Provision the assigned Dev UAMI and prepare its Azure access and Fabric tenant/workspace access. Give each learner the UAMI name, client ID, tenant ID, portal location if they manage its credential, and the approved Azure subscription name and ID. The participant creates the service connection in Azure DevOps. Give them the service connection Creator role or equivalent for their training project. [Unit 8 pilot notes](unit-08-pilot-notes.md).
+- If learners register their own federated credentials, scope that access to their assigned, isolated training UAMI. If the facilitator retains credential access, arrange to receive the draft connection's issuer and subject and add the credential during the exercise. Keep Azure role assignments with the facilitator. Reuse the same handoff for separate Test and Prod identities when those exercises need them.
+
 ## Control coverage and references
 
 This unit introduces MS-01 (ownership), MS-02/MS-03 (first traceable source change), MS-04 (separated environments), MS-12 (explicit training access) and MS-13 (initial execution-access awareness). It does not fully establish source control of Fabric definitions, bootstrap reproducibility, deployment connectivity or runtime validation.

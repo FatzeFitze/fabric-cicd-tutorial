@@ -16,11 +16,13 @@ The working scenario is a small synthetic sales solution that progresses from co
 | [5. Make a local feature change](section-03-team-delivery/unit-05-make-a-local-feature-change/README.md) | Edit the returned-order rule locally, review and complete the first PR into `dev`, then compare the merged revision with live Dev | Accepted after successful organizer walkthrough on 10 November. |
 | [6. Turn review into a required check](section-03-team-delivery/unit-06-required-pr-validation/README.md) | Add a reusable source validator and demonstrate a required PR check blocking a defect and passing after the fix | Accepted after organizer walkthrough on 10 November. |
 | [7. Configure and preview a release](section-04-release-automation/unit-07-configure-and-preview-release/README.md) | Fill the release mask, version the alternative value sets and review a read-only plan through the required PR check | Lesson accepted with a clarification about the static check. Exact run evidence pending. |
-| [8. Prepare the shared Dev release](section-04-release-automation/unit-08-publish-shared-dev/README.md) | Verify Dev workspace names and read live item IDs before the publishing handoff | Part A starter checked with mock responses. Live run and publishing continuation pending. |
+| [8. Prepare the shared Dev release](section-04-release-automation/unit-08-publish-shared-dev/README.md) | Create a federated Dev service connection, verify workspace names and read live item IDs before the publishing handoff | Part A starter checked with mock responses. Connection walkthrough, live run and publishing continuation pending. |
 
 Reference: [Logical and physical IDs in Fabric](reference/fabric-item-identities.md). Introduced with Git capture, applied during local editing and revisited for target bindings/deployment evidence.
 
 Explore which checks can run from Git, where they help and when live evidence is needed. [Static validation for Fabric items](reference/static-fabric-validation.md).
+
+See how a pipeline signs in as a managed identity and where to grant permissions. [Service connections, managed identities and federation](reference/release-service-connections.md).
 
 Optional companion: [Recover from source conflicts](auxiliary/aux-01-recover-from-source-conflicts/README.md). Concepts and recovery approach are available; the intentional-conflict lab is planned after Unit 5's local IDE/Git workflow and is outside required completion.
 
