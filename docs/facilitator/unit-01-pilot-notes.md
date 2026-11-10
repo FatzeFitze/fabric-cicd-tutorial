@@ -18,7 +18,7 @@ This file is starter source rather than a Fabric item export. Do not present it 
 
 Local verification should parse the starter, independently calculate its fixture metrics and expected returned-order feature result, and exercise the target guard against matching/mismatched/missing context values. Check lesson links and expected-result consistency. These checks do not execute PySpark, Delta writes, NotebookUtils, the picker or cross-workspace permissions. Record actual check results in the pilot log; do not treat local fixture arithmetic as V04/V07 passing.
 
-Baseline: six distinct orders, quantity 13, two returned orders, gross revenue/revenue 342.20 and no invalid rows. Returned-order exclusion later yields 189.70. Keep these sample-specific numbers separate from historical lab expectations.
+Unit 1 has six distinct orders, quantity 13, two returned orders, gross revenue and revenue 342.20, and zero invalid rows. Unit 4 carries forward a revised price and 357.20 gross. Unit 5 applies returned-order exclusion to that revised fixture and expects 204.70 revenue.
 
 ## Organizer walkthrough outcome
 

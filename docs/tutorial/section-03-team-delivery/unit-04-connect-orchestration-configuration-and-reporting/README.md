@@ -149,13 +149,13 @@ Model ownership, the connection's effective data-access identity and the report 
 
 6. Follow the visible-change exercise below. Record any readiness delay or refresh error.
 
-### 6.1 Make a data change visible, then restore the baseline
+### 6.1 Make a data change visible and capture the new baseline
 
 1. In **Code Dev → build_sales**, find `PRODUCTS` in the input-fixture cell. Change only the **P01 Travel mug** price from **1990 to 2490** cents. This raises its unit price from 19.90 to 24.90; the three mugs across the orders add 15.00 to revenue.
 2. In the transformation/checks cell's `EXPECTED_METRICS`, change **both** `gross_revenue` and `revenue` from `Decimal("342.20")` to **`Decimal("357.20")`**. These are deliberate, independently calculated expectations for the changed fixture. Keep all other checks and the target guard intact. Save the notebook, then close its editor.
 3. Run **`run_sales`** and confirm success, including **357.20** in the persisted-table checks. Editing the source alone does not rewrite the table; the pipeline run does. Do not edit the Delta table directly: the next notebook run overwrites this training table from its fixtures.
 4. In **Reporting Dev**, use the semantic model's **… → Refresh now** (or its available data-refresh action) and wait for completion. Then open `sales_overview` and refresh its visuals. Expect **Total Revenue 357.20**, **Travel mug revenue 74.70**, **Order Count 6** and **Sample Check PASS**. The other products stay unchanged. If the report still shows 342.20, check the successful write, model refresh and visual refresh in that order.
-5. Restore the P01 price to **1990** and **both** expected monetary totals to **`Decimal("342.20")`**. Save, run `run_sales` again and repeat the model/visual refresh. Confirm **342.20** overall and **59.70** for Travel mug before proceeding to Git capture. Leave the original baseline ready for the later feature exercise.
+5. Keep the P01 price at **2490** and both expected monetary totals at **`Decimal("357.20")`**. Capture this revision in Section 7. Unit 5 starts from the updated fixture and changes the revenue rule.
 
 **Expected result:** One report in Reporting Dev consumes `sales_model` and reconciles with the actual workload result. Direct Lake refresh updates its view of Delta data/metadata; it is not an Import-mode copy of the full table. Running the notebook, refreshing/framing the model and refreshing visuals are distinct actions.
 
@@ -197,7 +197,7 @@ Frequent changes, shared consumers and stronger release expectations motivate Mo
 - [ ] Code Dev contains `sales_config`, `run_sales` and the parameterized `build_sales` notebook.
 - [ ] Runtime output proves library values reached the notebook, and the restored configuration succeeds after a meaningful negative check.
 - [ ] Reporting Dev contains `sales_model` in Direct Lake on SQL mode and `sales_overview` over that model.
-- [ ] Report metrics reconcile with the persisted six-row Dev result; the price-change demonstration is visible and the original 342.20 baseline is restored.
+- [ ] Report metrics reconcile with the persisted six-row Dev result, including the updated Total Revenue of **357.20** and Travel mug revenue of **74.70**.
 - [ ] Code/Reporting definitions and their source revisions are captured; Data's baseline is retained.
 - [ ] The Dev solution record identifies dependencies, active value set, selected connections and visible ownership observations.
 - [ ] You can distinguish orchestration, deployment, runtime values, model data access and report consumption.

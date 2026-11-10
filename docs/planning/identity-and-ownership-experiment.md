@@ -7,8 +7,8 @@ Requested by the organizer on 4 November 2026. Required learning outcome: create
 | Unit | Role in the story |
 | --- | --- |
 | 4 | Record the human-created Dev baseline and actual pipeline/model connection choices. Do not change ownership to manufacture an expected observation. |
-| 8 | Establish the approved managed deployment identity/runner and distinguish deployment from runtime/data access. Validate required item/API operations before expanding this exercise. |
-| 9 | Introduce a small new read-only validation notebook, provisionally `validate_release`, after the managed path exists. Demonstrate its **first creation in Test by the managed deployment identity**, alongside an update to an existing human-created item. Inspect both before/after. |
+| 8 | Establish the approved runner identity and distinguish deployment from runtime/data access. Include the prepared read-only `validate_release` notebook in the selected source snapshot and validate it in Dev. |
+| 9 | Promote the Dev-validated snapshot. Demonstrate the notebook's **first creation in Test by the managed deployment identity**, alongside an update to an existing human-created item. Inspect both before and after deployment. |
 | 10 | Release the same selected source to Prod. Verify the new item did not already exist, create it through the Prod managed identity, inspect ownership/identity and run its validation through the chosen supported runtime path. |
 | 11 / reference | Explain recovery/support implications: access changes, account lifecycle, connections and any supported takeover/identity reassignment. Do not make human takeover the routine fix for a broken deployment identity. |
 

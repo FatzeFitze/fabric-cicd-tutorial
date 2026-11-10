@@ -108,9 +108,9 @@ Suggested change story: add a returns indicator, change the net-revenue calculat
 
 ## Time budget
 
-Proposed mandatory teaching and exercise time: 9 hours. Reserve 1.5 hours for support and overruns. Optional extensions fill up to another 1.5 hours if the full 12 hours are available. These are working-session hours; meal breaks are outside the estimate.
+The revised proposal allocates 9 h 10 min of core time and 90 minutes for support and overruns. A 12-hour working budget leaves up to 80 minutes for optional extensions. Allow additional time for breaks.
 
-The detailed estimates live in the [curriculum proposal](curriculum.md#timing-and-supporting-material): Units 0–6 total 4 h 40 min for Day 1; Units 7–12 total 4 h 20 min for Day 2. These replace the earlier coarse block estimates for planning discussion and must be measured during piloting. Distribute the 1.5-hour reserve across both days.
+Units 0–6 total 4 h 50 min for Day 1 and Units 7–12 total 4 h 20 min for Day 2. Distribute the reserve across both days and measure the actual times during piloting. [Curriculum estimates](curriculum.md#timing-and-supporting-material).
 
 Write the core tutorial for a single developer. Pairs follow together and rotate who operates; required concurrency or merge-conflict exercises are excluded. Review and approval can involve a partner or facilitator. Provide a short ALM pre-read, glossary, setup checklist, and optional Git practice beforehand. Introduce concepts briefly again during the relevant exercise so completion does not depend on perfect pre-read uptake.
 

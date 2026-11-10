@@ -32,10 +32,10 @@ Logical IDs are source identities; physical IDs identify deployed instances and 
 - Model connection authentication / SSO setting as actually exposed:
 - Model owner versus data-access identity observations:
 - Report-to-model reference / exported representation:
-- Report values (Total Revenue 342.20, Order Count 6, Sample Check PASS):
+- Starting report values (Total Revenue 342.20, Order Count 6, Sample Check PASS):
 - Product values (Backpack 245.00, Travel mug 59.70, Lunch box 37.50):
-- Temporary price-change result (Total Revenue 357.20 / Travel mug 74.70), run and model/visual refresh observations:
-- Restored price/expected checks and final report baseline (342.20 / 59.70) before Git capture:
+- Price-change result (Total Revenue 357.20 / Travel mug 74.70), run and model/visual refresh observations:
+- Final source and report baseline at Git capture (P01 2490 cents, gross revenue and revenue 357.20):
 - Code repo full commit ID/link:
 - Reporting repo full commit ID/link:
 - Retained Data repo baseline commit ID/link:

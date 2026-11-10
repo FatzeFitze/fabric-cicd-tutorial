@@ -1,6 +1,6 @@
 # DNA Fabric Days: workshop planning
 
-Workshop preparation started 28 October 2026. Agreed direction: Models A and B are hands-on; Model C and feature workspaces are explainer topics. Use local feature branches and shared Dev workspaces where supported. Units 0–5 and Tiny Sales starters are available. Units 3–4 are accepted as their first working versions by the organizer. Unit 5's local feature/draft PR path and later managed deployment/ownership experiments await pilot validation.
+Workshop preparation started 28 October 2026. Agreed direction: Models A and B are hands-on; Model C and feature workspaces are explainer topics. Use local feature branches and shared Dev workspaces where supported. Units 0–5 and Tiny Sales starters are available. Units 3–4 are accepted as their first working versions by the organizer. Unit 5 now completes the first feature PR into dev. The added merge checkpoint and managed deployment experiments await pilot validation.
 
 ## Start here
 
@@ -9,7 +9,7 @@ Workshop preparation started 28 October 2026. Agreed direction: Models A and B a
 - [Unit 2: capture the solution in Git](docs/tutorial/section-01-foundation/unit-02-capture-the-solution-in-git/README.md): successful organizer walkthrough reported; commit-diff review and open-editor update guidance refined.
 - [Unit 3: native promotion](docs/tutorial/section-02-model-a/unit-03-native-promotion/README.md): full native chain accepted as first working version on 4 November.
 - [Unit 4: connect configuration, orchestration and reporting](docs/tutorial/section-03-team-delivery/unit-04-connect-orchestration-configuration-and-reporting/README.md): first version accepted; source/deployed-ID wording clarified.
-- [Unit 5: make a local feature change](docs/tutorial/section-03-team-delivery/unit-05-make-a-local-feature-change/README.md): clone Code source, edit in an IDE, preserve metadata/IDs and open a draft PR; walkthrough pending.
+- [Unit 5: make a local feature change](docs/tutorial/section-03-team-delivery/unit-05-make-a-local-feature-change/README.md): edit Code source in an IDE, complete the first PR and record the resulting dev revision. The merge checkpoint awaits rehearsal.
 - [Logical and physical Fabric IDs](docs/tutorial/reference/fabric-item-identities.md): source identity versus deployed instance, lookup locations and later release evidence.
 - [Optional conflict recovery](docs/tutorial/auxiliary/aux-01-recover-from-source-conflicts/README.md): concepts and entry point; intentional-conflict lab awaits rehearsal after Unit 5's local Git workflow.
 - [Later identity/ownership experiment](docs/planning/identity-and-ownership-experiment.md): create a new Test/Prod asset through managed identities, compare creation with updates and verify runtime/access implications.
@@ -18,7 +18,7 @@ Workshop preparation started 28 October 2026. Agreed direction: Models A and B a
 - [Provisioning feedback review](docs/facilitator/provisioning-review-2026-10-29.md): factory code, supplied run records, Git credentials and pilot-layout differences.
 
 - [Scope and learning journey](docs/planning/scope.md): outcomes, sample project, timetable, reusable components, and repository design.
-- [Sections, units and sample growth](docs/planning/curriculum.md): agreed broad journey and minimal sample including a Variable Library; staged introduction of reusable automation/configuration. Timings and technical mechanisms await pilot validation.
+- [Sections, units and sample growth](docs/planning/curriculum.md): remaining unit proposal, reusable function suite, configuration mask and Unit 12 target state.
 - [Decision register](docs/planning/decisions.md): proposed decisions, assumptions, and missing inputs.
 - [Validation and delivery backlog](docs/planning/backlog.md): technical experiments, evidence requirements, delivery sequence, and readiness gates.
 - [Control coverage and development workflow](docs/planning/control-coverage.md): A/B exercises, Model C explainers, and shared-Dev constraints.

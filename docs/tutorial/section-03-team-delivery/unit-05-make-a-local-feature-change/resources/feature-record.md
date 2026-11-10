@@ -18,14 +18,13 @@ Keep private repository/workspace links in your training notes. Record actual ou
 - Business rule: returned rows retained; revenue zero on returns; gross revenue unchanged:
 - Expected gross / revenue / row / quantity / returned-order totals:
 - Actual diff scope / whitespace-check result:
-- Draft PR URL / source / target / status:
-- Auto-complete disabled / merge not performed:
-- Automated validation performed so far (none in this unit):
-- Fabric feature execution performed so far (none in this unit):
+- Completed PR URL, source and target branches, and review or policy results:
+- Merge type and full resulting `dev` commit ID:
+- Validation performed so far:
 
 ## Shared Dev state and feedback
 
-- Code Dev connected branch remains `dev` / source status:
-- Original persisted/report revenue remains 342.20:
+- Code Dev connected branch, last synchronized revision if visible, and incoming update status:
+- Actual persisted/report revenue after the merge (expected 357.20 before the feature runs):
 - Any unexpected writer, update or conflict:
 - Approximate time / sign-in delays / exact errors / confusing steps:

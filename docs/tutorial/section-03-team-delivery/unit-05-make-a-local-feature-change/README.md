@@ -1,18 +1,17 @@
 # Unit 5 — Make a local feature change
 
-**Time:** approximately 35–45 minutes, with local tools already installed.  
-**You will create:** a local feature branch and draft Azure Repos pull request changing how Tiny Sales handles returned orders. Dev stays on the previous source/runtime baseline.
+Allow **45–55 minutes** with local tools already installed. You will create a local feature branch, then complete the first Azure Repos pull request into `dev`.
 
 ## What you will learn
 
 - Clone your existing Fabric source into an ordinary local Git working folder.
 - Edit an exported notebook in an IDE while preserving its metadata and identity.
-- Review, commit and push a small feature without changing shared Dev.
-- Describe what is checked locally and what still needs CI and Fabric execution.
+- Review, commit, push and merge a small feature through a pull request.
+- Identify the merged source revision, the live Fabric definition and the last runtime result separately.
 
 ## Before you begin
 
-Complete [Unit 4](../unit-04-connect-orchestration-configuration-and-reporting/README.md). Restore its original fixture prices, expected totals and configuration, run successfully and capture the final Code/Reporting definitions in Git. Data Dev and the report should show **342.20** revenue. Keep your Unit 4 solution record.
+Complete Unit 4 and keep your solution record. The final Code revision contains the **2490-cent** P01 Travel mug price and **357.20** for both expected monetary totals. Data Dev and the report show **357.20** revenue. If you followed an earlier draft that restored the original price, finish the revised price exercise and capture the updated Code revision. If you already started the feature, bring the updated `dev` into your existing feature branch before completing its PR. [Unit 4](../unit-04-connect-orchestration-configuration-and-reporting/README.md).
 
 You need **Git**, **Visual Studio Code** and access to clone, create a branch and open a PR in your assigned **Azure DevOps Code repository**. Install/sign in using your organization's approved method before this exercise. Run `git --version` in PowerShell to confirm Git is available. No local Spark installation, Power BI Desktop or Fabric VS Code extension is required.
 
@@ -26,8 +25,9 @@ Keep a private copy of the [feature record](resources/feature-record.md). Read t
 flowchart LR
     D["Azure Repos: dev baseline"] -->|clone / branch| L["Local feature files in VS Code"]
     L -->|commit + push| F["Azure Repos: feature branch"]
-    F -->|propose change| P["Draft PR into dev\nheld for Unit 6 checks"]
-    D -. current connected branch .-> W["Shared Code Dev\nunchanged in this unit"]
+    F -->|review and complete PR| M["Azure Repos: new dev revision"]
+    D -. last synchronized revision .-> W["Shared Code Dev: live definition"]
+    M -. incoming Git update .-> W
 ```
 
 A local branch isolates **source files**, not Fabric runtime data. Saving these files changes your local checkout; a commit records that local state; pushing shares the feature branch. None of those actions switches the workspace branch, deploys the notebook or runs it.
@@ -106,19 +106,19 @@ The fictional business now wants **revenue to exclude returned orders**. Keep al
    ```
 
 2. Update the adjacent business-rule comment to explain that returned orders remain in the table but contribute zero revenue. Leave fixtures and the table schema unchanged.
-3. In `EXPECTED_METRICS`, change **only** the `revenue` value to **`Decimal("189.70")`**. Keep `gross_revenue = Decimal("342.20")` and all count/invalid-row checks. Keep `validate_sales` before and after the write.
+3. In `EXPECTED_METRICS`, set `revenue` to **`Decimal("204.70")`** and retain `gross_revenue` at **`Decimal("357.20")`**. Keep the count and invalid-row checks and both calls to `validate_sales`.
 4. Change the final success message's wording from **matches the baseline** to **matches the expected metrics**, retaining the `UNIT_01_PASS` marker. Save the local file.
-5. Review the expected result independently. Returned orders O003 and O006 contribute gross amounts 12.50 and 140.00. Therefore **342.20 − 12.50 − 140.00 = 189.70**. The future runtime checks must show:
+5. Review the expected result independently. Returned orders O003 and O006 contribute gross amounts 12.50 and 140.00. The expected revenue is **357.20 − 12.50 − 140.00 = 204.70**.
 
    | Result | Before | After feature execution |
    | --- | ---: | ---: |
    | Rows / distinct orders | 6 / 6 | 6 / 6 |
    | Quantity / returned orders | 13 / 2 | 13 / 2 |
-   | Gross revenue | 342.20 | 342.20 |
-   | Revenue / report Total Revenue | 342.20 | 189.70 |
+   | Gross revenue | 357.20 | 357.20 |
+   | Revenue / report Total Revenue | 357.20 | 204.70 |
    | Invalid rows | 0 | 0 |
 
-**Expected result:** One existing notebook definition contains the new calculation and matching monetary expectation. **189.70 is an expected result, not an executed Fabric result yet.** Do not use Run Python File on the export: this notebook needs Fabric's Spark/session utilities. Useful automated checks follow in Unit 6; integration/runtime checks follow the selected deployment path.
+**Expected result** The existing notebook definition contains the new calculation and the 204.70 expectation. Review the source here. Fabric execution requires a workspace Spark session, which the later deployment exercise will use to verify the result.
 
 ## 5. Review and commit the local change
 
@@ -150,7 +150,7 @@ The fictional business now wants **revenue to exclude returned orders**. Keep al
 
 **Expected result:** A local feature commit with a clean working folder and unchanged `.platform`. The commit exists on your computer; it has not yet been shared or deployed. See [VS Code source control](https://code.visualstudio.com/docs/sourcecontrol/overview) and [Git diff checks](https://git-scm.com/docs/git-diff).
 
-## 6. Push the feature and open a draft PR
+## 6. Push, review and complete the pull request
 
 1. Share the feature branch:
 
@@ -159,19 +159,20 @@ The fictional business now wants **revenue to exclude returned orders**. Keep al
    ```
 
 2. Open your **Code repo → Repos → Pull requests → New pull request** in Azure DevOps. Set **source = `feature/exclude-returned-orders`** and **target = `dev`** explicitly; do not accept `main` just because it is offered.
-3. Use the title **Exclude returned orders from Tiny Sales revenue**. Explain that returned rows stay present, `revenue` becomes zero for them, gross revenue/schema are unchanged and expected revenue becomes 189.70. Under validation, state **diff reviewed; whitespace check passed; CI and Fabric runtime validation pending**. Do not claim a notebook run.
-4. Select the arrow beside **Create → Create as draft**. Open the resulting PR's **Files** and **Commits** tabs. Confirm only the intended notebook file changed, its logical ID was preserved and the feature commit is present. Record the PR URL and source/target branches.
-5. Leave it **Draft**. Do not Complete, enable auto-complete or merge. Drafts do not automatically run Azure Repos build-validation policies; Unit 6 will add the check, publish the PR and exercise validation before merge. See [draft PR behavior](https://learn.microsoft.com/en-us/azure/devops/repos/git/pull-requests?view=azure-devops#create-draft-prs).
+3. Use the title **Exclude returned orders from Tiny Sales revenue**. State that returned rows contribute zero revenue and the expected result is **204.70**, with **357.20** gross. Record the diff review and whitespace check as the validation performed so far. Select **Create**. If you already have a draft from an earlier version of this exercise, check its base, updated amounts and file diff, then select **Publish** on that PR.
+4. Open **Files** and **Commits**. Verify the intended notebook edit, its preserved logical ID and the feature commit. Record the PR URL and branches. Check the PR's merge status and satisfy any existing requirements. Review the diff yourself in a solo lab, or ask your partner to review if working in a pair.
+5. When the PR is ready, select **Complete**. Choose **Squash commit** if the training repo permits it, or use the merge type specified for your repo. Select **Complete merge** after checking the options. If a required policy or reviewer blocks completion, ask the facilitator how to satisfy it. Leave policy override unchecked. [Complete an Azure Repos PR](https://learn.microsoft.com/en-us/azure/devops/repos/git/complete-pull-requests?view=azure-devops#complete-a-pull-request).
+6. Confirm the PR status is **Completed**. Find the resulting commit on `dev` in Azure Repos and record its full ID alongside the feature commit. A squash merge creates a new target commit, so use the resulting `dev` commit as the integration checkpoint.
 
-**Expected result:** The feature is available for review without advancing `dev`. In a productive team, independent review follows the required control model; preparing a solo draft here does not demonstrate that boundary is enforced.
+**Expected result** The reviewed feature is in `dev` and the completed PR links to its integration commit. Unit 6 adds an enforced build check for the next change.
 
-## 7. Confirm what has stayed unchanged
+## 7. Compare merged source with live Dev
 
-1. Read **Code Dev → Git integration / Source control** without editing or updating items. Its branch should still be **`dev`** and its notebook should retain the original calculation. A feature-branch push alone should not appear as an incoming update to `dev`.
-2. Compare the persisted Data Dev/report baseline with Unit 4's final **342.20**. No feature execution has occurred. If it differs, investigate another writer/run or an unrestored fixture rather than treating it as evidence that pushing deployed your feature.
-3. Record the local folder, integration base commit, feature commit, notebook path/logical ID, retained Data/Reporting revisions and draft PR in the [feature record](resources/feature-record.md).
+1. Open **Code Dev → Source control**, refresh the pane and confirm it tracks **`dev`**. Observe the incoming notebook update. Leave it pending for the pipeline publishing exercise so you can compare the merged revision with the live definition. [Update workspace from Git](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/git-get-started#update-workspace-from-git).
+2. Check the persisted Data Dev/report baseline of **357.20**. Record it separately from the feature's expected **204.70**. If the workspace or report is already showing the feature, check whether an update and run occurred and record the actual revision and result.
+3. Record the baseline, feature and resulting `dev` commits, completed PR, notebook path/logical ID, retained Data/Reporting revisions and workspace observations. [Feature record](resources/feature-record.md).
 
-**Expected result:** You can explain four distinct states: local feature source, pushed feature source, unchanged Dev definition/configuration and unchanged runtime data. No workspace branch switch, feature workspace, deployment or report edit was needed.
+**Expected result** You can trace the change from local source through the completed PR to `dev` and explain which revision produced the current report.
 
 ## If something does not work
 
@@ -186,25 +187,25 @@ The fictional business now wants **revenue to exclude returned orders**. Keep al
 | Local Run fails on Spark or notebookutils | This is exported Fabric notebook source, not a standalone local program. No local notebook execution is required here. |
 | Workspace shows a conflict or unexpected update | Stop competing edits, preserve both versions and identify the connected branch/revisions. Use the [conflict reference](../../auxiliary/aux-01-recover-from-source-conflicts/README.md); do not discard workspace changes to finish this unit. |
 | PR targets `main` or changes unrelated items | Correct the target to the confirmed integration branch and inspect the branch base/file list before proceeding. |
-| Draft PR has no automatic validation | Expected for a draft. Unit 6 adds and exercises the check; a missing result is not a passed test. |
+| Your feature branch started from the earlier 342.20 baseline | Capture Unit 4's corrected baseline in `dev`. In a clean checkout on the feature branch, run `git fetch origin` and `git merge origin/dev`. If needed, resolve the diff with the facilitator. Keep P01 at 2490 cents, gross at 357.20 and feature revenue at 204.70. [Conflict recovery](../../auxiliary/aux-01-recover-from-source-conflicts/README.md). |
+| Completion is blocked | Check the PR's conflicts, required policies and reviewer status. Satisfy the active requirements with the facilitator. |
 
 ## Completion checkpoint
 
 - [ ] Your local clone points to the assigned Azure DevOps Code repo.
 - [ ] `feature/exclude-returned-orders` contains one reviewed notebook-source feature; its logical ID, metadata, fixtures and schema are preserved.
-- [ ] The expected new revenue is 189.70; gross revenue stays 342.20, with unchanged row/quantity/return counts.
-- [ ] The feature commit is pushed and a **draft PR into `dev`** remains open, without auto-complete.
-- [ ] Code Dev stays on `dev`, with its previous definition and 342.20 runtime baseline.
-- [ ] The feature record distinguishes source inspection from unperformed CI/runtime validation.
+- [ ] The expected feature revenue is 204.70, with gross revenue 357.20 and six orders, quantity 13 and two returns.
+- [ ] The PR into `dev` is **Completed** and the resulting `dev` commit is recorded.
+- [ ] The feature record separates the merged source, live definition, runtime result and validation performed.
 
-Keep the local checkout, feature branch and draft PR for Unit 6. Retain approximate time and any sign-in, export-format or UI differences. Next we will introduce reusable validation components and PR checks before integration; their purpose is to test this change, not merely produce a green pipeline.
+Keep the local checkout and completed PR record for Unit 6. Start the next change from the updated `dev` and use it to exercise automated PR validation.
 
 ## References
 
 - [Clone an Azure Repos repository](https://learn.microsoft.com/en-us/azure/devops/repos/git/clone?view=azure-devops).
 - [Notebook source control and deployment](https://learn.microsoft.com/en-us/fabric/data-engineering/notebook-source-control-deployment).
 - [VS Code source control](https://code.visualstudio.com/docs/sourcecontrol/overview).
-- [Azure Repos draft PRs](https://learn.microsoft.com/en-us/azure/devops/repos/git/pull-requests?view=azure-devops#create-draft-prs).
+- [Complete an Azure Repos PR](https://learn.microsoft.com/en-us/azure/devops/repos/git/complete-pull-requests?view=azure-devops#complete-a-pull-request).
 - [Logical versus physical IDs](../../reference/fabric-item-identities.md).
 
 [Previous: Unit 4](../unit-04-connect-orchestration-configuration-and-reporting/README.md) · [Tutorial index](../../README.md)

@@ -16,6 +16,8 @@ Date: 28 October 2026. Explicit user decisions are recorded below. Other recomme
 
 ## Confirmed in the scoping discussion
 
+- 10 November. Keep Unit 4's 357.20 gross baseline for Unit 5 and complete the first reviewed merge into `dev` in Unit 5. Expected revenue after excluding returns is 204.70. This supersedes the earlier restore-and-hold-draft plan. The organizer wants a modular function suite and configuration mask in the remaining curriculum. The proposed YAML form, second PR for required CI, and separate Dev publishing exercise are recorded for review. [Curriculum and Unit 12 target state](curriculum.md#target-state-after-unit-12).
+
 - 4 November Unit 4 acceptance and Unit 5 request: organizer accepts Unit 4 as its first version, except Section 7 must distinguish logical IDs found in Git from physical IDs found in deployed items/URLs/APIs. Add a shared participant ID explainer now, link it from Units 2/4/5, and revisit source-to-target ID correlation in Units 7–10 logs/manifests. Acceptance does not supply raw per-item IDs, source exports or an independent replay of every revised step.
 - Unit 5 implementation: retain the current Code-repo/dev pilot; ordinary local IDE feature edit, reviewed commit/push and **draft PR into dev**, held for Unit 6's checks. Keep shared Dev on its existing branch/source/runtime baseline. Preserve actual Fabric export markers and logical identity; no mandatory Python/Spark installation or local runtime execution here. Unit 6 must publish the draft before expecting automatic build-policy validation. This is an authored pilot path, not reported Azure Repos/local-workflow success.
 
@@ -70,7 +72,7 @@ Date: 28 October 2026. Explicit user decisions are recorded below. Other recomme
 | D02 | Azure Pipelines files from the start | Target the eventual delivery platform | First real Azure DevOps run |
 | D03 | One repository with an independently structured toolkit | Fast workshop iteration and later extraction | Second small sample uses the toolkit |
 | D04 | Accepted 29 October: one evolving synthetic sales project, now including a Variable Library | Visible outcomes and meaningful dependencies | Asset mechanisms and timed pilot still to validate |
-| D05 | Nine core hours, 1.5 hours reserve, optional extensions | Protect the complete learning path | Timed pilot |
+| D05 | 9 h 10 min core, 90 minutes reserve, optional extensions | Protect the complete learning path | Timed pilot |
 | D06 | Prepared Model B starter with participant modifications | Managed team delivery is achievable within the event | Pilot across experience levels |
 | D07 | Thin reusable layer over supported tooling | Avoid rebuilding deployment and parameterization support | Compare current code with fabric-cicd and native features |
 | D08 | Small typed dependency contract only for demonstrated gaps | Express target state without hardcoding project names | Cross-workspace experiment |

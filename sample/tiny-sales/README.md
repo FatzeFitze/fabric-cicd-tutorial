@@ -17,7 +17,7 @@ The fixtures are embedded once in the starter: three customers, three products a
 | Revenue under the initial rule | 342.20 |
 | Invalid rows | 0 |
 
-The initial rule includes returned orders in revenue. A later feature exercise will exclude them while preserving the table schema; with these fixtures that produces revenue of **189.70**, while gross revenue remains **342.20**. Unit 1 uses the baseline rule only.
+The initial rule includes returned orders in revenue. Unit 4 changes the P01 Travel mug price to 2490 cents, giving a new baseline of **357.20**. Unit 5 excludes returns using that revised fixture, for **204.70** revenue and **357.20** gross.
 
 Each run overwrites the disposable training `sales` table in the checked default lakehouse. It does not append rows, ingest an external source, or persist the three input collections as separate tables. This deliberate full-rebuild sample is not a productive incremental-load or data-recovery strategy.
 
@@ -35,4 +35,4 @@ Local positive/negative context checks passed, and on 4 November the organizer a
 
 [sales-model-measures.dax](sales-model-measures.dax) contains five separate New measure definitions for the one-table report model. Copy one definition at a time; it is not one executable DAX query. Use **Total Revenue** as the measure name; the source column stays `revenue`. The organizer reports the original Unit 4 walkthrough successful; corrected instructions and the new visible-change/restore exercise await replay.
 
-Pipeline execution adds a generated cell below the authored parameter cell to override its defaults. Keep only the one authored parameter cell in source. Unit 4's temporary P01 price change produces revenue 357.20, then restores 342.20 before Git capture; the canonical fixtures here remain unchanged for Units 1–3 and the later returned-order feature.
+Pipeline execution adds a generated cell below the authored parameter cell to override its defaults. Keep one authored parameter cell in source. Capture Unit 4's revised fixture and its 357.20 expectations in Git for Unit 5. The canonical starter supplies the earlier 342.20 fixture used in Units 1–3.

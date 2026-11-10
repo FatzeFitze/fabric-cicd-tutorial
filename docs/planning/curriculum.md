@@ -1,6 +1,6 @@
 # Curriculum and sample growth
 
-Status, 4 November 2026: the broad A/B journey and six-item initial sample are agreed. Units 1–4 have organizer-reported success; Units 3–4 are parked as first versions. Unit 5's local feature/draft PR lesson is authored and unpiloted; Units 6–12 remain planning references. Timings, managed deployment mechanisms and ownership coverage require their own pilots.
+Updated 10 November 2026. Units 1–4 have organizer-reported success. Unit 5 feedback establishes the carried-forward 357.20 gross baseline and moves the first merge into Unit 5. The added merge checkpoint awaits rehearsal. Units 6–12 describe the proposed sequence and target state for review.
 
 ## Teaching journey
 
@@ -36,21 +36,21 @@ This is a bounded two-asset exercise. The expected result is working Test/Prod o
 
 | Unit | Min | Work and observable checkpoint | Main controls |
 | --- | ---: | --- | --- |
-| **4. Connect orchestration, configuration and reporting** | 60 | Create Code Dev Variable Library/Pipeline, pass scalar values into notebook parameters and validate a wrong-environment failure. Browser-create a Direct Lake on SQL model and report in Reporting Dev, reconcile Total Revenue and capture definitions/identity baseline. Temporarily change a fixture price, refresh to see the difference, then restore it. Accepted first version; source/deployed ID wording clarified. | MS-02, 04, 06–08, 10, 14 |
-| **5. Make a local feature change** | 35 | Clone Code source into an ordinary local Git folder, open it in VS Code, branch and zero returned-order revenue while preserving gross/schema and Fabric metadata. Review/commit/push and open a draft PR into dev, held for Unit 6 checks. Explain source versus runtime and logical versus physical IDs. Authored estimate is 35–45 minutes with tools installed; measure reserve above this slot. No feature workspace or local Spark. | MS-02, 03, 08 |
-| **6. Add useful CI and PR controls** | 35 | Introduce the supplied validation starter and an Azure Repos build-validation policy. Publish Unit 5's draft PR so automatic policy validation can run. A deliberately wrong calculation fails a local/CI check; the corrected feature passes. Review and merge. Distinguish local checks from Fabric runtime tests. Shared Dev is not yet automatically updated. | MS-02, 03, 08, 14 |
+| **4. Connect orchestration, configuration and reporting** | 60 | Create the Code Dev Variable Library and Pipeline, validate parameter flow, create the Direct Lake on SQL model and report, then raise the P01 price. Capture the refreshed 357.20 baseline in Git with its source and identity record. | MS-02, 04, 06–08, 10, 14 |
+| **5. Make a local feature change** | 45 | Clone the Code source in VS Code, zero returned-order revenue and preserve Fabric metadata. Review, push and complete the first PR into `dev`. Record the merged revision and compare it with the live definition and the 357.20 runtime result. The feature expects 204.70. Allow 45–55 minutes with tools installed. | MS-02, 03, 08 |
+| **6. Turn review into a required check** | 35 | Start a second PR from merged `dev`. Wire a supplied validation function and project check into thin CI YAML and attach required build validation. Observe a deliberate defect block that PR, fix it and complete the PR after the check passes. Record the PR and run IDs. | MS-02, 03, 08, 14 |
 
 Use one sales table and a few measures/visuals. Unit 4 selects a browser-only Direct Lake on SQL pilot through the SQL endpoint creation dialog; actual reporting/Git representation and target identity support must still be observed before release automation is finalized. The core feature edits notebook/calculation source locally and does not require simultaneous UI editing or local Fabric Spark.
 
-An [optional conflict-recovery companion](../tutorial/auxiliary/aux-01-recover-from-source-conflicts/README.md) has its own entry point. Rehearse local branch conflicts and Fabric workspace-versus-Git conflicts with safe text edits before publishing its hands-on steps. It remains outside the nine-hour core; no pair concurrency or extra workspace is required. See the [facilitator plan](../facilitator/source-conflict-exercise-plan.md).
+An optional companion covers local branch conflicts and Fabric workspace-versus-Git conflicts. Its hands-on steps need rehearsal with safe text edits and sit outside core time. [Conflict recovery companion](../tutorial/auxiliary/aux-01-recover-from-source-conflicts/README.md) · [Facilitator plan](../facilitator/source-conflict-exercise-plan.md).
 
 ### Section 4 — Automate the Model B release
 
 | Unit | Min | Work and observable checkpoint | Main controls |
 | --- | ---: | --- | --- |
-| **7. Describe environments and dependencies** | 45 | Add environment/configuration examples, extend the Variable Library with Dev/Test/Prod value sets and inspect the dependency plan. Distinguish runtime values, deployment bindings and Azure Pipeline parameters. Separate logical items from physical IDs; reject an absent value or forbidden Dev reference. Add these files through a reviewed change. | MS-03, 04, 06, 08, 12 |
-| **8. Publish and validate shared Dev** | 65 | Add the prepared deployment entry point and Azure Pipelines template; configure their documented inputs and connect the validated runner/workload identity. Reconcile outstanding UI changes and retire the previous Dev writer. Deploy the selected source, explicitly establish/check the active Variable Library value set, inspect bindings, run/refresh as needed, and retain results. | MS-03, 05–08, 10, 12–14 |
-| **9. Release the same source to Test** | 45 | Deploy the selected snapshot across roles, with proven prerequisites/bindings/runtime checks. Introduce a small new read-only validation notebook and observe its first Test creation by managed identity, comparing its ownership/identity with an update to a human-created item. Record caller, target IDs and runtime/access evidence; reject invalid references. | MS-01, 04–08, 10–14 |
+| **7. Fill the configuration mask and preview the release** | 45 | Fill the versioned YAML template with role/workspace mappings, supported bindings, library value-set selections and project checks. Add Dev/Test/Prod value sets to the versioned Variable Library definition using the rehearsed source-edit path. Run validation and preview the target plan. Correct a missing mapping or forbidden Dev reference before publishing. | MS-03, 04, 06, 08, 12 |
+| **8. Publish and validate shared Dev** | 65 | Wire the supplied Azure Pipelines template to the deployment functions and approved runner identity. Reconcile the pending Git update and retire Git publishing before enabling the automated writer. Publish the selected snapshot including the supplied read-only validation notebook. Verify target settings and bindings, run the workload and refresh the report. Capture evidence for 357.20 gross and 204.70 revenue. | MS-03, 05–08, 10, 12–14 |
+| **9. Release the same source to Test** | 45 | Promote the Dev-validated snapshot across roles. Observe the validation notebook's first Test creation by managed identity and compare its ownership with an update to a human-created item. Record caller, target IDs and runtime/access evidence. | MS-01, 04–08, 10–14 |
 | **10. Approve and release to simulated Prod** | 30 | Use a real resource approval and the source validated in Test. First-create the same new item through the Prod managed identity, inspect owner/default/runtime/connection identity observations and run post-deployment checks. Retain release evidence and explain Admin lab bypass limits. | MS-01, 03, 05, 07–12, 14 |
 
 The preferred Dev mechanism remains pipeline publishing, subject to validation. Controlled Git-update Dev is the alternative to assess, not a second required implementation. Native pipelines from Unit 3 become a comparison/reference path; normal Model B changes use the selected automation route. Do not keep competing native/manual and automated publishers active for the exercise.
@@ -62,13 +62,33 @@ The observed pilot has three repos, whereas the recommended participant architec
 | Unit | Min | Work and observable checkpoint | Main controls |
 | --- | ---: | --- | --- |
 | **11. Diagnose a failure and recover** | 55 | Trigger a safe, rehearsed failure in Test after part of a release has succeeded. Use deployment/runtime evidence to identify the failed step, correct configuration or redeploy a known-good definition, and rerun to a verified state. Explain why source rollback does not restore data and why cross-workspace release is not a transaction. Record the owner and next action. | MS-01, 05, 06, 08, 10, 11, 14 |
-| **12. Reuse the starter and choose the right controls** | 20 | Adapt a tiny supplied second example's configuration and project check; run its local validation/resolved-plan step without modifying toolkit internals. Locate the templates, configuration reference and support material. Classify a more critical scenario and identify Model C additions; explain when feature workspaces help. | MS-01–14 recap, especially 05, 09–12, 14 |
+| **12. Reuse the suite and choose the right controls** | 20 | Fill the mask for a small second example, select its project check and run validation and planning with the same functions. Explain which parts change for another project and identify when Model C controls or feature workspaces would help. | MS-01–14 recap, especially 05, 09–12, 14 |
 
 The second example is a small reuse check, not another complete cloud deployment. Full starter portability needs its own organizer feasibility test. Model C explainers cover independently protected production capability, separation of duties, stronger identity boundaries, monitoring/evidence retention, private execution where required, and risk-appropriate recovery. These remain obligations from the supplied guidelines, not claims that the sandbox implements them.
 
+## Target state after Unit 12
+
+- **Delivery workflow.** Participants have completed a reviewed feature merge, seen required CI block a faulty follow-up change, and released one selected source snapshot through Dev, Test and approved simulated Prod. A snapshot records the required repository revisions and the configuration used for that release.
+- **Running solution.** The Tiny Sales items resolve to their intended workspace roles in each environment. Runtime evidence confirms the target Variable Library selection, six orders, 357.20 gross and 204.70 recognized revenue. The reporting check confirms the intended model and data source and shows 204.70 Total Revenue.
+- **Repeatability and ownership.** Participants can use the release record to identify the source revision, deployed physical IDs, bindings, caller, runtime result and approval. They compare first creation of a validation notebook by managed identity in Test and Prod with an update to a human-created item. They rehearse recovery from a partial failure in Test and verify the recovered result.
+- **Reusable handoff.** Participants leave with modular functions, Azure Pipelines templates, the filled Tiny Sales mask, a field reference and a second example. They can fill the mask, preview a plan and use a project-specific check while leaving the generic function suite intact.
+
+## Proposed function suite and configuration mask
+
+Use a **versioned YAML form** for the mask. Give learners a starter to fill in, a field reference and validation messages that point to the field they need to fix. Keep Tiny Sales assertions in a project check. The generic functions call the check through a documented input and delegate Fabric operations to the supported tooling selected during the pilot.
+
+| Module | What the participant sees | First use |
+| --- | --- | --- |
+| Validate inputs | Actionable results for source, configuration and project checks. CI uses the same entry point. | Unit 6, with the mask added in Unit 7 |
+| Resolve a plan | Read-only preview of selected revisions, workspace roles, item order, binding intent and unresolved prerequisites. Show which item IDs can be discovered and which will be assigned at first creation. | Unit 7 |
+| Publish and configure | Apply the approved plan, resolve deployed IDs, establish bindings and select or verify the target value set. | Unit 8 |
+| Verify and record | Run target checks and capture results, IDs, source revisions and release evidence. Test and Prod reuse the same functions. | Units 8–10 |
+
+The mask describes which versioned source and role folders to use, the destination workspace for each role, dependency intent and the selected value set and check. The pipeline passes the pinned revision set, target name and config path. Azure DevOps resources supply the approved identity and approval. Fabric's Variable Library supplies the runtime values consumed by the workload. Resolve physical IDs where the selected tooling supports it and record them in the plan or release evidence. Define the exact field names once the cross-workspace pilot proves which overrides are needed.
+
 ## Ownership as a thread through the series
 
-The organizer requested first creation of a new asset through managed-identity-only Test/Prod delivery. Unit 4 records the human baseline; Unit 8 establishes identity boundaries; Unit 9 adds a new validation notebook and observes first Test creation versus an existing-item update; Unit 10 repeats first creation in Prod with the same selected source. The [experiment plan](identity-and-ownership-experiment.md) defines evidence and implications without assuming universal creator/owner/runtime behavior. The initial six item types remain unchanged; the later addition reuses the Notebook type.
+Unit 4 records the human baseline. Unit 8 establishes identity boundaries and includes a new validation notebook in the snapshot exercised in Dev. Unit 9 observes its first Test creation by managed identity and compares it with an existing-item update. Unit 10 observes first Prod creation using the same selected source. [Ownership experiment plan](identity-and-ownership-experiment.md).
 
 ## How reusable automation enters the tutorial
 
@@ -77,8 +97,8 @@ Build, document and validate each starter here before its participant unit is of
 | First unit | We prepare and test beforehand | Participant action / parameterization lesson |
 | --- | --- | --- |
 | 4 | Minimal Variable Library example and a proven pipeline-to-notebook parameter flow | Create the library manually; consume a value such as `environment_name` and inspect the received runtime value |
-| 6 | Reusable validation entry point, project-specific assertions and a thin CI YAML example | Add the selected files, supply source/config/check locations, and see a meaningful failing/passing check |
-| 7 | Small environment/dependency examples with documented fields, tool-native replacements and validation | Fill role/workspace mappings, allowed references and intended active value set; inspect a resolved plan before deployment |
+| 6 | Reusable validation entry point, project-specific assertions and a thin CI YAML example | Wire the check into the second PR and observe the required policy reject and then accept the change |
+| 7 | Fill-in YAML mask, field reference, example values and plan validation | Fill role/workspace mappings, allowed references and intended active value set, then inspect a resolved plan |
 | 8 | One reusable deployment/validation entry point plus a parameterized Azure Pipelines job/stage template | Wire a thin project pipeline to the starter; select environment/config/source inputs and understand identity setup; do not copy and modify the deployment implementation per environment |
 | 9–10 | Tested Test/Prod stages, pinned-source handling, target checks and release record | Reuse the same implementation with the target's configuration; inspect approval and runtime evidence |
 | 11–12 | Rehearsed fault/recovery and a second tiny example with different configuration/checks | Recover through the same entry point and demonstrate reuse without editing generic internals |
@@ -99,10 +119,10 @@ Current [Variable Library lifecycle guidance](https://learn.microsoft.com/en-us/
 
 ## Timing and supporting material
 
-- Units 0–6: **4 h 40 min**, proposed Day 1 core.
+- Units 0–6: **4 h 50 min**, proposed Day 1 core.
 - Units 7–12: **4 h 20 min**, proposed Day 2 core.
-- Total core: **9 hours**. Add **1.5 hours distributed reserve**, giving **10.5 working hours**. Breaks are additional; confirm that event scheduling treats them that way.
-- Up to another 1.5 hours is optional only if a 12-hour working budget is confirmed. Do not spend the support reserve on compulsory extensions.
+- Total core is **9 h 10 min**. With 90 minutes of distributed reserve, plan for **10 h 40 min** of working time plus breaks.
+- A 12-hour working budget leaves up to 80 minutes for optional material.
 
 Pre-read/reference pages cover a short ALM/Git glossary, classification and four states, identity purposes, and a local-tool/access checklist. Recap concepts when used. Facilitator material holds provisioning, approvals/service-connection setup, solutions, checkpoint recovery and timing evidence. The learner must observe the identity/approval boundaries even when a facilitator performs an administrative step.
 
@@ -114,7 +134,7 @@ Optional material: independent repo ownership, direct Git-connected versus pipel
 
 Use small versioned customers, products and orders fixtures or an equivalent deterministic generator. The notebook creates a single curated `sales` table containing the fields needed by the report. Store expected counts and monetary totals with the fixtures; choose and verify the actual numbers when implementing Unit 1. Do not reuse the historical lab's expected totals without reproducing its data.
 
-Unit 1 supplies the [canonical starter](../../sample/tiny-sales/unit-01-notebook.py): three customers/products and six orders, quantity 13, two returned orders, baseline gross revenue/revenue 342.20. Independent local fixture arithmetic confirms these numbers and the later returned-order feature result of 189.70. The organizer reports successful Dev execution/persistence and completion in 20–30 minutes; no raw runtime output was supplied. Keep the 45-minute mixed-experience unit budget for now. The fixture inputs are embedded in source and initially exist in memory, with only the curated table persisted.
+Unit 1 starts with three customers, three products and six orders, quantity 13, two returned orders, and 342.20 gross and recognized revenue. Unit 4 raises the price of P01 and carries forward 357.20. Unit 5 excludes returns from revenue, yielding an expected 204.70 with 357.20 gross. The organizer reports Unit 1 completion in 20–30 minutes. The fixtures begin in memory and the notebook persists the curated table. [Canonical Unit 1 starter](../../sample/tiny-sales/unit-01-notebook.py).
 
 | Item | Workspace role | First created | Important relationship |
 | --- | --- | --- | --- |
@@ -148,7 +168,7 @@ This shows data flow and execution, not an executable deployment-order graph. Ea
 | Unit 2 | Versioned baseline | Capture definitions and inspect the lakehouse reference; compare Git with runtime data |
 | Unit 3 | Minimal slice reaches Test and simulated Prod | Promote the lakehouse prerequisite, then notebook, configure/verify each target binding, execute in the target and verify environment isolation |
 | Unit 4 | Variable Library, Data Pipeline, semantic model and report in Dev | Read the library through a same-Code-workspace consumer and pass the value to the notebook; model to Data Dev's table; report to model. Run end to end and capture definitions |
-| Units 5–6 | Returned-order feature plus useful checks | Change recognized revenue while keeping the published table schema compatible; a deliberately wrong expected result fails CI |
+| Units 5–6 | First feature merge, then required checks on a second PR | Change recognized revenue while preserving the table schema. Introduce a deliberate defect to demonstrate the check blocking the second PR. |
 | Unit 7 | Explicit environment/dependency configuration and library value sets | Inspect notebook/lakehouse, pipeline/notebook, pipeline/library, model/data and report/model relationships; distinguish desired active-set configuration from versioned library definitions |
 | Unit 8 | Full Dev solution under one automated writer | Discover/create target items, resolve/inspect bindings, establish/check active value set, seed/run and refresh as required, then compare metrics |
 | Units 9–10 | Full solution reaches Test and simulated Prod | Use pinned source, proven target-specific ordering/binding and runtime checks; confirm a Test/Prod run does not write into Dev |
@@ -158,7 +178,7 @@ The actual automated order may include create-then-bind steps: storage prerequis
 
 ## Decisions and evidence before detailed authoring
 
-The [native Test rehearsal](../facilitator/unit-03-native-promotion-rehearsal.md) and full participant Unit 3 have organizer-reported success. Units 3–4 are parked as accepted first versions. Unit 5 now supplies the local-source/draft-PR pilot; retain actual exported source shape and observed Git/PR results before building Unit 6's checks. Retain the native rehearsal as evidence history, not an additional learner unit.
+The native Test rehearsal and full Unit 3 have organizer-reported success. Unit 5 adds the first merge to the local-source pilot. Retain the actual export shape and observed merge result before building Unit 6's checks. [Native Test rehearsal](../facilitator/unit-03-native-promotion-rehearsal.md) · [Unit 5 pilot notes](../facilitator/unit-05-pilot-notes.md).
 
 1. **Native boundary (V03/V04/V07):** prove the two-role lakehouse/notebook exercise and its target settings. Reporting is intentionally not a prerequisite for completing Model A in this proposal.
 2. **Reporting path (V06):** select one model mode/report representation, required client tools, deployment/identity support and a fast authoring route. Validate it before committing to Unit 4 instructions.
