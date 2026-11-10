@@ -7,7 +7,7 @@ Keep the record with your participant project.
 | Reviewed PR and Code `dev` commit | |
 | Pinned Data and Reporting revisions | |
 | CI and Dev preflight run links | |
-| Service connection and identity type | |
+| Configured release UAMI and service connection, checked against the connection setup | |
 | Code, Data and Reporting Dev names and workspace IDs | |
 | Notebook, library and Fabric pipeline physical IDs | |
 | Lakehouse, semantic model and report physical IDs | |

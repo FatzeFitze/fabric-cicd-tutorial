@@ -14,6 +14,8 @@ Unit 7 catches repeated GUIDs from Git. This checkpoint asks Fabric which worksp
 
 Azure DevOps uses the service connection to sign the Azure CLI task in as the release identity. The preflight uses that session to request a Fabric token. Later, the Fabric workload may use a different runtime or data-access identity. Success here establishes the identity's ability to read these targets and items. Write permission and runtime access have their own checks.
 
+Put the Dev UAMI name, service connection name and expected workspace names in `config/environments/dev.yml`. The release mask holds workspace IDs and repository references. Azure DevOps expands the service connection name from the environment file when it prepares the pipeline, before it starts the job. The UAMI name records the expected identity in the evidence. Check the service connection in Azure DevOps to confirm which identity it uses. [Azure Pipelines variable templates](https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/variables-template?view=azure-pipelines) · [Template expressions for service connection inputs](https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/reference/azure-powershell-v5?view=azure-pipelines#inputs).
+
 ### 1. Add the Dev preflight to Git
 
 1. Start from the reviewed Unit 7 merge.
@@ -28,24 +30,23 @@ Azure DevOps uses the service connection to sign the Azure CLI task in as the re
 
    | Starter | Destination |
    | --- | --- |
-   | [Dev workspace name template](../../../../config/dev-workspace-names.yml) | `config/dev-workspace-names.yml` |
+   | [Dev environment settings](../../../../config/environments/dev.yml) | `config/environments/dev.yml` |
    | [Preflight command](../../../../toolkit/fabric_preflight.py) | `toolkit/fabric_preflight.py` |
    | [Release planner](../../../../toolkit/release_plan.py) | `toolkit/release_plan.py` |
    | [Dev preflight pipeline](../../../../.azuredevops/pipelines/dev-release-preflight.yml) | `.azuredevops/pipelines/dev-release-preflight.yml` |
 
-3. Fill in the three exact display names in `config/dev-workspace-names.yml` from the assigned inventory. Compare that inventory with `environments.dev.workspaces` in your release mask. Keep the recorded expected names as your reference when you review the result.
-4. In `dev-release-preflight.yml`, replace `REPLACE_WITH_APPROVED_DEV_SERVICE_CONNECTION` with the provided service connection name. The Azure CLI task uses this connection to sign in. The existing notebook CI continues to validate PRs using the offline checks. [Azure CLI pipeline task](https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/reference/azure-cli-v2?view=azure-pipelines).
-5. Stage, commit and push the four files.
+3. Fill in `releaseUamiName` and `releaseServiceConnection` in `config/environments/dev.yml` with the values provided by the facilitator. Enter the three exact workspace display names from the assigned inventory. Compare the inventory with `environments.dev.workspaces` in your release mask. The pipeline reads the environment file for the connection name and the preflight reads it for the expected names.
+4. Stage, commit and push the four files.
 
    ```powershell
-   git add -- config/dev-workspace-names.yml toolkit/fabric_preflight.py toolkit/release_plan.py .azuredevops/pipelines/dev-release-preflight.yml
+   git add -- config/environments/dev.yml toolkit/fabric_preflight.py toolkit/release_plan.py .azuredevops/pipelines/dev-release-preflight.yml
    git diff --cached --check
    git diff --cached --stat
    git commit -m "Add read-only Fabric preflight for shared Dev"
    git push -u origin feature/dev-release-preflight
    ```
 
-6. Open a PR into `dev` titled **Add the shared Dev release preflight**. Use the following description. Record the PR build result, then complete the PR when the required checks pass.
+5. Open a PR into `dev` titled **Add the shared Dev release preflight**. Use the following description. Record the PR build result, then complete the PR when the required checks pass.
 
    ```markdown
    ## Change
@@ -61,7 +62,7 @@ Azure DevOps uses the service connection to sign the Azure CLI task in as the re
 
 1. In **Pipelines → New pipeline → Azure Repos Git**, choose your Code repository, then **Existing Azure Pipelines YAML file**. Select `dev` and `/.azuredevops/pipelines/dev-release-preflight.yml`. Save the pipeline. On its details page, use **… → Rename/move** and set its name to **Tiny Sales - Dev Preflight**. [Register an existing YAML pipeline](https://learn.microsoft.com/en-us/azure/devops/pipelines/get-started/clone-import-pipeline?view=azure-devops#clone-or-copy-a-pipeline) · [Pipeline settings](https://learn.microsoft.com/en-us/azure/devops/pipelines/customize-pipeline?view=azure-devops#pipeline-settings).
 2. Run the pipeline manually from `dev`. If Azure DevOps requests access to the service connection, have the connection owner authorize this pipeline. [Service connection permissions](https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops).
-3. Open **Read Dev workspace and item identities** in the run log. Find `PREFLIGHT PASSED` and inspect the JSON. Compare the three verified names and IDs with your inventory. Find the physical item ID and workspace ID for `build_sales` and `sales`. Where Fabric also supplies `logicalId`, compare it with the Git `.platform` identity. The run also records the Code checkout revision and the declared Data and Reporting pins. [Logical and physical Fabric IDs](../../reference/fabric-item-identities.md).
+3. Open **Read Dev workspace and item identities** in the run log. Find `PREFLIGHT PASSED` and inspect the JSON. Compare `configured_release_identity` with the assigned UAMI and service connection. Compare the three verified names and IDs with your inventory. Find the physical item ID and workspace ID for `build_sales` and `sales`. Where Fabric also supplies `logicalId`, compare it with the Git `.platform` identity. The run also records the Code checkout revision and the declared Data and Reporting pins. [Logical and physical Fabric IDs](../../reference/fabric-item-identities.md).
 4. Save the run link and observed IDs in the worksheet. For each Dev role, record its Git connection, pending updates and uncommitted workspace edits so you know what must be reconciled at the publishing handoff. [Dev preflight record](resources/dev-preflight-record.md).
 
 **Expected result** The release identity reads the intended Dev workspace names and the six existing Tiny Sales items. You have a live baseline to compare with the first publish.
@@ -84,7 +85,7 @@ Check the current active set in the Dev Variable Library and record what the wor
 | Symptom | What to check |
 | --- | --- |
 | Dev preflight job was skipped | Run from `refs/heads/dev`. Check the branch shown for the run. |
-| Azure CLI task cannot sign in | Confirm the service connection name, pipeline authorization and federation setup with the facilitator. |
+| Azure DevOps cannot resolve the service connection, or the Azure CLI task cannot sign in | Check `releaseServiceConnection` in the Dev environment file. Confirm the connection name, pipeline authorization and federation setup with the facilitator. |
 | Fabric returns HTTP 401 or 403 | Confirm the tenant setting, the caller's identity and the workspace role assignment. |
 | The workspace name differs | Compare the configured GUID and expected name with the assigned inventory. Resolve the discrepancy before publishing. |
 | An expected item is missing or appears twice | Inspect the workspace and the item role, type and name in the mask. Record the actual inventory before selecting a publish target. |

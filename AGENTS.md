@@ -41,4 +41,5 @@
 - Azure DevOps/Azure Pipelines is the delivery target regardless of where Git is hosted.
 - Prefer a thin reusable layer around supported tooling. Prove cross-workspace bindings before expanding custom abstractions.
 - Separate sample business logic from reusable components and environment configuration.
+- Keep participant and project identifiers out of reusable code. Use the release mask for repository references, pins and workspace IDs, and config/environments/<environment>.yml for release UAMI, service connection and expected workspace names. Resolve protected pipeline resources before the agent runs.
 - Validate selected source revisions consistently across release stages; source rollback does not imply data recovery.

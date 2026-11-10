@@ -12,7 +12,7 @@ from uuid import UUID
 
 import yaml
 
-from toolkit.release_plan import PlanError, build_preview, fields, load_mask, text
+from toolkit.release_plan import PlanError, build_preview, fields, load_mask, mapping, text
 
 
 FABRIC_ORIGIN = "https://api.fabric.microsoft.com"
@@ -85,6 +85,22 @@ def list_workspace_items(get, workspace_id):
         query = "?" + urlencode({"continuationToken": continuation})
 
 
+def read_environment_config(path, roles):
+    """Read the same environment settings Azure Pipelines uses for this run."""
+    document = fields(load_mask(path), str(path), ("variables",))
+    workspace_keys = {role: f"{role}WorkspaceName" for role in roles}
+    required = ("releaseUamiName", "releaseServiceConnection", *workspace_keys.values())
+    variables = mapping(document["variables"], f"{path}.variables")
+    values = {key: text(variables.get(key), f"{path}.variables.{key}") for key in required}
+    names = {role: values[key] for role, key in workspace_keys.items()}
+    # These labels record release intent. The service connection supplies the login.
+    identity = {
+        "uamiName": values["releaseUamiName"],
+        "serviceConnectionName": values["releaseServiceConnection"],
+    }
+    return names, identity
+
+
 def verify_dev(plan, names, get):
     """Verify identities against independently recorded names, then inspect items."""
     dev = plan["targets"]["dev"]
@@ -130,16 +146,14 @@ def verify_dev(plan, names, get):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mask", type=Path, required=True)
-    parser.add_argument("--workspace-names", type=Path, required=True)
+    parser.add_argument("--environment-config", type=Path, required=True)
     parser.add_argument("--checkout-revision", required=True)
     args = parser.parse_args()
     try:
         plan = build_preview(load_mask(args.mask), Path.cwd(), args.checkout_revision, target="dev")
-        names = load_mask(args.workspace_names)
-        fields(names, "expected Dev workspace names", plan["targets"]["dev"]["workspaces"])
-        for role, name in names.items():
-            text(name, f"expected Dev workspace names.{role}")
+        names, identity = read_environment_config(args.environment_config, plan["targets"]["dev"]["workspaces"])
         evidence = verify_dev(plan, names, fabric_reader(fabric_token()))
+        evidence["configured_release_identity"] = identity
     except (PlanError, OSError, URLError, subprocess.TimeoutExpired, UnicodeError,
             yaml.YAMLError, json.JSONDecodeError) as exc:
         print(f"PREFLIGHT FAILED: {exc}", file=sys.stderr)

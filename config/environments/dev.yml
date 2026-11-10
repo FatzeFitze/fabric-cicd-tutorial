@@ -1,0 +1,7 @@
+# Copy names from your assigned inventory and Azure DevOps project.
+variables:
+  releaseUamiName: 'REPLACE_WITH_DEV_UAMI_NAME'
+  releaseServiceConnection: 'REPLACE_WITH_DEV_SERVICE_CONNECTION_NAME'
+  codeWorkspaceName: 'REPLACE_WITH_CODE_DEV_DISPLAY_NAME'
+  dataWorkspaceName: 'REPLACE_WITH_DATA_DEV_DISPLAY_NAME'
+  reportsWorkspaceName: 'REPLACE_WITH_REPORTING_DEV_DISPLAY_NAME'

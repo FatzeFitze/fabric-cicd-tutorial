@@ -1,5 +1,8 @@
 trigger: none
 
+variables:
+  - template: /config/environments/dev.yml
+
 pool:
   vmImage: ubuntu-24.04
 
@@ -23,7 +26,8 @@ jobs:
       - task: AzureCLI@2
         displayName: Read Dev workspace and item identities
         inputs:
-          azureSubscription: 'REPLACE_WITH_APPROVED_DEV_SERVICE_CONNECTION'
+          # Resolve the connection name before Azure DevOps authorizes the task.
+          azureSubscription: ${{ variables.releaseServiceConnection }}
           scriptType: bash
           scriptLocation: inlineScript
           workingDirectory: $(Build.SourcesDirectory)
@@ -32,7 +36,7 @@ jobs:
             set -e
             python -B -m toolkit.fabric_preflight \
               --mask config/tiny-sales-release.yml \
-              --workspace-names config/dev-workspace-names.yml \
+              --environment-config config/environments/dev.yml \
               --checkout-revision "$CHECKOUT_REVISION"
         env:
           CHECKOUT_REVISION: $(Build.SourceVersion)

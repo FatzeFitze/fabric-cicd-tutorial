@@ -16,6 +16,8 @@ Date: 28 October 2026. Explicit user decisions are recorded below. Other recomme
 
 ## Confirmed in the scoping discussion
 
+- 10 November. Keep participant- and project-specific values in versioned configuration. The release mask carries repository references, source pins and workspace IDs. Use `config/environments/<environment>.yml` for release identity and connection names and expected workspace display names. Bind protected Azure DevOps resources at pipeline expansion. Repository resources that require a literal name belong in the project's pipeline entry point. [Repository resource schema](https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/resources-repositories-repository).
+
 - 10 November. The organizer accepted Unit 7's lesson with a clarification about the teaching example. Explain the purpose and limits of simplified logic at the point of use. Unit 8 starts with live Dev name and item checks. The publishing continuation depends on the observed runner identity and export bindings. [Unit 8 pilot notes](../facilitator/unit-08-pilot-notes.md).
 
 - 10 November. The organizer reported a smooth Unit 6 walkthrough and requested optional readings when a topic benefits from exploring choices. Place reusable readings in the tutorial reference folder and link them from the relevant unit. Unit 7 uses the observed three-repo setup for an offline preview of declared source pins, workspace IDs, dependencies and desired value sets. [Static Fabric validation](../tutorial/reference/static-fabric-validation.md) · [Unit 7 pilot notes](../facilitator/unit-07-pilot-notes.md).
