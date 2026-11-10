@@ -16,6 +16,8 @@ Date: 28 October 2026. Explicit user decisions are recorded below. Other recomme
 
 ## Confirmed in the scoping discussion
 
+- 10 November. The organizer accepted Unit 5 after completing its revised first-merge walkthrough and confirmed the Python export path. Pin the Unit 5 lesson body at `348d885` and proceed to the required CI exercise. Unit 6 uses a standard-Python source contract with a reusable notebook validator and a separate Tiny Sales check. Spark and Fabric runtime validation follow in Unit 8. [Unit 6 pilot notes](../facilitator/unit-06-pilot-notes.md).
+
 - 10 November. Keep Unit 4's 357.20 gross baseline for Unit 5 and complete the first reviewed merge into `dev` in Unit 5. Expected revenue after excluding returns is 204.70. This supersedes the earlier restore-and-hold-draft plan. The organizer wants a modular function suite and configuration mask in the remaining curriculum. The proposed YAML form, second PR for required CI, and separate Dev publishing exercise are recorded for review. [Curriculum and Unit 12 target state](curriculum.md#target-state-after-unit-12).
 
 - 4 November Unit 4 acceptance and Unit 5 request: organizer accepts Unit 4 as its first version, except Section 7 must distinguish logical IDs found in Git from physical IDs found in deployed items/URLs/APIs. Add a shared participant ID explainer now, link it from Units 2/4/5, and revisit source-to-target ID correlation in Units 7–10 logs/manifests. Acceptance does not supply raw per-item IDs, source exports or an independent replay of every revised step.

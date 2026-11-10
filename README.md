@@ -1,6 +1,6 @@
 # DNA Fabric Days: workshop planning
 
-Workshop preparation started 28 October 2026. Agreed direction: Models A and B are hands-on; Model C and feature workspaces are explainer topics. Use local feature branches and shared Dev workspaces where supported. Units 0–5 and Tiny Sales starters are available. Units 3–4 are accepted as their first working versions by the organizer. Unit 5 now completes the first feature PR into dev. The added merge checkpoint and managed deployment experiments await pilot validation.
+Workshop preparation started 28 October 2026. Models A and B are hands-on. Model C and feature workspaces are explainer topics. Units 0–6 and the Tiny Sales starters are available. The organizer has accepted Units 3–5, including the first merge into `dev`. Unit 6 adds the first reusable CI check and awaits its Azure DevOps walkthrough.
 
 ## Start here
 
@@ -9,7 +9,8 @@ Workshop preparation started 28 October 2026. Agreed direction: Models A and B a
 - [Unit 2: capture the solution in Git](docs/tutorial/section-01-foundation/unit-02-capture-the-solution-in-git/README.md): successful organizer walkthrough reported; commit-diff review and open-editor update guidance refined.
 - [Unit 3: native promotion](docs/tutorial/section-02-model-a/unit-03-native-promotion/README.md): full native chain accepted as first working version on 4 November.
 - [Unit 4: connect configuration, orchestration and reporting](docs/tutorial/section-03-team-delivery/unit-04-connect-orchestration-configuration-and-reporting/README.md): first version accepted; source/deployed-ID wording clarified.
-- [Unit 5: make a local feature change](docs/tutorial/section-03-team-delivery/unit-05-make-a-local-feature-change/README.md): edit Code source in an IDE, complete the first PR and record the resulting dev revision. The merge checkpoint awaits rehearsal.
+- Edit Code source in an IDE, complete the first PR and record the resulting `dev` revision. The organizer completed the walkthrough and accepted the unit. [Unit 5](docs/tutorial/section-03-team-delivery/unit-05-make-a-local-feature-change/README.md).
+- Add the reusable source validator and observe Azure Repos blocking a defective PR until its build passes. The checker passed its local rehearsal. [Unit 6](docs/tutorial/section-03-team-delivery/unit-06-required-pr-validation/README.md).
 - [Logical and physical Fabric IDs](docs/tutorial/reference/fabric-item-identities.md): source identity versus deployed instance, lookup locations and later release evidence.
 - [Optional conflict recovery](docs/tutorial/auxiliary/aux-01-recover-from-source-conflicts/README.md): concepts and entry point; intentional-conflict lab awaits rehearsal after Unit 5's local Git workflow.
 - [Later identity/ownership experiment](docs/planning/identity-and-ownership-experiment.md): create a new Test/Prod asset through managed identities, compare creation with updates and verify runtime/access implications.

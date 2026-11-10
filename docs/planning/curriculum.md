@@ -1,6 +1,6 @@
 # Curriculum and sample growth
 
-Updated 10 November 2026. Units 1–4 have organizer-reported success. Unit 5 feedback establishes the carried-forward 357.20 gross baseline and moves the first merge into Unit 5. The added merge checkpoint awaits rehearsal. Units 6–12 describe the proposed sequence and target state for review.
+Updated 10 November 2026. Units 1–5 have organizer-reported success, including the first merge into `dev`. Unit 6 has a local checker and an Azure DevOps exercise ready for its walkthrough. Units 7–12 describe the proposed sequence and target state.
 
 ## Teaching journey
 
@@ -38,7 +38,7 @@ This is a bounded two-asset exercise. The expected result is working Test/Prod o
 | --- | ---: | --- | --- |
 | **4. Connect orchestration, configuration and reporting** | 60 | Create the Code Dev Variable Library and Pipeline, validate parameter flow, create the Direct Lake on SQL model and report, then raise the P01 price. Capture the refreshed 357.20 baseline in Git with its source and identity record. | MS-02, 04, 06–08, 10, 14 |
 | **5. Make a local feature change** | 45 | Clone the Code source in VS Code, zero returned-order revenue and preserve Fabric metadata. Review, push and complete the first PR into `dev`. Record the merged revision and compare it with the live definition and the 357.20 runtime result. The feature expects 204.70. Allow 45–55 minutes with tools installed. | MS-02, 03, 08 |
-| **6. Turn review into a required check** | 35 | Start a second PR from merged `dev`. Wire a supplied validation function and project check into thin CI YAML and attach required build validation. Observe a deliberate defect block that PR, fix it and complete the PR after the check passes. Record the PR and run IDs. | MS-02, 03, 08, 14 |
+| **[6. Turn review into a required check](../tutorial/section-03-team-delivery/unit-06-required-pr-validation/README.md)** | 35 | Start a second PR from merged `dev`. Wire the supplied notebook validator and Tiny Sales source check into CI YAML and attach required build validation. Observe a one-line revenue defect block that PR, fix it and complete the PR after the check passes. Record the PR and run IDs. | MS-02, 03, 08, 14 |
 
 Use one sales table and a few measures/visuals. Unit 4 selects a browser-only Direct Lake on SQL pilot through the SQL endpoint creation dialog; actual reporting/Git representation and target identity support must still be observed before release automation is finalized. The core feature edits notebook/calculation source locally and does not require simultaneous UI editing or local Fabric Spark.
 
@@ -178,7 +178,7 @@ The actual automated order may include create-then-bind steps: storage prerequis
 
 ## Decisions and evidence before detailed authoring
 
-The native Test rehearsal and full Unit 3 have organizer-reported success. Unit 5 adds the first merge to the local-source pilot. Retain the actual export shape and observed merge result before building Unit 6's checks. [Native Test rehearsal](../facilitator/unit-03-native-promotion-rehearsal.md) · [Unit 5 pilot notes](../facilitator/unit-05-pilot-notes.md).
+The native Test rehearsal and full Unit 3 have organizer-reported success. The organizer completed Unit 5's first merge and confirmed the notebook export path. The Unit 6 checker uses that format and awaits the policy and agent walkthrough. [Native Test rehearsal](../facilitator/unit-03-native-promotion-rehearsal.md) · [Unit 5 pilot notes](../facilitator/unit-05-pilot-notes.md) · [Unit 6 pilot notes](../facilitator/unit-06-pilot-notes.md).
 
 1. **Native boundary (V03/V04/V07):** prove the two-role lakehouse/notebook exercise and its target settings. Reporting is intentionally not a prerequisite for completing Model A in this proposal.
 2. **Reporting path (V06):** select one model mode/report representation, required client tools, deployment/identity support and a fast authoring route. Validate it before committing to Unit 4 instructions.

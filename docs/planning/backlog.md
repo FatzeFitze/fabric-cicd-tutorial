@@ -1,6 +1,6 @@
 # Validation and delivery backlog
 
-V01 has an initial source inventory, targeted review and passing local checks; see the [codebase assessment](initial-codebase-review.md). Units 1–4 have organizer-reported success as of 4 November; Units 3–4 are accepted first versions. Unit 5's revised merge checkpoint and managed-identity/API delivery/ownership experiments remain untested. Hands-on scope is A/B; C is explainer material.
+V01 has an initial source inventory, targeted review and passing local checks; see the [codebase assessment](initial-codebase-review.md). Units 1–5 have organizer-reported success. Units 3–5 are accepted first versions. The Unit 6 Azure DevOps exercise and managed deployment experiments await pilot evidence. Hands-on scope is A/B; C is explainer material.
 
 W06 authoring/W08 piloting proceed incrementally. Provisioning/access and Units 1–4 are reported successful; Unit 0 remains parked. Units 3–4 remain first versions, with Unit 4's narrow ID clarification/navigation added. See the [pilot record](../facilitator/pilot-log.md). Detailed exports/target evidence, clean automated targets and workload identities require further validation.
 
@@ -14,7 +14,9 @@ The [learning-project handover review](handoff-review.md) records earlier report
 
 Unit 4: revised [participant lesson](../tutorial/section-03-team-delivery/unit-04-connect-orchestration-configuration-and-reporting/README.md) accepted as its first version; screenshot confirms pipeline success and injected library label, and the organizer confirmed Connection unselected. Clarified source logical IDs versus physical IDs in deployed item links/APIs and added a shared reference. Actual exports/source revisions and separate run records for every revised step are not retained here. See [pilot notes](../facilitator/unit-04-pilot-notes.md) for partial V05/V06/V19 evidence and target/identity gates. V20 reserves new-item ownership in Units 9–10. Optional conflict recovery has an [entry point](../tutorial/auxiliary/aux-01-recover-from-source-conflicts/README.md) and [rehearsal plan](../facilitator/source-conflict-exercise-plan.md), with no deliberate conflict run yet.
 
-Unit 5: [local feature lesson](../tutorial/section-03-team-delivery/unit-05-make-a-local-feature-change/README.md), feature record and [pilot checks](../facilitator/unit-05-pilot-notes.md) authored. The source edit expects 204.70 revenue and 357.20 gross. Unit 5 now completes the first PR into dev and records the resulting revision. The actual export and merge await pilot evidence. Unit 6 builds a meaningful required check and exercises it with a second PR. V16 also needs evidence from deployment and runtime.
+Unit 5: [local feature lesson](../tutorial/section-03-team-delivery/unit-05-make-a-local-feature-change/README.md), feature record and [pilot checks](../facilitator/unit-05-pilot-notes.md) authored. The source edit expects 204.70 revenue and 357.20 gross. Unit 5 now completes the first PR into dev and records the resulting revision. The organizer completed the first merge and confirmed the Python export path. V16 also needs deployment and runtime evidence.
+
+Unit 6 now supplies a reusable notebook validator, the Tiny Sales source check and CI YAML. The local checker passes the reviewed source and rejects the deliberate defect. Verify the automatic required policy and its failing and passing runs in the participant project. [Unit 6 pilot notes](../facilitator/unit-06-pilot-notes.md).
 
 ## Technical experiments before detailed tutorial authoring
 

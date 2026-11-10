@@ -1,6 +1,6 @@
 # Unit 5 preparation and pilot checks
 
-10 November 2026. The organizer's feedback confirms the 357.20 gross baseline carried over from Unit 4 and requests completing the first merge in Unit 5. Collect the actual export, commit IDs and completed PR result during the revised walkthrough. The feedback supplies no completed merge or feature runtime result.
+10 November 2026. The organizer accepted the revised Unit 5 lesson after completing all steps without issue, including the first PR into `dev`. The organizer confirmed the export path and format as `build_sales.Notebook/notebook-content.py`. Park the lesson body at `348d885`. The walkthrough report supplies no exact commit IDs, duration, full export or Spark run results.
 
 Participant entry point: [Unit 5](../tutorial/section-03-team-delivery/unit-05-make-a-local-feature-change/README.md). Evidence worksheet: [feature record](../tutorial/section-03-team-delivery/unit-05-make-a-local-feature-change/resources/feature-record.md). Shared explainer: [Fabric item IDs](../tutorial/reference/fabric-item-identities.md).
 
@@ -11,7 +11,7 @@ Participant entry point: [Unit 5](../tutorial/section-03-team-delivery/unit-05-m
 - Keep returned rows and set their `revenue` to zero. With the P01 price of 2490 cents, expect gross 357.20 and revenue 204.70, with rows/orders 6/6 and quantity/returns 13/2. Earlier drafts that restored the fixture need to capture the revised Unit 4 baseline before branching.
 - Complete the reviewed PR from `feature/exclude-returned-orders` into `dev`. The participant path suggests squash where permitted. Record the actual resulting `dev` commit. Honor any existing review or build requirements and collect the resulting policy status.
 - Learners use Git diff review and a whitespace check in this unit. Record the 204.70 value as a feature expectation until a deployed run verifies it.
-- Unit 4 acceptance does not establish retained raw exports or a particular source/connection identity. Current documentation supports the `.py` export, but capture the actual exported path/markers from the organizer before designing Unit 6's loader/validation.
+- The organizer confirmed the Python path used by Unit 6. Keep the full export and relevant markers available if a project check reports a mismatch during the next pilot.
 
 ## Walkthrough evidence needed
 
@@ -23,6 +23,8 @@ Participant entry point: [Unit 5](../tutorial/section-03-team-delivery/unit-05-m
 6. Actual learner duration and unclear steps. A solo learner is the required path; pairs can follow together. Independent review/enforcement is a later control boundary, not established by self-review in a training sandbox.
 
 ## Unit 6 preparation gate
+
+Unit 6 uses the confirmed path as the default CI input and the documented Unit 5 expression for a bounded source contract. [Unit 6 pilot notes](unit-06-pilot-notes.md).
 
 Build the first reusable validation starter here before offering its exercise. It must validate the actual exported representation without executing Fabric imports, guards or table writes offline. Design a meaningful check against the selected business transformation; a second hardcoded calculation that never exercises the feature cannot establish its correctness. Separate checks of source structure/configuration from business behavior and later Spark/runtime validation. If useful business validation requires extracting testable logic, make that explicit, preserve the exported-notebook path and keep the added learner work within the time budget.
 

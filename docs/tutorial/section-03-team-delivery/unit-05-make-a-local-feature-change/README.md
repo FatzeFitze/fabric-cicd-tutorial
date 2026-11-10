@@ -208,4 +208,4 @@ Keep the local checkout and completed PR record for Unit 6. Start the next chang
 - [Complete an Azure Repos PR](https://learn.microsoft.com/en-us/azure/devops/repos/git/complete-pull-requests?view=azure-devops#complete-a-pull-request).
 - [Logical versus physical IDs](../../reference/fabric-item-identities.md).
 
-[Previous: Unit 4](../unit-04-connect-orchestration-configuration-and-reporting/README.md) · [Tutorial index](../../README.md)
+[Previous: Unit 4](../unit-04-connect-orchestration-configuration-and-reporting/README.md) · [Tutorial index](../../README.md) · [Next: Unit 6](../unit-06-required-pr-validation/README.md)
