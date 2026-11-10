@@ -16,6 +16,8 @@ Date: 28 October 2026. Explicit user decisions are recorded below. Other recomme
 
 ## Confirmed in the scoping discussion
 
+- 10 November. The organizer reported a smooth Unit 6 walkthrough and requested optional readings when a topic benefits from exploring choices. Place reusable readings in the tutorial reference folder and link them from the relevant unit. Unit 7 uses the observed three-repo setup for an offline preview of declared source pins, workspace IDs, dependencies and desired value sets. [Static Fabric validation](../tutorial/reference/static-fabric-validation.md) · [Unit 7 pilot notes](../facilitator/unit-07-pilot-notes.md).
+
 - 10 November. The organizer accepted Unit 5 after completing its revised first-merge walkthrough and confirmed the Python export path. Pin the Unit 5 lesson body at `348d885` and proceed to the required CI exercise. Unit 6 uses a standard-Python source contract with a reusable notebook validator and a separate Tiny Sales check. Spark and Fabric runtime validation follow in Unit 8. [Unit 6 pilot notes](../facilitator/unit-06-pilot-notes.md).
 
 - 10 November. Keep Unit 4's 357.20 gross baseline for Unit 5 and complete the first reviewed merge into `dev` in Unit 5. Expected revenue after excluding returns is 204.70. This supersedes the earlier restore-and-hold-draft plan. The organizer wants a modular function suite and configuration mask in the remaining curriculum. The proposed YAML form, second PR for required CI, and separate Dev publishing exercise are recorded for review. [Curriculum and Unit 12 target state](curriculum.md#target-state-after-unit-12).

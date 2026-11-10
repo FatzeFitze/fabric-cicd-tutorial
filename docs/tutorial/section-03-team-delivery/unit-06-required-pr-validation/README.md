@@ -128,4 +128,6 @@ The **branch policy** queues this Azure Pipeline against the PR's proposed merge
 - [ ] The corrected revision passed and the PR was completed through the branch's requirements.
 - [ ] The worksheet records both runs, the completed PR and the resulting `dev` commit.
 
-[Previous unit](../unit-05-make-a-local-feature-change/README.md) · [Tutorial index](../../README.md)
+For a deeper look at what a PR can check from Git and where live validation belongs, see [Static validation for Fabric items](../../reference/static-fabric-validation.md).
+
+[Previous unit](../unit-05-make-a-local-feature-change/README.md) · [Tutorial index](../../README.md) · [Next unit](../../section-04-release-automation/unit-07-configure-and-preview-release/README.md)

@@ -1,6 +1,6 @@
 # Validation and delivery backlog
 
-V01 has an initial source inventory, targeted review and passing local checks; see the [codebase assessment](initial-codebase-review.md). Units 1–5 have organizer-reported success. Units 3–5 are accepted first versions. The Unit 6 Azure DevOps exercise and managed deployment experiments await pilot evidence. Hands-on scope is A/B; C is explainer material.
+V01 has an initial source inventory, targeted review and passing local checks. Units 1–6 have organizer-reported success. Units 3–6 are accepted first versions. The Unit 7 Azure DevOps exercise and managed deployment experiments await pilot evidence. Hands-on scope is A/B. Model C is explainer material. [Codebase assessment](initial-codebase-review.md).
 
 W06 authoring/W08 piloting proceed incrementally. Provisioning/access and Units 1–4 are reported successful; Unit 0 remains parked. Units 3–4 remain first versions, with Unit 4's narrow ID clarification/navigation added. See the [pilot record](../facilitator/pilot-log.md). Detailed exports/target evidence, clean automated targets and workload identities require further validation.
 
@@ -16,7 +16,7 @@ Unit 4: revised [participant lesson](../tutorial/section-03-team-delivery/unit-0
 
 Unit 5: [local feature lesson](../tutorial/section-03-team-delivery/unit-05-make-a-local-feature-change/README.md), feature record and [pilot checks](../facilitator/unit-05-pilot-notes.md) authored. The source edit expects 204.70 revenue and 357.20 gross. Unit 5 now completes the first PR into dev and records the resulting revision. The organizer completed the first merge and confirmed the Python export path. V16 also needs deployment and runtime evidence.
 
-Unit 6 now supplies a reusable notebook validator, the Tiny Sales source check and CI YAML. The local checker passes the reviewed source and rejects the deliberate defect. Verify the automatic required policy and its failing and passing runs in the participant project. [Unit 6 pilot notes](../facilitator/unit-06-pilot-notes.md).
+The organizer completed Unit 6. The optional reference records validation options and their limits. Unit 7 now supplies a release mask and local planner. The Azure DevOps run, managed bindings and runtime remain separate checkpoints. [Unit 6 pilot notes](../facilitator/unit-06-pilot-notes.md) · [Unit 7 pilot notes](../facilitator/unit-07-pilot-notes.md).
 
 ## Technical experiments before detailed tutorial authoring
 

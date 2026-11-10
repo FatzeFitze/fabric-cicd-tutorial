@@ -1,0 +1,59 @@
+version: 1
+
+sources:
+  code: {folder: '.', revision: checkout}
+  data: {repository: 'REPLACE_DATA_REPO', folder: '.', revision: 'REPLACE_DATA_COMMIT'}
+  reports: {repository: 'REPLACE_REPORTING_REPO', folder: '.', revision: 'REPLACE_REPORTING_COMMIT'}
+
+items:
+  lakehouse: {role: data, type: Lakehouse, name: sales}
+  library: {role: code, type: VariableLibrary, name: sales_config}
+  notebook:
+    role: code
+    type: Notebook
+    name: build_sales
+    bindings: {default_lakehouse: lakehouse}
+  pipeline:
+    role: code
+    type: DataPipeline
+    name: run_sales
+    bindings: {notebook: notebook, variables: library}
+  model:
+    role: reports
+    type: SemanticModel
+    name: sales_model
+    bindings: {sql_analytics_endpoint_of: lakehouse}
+    after: [pipeline]
+  report:
+    role: reports
+    type: Report
+    name: sales_overview
+    bindings: {semantic_model: model}
+
+variable_library:
+  item: library
+  folder: sales_config.VariableLibrary
+  environment_variable: environment_name
+
+project_checks:
+  notebook_source: checks.validate_tiny_sales
+
+environments:
+  dev:
+    workspaces:
+      code: 'REPLACE_CODE_DEV_ID'
+      data: 'REPLACE_DATA_DEV_ID'
+      reports: 'REPLACE_REPORTING_DEV_ID'
+    value_set: Default
+  test:
+    workspaces:
+      code: 'REPLACE_CODE_TEST_ID'
+      data: 'REPLACE_DATA_TEST_ID'
+      reports: 'REPLACE_REPORTING_TEST_ID'
+    value_set: Test
+  prod:
+    workspaces:
+      code: 'REPLACE_CODE_PROD_ID'
+      data: 'REPLACE_DATA_PROD_ID'
+      reports: 'REPLACE_REPORTING_PROD_ID'
+    value_set: Prod

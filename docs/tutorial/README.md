@@ -14,9 +14,12 @@ The working scenario is a small synthetic sales solution that progresses from co
 | [3. Native promotion](section-02-model-a/unit-03-native-promotion/README.md) | Promote the common-source Data/Code slice through Test and simulated Prod, with explicit bindings and runtime/release evidence | First working version accepted by organizer on 4 November; retain lesson content |
 | [4. Connect orchestration, configuration and reporting](section-03-team-delivery/unit-04-connect-orchestration-configuration-and-reporting/README.md) | Consume library values through a pipeline/notebook, build a browser-authored Dev model/report and capture definitions/identity baseline | First version accepted by organizer on 4 November; clarified source logical IDs versus deployed physical IDs |
 | [5. Make a local feature change](section-03-team-delivery/unit-05-make-a-local-feature-change/README.md) | Edit the returned-order rule locally, review and complete the first PR into `dev`, then compare the merged revision with live Dev | Accepted after successful organizer walkthrough on 10 November. |
-| [6. Turn review into a required check](section-03-team-delivery/unit-06-required-pr-validation/README.md) | Add a reusable source validator and demonstrate a required PR check blocking a defect and passing after the fix | Starter checked locally. Azure Repos and hosted agent walkthrough pending. |
+| [6. Turn review into a required check](section-03-team-delivery/unit-06-required-pr-validation/README.md) | Add a reusable source validator and demonstrate a required PR check blocking a defect and passing after the fix | Accepted after organizer walkthrough on 10 November. |
+| [7. Configure and preview a release](section-04-release-automation/unit-07-configure-and-preview-release/README.md) | Fill the release mask, version the alternative value sets and review a read-only plan through the required PR check | Planner checked locally. Azure Repos walkthrough pending. |
 
 Reference: [Logical and physical IDs in Fabric](reference/fabric-item-identities.md). Introduced with Git capture, applied during local editing and revisited for target bindings/deployment evidence.
+
+Explore which checks can run from Git, where they help and when live evidence is needed. [Static validation for Fabric items](reference/static-fabric-validation.md).
 
 Optional companion: [Recover from source conflicts](auxiliary/aux-01-recover-from-source-conflicts/README.md). Concepts and recovery approach are available; the intentional-conflict lab is planned after Unit 5's local IDE/Git workflow and is outside required completion.
 

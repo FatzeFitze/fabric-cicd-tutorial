@@ -1,6 +1,6 @@
 # DNA Fabric Days: workshop planning
 
-Workshop preparation started 28 October 2026. Models A and B are hands-on. Model C and feature workspaces are explainer topics. Units 0–6 and the Tiny Sales starters are available. The organizer has accepted Units 3–5, including the first merge into `dev`. Unit 6 adds the first reusable CI check and awaits its Azure DevOps walkthrough.
+Workshop preparation started 28 October 2026. Models A and B are hands-on. Model C and feature workspaces are explainer topics. Units 0–7 and the Tiny Sales starters are available. The organizer has accepted Units 3–6, including required PR validation. Unit 7 adds the release mask and awaits its Azure DevOps walkthrough.
 
 ## Start here
 
@@ -10,7 +10,8 @@ Workshop preparation started 28 October 2026. Models A and B are hands-on. Model
 - [Unit 3: native promotion](docs/tutorial/section-02-model-a/unit-03-native-promotion/README.md): full native chain accepted as first working version on 4 November.
 - [Unit 4: connect configuration, orchestration and reporting](docs/tutorial/section-03-team-delivery/unit-04-connect-orchestration-configuration-and-reporting/README.md): first version accepted; source/deployed-ID wording clarified.
 - Edit Code source in an IDE, complete the first PR and record the resulting `dev` revision. The organizer completed the walkthrough and accepted the unit. [Unit 5](docs/tutorial/section-03-team-delivery/unit-05-make-a-local-feature-change/README.md).
-- Add the reusable source validator and observe Azure Repos blocking a defective PR until its build passes. The checker passed its local rehearsal. [Unit 6](docs/tutorial/section-03-team-delivery/unit-06-required-pr-validation/README.md).
+- Add the reusable source validator and exercise required PR validation. The organizer completed the walkthrough and accepted the unit. [Unit 6](docs/tutorial/section-03-team-delivery/unit-06-required-pr-validation/README.md).
+- Fill the release mask, add Test and Prod value sets and preview the declared targets through CI. The planner passed its local rehearsal. [Unit 7](docs/tutorial/section-04-release-automation/unit-07-configure-and-preview-release/README.md).
 - [Logical and physical Fabric IDs](docs/tutorial/reference/fabric-item-identities.md): source identity versus deployed instance, lookup locations and later release evidence.
 - [Optional conflict recovery](docs/tutorial/auxiliary/aux-01-recover-from-source-conflicts/README.md): concepts and entry point; intentional-conflict lab awaits rehearsal after Unit 5's local Git workflow.
 - [Later identity/ownership experiment](docs/planning/identity-and-ownership-experiment.md): create a new Test/Prod asset through managed identities, compare creation with updates and verify runtime/access implications.

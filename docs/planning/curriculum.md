@@ -1,6 +1,6 @@
 # Curriculum and sample growth
 
-Updated 10 November 2026. Units 1–5 have organizer-reported success, including the first merge into `dev`. Unit 6 has a local checker and an Azure DevOps exercise ready for its walkthrough. Units 7–12 describe the proposed sequence and target state.
+Updated 10 November 2026. Units 1–6 have organizer-reported success. Unit 7 has a locally rehearsed release preview and awaits the Azure DevOps walkthrough. Units 8–12 describe the proposed sequence and target state.
 
 ## Teaching journey
 
@@ -48,7 +48,7 @@ An optional companion covers local branch conflicts and Fabric workspace-versus-
 
 | Unit | Min | Work and observable checkpoint | Main controls |
 | --- | ---: | --- | --- |
-| **7. Fill the configuration mask and preview the release** | 45 | Fill the versioned YAML template with role/workspace mappings, supported bindings, library value-set selections and project checks. Add Dev/Test/Prod value sets to the versioned Variable Library definition using the rehearsed source-edit path. Run validation and preview the target plan. Correct a missing mapping or forbidden Dev reference before publishing. | MS-03, 04, 06, 08, 12 |
+| **[7. Fill the configuration mask and preview the release](../tutorial/section-04-release-automation/unit-07-configure-and-preview-release/README.md)** | 45 | Fill the YAML mask with workspace mappings, source pins, dependency intent and desired value sets. Add Test and Prod alternatives to the versioned Variable Library. Reuse the required build to reject a duplicated Dev mapping, then preview the corrected targets. | MS-03, 04, 06, 08, 12 |
 | **8. Publish and validate shared Dev** | 65 | Wire the supplied Azure Pipelines template to the deployment functions and approved runner identity. Reconcile the pending Git update and retire Git publishing before enabling the automated writer. Publish the selected snapshot including the supplied read-only validation notebook. Verify target settings and bindings, run the workload and refresh the report. Capture evidence for 357.20 gross and 204.70 revenue. | MS-03, 05–08, 10, 12–14 |
 | **9. Release the same source to Test** | 45 | Promote the Dev-validated snapshot across roles. Observe the validation notebook's first Test creation by managed identity and compare its ownership with an update to a human-created item. Record caller, target IDs and runtime/access evidence. | MS-01, 04–08, 10–14 |
 | **10. Approve and release to simulated Prod** | 30 | Use a real resource approval and the source validated in Test. First-create the same new item through the Prod managed identity, inspect owner/default/runtime/connection identity observations and run post-deployment checks. Retain release evidence and explain Admin lab bypass limits. | MS-01, 03, 05, 07–12, 14 |
@@ -80,7 +80,7 @@ Use a **versioned YAML form** for the mask. Give learners a starter to fill in, 
 | Module | What the participant sees | First use |
 | --- | --- | --- |
 | Validate inputs | Actionable results for source, configuration and project checks. CI uses the same entry point. | Unit 6, with the mask added in Unit 7 |
-| Resolve a plan | Read-only preview of selected revisions, workspace roles, item order, binding intent and unresolved prerequisites. Show which item IDs can be discovered and which will be assigned at first creation. | Unit 7 |
+| Resolve a plan | Read-only preview of selected revisions, declared workspace IDs, definition order and binding intent. Resolve physical item IDs during publishing. | Units 7–8 |
 | Publish and configure | Apply the approved plan, resolve deployed IDs, establish bindings and select or verify the target value set. | Unit 8 |
 | Verify and record | Run target checks and capture results, IDs, source revisions and release evidence. Test and Prod reuse the same functions. | Units 8–10 |
 
@@ -178,7 +178,7 @@ The actual automated order may include create-then-bind steps: storage prerequis
 
 ## Decisions and evidence before detailed authoring
 
-The native Test rehearsal and full Unit 3 have organizer-reported success. The organizer completed Unit 5's first merge and confirmed the notebook export path. The Unit 6 checker uses that format and awaits the policy and agent walkthrough. [Native Test rehearsal](../facilitator/unit-03-native-promotion-rehearsal.md) · [Unit 5 pilot notes](../facilitator/unit-05-pilot-notes.md) · [Unit 6 pilot notes](../facilitator/unit-06-pilot-notes.md).
+The organizer completed the native Test rehearsal and Units 3–6. Unit 7 exercises the declared role mappings and value sets offline before publishing begins. [Native Test rehearsal](../facilitator/unit-03-native-promotion-rehearsal.md) · [Unit 6 pilot notes](../facilitator/unit-06-pilot-notes.md) · [Unit 7 pilot notes](../facilitator/unit-07-pilot-notes.md).
 
 1. **Native boundary (V03/V04/V07):** prove the two-role lakehouse/notebook exercise and its target settings. Reporting is intentionally not a prerequisite for completing Model A in this proposal.
 2. **Reporting path (V06):** select one model mode/report representation, required client tools, deployment/identity support and a fast authoring route. Validate it before committing to Unit 4 instructions.
