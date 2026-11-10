@@ -19,6 +19,7 @@ class MaskLoader(yaml.SafeLoader):
     """Load explicit mappings and reject duplicate keys."""
 
     def construct_mapping(self, node, deep=False):
+        # A repeated YAML key could silently replace an earlier workspace mapping.
         keys = set()
         for key, _ in node.value:
             if not isinstance(key, yaml.ScalarNode) or key.tag != "tag:yaml.org,2002:str":
@@ -65,6 +66,7 @@ def commit_id(value, where):
 
 
 def source_revisions(entries, checkout_revision):
+    """Record the build checkout revision and the pins for the other repositories."""
     entries = mapping(entries, "sources")
     result = {}
     checkout_roles = []
@@ -88,6 +90,7 @@ def source_revisions(entries, checkout_revision):
 
 
 def ordered_items(entries, sources):
+    """Build a definition order from binding references and explicit prerequisites."""
     entries = mapping(entries, "items")
     if not entries:
         raise PlanError("items: declare at least one Fabric item")
@@ -129,6 +132,7 @@ def target_workspaces(environments, sources):
     environments = mapping(environments, "environments")
     if not environments:
         raise PlanError("environments: declare at least one target")
+    # Track assignments across the whole mask to catch a Dev ID reused in Test.
     seen = {}
     result = {}
     for env, value in environments.items():
@@ -163,6 +167,7 @@ def variable_value(data, path, collection, name, fallback=None):
     if not isinstance(entries, list) or any(not isinstance(entry, dict) for entry in entries):
         raise PlanError(f"{path}: expected a list of {collection}")
     matches = [entry for entry in entries if entry.get("name") == name]
+    # A value set inherits the default for a variable it does not override.
     if not matches and fallback is not None:
         return fallback
     if len(matches) != 1:
@@ -171,6 +176,7 @@ def variable_value(data, path, collection, name, fallback=None):
 
 
 def build_preview(mask, root, checkout_revision, target=None):
+    """Validate every declared environment, then return the requested preview."""
     fields(mask, "release mask", ("version", "sources", "items", "variable_library", "project_checks", "environments"))
     if type(mask["version"]) is not int or mask["version"] != 1:
         raise PlanError("version: expected 1")
@@ -206,6 +212,7 @@ def build_preview(mask, root, checkout_revision, target=None):
 
     plans = {}
     for env, (workspaces, value_set) in targets.items():
+        # Read the values in Git. Workspace activation happens during release.
         value = default
         if value_set != "Default":
             if not re.fullmatch(r"[A-Za-z0-9_-]+", value_set):
@@ -238,6 +245,7 @@ def main():
     except (PlanError, OSError, UnicodeError, yaml.YAMLError, json.JSONDecodeError) as exc:
         print(f"PLAN INVALID: {exc}", file=sys.stderr)
         return 1
+    # Keep stdout as JSON so another tool can consume the plan.
     print(json.dumps(plan, indent=2))
     print("PLAN VALID: declared targets checked offline. Live Fabric resolution is pending.", file=sys.stderr)
     return 0

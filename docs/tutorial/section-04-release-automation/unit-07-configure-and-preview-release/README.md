@@ -42,7 +42,29 @@ The preview works offline. It checks declared workspace IDs for duplicate assign
    }
    ```
 
-4. Create `valueSets/Prod.json` using the same format. Set `name` to `Prod`, `environment_name` to `prod` and `run_label` to `tiny_sales_prod`. In `settings.json`, make sure `Test` and `Prod` each appear once in `valueSetsOrder`. Preserve existing entries and other settings. If the field is absent, add it as a JSON array. Preserve `.platform` and the default values. [Variable Library definition format](https://learn.microsoft.com/en-us/rest/api/fabric/articles/item-management/definitions/variable-library-definition).
+4. Create `valueSets/Prod.json` in the same item folder.
+
+   ```json
+   {
+     "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/valueSet/1.0.0/schema.json",
+     "name": "Prod",
+     "variableOverrides": [
+       {"name": "environment_name", "value": "prod"},
+       {"name": "run_label", "value": "tiny_sales_prod"}
+     ]
+   }
+   ```
+
+5. Edit the existing `settings.json` so `Test` and `Prod` each appear once in `valueSetsOrder`. For a library with no other alternative sets, the file looks like this. If your export contains other settings or value sets, keep them and update only the array.
+
+   ```json
+   {
+     "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/variableLibrary/definition/settings/1.0.0/schema.json",
+     "valueSetsOrder": ["Test", "Prod"]
+   }
+   ```
+
+   Match the capitalization of the file names, their `name` fields and the array entries. Keep the default values in `variables.json` and preserve `.platform`. [Variable Library definition format](https://learn.microsoft.com/en-us/rest/api/fabric/articles/item-management/definitions/variable-library-definition).
 
 **Expected result** Git contains alternative Test and Prod definitions. Dev uses its existing Default value set. Leave the Fabric workspaces at their current revision while reviewing the changes in Git.
 
@@ -67,7 +89,7 @@ Fill and review these fields in `config/tiny-sales-release.yml`.
 | `variable_library` | Set `folder` to the actual item folder relative to `sources.code.folder`. Keep `environment_name` as the variable the planner checks. |
 | `project_checks` | `checks.validate_tiny_sales` records the project check. The existing Unit 6 pipeline step runs it. The preview displays this declaration. |
 
-Keep credentials in their approved Azure DevOps resources. Use repository names and commit IDs in this file. The mask's bindings describe the intended relationships and are resolved during the later release exercise. For example, `notebook.default_lakehouse` names the `lakehouse` plan item. A Dev plan assigns that item to Data Dev, and a Test plan assigns it to Data Test.
+The mask records identifiers such as repository names, commit IDs and workspace GUIDs. The preview reads those identifiers from the checkout. You will set up authentication when the pipeline connects to Fabric in Unit 8. The mask also describes intended relationships. For example, `items.notebook.bindings.default_lakehouse` names the `lakehouse` plan item. A Dev plan assigns that item to Data Dev, and a Test plan assigns it to Data Test.
 
 **Expected result** The mask has concrete workspace IDs and source revisions. It describes the six Tiny Sales items and their target relationships.
 
@@ -83,6 +105,7 @@ Append this step to the existing `steps` list in `.azuredevops/pipelines/noteboo
     displayName: Preview Tiny Sales release targets
     workingDirectory: $(Build.SourcesDirectory)
     env:
+      # Record the Git revision this build is evaluating.
       CHECKOUT_REVISION: $(Build.SourceVersion)
 ```
 
@@ -92,15 +115,25 @@ The agent loads the mask and the Code export from the proposed PR merge. It disp
 
 ## 4. Reject a cross-environment mapping, then fix it
 
-1. Save your correct Test Data ID in the release worksheet. For the failure exercise, put the Dev Data ID into `environments.test.workspaces.data`. Review, commit and push the Code changes. Open an active PR titled **Configure and preview Tiny Sales releases** into `dev`. [Release preview worksheet](resources/release-preview-record.md).
-2. On the PR's **Overview**, open the required build and inspect **Preview Tiny Sales release targets**. Expect `PLAN INVALID` and a message that `environments.test.workspaces.data` reuses the workspace ID assigned to `environments.dev.workspaces.data`. Record the failed run.
-3. Restore the Test Data ID. Commit and push the correction to the same PR. Wait for the new required build and find `PLAN VALID`. Inspect the plan before completing the PR.
+1. Save your correct Test Data ID in the release worksheet. For the failure exercise, put the Dev Data ID into `environments.test.workspaces.data`. Review and stage the Unit 7 changes, then commit and push them. Use **Add release preview with a deliberate workspace conflict** as the commit message. [Release preview worksheet](resources/release-preview-record.md).
+2. Open an active PR into `dev` titled **Configure and preview Tiny Sales releases**. Use this description to tell the reviewer what changed and how to read the first build.
+
+   ```markdown
+   ## Change
+   Add the release mask, Test and Prod value sets, and a CI preview.
+
+   ## Validation
+   The first run should reject the deliberate Dev Data ID in the Test mapping.
+   After correcting it, I'll verify that the preview lists all three targets.
+   ```
+3. On the PR's **Overview**, open the required build and inspect **Preview Tiny Sales release targets**. Expect `PLAN INVALID` and a message that `environments.test.workspaces.data` reuses the workspace ID assigned to `environments.dev.workspaces.data`. Record the failed run.
+4. Restore the Test Data ID. Use **Restore the Test Data workspace mapping** as the commit message and push to the same PR. Wait for the new required build and find `PLAN VALID`. Inspect the plan before completing the PR.
 
    - `sources` shows the Code checkout revision and both external pins.
    - `definition_order` puts the lakehouse ahead of the notebook, the library and notebook ahead of the pipeline, and the model ahead of the report. The model also follows the pipeline in the declared order. The later release adds execution and data-readiness checks before publishing reporting items.
    - `targets` shows the planned item workspace IDs and expected environment values from `Default`, `Test` and `Prod`.
 
-4. Review the proposed changes and complete the PR after its required check passes. Record the resulting `dev` commit, both run links and the Data and Reporting pins.
+5. Update **Validation** in the PR description with what actually happened and links to both runs. Review the final diff and complete the PR after its required check passes. Record the resulting `dev` commit and the Data and Reporting pins.
 
 **Expected result** The same policy blocks the conflicting mapping and accepts the corrected one. The merged mask and its preview give the next unit an agreed release intent to verify against Fabric.
 

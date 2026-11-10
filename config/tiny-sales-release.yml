@@ -1,10 +1,13 @@
 version: 1
 
+# Use repo-relative item folders. A dot means the root of that repo.
+# CI supplies the Code revision. The other repos use full commit pins.
 sources:
   code: {folder: '.', revision: checkout}
   data: {repository: 'REPLACE_DATA_REPO', folder: '.', revision: 'REPLACE_DATA_COMMIT'}
   reports: {repository: 'REPLACE_REPORTING_REPO', folder: '.', revision: 'REPLACE_REPORTING_COMMIT'}
 
+# Item keys are local names for the plan. Bindings refer to these keys.
 items:
   lakehouse: {role: data, type: Lakehouse, name: sales}
   library: {role: code, type: VariableLibrary, name: sales_config}
@@ -23,6 +26,7 @@ items:
     type: SemanticModel
     name: sales_model
     bindings: {sql_analytics_endpoint_of: lakehouse}
+    # The pipeline must prepare the table before the reporting items use it.
     after: [pipeline]
   report:
     role: reports
@@ -30,14 +34,18 @@ items:
     name: sales_overview
     bindings: {semantic_model: model}
 
+# The library folder is relative to sources.code.folder.
 variable_library:
   item: library
   folder: sales_config.VariableLibrary
   environment_variable: environment_name
 
+# The preview lists this check. The existing CI step runs it.
 project_checks:
   notebook_source: checks.validate_tiny_sales
 
+# Assign each role to its own workspace in each environment.
+# value_set describes the selection the release should verify in Fabric.
 environments:
   dev:
     workspaces:

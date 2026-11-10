@@ -29,6 +29,7 @@ Create the unit folder and README entry point immediately, even during preparati
 - Keep creator, visible item owner, associated/default identity, deployment caller, runtime executor and connection/data-access identity distinct where relevant. Test first creation separately from updating an existing item; do not generalize one ownership result to every Fabric item/API.
 - Provide definite exercise instructions, while recording their untested status in the index/pilot log. Expected results are acceptance criteria, not claims that a cloud run occurred.
 - Use optional pages under `docs/tutorial/reference/` for topics that benefit from tradeoffs, examples or discussion prompts. Link them at the point of use and from the tutorial index. Keep task instructions and checkpoints in the lesson, with exercise-specific worksheets beside it.
+- Give learners short, descriptive commit messages for the Git changes they make. For a PR exercise, supply a title and a brief description with **Change** and **Validation**. Ask learners to replace expected outcomes with observed results and links before completing the PR.
 
 ## Keep organizer material separate
 

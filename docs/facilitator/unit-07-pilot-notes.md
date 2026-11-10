@@ -11,6 +11,7 @@
 
 ## Evidence and walkthrough
 
+- **Feedback revision.** Added complete Test and Prod JSON and the `settings.json` example. Clarified that the mask contains source and target identifiers, and added example commit messages and a brief PR description. Added explanatory comments to the starter mask, planner and CI excerpt. The local check parsed all three JSON examples and ran the preview using them, including the duplicate workspace failure.
 - **Locally exercised.** The module command accepted a synthetic export assembled with the exact lesson value-set JSON and resolved the three target mappings and dependency order. It rejected repeated workspace IDs, missing roles, cycles, unknown bindings, stale value sets, duplicate YAML keys and unfilled fields. Parsed the Unit 7 YAML excerpt appended to the actual Unit 6 pipeline using the pinned PyYAML release.
 - **Pilot pending.** Inspect the actual Variable Library paths, confirm PyYAML installation on the approved agent, and record both required build links and the merged commit. The expected negative checkpoint is the duplicate workspace diagnostic. The positive checkpoint is the corrected plan with all three environments and pinned source revisions. No Fabric API call, value-set activation, target deployment or runtime verification is part of this checkpoint.
 - **MS coverage.** MS-03 for a reviewed configuration change, MS-04/06 for source and target separation, MS-08 for a rejected invalid configuration, and MS-12/14 for approved identity boundaries and reproducible source selection.
