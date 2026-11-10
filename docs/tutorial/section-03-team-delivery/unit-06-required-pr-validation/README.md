@@ -14,12 +14,6 @@ Use your participant **Code** repository and local checkout. Find the completed 
 
 You need permission to create an Azure Pipeline and queue it on the supplied agent. You or the facilitator need **Edit policies** permission for `dev`. This lesson uses a Microsoft-hosted Ubuntu agent with Python 3.12. Local Python 3.12 is optional. [Python on Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/customize-python) · [Azure Repos branch policies](https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies?view=azure-devops#set-build-validation).
 
-### If you started with the earlier layout
-
-- In your current feature branch, copy `pipelines/notebook-ci.yml` to `.azuredevops/pipelines/notebook-ci.yml`, then commit and push. Keep the old path available during the switch. If Unit 6 has already merged, land the copy in `dev` through a follow-up PR using the existing check.
-- If you have already registered the pipeline, open its details page and use **… → Settings → YAML file path** to select `/.azuredevops/pipelines/notebook-ci.yml`. Rename the same pipeline to **Tiny Sales - Notebook CI** using Section 2. In the Code repo's `dev` branch policy, verify it still references that pipeline and check a fresh build. If you have yet to register it, use the new path in Section 2. [Pipeline settings](https://learn.microsoft.com/en-us/azure/devops/pipelines/customize-pipeline?view=azure-devops#pipeline-settings).
-- Once the check runs from the new path, remove the old YAML in your open PR or in a follow-up PR if the copy has already merged. If you copied the earlier `ci_check.py` starter as `checks/validate_tiny_sales.py`, you already have the current checker filename and contents.
-
 ## How the pieces fit
 
 ```mermaid
@@ -53,7 +47,9 @@ The **branch policy** queues this Azure Pipeline against the PR's proposed merge
    | [Tiny Sales check](../../../../sample/tiny-sales/validate_tiny_sales.py) | `checks/validate_tiny_sales.py` | Check this project's revenue expression and declared totals. |
    | [CI YAML](../../../../.azuredevops/pipelines/notebook-ci.yml) | `.azuredevops/pipelines/notebook-ci.yml` | Set up Python and call the check on the notebook item folder. |
 
-   `.azuredevops/pipelines/` groups Azure DevOps pipeline definitions apart from Fabric item folders. The leading dot is a repository convention. Azure Pipelines uses the YAML path you select during registration, so you may see different layouts in other repositories. [Register an existing YAML pipeline](https://learn.microsoft.com/en-us/azure/devops/pipelines/get-started/clone-import-pipeline?view=azure-devops#clone-or-copy-a-pipeline).
+   Microsoft examples often start with a root `azure-pipelines.yml`. Azure Pipelines also lets you select an existing YAML file by path. We use `.azuredevops/pipelines/` to give CI and the later deployment pipelines one recognizable home. Keep project-specific rules in `checks/` and reusable functions in `toolkit/` so you can run and reuse them independently of the Azure DevOps YAML. [Azure Pipelines YAML and settings](https://learn.microsoft.com/en-us/azure/devops/pipelines/customize-pipeline?view=azure-devops) · [Select an existing YAML file](https://learn.microsoft.com/en-us/azure/devops/pipelines/get-started/clone-import-pipeline?view=azure-devops#clone-or-copy-a-pipeline).
+
+   When setting up a new Fabric project, point the workspace's **Git folder** at a dedicated item folder such as `/fabric/code`. Keep `.azuredevops/`, `checks/` and `toolkit/` alongside `fabric/` at the repo root. This keeps workflow files and Python helpers outside the directory Fabric synchronizes. For this exercise, use the item path you recorded in Unit 5. [Fabric Git folder guidance](https://learn.microsoft.com/en-us/fabric/fundamentals/understand-best-practices-fabric-cicd#git-folder-settings).
 
 3. In the YAML, confirm `NOTEBOOK_ITEM_DIR` is the folder you recorded in Unit 5. The supplied value is `build_sales.Notebook`. If your folder differs, enter its repo-relative path using forward slashes. The value points to the item folder containing `.platform` and `notebook-content.py`.
 4. If you have local Python 3.12, run the check from the Code repository root. Use the same path as in the YAML. A successful run prints `VALIDATION PASSED`. Azure Pipelines will run this command as part of the required exercise.

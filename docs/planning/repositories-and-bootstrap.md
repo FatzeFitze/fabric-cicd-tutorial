@@ -30,8 +30,8 @@ solution/
     reports/              # semantic model and report definitions
   src/                    # locally testable business code, if needed
   config/                 # sanitized environment maps and dependencies
-  tests/                  # meaningful source/configuration checks
-  deployment/             # selected reusable starter components
+  checks/                 # project-specific validation entry points and rules
+  toolkit/                # reusable validation and deployment functions
   .azuredevops/pipelines/  # Azure Pipelines YAML
 ```
 
@@ -46,6 +46,8 @@ For connected Dev workspaces, use the same solution repository and integration b
 | Dev reporting | `/fabric/reports` |
 
 Microsoft recommends a common repository/branch with distinct Git folders for workspaces within one solution [S14]. Store deployment scripts and workflow YAML outside those Fabric-sync folders. Treat each workspace-to-folder mapping as a recorded configuration choice; validate it during setup and before synchronization. Do not connect every workspace to the repository root or to overlapping role folders.
+
+Use `.azuredevops/pipelines/` as the workshop convention for Azure Pipelines entry points and templates. The service accepts a selected YAML path, and Microsoft's introductory examples often use a root `azure-pipelines.yml`. The subfolder gives multiple pipelines a common home. Keep `checks/`, `toolkit/` and `config/` as visible siblings because their project rules, shared Python functions and environment inputs also serve local commands. Add `tests/` when a project has automated tests distinct from its validation entry points. A larger repo can group vendor-neutral code under `automation/` if that boundary helps it navigate the files. [Azure Pipelines YAML and settings](https://learn.microsoft.com/en-us/azure/devops/pipelines/customize-pipeline?view=azure-devops) · [Fabric Git folder guidance](https://learn.microsoft.com/en-us/fabric/fundamentals/understand-best-practices-fabric-cicd#git-folder-settings).
 
 A common repository gives one PR and one selected source revision for coordinated code/data/reporting changes. It does not make deployments across workspaces atomic.
 

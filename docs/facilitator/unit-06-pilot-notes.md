@@ -14,7 +14,8 @@
 ## 10 November revision after organizer feedback
 
 - Use `.azuredevops/pipelines/notebook-ci.yml` and keep `validate_tiny_sales.py` as the checker filename in both repositories. The revision explains module invocation from the repo root and distinguishes the hardcoded teaching check from configurable project validation. [Generic validation candidates](../planning/backlog.md#configurable-validation-candidates).
-- Rename the registered pipeline to **Tiny Sales - Notebook CI** and select it in the policy on the Code repo's `dev` branch. The policy display name remains **Tiny Sales source validation**. The lesson gives a migration path for a pipeline already registered with the old YAML location. Observe the live rename, YAML path switch and policy run during the next walkthrough. [Pipeline settings](https://learn.microsoft.com/en-us/azure/devops/pipelines/customize-pipeline?view=azure-devops#pipeline-settings).
+- Rename the registered pipeline to **Tiny Sales - Notebook CI** and select it in the policy on the Code repo's `dev` branch. The policy display name is **Tiny Sales source validation**. Observe the live rename, selected YAML path and policy run during the walkthrough. [Pipeline settings](https://learn.microsoft.com/en-us/azure/devops/pipelines/customize-pipeline?view=azure-devops#pipeline-settings).
+- The organizer requested that draft migration guidance stay in chat. The lesson now explains the selected pipeline folder, the split between project checks and shared functions, and the dedicated Fabric item directory recommended for new projects. [Repository layout rationale](../planning/repositories-and-bootstrap.md#recommended-participant-layout).
 
 ## Evidence and limits
 

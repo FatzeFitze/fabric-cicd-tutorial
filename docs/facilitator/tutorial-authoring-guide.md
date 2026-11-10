@@ -31,6 +31,8 @@ Create the unit folder and README entry point immediately, even during preparati
 
 ## Keep organizer material separate
 
+Write the current exercise path for participants. Share temporary workarounds, migration steps between draft revisions and directions for the organizer in chat. Use facilitator notes for durable pilot evidence and setup guidance.
+
 Keep draft status, unresolved tenant/UI details, evidence gaps, validation gates, authorship notes, facilitator setup, recovery solutions and MS-control mapping in facilitator/planning files. The participant unit should contain no request to the organizer to test or approve our design.
 
 Every new unit needs a facilitator record stating:
