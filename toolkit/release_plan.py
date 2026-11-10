@@ -233,6 +233,11 @@ def build_preview(mask, root, checkout_revision, target=None):
     return {"sources": sources, "items": items, "definition_order": order, "project_checks": checks, "targets": plans}
 
 
+def load_mask(path):
+    """Read the same strict mask format for offline and live checks."""
+    return yaml.load(path.read_text(encoding="utf-8-sig"), Loader=MaskLoader)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mask", type=Path, required=True)
@@ -240,7 +245,7 @@ def main():
     parser.add_argument("--target", help="Show one target while validating the whole mask")
     args = parser.parse_args()
     try:
-        mask = yaml.load(args.mask.read_text(encoding="utf-8-sig"), Loader=MaskLoader)
+        mask = load_mask(args.mask)
         plan = build_preview(mask, Path.cwd(), args.checkout_revision, args.target)
     except (PlanError, OSError, UnicodeError, yaml.YAMLError, json.JSONDecodeError) as exc:
         print(f"PLAN INVALID: {exc}", file=sys.stderr)

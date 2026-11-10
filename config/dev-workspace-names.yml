@@ -1,0 +1,4 @@
+# Copy the exact display names from the assigned Dev workspace inventory.
+code: 'REPLACE_WITH_CODE_DEV_DISPLAY_NAME'
+data: 'REPLACE_WITH_DATA_DEV_DISPLAY_NAME'
+reports: 'REPLACE_WITH_REPORTING_DEV_DISPLAY_NAME'

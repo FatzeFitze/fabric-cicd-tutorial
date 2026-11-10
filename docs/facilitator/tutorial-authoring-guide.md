@@ -26,6 +26,7 @@ Create the unit folder and README entry point immediately, even during preparati
 - Use the UI's actual field names and distinguish conceptual mappings from visible input fields. Explain generated runtime content separately from authored source. For web editors, state whether edits autosave instead of assuming a Save button exists.
 - Distinguish a Fabric Data Pipeline, native Deployment pipeline and Azure Pipeline by name.
 - State the identity/environment assumptions relevant to the current task. Label training simplifications at the point they matter.
+- When a simplified check or implementation teaches a concept, explain what it demonstrates, why the exercise uses it and what stronger evidence a real release would require.
 - Keep creator, visible item owner, associated/default identity, deployment caller, runtime executor and connection/data-access identity distinct where relevant. Test first creation separately from updating an existing item; do not generalize one ownership result to every Fabric item/API.
 - Provide definite exercise instructions, while recording their untested status in the index/pilot log. Expected results are acceptance criteria, not claims that a cloud run occurred.
 - Use optional pages under `docs/tutorial/reference/` for topics that benefit from tradeoffs, examples or discussion prompts. Link them at the point of use and from the tutorial index. Keep task instructions and checkpoints in the lesson, with exercise-specific worksheets beside it.

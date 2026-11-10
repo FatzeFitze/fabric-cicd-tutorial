@@ -18,6 +18,8 @@ The mask is a versioned YAML form. It tells the release tools where to get sourc
 
 The preview works offline. It checks declared workspace IDs for duplicate assignments, orders item prerequisites and reads the exported library files to check the environment value. It reports planned workspace IDs. The release later looks up or creates physical item IDs, verifies access and checks the actual bindings.
 
+The duplicate-ID check is a deliberately simple teaching example. Each role and environment in this lab has its own workspace, so reusing a GUID catches a likely copy-and-paste error. A different but incorrect GUID can still pass. In Unit 8, you use the Fabric API to compare the workspace returned for a configured GUID with the expected name from your assigned inventory. [Fabric Get Workspace API](https://learn.microsoft.com/en-us/rest/api/fabric/core/workspaces/get-workspace).
+
 ## 1. Branch from `dev` and add the value sets
 
 1. In a clean Code checkout, pull the Unit 6 merge and branch for the configuration change.
@@ -154,4 +156,4 @@ The agent loads the mask and the Code export from the proposed PR merge. It disp
 - [ ] You can distinguish the source revisions, planned workspace IDs, desired value sets and the deployed state the next unit will verify.
 - [ ] Your worksheet records the merged `dev` commit, external pins and both runs.
 
-[Previous unit](../../section-03-team-delivery/unit-06-required-pr-validation/README.md) · [Tutorial index](../../README.md)
+[Previous unit](../../section-03-team-delivery/unit-06-required-pr-validation/README.md) · [Tutorial index](../../README.md) · [Next unit](../unit-08-publish-shared-dev/README.md)

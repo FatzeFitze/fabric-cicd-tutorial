@@ -16,6 +16,8 @@ Date: 28 October 2026. Explicit user decisions are recorded below. Other recomme
 
 ## Confirmed in the scoping discussion
 
+- 10 November. The organizer accepted Unit 7's lesson with a clarification about the teaching example. Explain the purpose and limits of simplified logic at the point of use. Unit 8 starts with live Dev name and item checks. The publishing continuation depends on the observed runner identity and export bindings. [Unit 8 pilot notes](../facilitator/unit-08-pilot-notes.md).
+
 - 10 November. The organizer reported a smooth Unit 6 walkthrough and requested optional readings when a topic benefits from exploring choices. Place reusable readings in the tutorial reference folder and link them from the relevant unit. Unit 7 uses the observed three-repo setup for an offline preview of declared source pins, workspace IDs, dependencies and desired value sets. [Static Fabric validation](../tutorial/reference/static-fabric-validation.md) · [Unit 7 pilot notes](../facilitator/unit-07-pilot-notes.md).
 
 - 10 November. The organizer accepted Unit 5 after completing its revised first-merge walkthrough and confirmed the Python export path. Pin the Unit 5 lesson body at `348d885` and proceed to the required CI exercise. Unit 6 uses a standard-Python source contract with a reusable notebook validator and a separate Tiny Sales check. Spark and Fabric runtime validation follow in Unit 8. [Unit 6 pilot notes](../facilitator/unit-06-pilot-notes.md).

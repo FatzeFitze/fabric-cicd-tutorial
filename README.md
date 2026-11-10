@@ -1,6 +1,6 @@
 # DNA Fabric Days: workshop planning
 
-Workshop preparation started 28 October 2026. Models A and B are hands-on. Model C and feature workspaces are explainer topics. Units 0–7 and the Tiny Sales starters are available. The organizer has accepted Units 3–6, including required PR validation. Unit 7 adds the release mask and awaits its Azure DevOps walkthrough.
+Workshop preparation started 28 October 2026. Models A and B are hands-on. Model C and feature workspaces are explainer topics. Units 0–7 and the Tiny Sales starters are available. The organizer accepted the Unit 7 lesson with a clarification about static checks. Unit 8 Part A prepares the live Dev preflight for its Azure DevOps walkthrough.
 
 ## Start here
 
@@ -11,7 +11,8 @@ Workshop preparation started 28 October 2026. Models A and B are hands-on. Model
 - [Unit 4: connect configuration, orchestration and reporting](docs/tutorial/section-03-team-delivery/unit-04-connect-orchestration-configuration-and-reporting/README.md): first version accepted; source/deployed-ID wording clarified.
 - Edit Code source in an IDE, complete the first PR and record the resulting `dev` revision. The organizer completed the walkthrough and accepted the unit. [Unit 5](docs/tutorial/section-03-team-delivery/unit-05-make-a-local-feature-change/README.md).
 - Add the reusable source validator and exercise required PR validation. The organizer completed the walkthrough and accepted the unit. [Unit 6](docs/tutorial/section-03-team-delivery/unit-06-required-pr-validation/README.md).
-- Fill the release mask, add Test and Prod value sets and preview the declared targets through CI. The planner passed its local rehearsal. [Unit 7](docs/tutorial/section-04-release-automation/unit-07-configure-and-preview-release/README.md).
+- Fill the release mask, add Test and Prod value sets and preview the declared targets through CI. The lesson includes the limits of the static workspace check. [Unit 7](docs/tutorial/section-04-release-automation/unit-07-configure-and-preview-release/README.md).
+- Verify Dev workspace names and item IDs through the Fabric API before the publishing handoff. [Unit 8 Part A](docs/tutorial/section-04-release-automation/unit-08-publish-shared-dev/README.md).
 - [Logical and physical Fabric IDs](docs/tutorial/reference/fabric-item-identities.md): source identity versus deployed instance, lookup locations and later release evidence.
 - [Optional conflict recovery](docs/tutorial/auxiliary/aux-01-recover-from-source-conflicts/README.md): concepts and entry point; intentional-conflict lab awaits rehearsal after Unit 5's local Git workflow.
 - [Later identity/ownership experiment](docs/planning/identity-and-ownership-experiment.md): create a new Test/Prod asset through managed identities, compare creation with updates and verify runtime/access implications.
