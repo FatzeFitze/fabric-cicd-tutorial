@@ -36,7 +36,7 @@ docs/tutorial/
       resources/                # optional; create only for actual unit-specific files
 ```
 
-Files needed only for one exercise belong in its unit folder. Reusable deployment code, shared sample definitions, pipeline templates and multi-unit examples remain in `toolkit/`, `sample/`, `pipelines/` or `examples/`, and units link to their canonical files. Avoid maintaining duplicate copies of shared code beside each lesson. The old setup-draft redirect is retained for historical links and is not an active participant unit.
+Files needed only for one exercise belong in its unit folder. Reusable deployment code, shared sample definitions, pipeline templates and multi-unit examples remain in `toolkit/`, `sample/`, `.azuredevops/pipelines/` or `examples/`, and units link to their canonical files. Avoid maintaining duplicate copies of shared code beside each lesson. The old setup-draft redirect is retained for historical links and is not an active participant unit.
 
 From Unit 1 onward, lessons use a consistent participant-facing structure: outcomes/prerequisites, a short explanation, numbered assignments with expected results, troubleshooting, completion checkpoint and references. Organizer validation notes stay in [facilitator material](../facilitator/tutorial-authoring-guide.md).
 

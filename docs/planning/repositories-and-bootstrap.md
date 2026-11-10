@@ -32,7 +32,7 @@ solution/
   config/                 # sanitized environment maps and dependencies
   tests/                  # meaningful source/configuration checks
   deployment/             # selected reusable starter components
-  pipelines/              # Azure Pipelines YAML
+  .azuredevops/pipelines/  # Azure Pipelines YAML
 ```
 
 `data/` here stores Fabric item definitions; runtime tables and lakehouse data are not automatically stored in Git. Model A can start with a single `/fabric/initial` folder before an explicit, rehearsed transition to role folders. The exact introductory asset subset and transition remain to be proven.

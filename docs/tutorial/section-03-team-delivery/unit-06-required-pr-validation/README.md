@@ -14,6 +14,12 @@ Use your participant **Code** repository and local checkout. Find the completed 
 
 You need permission to create an Azure Pipeline and queue it on the supplied agent. You or the facilitator need **Edit policies** permission for `dev`. This lesson uses a Microsoft-hosted Ubuntu agent with Python 3.12. Local Python 3.12 is optional. [Python on Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/customize-python) · [Azure Repos branch policies](https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies?view=azure-devops#set-build-validation).
 
+### If you started with the earlier layout
+
+- In your current feature branch, copy `pipelines/notebook-ci.yml` to `.azuredevops/pipelines/notebook-ci.yml`, then commit and push. Keep the old path available during the switch. If Unit 6 has already merged, land the copy in `dev` through a follow-up PR using the existing check.
+- If you have already registered the pipeline, open its details page and use **… → Settings → YAML file path** to select `/.azuredevops/pipelines/notebook-ci.yml`. Rename the same pipeline to **Tiny Sales - Notebook CI** using Section 2. In the Code repo's `dev` branch policy, verify it still references that pipeline and check a fresh build. If you have yet to register it, use the new path in Section 2. [Pipeline settings](https://learn.microsoft.com/en-us/azure/devops/pipelines/customize-pipeline?view=azure-devops#pipeline-settings).
+- Once the check runs from the new path, remove the old YAML in your open PR or in a follow-up PR if the copy has already merged. If you copied the earlier `ci_check.py` starter as `checks/validate_tiny_sales.py`, you already have the current checker filename and contents.
+
 ## How the pieces fit
 
 ```mermaid
@@ -25,7 +31,7 @@ flowchart LR
     CHECK --> RESULT["Pass or fail in the PR"]
 ```
 
-The validator reads the notebook's `.platform` metadata and compiles its Python source without executing it. The project check then inspects the `revenue` expression and the two declared monetary totals from Unit 5. This is a **source contract** for the workshop notebook. A pass tells you those parts match the agreed definition. Fabric execution will verify table writes, cross-workspace bindings and the report later.
+The reusable validator reads the notebook's `.platform` metadata and compiles its Python source without executing it. The Tiny Sales check is a teaching shortcut. It hardcodes the parsed shape of the `revenue` expression and the two totals from Unit 5 so you can see a clear failure in the PR. Even a rewrite that produces the same result can fail this check. For a team project, use configurable checks for requirements such as item metadata and allowed dependencies. Test business rules by running the transformation on representative data and asserting the results. The later Fabric exercise verifies table writes, cross-workspace bindings and the report.
 
 The **branch policy** queues this Azure Pipeline against the PR's proposed merge with `dev` and uses the run result when deciding whether completion is allowed. In Azure Repos Git, you configure that trigger on the target branch. The supplied YAML sets `trigger: none` so ordinary pushes do not queue a separate CI run. [Azure Repos PR triggers](https://learn.microsoft.com/en-us/azure/devops/pipelines/repos/azure-repos-git?view=azure-devops#pr-triggers).
 
@@ -44,8 +50,10 @@ The **branch policy** queues this Azure Pipeline against the PR's proposed merge
    | Supplied file | Destination in your Code repo | Responsibility |
    | --- | --- | --- |
    | [Notebook validator](../../../../toolkit/notebook_validation.py) | `toolkit/notebook_validation.py` | Read `.platform`, validate Notebook type and logical ID, compile the Python export and return its parsed syntax. |
-   | [Tiny Sales check](../../../../sample/tiny-sales/ci_check.py) | `checks/validate_tiny_sales.py` | Check this project's revenue expression and declared totals. |
-   | [CI YAML](../../../../pipelines/notebook-ci.yml) | `pipelines/notebook-ci.yml` | Set up Python and call the check on the notebook item folder. |
+   | [Tiny Sales check](../../../../sample/tiny-sales/validate_tiny_sales.py) | `checks/validate_tiny_sales.py` | Check this project's revenue expression and declared totals. |
+   | [CI YAML](../../../../.azuredevops/pipelines/notebook-ci.yml) | `.azuredevops/pipelines/notebook-ci.yml` | Set up Python and call the check on the notebook item folder. |
+
+   `.azuredevops/pipelines/` groups Azure DevOps pipeline definitions apart from Fabric item folders. The leading dot is a repository convention. Azure Pipelines uses the YAML path you select during registration, so you may see different layouts in other repositories. [Register an existing YAML pipeline](https://learn.microsoft.com/en-us/azure/devops/pipelines/get-started/clone-import-pipeline?view=azure-devops#clone-or-copy-a-pipeline).
 
 3. In the YAML, confirm `NOTEBOOK_ITEM_DIR` is the folder you recorded in Unit 5. The supplied value is `build_sales.Notebook`. If your folder differs, enter its repo-relative path using forward slashes. The value points to the item folder containing `.platform` and `notebook-content.py`.
 4. If you have local Python 3.12, run the check from the Code repository root. Use the same path as in the YAML. A successful run prints `VALIDATION PASSED`. Azure Pipelines will run this command as part of the required exercise.
@@ -54,10 +62,12 @@ The **branch policy** queues this Azure Pipeline against the PR's proposed merge
    python -B -m checks.validate_tiny_sales --item-dir 'build_sales.Notebook'
    ```
 
+   `-m` takes a Python module name. The dot separates the `checks` package from the `validate_tiny_sales` module in `checks/validate_tiny_sales.py`. From the repo root, this invocation lets Python find both `checks` and the sibling `toolkit` it imports. Running a `.py` file directly takes a filesystem path and starts the import search in the script's directory. `--item-dir` still takes a filesystem path, such as `fabric/code/build_sales.Notebook`. [Python command-line options](https://docs.python.org/3.12/using/cmdline.html#cmdoption-m).
+
 5. Review the three new files, then stage and push them.
 
    ```powershell
-   git add -- toolkit/notebook_validation.py checks/validate_tiny_sales.py pipelines/notebook-ci.yml
+   git add -- toolkit/notebook_validation.py checks/validate_tiny_sales.py .azuredevops/pipelines/notebook-ci.yml
    git diff --cached --check
    git diff --cached --stat
    git commit -m "Add Tiny Sales source validation pipeline"
@@ -69,21 +79,22 @@ The **branch policy** queues this Azure Pipeline against the PR's proposed merge
 ## 2. Register the pipeline and require it on `dev`
 
 1. In your Azure DevOps project, select **Pipelines → New pipeline → Azure Repos Git**, then select the participant Code repo.
-2. Choose **Existing Azure Pipelines YAML file**. Select branch `feature/required-pr-validation` and path `/pipelines/notebook-ci.yml`. Select **Continue**. On the review screen use the dropdown beside **Run** to select **Save**. If you use **Run** at this point, treat that run as a setup check and use the feature branch as its source. Record the name of the saved pipeline. [Register an existing YAML pipeline](https://learn.microsoft.com/en-us/azure/devops/pipelines/get-started/clone-import-pipeline?view=azure-devops#clone-or-copy-a-pipeline).
-3. In **Repos → Branches**, open the menu beside **`dev`** and select **Branch policies**. Under **Build validation**, select **+** and set the following values. Ask the facilitator to apply them if branch-policy editing is delegated.
+2. Choose **Existing Azure Pipelines YAML file**. Select branch `feature/required-pr-validation` and path `/.azuredevops/pipelines/notebook-ci.yml`. Select **Continue**. On the review screen use the dropdown beside **Run** to select **Save**. If you use **Run** at this point, treat that run as a setup check and use the feature branch as its source. [Register an existing YAML pipeline](https://learn.microsoft.com/en-us/azure/devops/pipelines/get-started/clone-import-pipeline?view=azure-devops#clone-or-copy-a-pipeline).
+3. Open the saved pipeline under **Pipelines**. On its details page, select **… → Rename/move** and set its name to **Tiny Sales - Notebook CI**. The initial name may match the repository. A descriptive name makes the pipeline easier to pick when the Code repo has both CI and deployment pipelines. [Pipeline settings](https://learn.microsoft.com/en-us/azure/devops/pipelines/customize-pipeline?view=azure-devops#pipeline-settings).
+4. In **Repos → Branches**, select your participant **Code repository** in the repository picker. On that repository's **`dev`** branch, open **… → Branch policies**. Under **Build validation**, select **+** and set the following values. Ask the facilitator to apply them if branch-policy editing is delegated.
 
    | Field | Value |
    | --- | --- |
-   | Build pipeline | The pipeline saved in step 2 |
+   | Build pipeline | **Tiny Sales - Notebook CI** |
    | Path filter | Blank, so the policy covers all changes to `dev` |
    | Trigger | **Automatic** |
    | Policy requirement | **Required** |
    | Build expiration | **Immediately when `dev` is updated** |
    | Display name | **Tiny Sales source validation** |
 
-4. Save and check that the policy is enabled on `dev`. Keep the existing branch requirements in place. [Configure build validation](https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies?view=azure-devops#set-build-validation).
+5. Save and check that the policy is enabled on the Code repository's `dev` branch. Keep the existing branch requirements in place. [Configure build validation](https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies?view=azure-devops#set-build-validation).
 
-**Expected result** Azure Repos lists **Tiny Sales source validation** as a required, automatic check on `dev`.
+**Expected result** The Code repository's `dev` branch lists **Tiny Sales source validation** as a required, automatic policy backed by **Tiny Sales - Notebook CI**.
 
 ## 3. Watch the policy block a faulty change
 
@@ -106,7 +117,7 @@ The **branch policy** queues this Azure Pipeline against the PR's proposed merge
 
 | Symptom | What to check |
 | --- | --- |
-| The YAML picker cannot find the file | Select the participant Code repository and the pushed feature branch, then check the exact `/pipelines/notebook-ci.yml` path. |
+| The YAML picker cannot find the file | Select the participant Code repository and the pushed feature branch, then check the exact `/.azuredevops/pipelines/notebook-ci.yml` path. |
 | The job waits or reports no hosted parallelism | Ask the facilitator to verify that your project can queue on the designated agent and has available job capacity. [Parallel jobs](https://learn.microsoft.com/en-us/azure/devops/pipelines/licensing/concurrent-jobs?view=azure-devops). |
 | No build appears on the PR | Confirm the PR is active, targets `dev`, and has the enabled **Automatic / Required** policy attached to the saved pipeline. |
 | The check reports missing `.platform` or notebook source | Check `NOTEBOOK_ITEM_DIR` and the item folder in the PR revision. |
@@ -115,8 +126,8 @@ The **branch policy** queues this Azure Pipeline against the PR's proposed merge
 
 ## Completion checkpoint
 
-- [ ] The Code repo contains the reusable validator, project check and CI YAML.
-- [ ] `dev` has an enabled automatic required build policy for the pipeline.
+- [ ] The Code repo contains the reusable validator, project check and CI YAML under `.azuredevops/pipelines/`.
+- [ ] The Code repo's `dev` branch has an automatic required build policy for **Tiny Sales - Notebook CI**.
 - [ ] The deliberately faulty revision failed with the intended diagnostic and normal PR completion was blocked.
 - [ ] The corrected revision passed and the PR was completed through the branch's requirements.
 - [ ] The worksheet records both runs, the completed PR and the resulting `dev` commit.

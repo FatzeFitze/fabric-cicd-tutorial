@@ -63,7 +63,7 @@ toolkit/
   src/                         # reusable deployment and validation components
   schemas/                     # configuration contracts, if experiments justify them
   tests/                       # meaningful generic behavior and adapter checks
-pipelines/
+.azuredevops/pipelines/
   azure/                       # Azure Pipelines entry points and templates
 examples/                      # minimal and separated-workspace examples
 config/                        # sanitized example environment mappings

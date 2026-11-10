@@ -5,8 +5,8 @@ Record the actual results from your Azure DevOps project.
 | Checkpoint | Observation |
 | --- | --- |
 | Code repo, starting `dev` commit and notebook item path | |
-| Pipeline name and link | |
-| Required build policy on `dev`, including trigger and expiration | |
+| Pipeline name, link and registered YAML path | |
+| Code repo `dev` build policy, including linked pipeline, trigger and expiration | |
 | Active PR link and target branch | |
 | Faulty source commit, failing build link and build revision | |
 | Diagnostic and blocked PR status | |

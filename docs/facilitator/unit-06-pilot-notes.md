@@ -11,6 +11,11 @@
 - The learner changes `F.lit(0)` to `F.lit(1)` and restores it on the same PR after observing the failed build. The check reads the notebook under review and exits with a nonzero status for that source defect. The exercise uses standard Python. The later runtime exercise evaluates the Spark computation and checks persisted data and reporting.
 - The lesson starts with a Microsoft-hosted Ubuntu 24.04 job, Python 3.12, and the learner's Code repo checkout. Verify that project pipeline creation, agent authorization, hosted parallel capacity and `dev` policy editing are available before the session. Measure both working time and queue time. Use a facilitator for delegated branch-policy setup.
 
+## 10 November revision after organizer feedback
+
+- Use `.azuredevops/pipelines/notebook-ci.yml` and keep `validate_tiny_sales.py` as the checker filename in both repositories. The revision explains module invocation from the repo root and distinguishes the hardcoded teaching check from configurable project validation. [Generic validation candidates](../planning/backlog.md#configurable-validation-candidates).
+- Rename the registered pipeline to **Tiny Sales - Notebook CI** and select it in the policy on the Code repo's `dev` branch. The policy display name remains **Tiny Sales source validation**. The lesson gives a migration path for a pipeline already registered with the old YAML location. Observe the live rename, YAML path switch and policy run during the next walkthrough. [Pipeline settings](https://learn.microsoft.com/en-us/azure/devops/pipelines/customize-pipeline?view=azure-devops#pipeline-settings).
+
 ## Evidence and limits
 
 - **Organizer-reported** Unit 5 clone, edit, push, review and first merge completed without issue. The recorded export path confirms the default CI input.

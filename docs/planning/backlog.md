@@ -75,6 +75,19 @@ Relationship support matrix to fill from V04–V06:
 
 The organizer accepted gradual adoption of generic components/configuration on 29 October. Follow the [curriculum phasing contract](curriculum.md#how-reusable-automation-enters-the-tutorial): prove Variable Library consumption before Unit 4 (V19); build/test reusable checks before Unit 6; document/validate environment and dependency inputs before Unit 7; prove one deployment entry point and parameterized Azure Pipelines template before Unit 8; prove pinned Test/Prod release and active-value-set checks before Units 9–10; rehearse recovery/reuse before Units 11–12. W02 must include V19 in its full-solution feasibility evidence. These are preparation gates, not participant tasks to write framework internals. The revised 9 h 10 min core is an estimate to verify during piloting.
 
+## Configurable validation candidates
+
+Before expanding the toolkit, choose checks that developers can configure through the project mask. Start with checks whose inputs and failure messages can be demonstrated on Tiny Sales and a second project.
+
+| Stage | Candidate reusable helper | Project-supplied inputs |
+| --- | --- | --- |
+| CI | Check item inventory, required definition files, parseable metadata and logical ID uniqueness within a workspace's item set. | Role folders, expected items and supported item types. |
+| CI | Check the mask and dependency declarations for missing roles, unknown item references and disallowed mappings. | Required roles, permitted dependencies and environment constraints. |
+| Planning or post-deploy | Check that resolved dependency IDs point to the intended target workspaces and items. | Binding declarations and resolved or observed IDs from the supported deployment tooling. |
+| Project tests | Provide a standard way to invoke a project's tests and report their results. | Representative data, expected business outcomes and runtime requirements. |
+
+The Unit 6 AST comparison remains a teaching check for Tiny Sales. Use the second-example exercise to prove which helpers can be reused by changing configuration and which assertions belong with the project's code or runtime tests.
+
 ## Readiness gates
 
 1. **Architecture gate:** apply the supplied model/control definitions and agree sample, workspace roles, local development workflow, supported dependencies, identities, runner, and required A/B controls. Keep Model C and feature workspaces as explainers.

@@ -32,7 +32,7 @@ Do not keep two competing editable copies after relocation. Verify the new copy,
 | --- | --- | --- |
 | Tutorial units, pre-reads, facilitator/reference docs | Yes | `docs/` |
 | Fabric sample definitions and synthetic input data | Yes | `sample/` |
-| Generic components, checks and pipeline templates | Yes | `toolkit/`, `pipelines/`, `examples/` |
+| Generic components, checks and pipeline templates | Yes | `toolkit/`, `.azuredevops/pipelines/`, `examples/` |
 | Scope, decisions, architecture and useful experiment results | Yes | `docs/planning/` and later focused reference pages |
 | Concise instructions for agents working on this project | Yes | Root `AGENTS.md`; nested guidance only when needed |
 | Portable project setup/test scripts and dependency definitions | Yes | Alongside the relevant component |
@@ -63,7 +63,7 @@ fabric-cicd-tutorial/
     reference/
   sample/
   toolkit/
-  pipelines/
+  .azuredevops/pipelines/
   examples/
   config/
   .agents/skills/         # optional project workflows, when warranted
