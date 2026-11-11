@@ -6,6 +6,8 @@ The working scenario is a small synthetic sales solution that progresses from co
 
 ## Start here
 
+Coming to DNA Fabric Days? The [participant prep guide](pre-reads/README.md) covers what you'll get, what to set up and which background reading to pick.
+
 | Unit | Outcome | Status |
 | --- | --- | --- |
 | [0. Observe and test the setup](section-01-foundation/unit-00-observe-and-test-the-setup/README.md) | Explain the components and inspect the provided workspace/repository layout | Parked as-is after organizer review; access checks reported successful; learner timing unmeasured |
