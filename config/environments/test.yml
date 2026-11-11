@@ -1,0 +1,7 @@
+# Copy names from your assigned Test inventory and Azure DevOps project.
+variables:
+  releaseUamiName: 'REPLACE_WITH_TEST_UAMI_NAME'
+  releaseServiceConnection: 'REPLACE_WITH_TEST_SERVICE_CONNECTION_NAME'
+  codeWorkspaceName: 'REPLACE_WITH_CODE_TEST_DISPLAY_NAME'
+  dataWorkspaceName: 'REPLACE_WITH_DATA_TEST_DISPLAY_NAME'
+  reportsWorkspaceName: 'REPLACE_WITH_REPORTING_TEST_DISPLAY_NAME'

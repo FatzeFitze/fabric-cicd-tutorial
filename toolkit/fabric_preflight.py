@@ -1,4 +1,4 @@
-"""Check the planned Dev workspace identities and inventory against Fabric."""
+"""Check planned workspace identities and read the target inventory from Fabric."""
 
 import argparse
 import json
@@ -101,14 +101,12 @@ def read_environment_config(path, roles):
     return names, identity
 
 
-def verify_dev(plan, names, get):
-    """Verify identities against independently recorded names, then inspect items."""
-    dev = plan["targets"]["dev"]
-    workspaces = dev["workspaces"]
-    fields(names, "expected Dev workspace names", workspaces)
+def verify_workspaces(workspaces, names, get):
+    """Check all target IDs against independently recorded display names."""
+    fields(names, "expected workspace names", workspaces)
     verified = {}
     for role, workspace_id in workspaces.items():
-        expected = text(names[role], f"expected Dev workspace names.{role}")
+        expected = text(names[role], f"expected workspace names.{role}")
         info = get(f"/workspaces/{workspace_id}")
         if guid(info.get("id"), f"{role} workspace") != workspace_id:
             raise PlanError(f"{role} workspace: Fabric returned a different ID from {workspace_id}")
@@ -118,29 +116,50 @@ def verify_dev(plan, names, get):
         if actual != expected:
             raise PlanError(f"{role} workspace {workspace_id}: expected {expected!r}, found {actual!r}")
         verified[role] = {"id": workspace_id, "displayName": actual}
+    return verified
 
-    live_items = {role: list(list_workspace_items(get, record["id"])) for role, record in verified.items()}
+
+def item_record(item, role, workspace_id):
+    name = text(item.get("displayName"), f"{role} item display name")
+    if guid(item.get("workspaceId"), name) != workspace_id:
+        raise PlanError(f"{name}: Fabric reported a different workspace ID")
+    return {
+        "role": role,
+        "name": name,
+        "type": text(item.get("type"), f"{name} item type"),
+        "workspaceId": workspace_id,
+        "itemId": guid(item.get("id"), name),
+        "logicalId": item.get("logicalId"),
+    }
+
+
+def verify_expected_items(items, workspaces, live_items):
     inventory = {}
-    for key, desired in plan["items"].items():
+    for key, desired in items.items():
         role = desired["role"]
-        workspace_id = workspaces[role]
         matches = [item for item in live_items[role]
                    if item.get("type") == desired["type"] and item.get("displayName") == desired["name"]]
         if len(matches) != 1:
             raise PlanError(f"{role} workspace: expected one {desired['type']} named {desired['name']!r}, found {len(matches)}")
-        item = matches[0]
-        if guid(item.get("workspaceId"), key) != workspace_id:
-            raise PlanError(f"{key}: Fabric reported a different workspace ID")
-        inventory[key] = {
-            "role": role,
-            "name": desired["name"],
-            "type": desired["type"],
-            "workspaceId": workspace_id,
-            "itemId": guid(item.get("id"), key),
-            "logicalId": item.get("logicalId"),
+        inventory[key] = item_record(matches[0], role, workspaces[role])
+    return inventory
+
+
+def inspect_target(plan, target, names, get, inventory_only):
+    workspaces = plan["targets"][target]["workspaces"]
+    verified = verify_workspaces(workspaces, names, get)
+    live_items = {role: list(list_workspace_items(get, workspace_id))
+                  for role, workspace_id in workspaces.items()}
+    evidence = {"environment": target, "declared_sources": plan["sources"],
+                "verified_workspaces": verified}
+    if inventory_only:
+        evidence["workspace_items"] = {
+            role: [item_record(item, role, workspace_id) for item in live_items[role]]
+            for role, workspace_id in workspaces.items()
         }
-    return {"environment": "dev", "declared_sources": plan["sources"],
-            "verified_workspaces": verified, "observed_items": inventory}
+    else:
+        evidence["observed_items"] = verify_expected_items(plan["items"], workspaces, live_items)
+    return evidence
 
 
 def main():
@@ -148,18 +167,26 @@ def main():
     parser.add_argument("--mask", type=Path, required=True)
     parser.add_argument("--environment-config", type=Path, required=True)
     parser.add_argument("--checkout-revision", required=True)
+    parser.add_argument("--target", default="dev", help="Select an environment from the release mask")
+    parser.add_argument("--inventory-only", action="store_true",
+                        help="List visible items without requiring the complete source inventory")
     args = parser.parse_args()
     try:
-        plan = build_preview(load_mask(args.mask), Path.cwd(), args.checkout_revision, target="dev")
-        names, identity = read_environment_config(args.environment_config, plan["targets"]["dev"]["workspaces"])
-        evidence = verify_dev(plan, names, fabric_reader(fabric_token()))
+        plan = build_preview(load_mask(args.mask), Path.cwd(), args.checkout_revision, target=args.target)
+        workspaces = plan["targets"][args.target]["workspaces"]
+        names, identity = read_environment_config(args.environment_config, workspaces)
+        evidence = inspect_target(plan, args.target, names, fabric_reader(fabric_token()), args.inventory_only)
         evidence["configured_release_identity"] = identity
     except (PlanError, OSError, URLError, subprocess.TimeoutExpired, UnicodeError,
             yaml.YAMLError, json.JSONDecodeError) as exc:
         print(f"PREFLIGHT FAILED: {exc}", file=sys.stderr)
         return 1
     print(json.dumps(evidence, indent=2))
-    print("PREFLIGHT PASSED: Dev workspace names and expected item inventory verified.", file=sys.stderr)
+    if args.inventory_only:
+        result = "workspace names verified and visible items recorded."
+    else:
+        result = "workspace names and expected item inventory verified."
+    print(f"PREFLIGHT PASSED: {args.target.capitalize()} {result}", file=sys.stderr)
     return 0
 
 

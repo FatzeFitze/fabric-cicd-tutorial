@@ -8,6 +8,7 @@ Keep the record with your participant project.
 | Pinned Data and Reporting revisions | |
 | CI and Dev preflight run links | |
 | Configured release UAMI and service connection, checked against the connection setup | |
+| Dev UAMI Contributor assignment in Code, Data and Reporting Dev | |
 | Code, Data and Reporting Dev names and workspace IDs | |
 | Notebook, library and Fabric pipeline physical IDs | |
 | Lakehouse, semantic model and report physical IDs | |

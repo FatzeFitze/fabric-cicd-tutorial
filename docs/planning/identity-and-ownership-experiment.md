@@ -28,11 +28,9 @@ Adding this one notebook uses an item type and workspace role already taught. Ch
 
 The organizer's expectation that a non-human creator becomes the owner is a hypothesis to verify for the selected item type and operation. A deployment that updates an existing item need not behave like first creation. Do not teach one universal owner rule for notebooks, lakehouses, semantic models and reports without evidence.
 
-## Provisioning proposal for the pilot and the event
+## Provisioning for the pilot and the event
 
-The organizer plans one UAMI per environment for the pilot. The suggested names are `mi-dfd-test123-rel-dev`, `mi-dfd-test123-rel-test` and `mi-dfd-test123-rel-prod`. All three fit the 24-character limit that applies if an identity is assigned to a VM or VM scale set. Each name identifies the workshop, pilot team, release purpose and environment. [Azure managed identity naming](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/manage-user-assigned-managed-identities-azure-resource-manager).
-
-For participant-operated releases, prefer one identity per team per environment. Scope each identity to the team's corresponding Fabric workspaces, federate it to the service connection and authorize the intended pipeline. A shared identity with access to multiple teams' workspaces gives every authorized pipeline the same underlying grants. Consider a shared pair only for a facilitator-controlled release pipeline that validates team and target boundaries. Keep deployment and runtime grants separately scoped. [Managed identity least privilege](https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/managed-identity-best-practice-recommendations) · [Authorize individual pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/release/configure-workload-identity).
+The organizer is starting with shared Dev, Test and Prod UAMIs and may automate per-team identities later. Teams create their own service connections and grant the corresponding UAMI Fabric Contributor in their assigned workspaces. A shared identity gives its authorized pipelines the same underlying grants across teams. Use the physical workspace ID and verify the independently recorded team workspace name before a write. Keep deployment and runtime grants separately scoped. [Provisioning handoff](../facilitator/project-and-environment-provisioning.md#unit-8-identity-handoff) · [Managed identity least privilege](https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/managed-identity-best-practice-recommendations).
 
 ## Minimal preparation and exercise contract
 

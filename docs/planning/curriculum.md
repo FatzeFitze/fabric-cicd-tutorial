@@ -1,6 +1,6 @@
 # Curriculum and sample growth
 
-Updated 10 November 2026. Units 1–6 have organizer-reported success. The organizer accepted Unit 7's lesson with a clarification about static validation. Unit 8 Part A supplies the live Dev preflight. The publishing continuation and Units 9–12 describe the proposed sequence and target state.
+Updated 11 November 2026. Units 1–6 have organizer-reported success. The organizer accepted Unit 7's lesson with a clarification about static validation and reports that the Unit 8 Dev preflight passed. Unit 9 Part A covers the Test setup and before-release inventory. The managed publishing exercises and Units 10–12 describe the proposed sequence and target state.
 
 ## Teaching journey
 
@@ -50,7 +50,7 @@ An optional companion covers local branch conflicts and Fabric workspace-versus-
 | --- | ---: | --- | --- |
 | **[7. Fill the configuration mask and preview the release](../tutorial/section-04-release-automation/unit-07-configure-and-preview-release/README.md)** | 45 | Fill the YAML mask with workspace mappings, source pins, dependency intent and desired value sets. Add Test and Prod alternatives to the versioned Variable Library. Reuse the required build to reject a duplicated Dev mapping, then preview the corrected targets. | MS-03, 04, 06, 08, 12 |
 | **[8. Publish and validate shared Dev](../tutorial/section-04-release-automation/unit-08-publish-shared-dev/README.md)** | 65 planned | Part A uses the approved runner identity to verify Dev workspace names and item IDs and record the exported relationships. For the publishing continuation, reconcile pending Git changes, establish one publisher, publish the reviewed snapshot including the validation notebook, and verify settings, bindings and runtime results. Capture 357.20 gross and 204.70 revenue. | MS-03, 05–08, 10, 12–14 |
-| **9. Release the same source to Test** | 45 | Promote the Dev-validated snapshot across roles. Observe the validation notebook's first Test creation by managed identity and compare its ownership with an update to a human-created item. Record caller, target IDs and runtime/access evidence. | MS-01, 04–08, 10–14 |
+| **[9. Release the same source to Test](../tutorial/section-04-release-automation/unit-09-release-to-test/README.md)** | 45 planned | Part A establishes Test deployment access and records the baseline. Then promote the Dev-validated snapshot, observe the validation notebook's first Test creation by managed identity and compare its ownership with an update to a human-created item. Record caller, target IDs and runtime/access evidence. | MS-01, 04–08, 10–14 |
 | **10. Approve and release to simulated Prod** | 30 | Use a real resource approval and the source validated in Test. First-create the same new item through the Prod managed identity, inspect owner/default/runtime/connection identity observations and run post-deployment checks. Retain release evidence and explain Admin lab bypass limits. | MS-01, 03, 05, 07–12, 14 |
 
 The preferred Dev mechanism remains pipeline publishing, subject to validation. Controlled Git-update Dev is the alternative to assess, not a second required implementation. Native pipelines from Unit 3 become a comparison/reference path; normal Model B changes use the selected automation route. Do not keep competing native/manual and automated publishers active for the exercise.

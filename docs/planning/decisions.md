@@ -16,6 +16,8 @@ Date: 28 October 2026. Explicit user decisions are recorded below. Other recomme
 
 ## Confirmed in the scoping discussion
 
+- 11 November. Use the existing-UAMI **Managed identity** connection form and facilitator-provided Azure subscription and resource group selections. Teams grant their deployment UAMI Fabric Contributor in the assigned workspaces. Start with shared Dev, Test and Prod UAMIs. Per-team identities may be automated later. The live Dev preflight passed by organizer report and logical IDs matched `.platform`. Start Unit 9 with Test setup and the before-release inventory. [Unit 8 pilot notes](../facilitator/unit-08-pilot-notes.md) · [Unit 9 pilot notes](../facilitator/unit-09-pilot-notes.md).
+
 - 10 November. Learners create their own Azure DevOps service connections, starting with the Dev connection in Unit 8. The facilitator provides the UAMIs and prepares Azure and Fabric access. Use the same guided pattern for later environment-specific connections. The scope and minimum Azure access for the chosen task still need pilot evidence. [Unit 8 pilot notes](../facilitator/unit-08-pilot-notes.md).
 
 - 10 November. Keep participant- and project-specific values in versioned configuration. The release mask carries repository references, source pins and workspace IDs. Use `config/environments/<environment>.yml` for release identity and connection names and expected workspace display names. Bind protected Azure DevOps resources at pipeline expansion. Repository resources that require a literal name belong in the project's pipeline entry point. [Repository resource schema](https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/resources-repositories-repository).

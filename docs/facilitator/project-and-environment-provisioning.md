@@ -145,8 +145,8 @@ Resource names and commit IDs are enough for this checkpoint. Do not include cre
 
 ## Unit 8 identity handoff
 
-- Provision the assigned Dev UAMI and prepare its Azure access and Fabric tenant/workspace access. Give each learner the UAMI name, client ID, tenant ID, portal location if they manage its credential, and the approved Azure subscription name and ID. The participant creates the service connection in Azure DevOps. Give them the service connection Creator role or equivalent for their training project. [Unit 8 pilot notes](unit-08-pilot-notes.md).
-- If learners register their own federated credentials, scope that access to their assigned, isolated training UAMI. If the facilitator retains credential access, arrange to receive the draft connection's issuer and subject and add the credential during the exercise. Keep Azure role assignments with the facilitator. Reuse the same handoff for separate Test and Prod identities when those exercises need them.
+- Provision the training UAMIs and enable the tenant access needed for Fabric APIs. Provide each team with the UAMI name and the subscriptions and resource groups for the identity and the service connection scope. Prepare the Azure permissions to find the UAMI, create the federated credential and save the connection. In Azure DevOps, give the team the service connection Creator role or equivalent in its project. [Unit 8 pilot notes](unit-08-pilot-notes.md).
+- Give the team Admin access to its assigned workspaces so it can grant the matching deployment UAMI Contributor. The workshop initially shares one UAMI per environment. Coordinate credential creation on each shared UAMI when teams reach the connection form together. [Federation concurrency and throttling](https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation-considerations#concurrent-updates-arent-supported-user-assigned-managed-identities).
 
 ## Control coverage and references
 
