@@ -19,7 +19,7 @@ Suppose you're adding a column to a data export. You can create a branch from th
 
 ## Follow a change from laptop to review
 
-1. **Clone** the shared repository with `git clone` to get a local copy and history. If you already cloned it, switch to the intended base branch and get its latest changes before branching.
+1. **Clone** the shared repository with `git clone` to get a local copy and history. Before branching, check that you're on the intended base branch and that it is up to date. For a team using `dev`, run `git switch dev` followed by `git pull --ff-only`.
 2. **Create a feature branch** with `git switch -c feature/add-export-column`. It starts at your current commit. Choose a name that describes the change.
 3. **Edit and inspect.** Run `git status` to see changed and untracked files. Use `git diff` to see unstaged changes to tracked files. An IDE's Git view can show the same information.
 4. **Stage and commit.** Use `git add <file>` to select the changes, then `git diff --staged` to review what you'll commit. Record it with `git commit -m "Add warehouse column to export"`. If you edit a file after staging it, run `git add` again to include the new edit.

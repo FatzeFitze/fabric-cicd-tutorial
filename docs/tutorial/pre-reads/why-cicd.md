@@ -41,7 +41,7 @@ The investment tends to pay off faster when changes are frequent, several people
 
 ## What does a green result actually prove?
 
-A static check can confirm that source parses and a configuration field exists. An integration test can show that the workload reaches the right dependencies. A small **smoke test** after deployment can verify that a critical path runs and returns a sensible result. Each check covers a different failure mode.
+A static check can confirm that source parses and a configuration field exists. An integration test can show that the workload reaches the right dependencies. A small **smoke test** after deployment can verify that a critical path runs and returns a sensible result. Each check covers a different failure mode. [Static validation for Fabric items](../reference/static-fabric-validation.md).
 
 Suppose the new inventory job writes incorrect quantities before anyone notices. Releasing a known-good definition can repair future runs. The quantities already written may need to be rebuilt or restored, and a downstream export may need to be regenerated. Keep track of source, deployed definitions, environment settings and runtime effects when planning recovery.
 
