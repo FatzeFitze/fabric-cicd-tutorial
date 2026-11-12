@@ -40,6 +40,8 @@ Have the assigned Test UAMI name, the Azure subscriptions and resource groups fo
 
    The Test service connection name comes from the environment template. Azure Pipelines requires a literal value for `resources.repositories[].name`, so you enter the two repository names in the pipeline definition as well as in the mask. The declaration lets Azure DevOps identify and authorize the repositories for checkout. The mask gives the release command the exact commit to select from each repository's `dev` history. The command checks both the repository name and the pinned commit before publishing. [Azure Pipelines repository resources](https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/resources-repositories-repository?view=azure-pipelines).
 
+   For this exercise, copying two names keeps setup simple. A team that provisions many pipelines can generate the checkout declarations from the release mask before Azure DevOps loads the YAML. That gives the repository names a single source of truth while still supplying the literal values Azure DevOps requires.
+
 4. Prepare the validation notebook's source identity before staging the files.
 
    - Make sure the metadata file is named exactly `.platform`. If your browser saved it as `.platform.txt`, remove the trailing `.txt` and keep the leading dot. In Windows File Explorer, turn on **View → Show → File name extensions** to see the full filename. From the Code repo root you can also rename it in PowerShell.
