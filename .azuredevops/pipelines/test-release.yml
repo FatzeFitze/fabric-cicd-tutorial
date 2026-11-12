@@ -2,6 +2,7 @@ trigger: none
 
 resources:
   repositories:
+    # Azure Pipelines requires literal names here. Match the repositories in the release mask.
     - repository: data
       type: git
       name: REPLACE_WITH_DATA_REPO

@@ -1,4 +1,5 @@
 # Copy names from your assigned Test inventory and Azure DevOps project.
+# Repository names and commit pins belong in config/tiny-sales-release.yml.
 variables:
   releaseUamiName: 'REPLACE_WITH_TEST_UAMI_NAME'
   releaseServiceConnection: 'REPLACE_WITH_TEST_SERVICE_CONNECTION_NAME'

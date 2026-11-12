@@ -24,6 +24,10 @@ The same controlled definition can correspond to distinct deployed items. Updati
 
 Preserve the generated logical ID when editing an existing definition. Do not regenerate `.platform`, copy another item's logical ID or replace it with a Dev/Test/Prod physical ID. That changes how source control identifies the item; it does not configure its environment.
 
+## Assign a logical ID to a new source item
+
+Unit 9 starts `validate_release` as a new notebook definition in Git. A fresh, unique, nonzero GUID gives that definition its own identity. The value is a key used to correlate the source item and its references. It encodes no workspace, environment or permission. Generate the GUID once, store it in `config.logicalId` inside `.platform`, and keep it with the notebook through later revisions. Corresponding items can share this logical ID across Test and Prod while each deployed item has its own physical item ID. When starting from an existing Fabric export, keep the logical ID Fabric supplied. [Fabric Git source format](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/source-code-format#platform-file).
+
 ## Find a physical ID without changing the item
 
 1. Open the item from its intended Fabric workspace. Retain its item link in your private solution record.
