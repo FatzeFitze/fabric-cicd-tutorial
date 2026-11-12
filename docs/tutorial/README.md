@@ -19,7 +19,7 @@ Coming to DNA Fabric Days? The [participant prep guide](pre-reads/README.md) cov
 | [6. Turn review into a required check](section-03-team-delivery/unit-06-required-pr-validation/README.md) | Add a reusable source validator and demonstrate a required PR check blocking a defect and passing after the fix | Accepted after organizer walkthrough on 10 November. |
 | [7. Configure and preview a release](section-04-release-automation/unit-07-configure-and-preview-release/README.md) | Fill the release mask, version the alternative value sets and review a read-only plan through the required PR check | Lesson accepted with a clarification about the static check. Exact run evidence pending. |
 | [8. Prepare the shared Dev release](section-04-release-automation/unit-08-publish-shared-dev/README.md) | Set up Dev deployment access, verify workspace names and compare live logical IDs with Git | Organizer reports the live preflight passed and logical IDs matched. Publishing continuation pending. |
-| [9. Release the same source to Test](section-04-release-automation/unit-09-release-to-test/README.md) | Set up Test deployment access and record the item and ownership baseline for release | Part A ready for pilot. Test publishing follows Dev validation. |
+| [9. Release the same source to Test](section-04-release-automation/unit-09-release-to-test/README.md) | Deploy the Dev-validated snapshot to Test and check bindings, runtime and item ownership | Test identity setup and optional baseline rehearsal are available. Managed publishing follows the Dev rehearsal. |
 
 Reference: [Logical and physical IDs in Fabric](reference/fabric-item-identities.md). Introduced with Git capture, applied during local editing and revisited for target bindings/deployment evidence.
 

@@ -1,12 +1,12 @@
 # Unit 9 — Release the same source to Test
 
-## Part A. Prepare Test and record its starting state
+## Test release
 
-Allow **25–30 minutes**. You will create the Test service connection, give the Test deployment identity access to your workspaces and capture what already exists. Keep this record so you can distinguish a first creation from an update when you release to Test.
+In this unit, you will use the Test deployment identity to release the same source you published and validated in Dev. The release pipeline will verify the target workspaces and capture the items already present before it writes. You will then check the Test bindings and runtime results and compare first creation of `validate_release` with the update to `build_sales`.
 
 ### Before you begin
 
-Complete the [Unit 8 Dev preflight](../unit-08-publish-shared-dev/README.md) and keep its run link. Have the assigned Test UAMI name, the subscriptions and resource groups for the identity and service connection, and the names and IDs of your Code, Data and Reporting Test workspaces. You need the Admin role in those three workspaces.
+Have the assigned Test UAMI name, the subscriptions and resource groups for the identity and service connection, and the names and IDs of your Code, Data and Reporting Test workspaces. You need the Admin role in those three workspaces. For the release, use the exact Code, Data and Reporting revisions validated in [Unit 8](../unit-08-publish-shared-dev/README.md).
 
 ### 1. Set up the Test deployment identity
 
@@ -14,6 +14,10 @@ Complete the [Unit 8 Dev preflight](../unit-08-publish-shared-dev/README.md) and
 2. Follow [Unit 8’s workspace access steps](../unit-08-publish-shared-dev/README.md#2-grant-the-deployment-identity-access-in-fabric) to give the **Test UAMI** the **Contributor** role in your Code, Data and Reporting **Test** workspaces. Check all three entries in **Manage access**.
 
 **Expected result** The Test connection uses the Test UAMI, and that identity has Contributor in your three Test workspaces. The Dev preflight keeps using its own Dev connection.
+
+## Optional pilot rehearsal
+
+Run this rehearsal if you want to verify Test access and see the starting inventory while the managed release is being prepared. The Test release will capture its own before-release inventory as part of the run. If you have already merged the rehearsal files, start at [Authorize and run the Test baseline](#3-authorize-and-run-the-test-baseline).
 
 ### 2. Add the Test baseline pipeline
 
@@ -73,7 +77,7 @@ Complete the [Unit 8 Dev preflight](../unit-08-publish-shared-dev/README.md) and
 | Fabric returns HTTP 403 or an unexpected workspace name | Compare the Test UAMI’s workspace roles and the physical IDs and expected names with your assigned Test inventory. |
 | The fresh notebook already exists or `build_sales` is missing | Record the actual state and ask the facilitator to reconcile it before the release comparison. |
 
-### Part A checkpoint
+### Rehearsal checkpoint
 
 - [ ] The Test connection and three workspace role assignments are recorded.
 - [ ] The Test baseline is listed under the connection's restricted pipeline permissions.
