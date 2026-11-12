@@ -18,19 +18,49 @@ You will connect a Test run to a Prod approval, verify both workspace bindings a
 
 **Expected result** Your release record identifies one tested source snapshot, three distinct Prod targets and the expected Prod settings. This applies Model B **MS-02 Source control**, **MS-03 Change control & traceability**, **MS-04 Environment separation** and **MS-06 Environment configuration**. [Fabric Minimum Standard](../../../source-guidelines/fabric-minimum-standard.md#minimum-standard-by-operating-model).
 
-### 2. Prepare the Prod release pipeline
+### 2. Promote the tested Code commit to main
 
-1. Follow the [Unit 8 connection steps](../unit-08-publish-shared-dev/README.md#1-create-your-dev-service-connection) using the assigned **Prod** UAMI and the name `sc-tiny-sales-prod`. Leave **Grant access permission to all pipelines** clear. Use the [Unit 9 Contributor setup](../unit-09-release-to-test/README.md#1-set-up-the-test-deployment-identity) in your Code, Data and Reporting **Prod** workspaces. Record the assignments. Azure DevOps authorizes the pipeline to use the connection. Fabric authorizes the UAMI to publish. [Service connections and identities](../../reference/release-service-connections.md).
-2. In the Code repo, fetch `main` and confirm it contains the selected Code revision. If the branch or revision is missing, ask the release-branch maintainer to establish the tested baseline through the reviewed branch workflow before continuing.
+1. In Azure Repos, open **Repos → Branches** in the **Code** repository and look for `main`. If it does not exist, have the repository maintainer create it from the agreed earlier Code baseline and set up its review policy. The promotion PR will bring in the tested commit.
+2. Fetch the branches. Compare the tip of `origin/dev` with the Code hash from your Test manifest.
 
    ```powershell
    git fetch origin
-   git merge-base --is-ancestor <tested-code-sha> origin/main
+   git rev-parse origin/dev
+   ```
+
+   If the hashes match, open a PR from **`dev` into `main`**. If `dev` has moved, branch from the exact tested Code hash and use that branch as the PR source.
+
+   ```powershell
+   $testedCodeCommit = 'PASTE_FULL_CODE_HASH_FROM_TEST_MANIFEST'
+   git branch release/unit-10 $testedCodeCommit
+   git push origin release/unit-10
+   ```
+
+3. Title the PR **Promote tested Tiny Sales to main**. Link the Test run and the runtime results. List the three verified commits. Ask the reviewer to check that the PR source tip still matches the tested Code hash when the PR is completed. If `dev` moves during review, use the branch pinned to the tested commit.
+4. After review and branch checks pass, complete the promotion PR with **Merge (no fast forward)**. If the source branch is `dev`, leave **Delete source branch** clear. This merge keeps the original tested Code commit in `main` history so the Prod pipeline can check it out by hash. Squash or rebase can produce new commit hashes. If the merge option is unavailable, ask the repository maintainer to check the allowed merge types for `main`. [Complete an Azure Repos PR](https://learn.microsoft.com/en-us/azure/devops/repos/git/complete-pull-requests?view=azure-devops#complete-a-pull-request).
+5. Verify the tested commit is reachable from `main`, then record the completed PR and its resulting `main` revision.
+
+   ```powershell
+   $testedCodeCommit = 'PASTE_FULL_CODE_HASH_FROM_TEST_MANIFEST'
+   git fetch origin
+   git merge-base --is-ancestor $testedCodeCommit origin/main
    $LASTEXITCODE
+   git rev-parse origin/main
+   ```
+
+   Expect exit code `0` from the ancestry check before continuing.
+
+**Expected result** The Code promotion PR puts the exact tested Code commit in `main` history. Data and Reporting stay pinned to their tested commits. This applies **MS-02 Source control**, **MS-03 Change control & traceability** and **MS-14 Release evidence**. [Fabric Minimum Standard](../../../source-guidelines/fabric-minimum-standard.md#minimum-standard-by-operating-model).
+
+### 3. Prepare the Prod release pipeline
+
+1. Follow the [Unit 8 connection steps](../unit-08-publish-shared-dev/README.md#1-create-your-dev-service-connection) using the assigned **Prod** UAMI and the name `sc-tiny-sales-prod`. Leave **Grant access permission to all pipelines** clear. Follow [Unit 8's workspace access steps](../unit-08-publish-shared-dev/README.md#2-grant-the-deployment-identity-access-in-fabric) in Code, Data and Reporting **Prod**, selecting **Contributor** for the Prod UAMI. Verify the three grants in **Manage access**. Azure DevOps authorizes the pipeline to use the connection. Fabric authorizes the UAMI to publish. [Service connections and identities](../../reference/release-service-connections.md).
+2. Create a feature branch from the `origin/main` you just verified.
+
+   ```powershell
    git switch -c feature/prod-release origin/main
    ```
 
-   Replace `<tested-code-sha>` with the actual hash, including removal of the angle brackets. Expect exit code `0` from the ancestry check before creating the feature branch.
 3. Copy the following files from the tutorial into the same paths in your Code checkout. The revised publisher shares the binding and publish logic with Unit 9. The selected Test run and its artifact remain the source of the release candidate.
 
    | Starter | What to configure |
@@ -43,7 +73,7 @@ You will connect a Test run to a Prod approval, verify both workspace bindings a
 
 **Expected result** The Prod pipeline settings are reviewed and versioned. The selected source stays fixed across environments, and the Prod publisher uses a separate managed identity. This applies **MS-03**, **MS-05 Reproducible deployment**, **MS-07 Identity model** and **MS-12 Security & least privilege**. This release starts from the Unit 3 lakehouse and notebook. A fresh rebuild also needs workspace provisioning, bootstrap and data preparation. [Fabric Minimum Standard](../../../source-guidelines/fabric-minimum-standard.md#minimum-standard-by-operating-model).
 
-### 3. Authorize and approve the Prod run
+### 4. Authorize and approve the Prod run
 
 1. Save the pipeline as **Tiny Sales - Prod Release** from the Code repo's `main` branch, using `/.azuredevops/pipelines/prod-release.yml`. Use the [Unit 9 save and authorization steps](../unit-09-release-to-test/README.md#3-authorize-and-run-the-test-release) for the Prod connection and the Data and Reporting repos. If Azure DevOps requests access to the referenced Test pipeline, have its resource administrator authorize the Prod pipeline. [Pipeline resource authorization](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/resources?view=azure-devops#resource-authorization).
 2. Have the connection administrator open **Project settings → Service connections → sc-tiny-sales-prod → Approvals and checks** and add an **Approvals** check. Select the designated approver. Keep the run requester's ability to approve their own run disabled and use a separate account to request the release. This approval lives on the connection in Azure DevOps. It gates the stage that uses the Prod deployment credential. [Azure Pipelines approvals and checks](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals?view=azure-devops#approvals).
@@ -52,7 +82,7 @@ You will connect a Test run to a Prod approval, verify both workspace bindings a
 
 **Expected result** The Prod stage waits for the resource approval, then checks the exact tested snapshot and publishes through the Prod connection. This applies **MS-09 Production authorization** and exercises the **MS-13 Network & execution prerequisites** for the workshop's hosted runner and Fabric path. Workshop workspace Admins retain direct edit rights. Enforcing the production boundary also requires managing those rights and protecting the release branch and credential. [Fabric Minimum Standard](../../../source-guidelines/fabric-minimum-standard.md#minimum-standard-by-operating-model).
 
-### 4. Observe the first creation and the existing-item update
+### 5. Observe the first creation and the existing-item update
 
 1. Open `prod-release.json` under **prod-release-evidence**. Confirm `status: published`, `phase: complete`, all three `verified_source_revisions`, `verified_workspaces`, `deployment_principal_id`, `sql_endpoint_id` and `active_value_set: Prod`. Compare them with your release record.
 2. Compare `before_item_ids` and `published_items`. For `validation`, expect a null before ID, a new physical item ID after publishing, and an entry in `created_items`. Compare the source `validation_logical_id` with the Test notebook's Git definition. The two environments use the same source logical ID and have separate physical item IDs. Check that the existing `build_sales` notebook and `sales` lakehouse kept their Prod physical IDs.
@@ -61,7 +91,7 @@ You will connect a Test run to a Prod approval, verify both workspace bindings a
 
 **Expected result** The manifest shows the first managed creation of `validate_release` in Prod and an update that preserved the existing `build_sales` ID.
 
-### 5. Run Tiny Sales in Prod and retain the evidence
+### 6. Run Tiny Sales in Prod and retain the evidence
 
 1. In **Code Prod**, inspect the `run_sales` Notebook activity. Confirm it points to the Prod `build_sales` item and note the connection choice shown. Run `run_sales` from Fabric. Open its run details and capture status, run link, notebook activity result and the observed values `prod` and `tiny_sales_prod`. Check that the notebook is bound to the **Data Prod** `sales` lakehouse. [Monitor pipeline runs](https://learn.microsoft.com/en-us/fabric/data-factory/monitor-pipeline-runs).
 2. Open the published `validate_release` in **Code Prod**. Check its default lakehouse is **Data Prod** `sales`, then select **Run all**. Record the notebook run or session link and the output `SALES_SMOKE_PASSED` with **357.20 gross** and **204.70 revenue**. Record the signed-in operator who launched each run and any executor or data-access identity exposed by the run or connection settings. Where a connection exposes both its owner and its authentication identity, record them separately.
@@ -84,6 +114,7 @@ For **MS-11 Recovery**, keep the known-good source revisions and target settings
 
 ### Completion checkpoint
 
+- [ ] The completed Code promotion PR preserved the exact tested commit in `main` history.
 - [ ] The approved Prod run used the exact three Test revisions and the assigned Prod managed identity.
 - [ ] The manifest shows first creation of `validate_release` and stable physical IDs for the existing items.
 - [ ] The record links approval, deployment, ownership observations and the actual Prod runtime checks.

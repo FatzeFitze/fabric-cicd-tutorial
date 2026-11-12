@@ -8,6 +8,7 @@ Keep this record with your team's run evidence. Use full commit hashes and links
 | Test pipeline run ID and link | |
 | Test manifest and Test pipeline/notebook runtime results | |
 | Verified Code, Data and Reporting commits | |
+| Completed Code promotion PR and resulting `main` revision | |
 | Reviewed Prod pipeline PR and pipeline definition revision | |
 | Assigned Prod Code, Data and Reporting workspace names and IDs | |
 | Prod lakehouse and SQL analytics endpoint IDs | |
