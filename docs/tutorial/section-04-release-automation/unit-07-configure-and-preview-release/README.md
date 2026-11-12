@@ -93,6 +93,8 @@ Fill and review these fields in `config/tiny-sales-release.yml`.
 
 The mask records identifiers such as repository names, commit IDs and workspace GUIDs. The preview reads those identifiers from the checkout. You will set up authentication when the pipeline connects to Fabric in Unit 8. The mask also describes intended relationships. For example, `items.notebook.bindings.default_lakehouse` names the `lakehouse` plan item. A Dev plan assigns that item to Data Dev, and a Test plan assigns it to Data Test.
 
+The Data and Reporting pins let the Code repo select one combination to test and later release. When a new Data or Reporting commit should be part of a release, review the new pin in the Code repo so Test can validate that combination. [How one release spans three repositories](../unit-10-release-to-prod/README.md#how-one-release-spans-three-repositories).
+
 **Expected result** The mask has concrete workspace IDs and source revisions. It describes the six Tiny Sales items and their target relationships.
 
 ## 3. Add the preview to the required build
