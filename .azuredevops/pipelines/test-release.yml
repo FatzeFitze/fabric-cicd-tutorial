@@ -1,5 +1,11 @@
 trigger: none
 
+parameters:
+  - name: deployToTest
+    displayName: Publish to Test after preflight
+    type: boolean
+    default: false
+
 resources:
   repositories:
     # Azure Pipelines requires literal names here. Match the repositories in the release mask.
@@ -55,7 +61,10 @@ steps:
           --data "$PIPELINE_WORKSPACE/s/data" \
           --reports "$PIPELINE_WORKSPACE/s/reports" \
           --checkout-revision "$BUILD_SOURCEVERSION" \
-          --evidence "$BUILD_ARTIFACTSTAGINGDIRECTORY/test-release.json"
+          --evidence "$BUILD_ARTIFACTSTAGINGDIRECTORY/test-release.json" \
+          --mode "$TEST_RELEASE_MODE"
+    env:
+      TEST_RELEASE_MODE: ${{ iif(parameters.deployToTest, 'deploy', 'preflight') }}
   - publish: $(Build.ArtifactStagingDirectory)
     artifact: test-release-evidence
     condition: succeededOrFailed()

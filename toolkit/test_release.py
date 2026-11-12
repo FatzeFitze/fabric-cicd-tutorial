@@ -1,4 +1,4 @@
-"""Publish the pinned Tiny Sales snapshot to the three verified Test workspaces."""
+"""Check the pinned Tiny Sales snapshot and optionally publish it to Test."""
 
 import argparse
 from datetime import datetime, timezone
@@ -165,7 +165,7 @@ def read_items(plan, keys, workspaces, get):
     return verify_expected_items(items, workspaces, live)
 
 
-def publish_test(plan, dev, paths, names, get, publish, evidence):
+def run_test_release(plan, dev, paths, names, get, publish, evidence, *, deploy):
     notebook, validation, pipeline, activity, expression, model, sql, value_set = read_bindings(paths, plan, dev)
     workspaces = plan["targets"]["test"]["workspaces"]
     preflight = inspect_target(plan, "test", names, get, inventory_only=True)
@@ -180,7 +180,10 @@ def publish_test(plan, dev, paths, names, get, publish, evidence):
     evidence["before_item_ids"] = before
     if not before["lakehouse"] or not before["notebook"]:
         raise PlanError("Complete the native Test promotion from Unit 3 before running this release")
-    print("TEST PREFLIGHT PASSED. Publishing the reviewed snapshot.", flush=True)
+    print("TEST PREFLIGHT PASSED.", flush=True)
+    if not deploy:
+        return
+    print("Publishing the reviewed snapshot to Test.", flush=True)
 
     def publish_phase(role, types):
         evidence["phase"] = f"publish {role}: {', '.join(types)}"
@@ -236,8 +239,11 @@ def main():
     parser.add_argument("--reports", type=Path, required=True)
     parser.add_argument("--checkout-revision", required=True)
     parser.add_argument("--evidence", type=Path, required=True)
+    parser.add_argument("--mode", choices=("preflight", "deploy"), default="preflight")
     args = parser.parse_args()
+    deploy = args.mode == "deploy"
     evidence = {"environment": "test", "run_id": os.getenv("BUILD_BUILDID"), "status": "failed",
+                "mode": args.mode,
                 "phase": "preflight", "started_utc": datetime.now(timezone.utc).isoformat()}
     try:
         from azure.identity import AzureCliCredential
@@ -264,9 +270,11 @@ def main():
 
         with TemporaryDirectory(prefix="tiny-sales-test-") as directory:
             paths = stage_items(plan, repos, Path(directory))
-            publish_test(plan, dev, paths, names, fabric_reader(fabric_token()), publish, evidence)
-        evidence.update(status="published", phase="complete")
-        print("TEST RELEASE PUBLISHED. Review the Test release evidence artifact.")
+            run_test_release(plan, dev, paths, names, fabric_reader(fabric_token()), publish, evidence,
+                             deploy=deploy)
+        evidence.update(status="published" if deploy else "preflight_passed", phase="complete")
+        if deploy:
+            print("TEST RELEASE PUBLISHED. Review the Test release evidence artifact.")
     except Exception as exc:
         evidence["error_type"] = type(exc).__name__
         print(f"TEST RELEASE FAILED during {evidence['phase']}: {exc}", file=sys.stderr)
