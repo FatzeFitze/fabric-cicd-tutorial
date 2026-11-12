@@ -1,0 +1,61 @@
+trigger: none
+
+resources:
+  repositories:
+    - repository: data
+      type: git
+      name: REPLACE_WITH_DATA_REPO
+      ref: refs/heads/dev
+    - repository: reports
+      type: git
+      name: REPLACE_WITH_REPORTING_REPO
+      ref: refs/heads/dev
+
+variables:
+  - template: /config/environments/test.yml
+
+pool:
+  vmImage: ubuntu-24.04
+
+steps:
+  - bash: |
+      set -eu
+      test "$BUILD_SOURCEBRANCH" = refs/heads/dev || { echo 'Run this release from dev.' >&2; exit 1; }
+    displayName: Require the reviewed dev branch
+  - checkout: self
+    path: s/code
+    clean: true
+  - checkout: data
+    path: s/data
+    fetchDepth: 0
+    clean: true
+  - checkout: reports
+    path: s/reports
+    fetchDepth: 0
+    clean: true
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.12'
+  - bash: python -m pip install --disable-pip-version-check -r toolkit/requirements-release.txt
+    displayName: Install the Fabric publisher
+    workingDirectory: $(Pipeline.Workspace)/s/code
+  - task: AzureCLI@2
+    displayName: Preflight and publish Tiny Sales to Test
+    inputs:
+      azureSubscription: ${{ variables.releaseServiceConnection }}
+      scriptType: bash
+      scriptLocation: inlineScript
+      workingDirectory: $(Pipeline.Workspace)/s/code
+      visibleAzLogin: false
+      inlineScript: |
+        set -eu
+        python -B -m toolkit.test_release \
+          --code "$PIPELINE_WORKSPACE/s/code" \
+          --data "$PIPELINE_WORKSPACE/s/data" \
+          --reports "$PIPELINE_WORKSPACE/s/reports" \
+          --checkout-revision "$BUILD_SOURCEVERSION" \
+          --evidence "$BUILD_ARTIFACTSTAGINGDIRECTORY/test-release.json"
+  - publish: $(Build.ArtifactStagingDirectory)
+    artifact: test-release-evidence
+    condition: succeededOrFailed()
+    displayName: Retain Test release evidence

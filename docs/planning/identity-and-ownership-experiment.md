@@ -7,8 +7,8 @@ Requested by the organizer on 4 November 2026. Required learning outcome: create
 | Unit | Role in the story |
 | --- | --- |
 | 4 | Record the human-created Dev baseline and actual pipeline/model connection choices. Do not change ownership to manufacture an expected observation. |
-| 8 | Establish the approved runner identity and distinguish deployment from runtime/data access. Include the prepared read-only `validate_release` notebook in the selected source snapshot and validate it in Dev. |
-| 9 | Promote the Dev-validated snapshot. Demonstrate the notebook's **first creation in Test by the managed deployment identity**, alongside an update to an existing human-created item. Inspect both before and after deployment. |
+| 8 | Establish the authenticated Dev preflight and distinguish deployment from runtime/data access. Capture the source binding formats. |
+| 9 | Publish the reviewed snapshot including `validate_release`. Demonstrate the notebook's **first creation in Test by the managed deployment identity**, alongside an update to an existing human-created item. Inspect both before and after deployment. |
 | 10 | Release the same selected source to Prod. Verify the new item did not already exist, create it through the Prod managed identity, inspect ownership/identity and run its validation through the chosen supported runtime path. |
 | 11 / reference | Explain recovery/support implications: access changes, account lifecycle, connections and any supported takeover/identity reassignment. Do not make human takeover the routine fix for a broken deployment identity. |
 
@@ -36,7 +36,7 @@ The organizer is starting with shared Dev, Test and Prod UAMIs and may automate 
 
 1. Select the managed-identity-only Test/Prod deployment route and validate operation-specific support, tenant settings and least-privilege workspace access. Do not substitute a human connection and claim the managed path passed.
 2. Before introducing the new definition, inventory target item names, physical/logical identities and available ownership fields. Confirm the new item is absent; preserve existing human-created items for comparison.
-3. Author the new definition on a feature branch through the validated new-item template or coordinated export route established for Model B. Give this genuinely new item its own stable logical identity; preserve existing items' identities. Pass CI/shared-Dev integration before selecting the snapshot for Test, then use that same snapshot through Test and Prod. Do not introduce an uncoordinated second Dev publisher or require feature workspaces. The new notebook performs a small read-only check without recreating/deleting the main lakehouse or altering unrelated permissions.
+3. Author the new definition on a feature branch using the Unit 9 starter. Give it its own stable logical identity and preserve existing items' identities. Review the source change and pass CI before selecting the Test snapshot. Retain those exact revisions for Prod. The new notebook performs a read-only check of the sales table.
 4. Deploy Test under the managed identity. Record the new physical item ID, caller, owner/associated identity fields actually exposed, deployment result and supported runtime/access result. Compare with an existing item's ownership before/after an update in that same release.
 5. Redeploy the same source and determine whether it updates the same physical item and whether the observed identities change. Do not delete/recreate merely to force an ownership outcome.
 6. Promote that same selected source to Prod through its governed managed connection, repeat the absence/creation/ownership/runtime checks and retain the evidence with the release record.

@@ -16,6 +16,8 @@ Date: 28 October 2026. Explicit user decisions are recorded below. Other recomme
 
 ## Confirmed in the scoping discussion
 
+- Keep Unit 8 as the read-only Dev preflight and use Git integration for shared Dev. Unit 9 uses one pipeline run to check the reviewed source and Test workspaces before publishing to Test. Automated smoke validation and a required PR gate to `main` are follow-on topics. The workshop uses the seeded Test lakehouse from Unit 3 for this first managed release. [Unit 8](../tutorial/section-04-release-automation/unit-08-publish-shared-dev/README.md) · [Unit 9](../tutorial/section-04-release-automation/unit-09-release-to-test/README.md).
+
 - 11 November. Use the existing-UAMI **Managed identity** connection form and facilitator-provided Azure subscription and resource group selections. Teams grant their deployment UAMI Fabric Contributor in the assigned workspaces. Start with shared Dev, Test and Prod UAMIs. Per-team identities may be automated later. The live Dev preflight passed by organizer report and logical IDs matched `.platform`. Start Unit 9 with Test setup and the before-release inventory. [Unit 8 pilot notes](../facilitator/unit-08-pilot-notes.md) · [Unit 9 pilot notes](../facilitator/unit-09-pilot-notes.md).
 
 - 10 November. Learners create their own Azure DevOps service connections, starting with the Dev connection in Unit 8. The facilitator provides the UAMIs and prepares Azure and Fabric access. Use the same guided pattern for later environment-specific connections. The scope and minimum Azure access for the chosen task still need pilot evidence. [Unit 8 pilot notes](../facilitator/unit-08-pilot-notes.md).

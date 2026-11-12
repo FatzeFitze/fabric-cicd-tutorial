@@ -1,6 +1,6 @@
 # Curriculum and sample growth
 
-Updated 12 November 2026. Units 1–6 have organizer-reported success. The organizer accepted Unit 7's lesson with a clarification about static validation and reports that the Unit 8 Dev preflight passed. Unit 9 has Test setup and an optional inventory rehearsal. Its core exercise is the Test deployment. The managed publishing exercises and Units 10–12 describe the proposed sequence and target state.
+Units 1–6 have organizer-reported success. The organizer accepted Unit 7's lesson with a clarification about static validation and reports that the Unit 8 Dev preflight passed. Unit 9 supplies the first managed Test release pipeline for live rehearsal. Units 10–12 describe the proposed sequence and target state.
 
 ## Teaching journey
 
@@ -49,11 +49,11 @@ An optional companion covers local branch conflicts and Fabric workspace-versus-
 | Unit | Min | Work and observable checkpoint | Main controls |
 | --- | ---: | --- | --- |
 | **[7. Fill the configuration mask and preview the release](../tutorial/section-04-release-automation/unit-07-configure-and-preview-release/README.md)** | 45 | Fill the YAML mask with workspace mappings, source pins, dependency intent and desired value sets. Add Test and Prod alternatives to the versioned Variable Library. Reuse the required build to reject a duplicated Dev mapping, then preview the corrected targets. | MS-03, 04, 06, 08, 12 |
-| **[8. Publish and validate shared Dev](../tutorial/section-04-release-automation/unit-08-publish-shared-dev/README.md)** | 65 planned | Part A uses the approved runner identity to verify Dev workspace names and item IDs and record the exported relationships. For the publishing continuation, reconcile pending Git changes, establish one publisher, publish the reviewed snapshot including the validation notebook, and verify settings, bindings and runtime results. Capture 357.20 gross and 204.70 revenue. | MS-03, 05–08, 10, 12–14 |
-| **[9. Release the same source to Test](../tutorial/section-04-release-automation/unit-09-release-to-test/README.md)** | 45 planned | Set up Test access and deploy the Dev-validated snapshot. Capture the starting inventory inside the release run. Observe the validation notebook's first Test creation by managed identity and compare its ownership with an update to a human-created item. Record caller, target IDs and runtime/access evidence. The standalone baseline is an optional pilot rehearsal. | MS-01, 04–08, 10–14 |
+| **[8. Verify the shared Dev workspaces](../tutorial/section-04-release-automation/unit-08-publish-shared-dev/README.md)** | 35–40 planned | Use the Dev connection to verify workspace names and item IDs. Record exported relationships while Git integration remains the Dev update mechanism. | MS-04, 06, 07, 12, 14 |
+| **[9. Publish Tiny Sales to Test](../tutorial/section-04-release-automation/unit-09-release-to-test/README.md)** | 45–55 planned | Verify the pinned source and Test targets, capture starting inventory and deploy in one run. Compare first creation by the Test identity with an update to a human-created item. Review the deployment evidence and run an optional runtime smoke test. | MS-01, 04–07, 12, 14 |
 | **10. Approve and release to simulated Prod** | 30 | Use a real resource approval and the source validated in Test. First-create the same new item through the Prod managed identity, inspect owner/default/runtime/connection identity observations and run post-deployment checks. Retain release evidence and explain Admin lab bypass limits. | MS-01, 03, 05, 07–12, 14 |
 
-The preferred Dev mechanism remains pipeline publishing, subject to validation. Controlled Git-update Dev is the alternative to assess, not a second required implementation. Native pipelines from Unit 3 become a comparison/reference path; normal Model B changes use the selected automation route. Do not keep competing native/manual and automated publishers active for the exercise.
+The workshop uses Git integration for shared Dev. Managed deployment begins in Test. Native pipelines from Unit 3 provide the starting Test items and a comparison for the Model B release.
 
 The observed pilot has three repos, whereas the recommended participant architecture is one solution repo with role folders. Resolve the workshop choice before finalizing Unit 2 and local-development instructions. A final three-repo path needs a release record pinning each repo revision; a single commit cannot represent all three. Avoid a mandatory repository migration exercise merely to reconcile our pilot with the recommendation.
 
@@ -81,14 +81,14 @@ Use a **versioned YAML form** for the mask. Give learners a starter to fill in, 
 | --- | --- | --- |
 | Validate inputs | Actionable results for source, configuration and project checks. CI uses the same entry point. | Unit 6, with the mask added in Unit 7 |
 | Resolve a plan | Read-only preview of selected revisions, declared workspace IDs, definition order and binding intent. Resolve physical item IDs during publishing. | Units 7–8 |
-| Publish and configure | Apply the approved plan, resolve deployed IDs, establish bindings and select or verify the target value set. | Unit 8 |
+| Publish and configure | Apply the approved plan, resolve deployed IDs, establish bindings and select or verify the target value set. | Unit 9 |
 | Verify and record | Run target checks and capture results, IDs, source revisions and release evidence. Test and Prod reuse the same functions. | Units 8–10 |
 
 The mask describes which versioned source and role folders to use, the destination workspace for each role, dependency intent and the selected value set and check. The pipeline passes the pinned revision set, target name and config path. Azure DevOps resources supply the approved identity and approval. Fabric's Variable Library supplies the runtime values consumed by the workload. Resolve physical IDs where the selected tooling supports it and record them in the plan or release evidence. Define the exact field names once the cross-workspace pilot proves which overrides are needed.
 
 ## Ownership as a thread through the series
 
-Unit 4 records the human baseline. Unit 8 establishes identity boundaries and includes a new validation notebook in the snapshot exercised in Dev. Unit 9 observes its first Test creation by managed identity and compares it with an existing-item update. Unit 10 observes first Prod creation using the same selected source. [Ownership experiment plan](identity-and-ownership-experiment.md).
+Unit 4 records the human baseline. Unit 8 establishes the authenticated Dev preflight. Unit 9 adds the validation notebook to the reviewed source, observes its first Test creation by managed identity, and compares it with an existing-item update. Unit 10 observes first Prod creation using the same selected source. [Ownership experiment plan](identity-and-ownership-experiment.md).
 
 ## How reusable automation enters the tutorial
 
@@ -170,7 +170,7 @@ This shows data flow and execution, not an executable deployment-order graph. Ea
 | Unit 4 | Variable Library, Data Pipeline, semantic model and report in Dev | Read the library through a same-Code-workspace consumer and pass the value to the notebook; model to Data Dev's table; report to model. Run end to end and capture definitions |
 | Units 5–6 | First feature merge, then required checks on a second PR | Change recognized revenue while preserving the table schema. Introduce a deliberate defect to demonstrate the check blocking the second PR. |
 | Unit 7 | Explicit environment/dependency configuration and library value sets | Inspect notebook/lakehouse, pipeline/notebook, pipeline/library, model/data and report/model relationships; distinguish desired active-set configuration from versioned library definitions |
-| Unit 8 | Full Dev solution under one automated writer | Discover/create target items, resolve/inspect bindings, establish/check active value set, seed/run and refresh as required, then compare metrics |
+| Unit 8 | Git-connected Dev with authenticated inventory checks | Check assigned workspace IDs and names, item IDs and source bindings |
 | Units 9–10 | Full solution reaches Test and simulated Prod | Use pinned source, proven target-specific ordering/binding and runtime checks; confirm a Test/Prod run does not write into Dev |
 | Units 11–12 | Recovery and portability evidence | Correct/redeploy and verify convergence; change a second example's config without changing generic implementation |
 

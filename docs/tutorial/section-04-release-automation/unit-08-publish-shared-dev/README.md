@@ -1,8 +1,6 @@
-# Unit 8 — Prepare the shared Dev release
+# Unit 8 — Verify the shared Dev workspaces
 
-## Part A. Verify the targets with Fabric
-
-Allow **35–40 minutes**. You will create a Dev service connection and run an Azure Pipeline that checks the shared Dev workspaces and records the physical IDs of the existing Tiny Sales items. This is the read-only checkpoint before the publishing handoff.
+Allow **35–40 minutes**. You will create a Dev service connection and run a read-only Azure Pipeline that verifies the shared Dev workspaces and records the physical IDs of the existing Tiny Sales items. In this workshop, Git integration keeps shared Dev current and the first pipeline-managed deployment goes to Test in Unit 9. Teams that need automated publishing in Dev can adopt a managed Dev release as their Dev update mechanism.
 
 ### Before you begin
 
@@ -28,12 +26,12 @@ Put the Dev UAMI name, service connection name and expected workspace names in `
 ### 2. Grant the deployment identity access in Fabric
 
 1. In Fabric, open your **Code Dev** workspace. Select **Manage access → Add people or groups**. Search for the exact assigned Dev UAMI name and select its service principal.
-2. Select **Contributor**, then **Add**. In **Manage access**, verify the Dev UAMI is listed as **Contributor**. If it already has a direct role, use the menu beside its entry to select **Contributor**.
+2. Select **Viewer**, then **Add**. In **Manage access**, verify the Dev UAMI has Viewer or higher.
 3. Repeat in your **Data Dev** and **Reporting Dev** workspaces. Record the three assignments in the worksheet.
 
-You use your workspace Admin role to grant access. Azure DevOps controls which pipeline may sign in through the service connection. Fabric checks what that UAMI may do in each workspace. Viewer is enough for this read-only preflight. Assign Contributor now because the same Dev deployment identity will publish items in these workspaces. [Manage workspace access](https://learn.microsoft.com/en-us/power-bi/collaborate-share/service-give-access-new-workspaces) · [Fabric workspace roles](https://learn.microsoft.com/en-us/fabric/fundamentals/roles-workspaces).
+You use your workspace Admin role to grant access. Azure DevOps controls which pipeline may sign in through the service connection. Fabric checks what that UAMI may do in each workspace. Viewer is enough for these reads. Unit 9 grants the separate Test UAMI Contributor so it can publish. [Manage workspace access](https://learn.microsoft.com/en-us/power-bi/collaborate-share/service-give-access-new-workspaces) · [Fabric workspace roles](https://learn.microsoft.com/en-us/fabric/fundamentals/roles-workspaces).
 
-**Expected result** The assigned Dev UAMI is listed as Contributor in your three Dev workspaces.
+**Expected result** The assigned Dev UAMI can read all three Dev workspaces.
 
 ### 3. Add the Dev preflight to Git
 
@@ -113,10 +111,10 @@ Check the current active set in the Dev Variable Library and record what the wor
 | The workspace name differs | Compare the configured GUID and expected name with the assigned inventory. Resolve the discrepancy before publishing. |
 | An expected item is missing or appears twice | Inspect the workspace and the item role, type and name in the mask. Record the actual inventory before selecting a publish target. |
 
-### Part A checkpoint
+### Completion checkpoint
 
 - [ ] You created and verified the federated Dev service connection and authorized the preflight pipeline to use it.
-- [ ] The Dev UAMI has Contributor in your Code Dev, Data Dev and Reporting Dev workspaces.
+- [ ] The Dev UAMI has at least Viewer in your Code Dev, Data Dev and Reporting Dev workspaces.
 - [ ] The authenticated run verified all three Dev workspace names and recorded the expected item IDs.
 - [ ] The worksheet records the Code revision, Data and Reporting pins, and the CI and preflight runs.
 - [ ] The workspace Git state, active value set and exported references are recorded for the publishing handoff.
