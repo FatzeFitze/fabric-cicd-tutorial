@@ -55,12 +55,13 @@ Complete the [Unit 8 Dev preflight](../unit-08-publish-shared-dev/README.md) and
 
 **Expected result** The Test pipeline and environment settings are reviewed and merged into `dev`.
 
-### 3. Run the baseline and inspect ownership
+### 3. Authorize and run the Test baseline
 
-1. In **Pipelines → New pipeline → Azure Repos Git**, select the Code repository and **Existing Azure Pipelines YAML file**. Select `dev` and `/.azuredevops/pipelines/test-release-baseline.yml`. Save the pipeline and name it **Tiny Sales - Test Baseline**.
-2. Run from `dev`. If prompted, select **View → Permit**, then confirm **Permit** for this pipeline. In **Read Test workspace and item identities**, find `PREFLIGHT PASSED`. Compare `verified_workspaces` with your inventory and the configured identity with the Test connection you created. [Authorize a single pipeline](https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops#authorize-pipelines).
-3. In `workspace_items.code`, check whether the `validate_release` notebook is absent. Find `build_sales` from the earlier native promotion and record its physical ID if present. In Code Test, use item details or the workspace list to inspect any owner or creator field exposed for `build_sales`. Record the exact label and what you saw. If no such field is exposed, record that observation. Keep both notebooks untouched so the later release can distinguish creation from update. [Fabric item ownership](https://learn.microsoft.com/en-us/fabric/fundamentals/item-ownership-take-over).
-4. Save the run link and observations in the worksheet. The logged Code checkout and declared Data and Reporting pins describe the input to the baseline. The release will use the exact snapshot validated in Dev. Keep its three revisions with the release evidence when that snapshot is selected. [Test release record](resources/test-release-record.md).
+1. In **Pipelines → New pipeline → Azure Repos Git**, select the Code repository and **Existing Azure Pipelines YAML file**. Select `dev` and `/.azuredevops/pipelines/test-release-baseline.yml`. Use the menu next to **Run** to select **Save**. On the saved pipeline's details page, use **… → Rename/move** to name it **Tiny Sales - Test Baseline**. [Pipeline settings](https://learn.microsoft.com/en-us/azure/devops/pipelines/customize-pipeline?view=azure-devops#pipeline-settings).
+2. Open **Project settings → Pipelines → Service connections** and select `sc-tiny-sales-test`. Open **… → Security**. Under **Pipeline permissions**, keep access restricted, select **Add pipeline** (**+**) and choose **Tiny Sales - Test Baseline**. Verify the pipeline appears in the list. A service connection administrator can grant this access in advance. The person who queues the authorized pipeline needs **Queue builds** permission on the pipeline. The task then uses the connection's Test UAMI, and Fabric applies that identity's workspace role. [Pipeline and service connection permissions](https://learn.microsoft.com/en-us/azure/devops/pipelines/policies/permissions?view=azure-devops#set-service-connection-pipeline-permissions).
+3. Run from `dev`. In **Read Test workspace and item identities**, find `PREFLIGHT PASSED`. Compare `verified_workspaces` with your inventory and the configured identity with the Test connection you created.
+4. In `workspace_items.code`, check whether the `validate_release` notebook is absent. Find `build_sales` from the earlier native promotion and record its physical ID if present. In Code Test, use item details or the workspace list to inspect any owner or creator field exposed for `build_sales`. Record the exact label and what you saw. If no such field is exposed, record that observation. Keep both notebooks untouched so the later release can distinguish creation from update. [Fabric item ownership](https://learn.microsoft.com/en-us/fabric/fundamentals/item-ownership-take-over).
+5. Save the run link and observations in the worksheet. The logged Code checkout and declared Data and Reporting pins describe the input to the baseline. The release will use the exact snapshot validated in Dev. Keep its three revisions with the release evidence when that snapshot is selected. [Test release record](resources/test-release-record.md).
 
 **Expected result** You have a live inventory from the Test identity and an ownership baseline for the comparison item. The baseline reads workspace and item information.
 
@@ -68,12 +69,14 @@ Complete the [Unit 8 Dev preflight](../unit-08-publish-shared-dev/README.md) and
 
 | Symptom | What to check |
 | --- | --- |
+| The pipeline needs permission to use the connection | Check that the saved **Tiny Sales - Test Baseline** pipeline is listed under the connection's restricted **Pipeline permissions**. If you lack access to that setting, ask the connection administrator to add it. |
 | Fabric returns HTTP 403 or an unexpected workspace name | Compare the Test UAMI’s workspace roles and the physical IDs and expected names with your assigned Test inventory. |
 | The fresh notebook already exists or `build_sales` is missing | Record the actual state and ask the facilitator to reconcile it before the release comparison. |
 
 ### Part A checkpoint
 
 - [ ] The Test connection and three workspace role assignments are recorded.
+- [ ] The Test baseline is listed under the connection's restricted pipeline permissions.
 - [ ] The Test baseline run verified all three workspaces.
 - [ ] The record shows whether `validate_release` was absent and captures the existing comparison item's ID and any ownership information visible.
 

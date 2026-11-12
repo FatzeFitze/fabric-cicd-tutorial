@@ -6,6 +6,7 @@ Keep the record with your participant project. Retain the baseline before releas
 | --- | --- |
 | Dev preflight and Test baseline run links | |
 | Test connection and selected UAMI | |
+| Pipeline authorized on the Test service connection | |
 | Test UAMI Contributor assignment in Code, Data and Reporting Test | |
 | Verified Test workspace names and physical IDs | |
 | Is `validate_release` absent from Code Test? | |
