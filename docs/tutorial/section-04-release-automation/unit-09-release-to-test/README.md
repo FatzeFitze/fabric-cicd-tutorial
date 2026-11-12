@@ -118,6 +118,7 @@ The artifact records deployment evidence. If time allows, run `run_sales` in Cod
 | The release cannot find the validation notebook's `.platform` file | Check the committed filename in Azure Repos and remove any trailing `.txt` before committing the file. |
 | Fabric returns HTTP 403 or an unexpected workspace name | Compare the Test UAMI’s workspace roles and the physical IDs and expected names with your assigned Test inventory. |
 | The preflight rejects a pin or a source definition | Check the pinned commit is in the corresponding `dev` history and the definition matches the bindings inspected in Unit 8. |
+| The preflight rejects the notebook activity reference | Check the `TridentNotebook` activity in `run_sales.DataPipeline/pipeline-content.json` on the run's Code revision. A same-workspace Git binding uses the all-zero `workspaceId` with the `notebookId` from `build_sales.Notebook/.platform` (`config.logicalId`). An explicit workspace reference uses the Code Dev workspace ID in the release mask. The release resolves the physical Code Test IDs before publishing the activity. |
 | A publish step fails | Open the run log and the artifact's `phase`. Inspect the target items before retrying the same revision. Earlier publish phases can have completed. |
 
 ### Completion checkpoint

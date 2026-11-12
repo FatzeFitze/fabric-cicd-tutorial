@@ -28,6 +28,7 @@ ITEM_TYPES = {
 }
 NOTEBOOK_META = re.compile(r"(?:^# META .*\n)+", re.MULTILINE)
 SQL_SOURCE = re.compile(r'Sql\.Database\("([^"\r\n]+)",\s*"([0-9a-fA-F-]{36})"\)')
+ZERO_GUID = "00000000-0000-0000-0000-000000000000"
 
 
 def git(repo, *args):
@@ -82,7 +83,7 @@ def stage_items(plan, repos, root):
         if (metadata["displayName"], metadata["type"]) != (item["name"], kind):
             raise PlanError(f"{key}: .platform does not match the release mask")
         logical_id = guid(platform["config"]["logicalId"], f"{key} logical ID")
-        if logical_id in logical_ids or logical_id == "00000000-0000-0000-0000-000000000000":
+        if logical_id in logical_ids or logical_id == ZERO_GUID:
             raise PlanError(f"{key}: expected a unique, nonzero logical ID")
         logical_ids.add(logical_id)
         paths[key] = destination
@@ -123,9 +124,19 @@ def read_bindings(paths, plan, dev):
     if len(activities) != 1 or activities[0].get("externalReferences"):
         raise PlanError("Expected one Notebook activity with the workshop's default connection")
     activity = activities[0]["typeProperties"]
-    guid(activity["notebookId"], "source pipeline notebook")
-    if activity["workspaceId"].lower() != dev["code"]:
-        raise PlanError("Notebook activity must reference Code Dev in source")
+    notebook_id = guid(activity.get("notebookId"), "source pipeline notebook")
+    workspace_id = guid(activity.get("workspaceId"), "source pipeline notebook workspace")
+    if notebook_id == ZERO_GUID:
+        raise PlanError("Notebook activity must reference a nonzero notebook ID")
+    if workspace_id == ZERO_GUID:
+        # A same-workspace Git reference identifies its sibling by logical ID.
+        platform = read_json(paths["notebook"] / ".platform")
+        logical_id = guid(platform["config"]["logicalId"], "source notebook logical ID")
+        if notebook_id != logical_id:
+            raise PlanError("Same-workspace activity notebookId must match the source notebook's .platform logicalId")
+    elif workspace_id != dev["code"]:
+        raise PlanError(f"Notebook activity references workspace {workspace_id}. "
+                        f"Expected Code Dev ({dev['code']}) or the all-zero same-workspace GUID.")
     aliases = properties["libraryVariables"]
     for parameter, alias, variable in (("runtime_environment", "EnvironmentName", "environment_name"),
                                         ("run_label", "RunLabel", "run_label")):
