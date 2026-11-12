@@ -1,6 +1,6 @@
 # DNA Fabric Days: workshop planning
 
-Workshop preparation started 28 October 2026. Models A and B are hands-on. Model C and feature workspaces are explainer topics. The organizer reports that the Unit 8 Dev preflight passed and the returned logical IDs matched Git. Unit 9 introduces the first managed Test deployment.
+Workshop preparation started 28 October 2026. Models A and B are hands-on. Model C and feature workspaces are explainer topics. The Unit 8 Dev preflight and Unit 9 managed Test publish passed in the pilot. The Test publish and reported manual runtime checks are recorded in the [Unit 9 pilot notes](docs/facilitator/unit-09-pilot-notes.md#live-test-release-12-november-2026).
 
 ## Start here
 

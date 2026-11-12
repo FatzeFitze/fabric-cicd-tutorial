@@ -15,6 +15,8 @@ In Unit 6, the generic loader checks metadata and Python syntax. The Tiny Sales 
 
 Before making a check mandatory, try it on one known-good definition and one deliberately broken example. Give the failure a file, field or item name so the author knows where to look. Use a Fabric preflight for actual IDs, bindings and access. Use runtime verification for table writes, refreshes and business results. [Logical and physical Fabric IDs](fabric-item-identities.md).
 
+The required PR check in Unit 6 demonstrates the automated validation before integration expected by Model B’s **MS-03 Change control & traceability**. The deployed solution still needs the automated technical and runtime checks described in **MS-08 Release validation**. [Fabric Minimum Standard](../../source-guidelines/fabric-minimum-standard.md#minimum-standard-by-operating-model).
+
 **Discuss with your team.** If a report points to a model with the right name in the wrong workspace, what could a Git-only check detect? What would you need to inspect after deployment? Which three fast checks would earn a required place in your own PR pipeline?
 
 [Unit 6](../section-03-team-delivery/unit-06-required-pr-validation/README.md) · [Tutorial index](../README.md)

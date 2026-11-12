@@ -1,6 +1,6 @@
 # Item creation, ownership and execution identities
 
-Requested by the organizer on 4 November 2026. Required learning outcome: create at least one new target item through the managed-identity-only Test/Prod delivery path and examine its ownership and operational implications. This is planned coverage, not a completed tenant experiment.
+Requested by the organizer on 4 November 2026. Required learning outcome: create at least one new target item through the managed-identity-only Test/Prod delivery path and examine its ownership and operational implications. Test first creation is evidenced in Unit 9. Ownership observations and the Prod experiment are pending.
 
 ## Place it in the existing journey
 
@@ -51,7 +51,7 @@ The core exercise observes ownership; it does not require changing it. Human UI 
 - [Direct Lake data access](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-security-integration) distinguishes the effective query identity, connection configuration and owner read requirements for framing. This supplies a concrete operational reason to inspect more than a displayed owner.
 - If an API uses a field named `creatorPrincipal` but describes it as owner, retain that exact field/version and compare it with the item's actual ownership/identity surfaces. Do not silently merge creator/current owner/default identity into one property.
 
-Checked 4 November 2026. No managed creation/ownership result has been observed for this sample. Record date, tenant/tool/API versions, selected source, operation, caller, target item IDs, ownership inspection method, permissions and actual runtime result during V20. Future capability changes should update implementation guidance without silently rewriting the organizer's Working Version 1 baseline.
+On 12 November 2026, the Unit 9 artifact from run 643 recorded `validate_release` as absent before the Test publish and present afterward. The existing `build_sales` physical ID was preserved. The organizer manually ran the validation notebook successfully. The recorded connection and UAMI names describe the configured deployer. Capture the authenticated principal, exposed owner fields, runtime principal and repeat-deployment result separately during V20. [Unit 9 pilot evidence](../facilitator/unit-09-pilot-notes.md#live-test-release-12-november-2026).
 
 ## Completion and control mapping
 

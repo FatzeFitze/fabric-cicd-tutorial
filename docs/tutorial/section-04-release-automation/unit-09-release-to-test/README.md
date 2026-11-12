@@ -101,7 +101,9 @@ The checkbox makes intent explicit when someone queues a manual release into a s
 
 ### 4. Review what changed
 
-1. Open `test-release.json` in the run artifact. Check `status` is `published`, compare the three source revisions with the selected source, and check `active_value_set` is `Test`.
+The Model B **MS-14 Release evidence** control asks you to connect the source state, deployment and validation result. Use the manifest for the source and deployment evidence, then add your validation observations to the same release record. [Fabric Minimum Standard](../../../source-guidelines/fabric-minimum-standard.md#minimum-standard-by-operating-model).
+
+1. Open `test-release.json` in the run artifact. Check `status` is `published`, compare the three verified source revisions with the selected source, and check `active_value_set` is `Test`. For help reading the fields and examples of how teams use this evidence in reviews, see [Read and design a release manifest](../../reference/release-manifests.md).
 2. Compare `before_item_ids` with `published_items`. Find the existing `build_sales` physical ID and the new `validate_release` physical ID. Inspect any owner or creator field the workspace shows for each notebook. Record the field's exact label and value. If the UI has no field, record that observation. [Fabric item ownership](https://learn.microsoft.com/en-us/fabric/fundamentals/item-ownership-take-over).
 3. Open `sales_overview` in Reporting Test and confirm it uses `sales_model` in Reporting Test. Record the run and your observations. [Test release record](resources/test-release-record.md).
 

@@ -19,13 +19,17 @@ Coming to DNA Fabric Days? The [participant prep guide](pre-reads/README.md) cov
 | [6. Turn review into a required check](section-03-team-delivery/unit-06-required-pr-validation/README.md) | Add a reusable source validator and demonstrate a required PR check blocking a defect and passing after the fix | Accepted after organizer walkthrough on 10 November. |
 | [7. Configure and preview a release](section-04-release-automation/unit-07-configure-and-preview-release/README.md) | Fill the release mask, version the alternative value sets and review a read-only plan through the required PR check | Lesson accepted with a clarification about the static check. Exact run evidence pending. |
 | [8. Verify the shared Dev workspaces](section-04-release-automation/unit-08-publish-shared-dev/README.md) | Use the Dev identity to verify workspace names, item IDs and exported bindings | Organizer reports the live preflight passed and logical IDs matched. |
-| [9. Publish Tiny Sales to Test](section-04-release-automation/unit-09-release-to-test/README.md) | Run the preflight and managed publish together, then review evidence and item ownership | Pipeline starter available for the first live Test publish rehearsal. |
+| [9. Publish Tiny Sales to Test](section-04-release-automation/unit-09-release-to-test/README.md) | Run the preflight and managed publish together, then review evidence and item ownership | Managed Test publish verified from run 643. Manual Test pipeline and notebook checks reported successful. Ownership and rerun observations pending. |
 
 Reference: [Logical and physical IDs in Fabric](reference/fabric-item-identities.md). Introduced with Git capture, applied during local editing and revisited for target bindings/deployment evidence.
 
 Explore which checks can run from Git, where they help and when live evidence is needed. [Static validation for Fabric items](reference/static-fabric-validation.md).
 
 See how a pipeline signs in as a managed identity and where to grant permissions. [Service connections, managed identities and federation](reference/release-service-connections.md).
+
+Read the Test release artifact and see how its fields support review, automated gates and recovery. [Read and design a release manifest](reference/release-manifests.md).
+
+Where a step demonstrates a DataOps control, look for its **MS** number and the practical evidence it produces. Use the Solution Classification Framework to choose the operating model for a real solution, then read the matching column of the Fabric Minimum Standard. [DataOps guidelines](../source-guidelines/README.md).
 
 Optional companion: [Recover from source conflicts](auxiliary/aux-01-recover-from-source-conflicts/README.md). Concepts and recovery approach are available; the intentional-conflict lab is planned after Unit 5's local IDE/Git workflow and is outside required completion.
 
