@@ -107,7 +107,7 @@ def notebook_source(path):
     return source, match, metadata
 
 
-def read_bindings(paths, plan, dev):
+def read_bindings(paths, plan, dev, target="test"):
     notebook = notebook_source(paths["notebook"] / "notebook-content.py")
     lakehouse = notebook[2]["dependencies"]["lakehouse"]
     source_id = guid(lakehouse["default_lakehouse"], "source lakehouse")
@@ -156,9 +156,9 @@ def read_bindings(paths, plan, dev):
     expected_path = {"byPath": {"path": f"../{paths['model'].name}"}}
     if report["datasetReference"] != expected_path:
         raise PlanError("Expected the report's relative path to the staged semantic model")
-    value_set = plan["targets"]["test"]["variable_library"]["desired_value_set"]
+    value_set = plan["targets"][target]["variable_library"]["desired_value_set"]
     if value_set not in read_json(paths["library"] / "settings.json")["valueSetsOrder"]:
-        raise PlanError("Add the Test value set to the Variable Library settings")
+        raise PlanError(f"Add the {value_set} value set to the Variable Library settings")
     return notebook, validation, pipeline, activity, expression, model, matches[0], value_set
 
 
@@ -176,10 +176,11 @@ def read_items(plan, keys, workspaces, get):
     return verify_expected_items(items, workspaces, live)
 
 
-def run_test_release(plan, dev, paths, names, get, publish, evidence, *, deploy):
-    notebook, validation, pipeline, activity, expression, model, sql, value_set = read_bindings(paths, plan, dev)
-    workspaces = plan["targets"]["test"]["workspaces"]
-    preflight = inspect_target(plan, "test", names, get, inventory_only=True)
+def run_release(plan, dev, paths, names, get, publish, evidence, *, deploy, target, first_creation=False):
+    notebook, validation, pipeline, activity, expression, model, sql, value_set = read_bindings(paths, plan, dev, target)
+    workspaces = plan["targets"][target]["workspaces"]
+    label = target.capitalize()
+    preflight = inspect_target(plan, target, names, get, inventory_only=True)
     evidence.update(preflight)
     before = {}
     for key, item in plan["items"].items():
@@ -190,11 +191,15 @@ def run_test_release(plan, dev, paths, names, get, publish, evidence, *, deploy)
         before[key] = matches[0]["itemId"] if matches else None
     evidence["before_item_ids"] = before
     if not before["lakehouse"] or not before["notebook"]:
-        raise PlanError("Complete the native Test promotion from Unit 3 before running this release")
-    print("TEST PREFLIGHT PASSED.", flush=True)
+        raise PlanError(f"Complete the native {label} promotion from Unit 3 before running this release")
+    if first_creation and before["validation"] is not None:
+        raise PlanError("validate_release already exists. Review the previous release evidence before continuing.")
+    if target == "prod" and not first_creation and before["validation"] is None:
+        raise PlanError("Repeat mode requires an existing validate_release notebook.")
+    print(f"{target.upper()} PREFLIGHT PASSED.", flush=True)
     if not deploy:
         return
-    print("Publishing the reviewed snapshot to Test.", flush=True)
+    print(f"Publishing the reviewed snapshot to {label}.", flush=True)
 
     def publish_phase(role, types):
         evidence["phase"] = f"publish {role}: {', '.join(types)}"
@@ -204,12 +209,12 @@ def run_test_release(plan, dev, paths, names, get, publish, evidence, *, deploy)
     publish_phase("data", ["Lakehouse"])
     lakehouse = read_items(plan, ["lakehouse"], workspaces, get)["lakehouse"]
     if lakehouse["itemId"] != before["lakehouse"]:
-        raise PlanError("Publishing did not preserve the existing Test lakehouse")
+        raise PlanError(f"Publishing did not preserve the existing {label} lakehouse")
     endpoint = get(f"/workspaces/{workspaces['data']}/lakehouses/{lakehouse['itemId']}")["properties"]["sqlEndpointProperties"]
     host = endpoint["connectionString"]
-    catalog = guid(endpoint["id"], "Test SQL endpoint")
+    catalog = guid(endpoint["id"], f"{label} SQL endpoint")
     if endpoint["provisioningStatus"] != "Success" or not re.fullmatch(r"[\w-]+\.datawarehouse\.fabric\.microsoft\.com", host, re.I):
-        raise PlanError("Test lakehouse SQL analytics endpoint is not ready")
+        raise PlanError(f"{label} lakehouse SQL analytics endpoint is not ready")
     evidence["sql_endpoint_id"] = catalog
     target_lakehouse = {
         "default_lakehouse": lakehouse["itemId"], "default_lakehouse_name": lakehouse["name"],
@@ -220,9 +225,10 @@ def run_test_release(plan, dev, paths, names, get, publish, evidence, *, deploy)
 
     publish_phase("code", ["VariableLibrary", "Notebook"])
     code = read_items(plan, ["library", "notebook", "validation"], workspaces, get)
+    evidence["published_code_items"] = code
     for key, record in code.items():
         if before[key] and before[key] != record["itemId"]:
-            raise PlanError(f"Publishing did not preserve the existing Test {key}")
+            raise PlanError(f"Publishing did not preserve the existing {label} {key}")
     library = get(f"/workspaces/{workspaces['code']}/variableLibraries/{code['library']['itemId']}")
     actual_set = library["properties"]["activeValueSetName"]
     evidence["active_value_set"] = actual_set
@@ -240,7 +246,11 @@ def run_test_release(plan, dev, paths, names, get, publish, evidence, *, deploy)
     evidence["created_items"] = [key for key in after if before[key] is None]
     for key, record in after.items():
         if before[key] and before[key] != record["itemId"]:
-            raise PlanError(f"Publishing did not preserve the existing Test {key}")
+            raise PlanError(f"Publishing did not preserve the existing {label} {key}")
+
+
+def run_test_release(plan, dev, paths, names, get, publish, evidence, *, deploy):
+    run_release(plan, dev, paths, names, get, publish, evidence, deploy=deploy, target="test")
 
 
 def main():

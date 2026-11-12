@@ -1,6 +1,6 @@
 # Curriculum and sample growth
 
-Units 1–6 have organizer-reported success. The organizer accepted Unit 7's lesson with a clarification about static validation and reports that the Unit 8 Dev preflight passed. Unit 9 run 643 published to Test, followed by reported manual runtime checks. Units 10–12 describe the proposed sequence and target state. [Unit 9 pilot evidence](../facilitator/unit-09-pilot-notes.md#live-test-release-12-november-2026).
+Units 1-6 have organizer-reported success. The organizer accepted Unit 7's lesson with a clarification about static validation and reports that the Unit 8 Dev preflight passed. Unit 9 run 643 published to Test, followed by reported manual runtime checks. Unit 10 is drafted for the Prod rehearsal. Units 11-12 describe the proposed sequence and target state. [Unit 9 pilot evidence](../facilitator/unit-09-pilot-notes.md#live-test-release-12-november-2026) · [Unit 10 pilot checks](../facilitator/unit-10-pilot-notes.md).
 
 ## Teaching journey
 

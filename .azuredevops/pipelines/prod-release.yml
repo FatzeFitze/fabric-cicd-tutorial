@@ -1,0 +1,92 @@
+trigger: none
+
+parameters:
+  - name: expectFirstCreation
+    displayName: Require first creation of validate_release
+    type: boolean
+    default: true
+
+resources:
+  pipelines:
+    - pipeline: tested
+      source: Tiny Sales - Test Release
+      trigger: none
+  repositories:
+    - repository: data
+      type: git
+      name: REPLACE_WITH_DATA_REPO
+      ref: refs/heads/dev
+    - repository: reports
+      type: git
+      name: REPLACE_WITH_REPORTING_REPO
+      ref: refs/heads/dev
+
+variables:
+  - template: /config/environments/prod.yml
+
+pool:
+  vmImage: ubuntu-24.04
+
+stages:
+  - stage: Prod
+    displayName: Publish the tested snapshot to Prod
+    jobs:
+      - job: Publish
+        steps:
+          - bash: |
+              set -eu
+              test "$BUILD_SOURCEBRANCH" = refs/heads/main || { echo 'Queue Prod from main.' >&2; exit 1; }
+              test "$TEST_RUN_ID" = "$APPROVED_TEST_RUN_ID" || { echo 'Select the Test run in the reviewed Prod settings.' >&2; exit 1; }
+              test "$TEST_SOURCE_BRANCH" = refs/heads/dev || { echo 'Select a Test run from dev.' >&2; exit 1; }
+            displayName: Require main and the selected Test run
+            env:
+              TEST_RUN_ID: $(resources.pipeline.tested.runID)
+              APPROVED_TEST_RUN_ID: ${{ variables.approvedTestRunId }}
+              TEST_SOURCE_BRANCH: $(resources.pipeline.tested.sourceBranch)
+          - checkout: self
+            path: s/release
+            fetchDepth: 0
+            clean: true
+          - checkout: data
+            path: s/data
+            fetchDepth: 0
+            clean: true
+          - checkout: reports
+            path: s/reports
+            fetchDepth: 0
+            clean: true
+          - download: tested
+            artifact: test-release-evidence
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '3.12'
+          - bash: python -m pip install --disable-pip-version-check -r toolkit/requirements-release.txt
+            displayName: Install the Fabric publisher
+            workingDirectory: $(Pipeline.Workspace)/s/release
+          - task: AzureCLI@2
+            displayName: Verify and publish Tiny Sales to Prod
+            inputs:
+              azureSubscription: ${{ variables.releaseServiceConnection }}
+              scriptType: bash
+              scriptLocation: inlineScript
+              workingDirectory: $(Pipeline.Workspace)/s/release
+              visibleAzLogin: false
+              inlineScript: |
+                set -eu
+                python -B -m toolkit.prod_release \
+                  --release "$PIPELINE_WORKSPACE/s/release" \
+                  --data "$PIPELINE_WORKSPACE/s/data" \
+                  --reports "$PIPELINE_WORKSPACE/s/reports" \
+                  --test-manifest "$PIPELINE_WORKSPACE/tested/test-release-evidence/test-release.json" \
+                  --test-run-id "$TEST_RUN_ID" \
+                  --test-code-revision "$TEST_CODE_REVISION" \
+                  --evidence "$BUILD_ARTIFACTSTAGINGDIRECTORY/prod-release.json" \
+                  --mode "$PROD_CREATION_MODE"
+            env:
+              TEST_RUN_ID: $(resources.pipeline.tested.runID)
+              TEST_CODE_REVISION: $(resources.pipeline.tested.sourceCommit)
+              PROD_CREATION_MODE: ${{ iif(parameters.expectFirstCreation, 'first', 'repeat') }}
+          - publish: $(Build.ArtifactStagingDirectory)
+            artifact: prod-release-evidence
+            condition: succeededOrFailed()
+            displayName: Retain Prod release evidence

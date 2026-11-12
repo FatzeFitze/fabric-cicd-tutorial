@@ -129,4 +129,4 @@ The artifact records deployment evidence. If time allows, run `run_sales` in Cod
 - [ ] The release artifact records the selected source, target IDs and `Test` value set.
 - [ ] The worksheet records the report's Test model and the observable differences between creating and updating an item.
 
-[Previous unit](../unit-08-publish-shared-dev/README.md) · [Tutorial index](../../README.md)
+[Previous unit](../unit-08-publish-shared-dev/README.md) · [Tutorial index](../../README.md) · [Next: Approve and publish Tiny Sales to Prod](../unit-10-release-to-prod/README.md)
