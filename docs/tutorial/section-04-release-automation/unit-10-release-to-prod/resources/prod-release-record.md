@@ -8,11 +8,11 @@ Keep this record with your team's run evidence. Use full commit hashes and links
 | Test pipeline run ID and link | |
 | Test manifest and Test pipeline/notebook runtime results | |
 | Verified Code, Data and Reporting commits | |
-| Completed Code promotion PR and resulting `main` revision | |
-| Reviewed Prod pipeline PR and pipeline definition revision | |
+| Completed Code promotion PR, its Notebook CI result and resulting `main` revision | |
+| Reviewed Prod pipeline PR, its Notebook CI result and pipeline definition revision | |
 | Assigned Prod Code, Data and Reporting workspace names and IDs | |
 | Prod lakehouse and SQL analytics endpoint IDs | |
-| Prod connection, UAMI name and authenticated principal/object ID | |
+| Prod connection, assigned UAMI name and any Fabric caller audit evidence | |
 | Prod run link, approval decision, approver and time | |
 | Prod manifest, active value set and last phase | |
 | `validate_release` source logical ID, Test physical ID and Prod before/after physical IDs | |

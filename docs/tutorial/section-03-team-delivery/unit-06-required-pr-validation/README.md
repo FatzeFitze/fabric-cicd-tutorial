@@ -130,4 +130,6 @@ The **branch policy** queues this Azure Pipeline against the PR's proposed merge
 
 For a deeper look at what a PR can check from Git and where live validation belongs, see [Static validation for Fabric items](../../reference/static-fabric-validation.md).
 
+The build policy in this unit applies to `dev`. When `main` becomes the Prod release branch, you will add its own policy and reuse this CI pipeline. [Unit 10 branch policies](../../section-04-release-automation/unit-10-release-to-prod/README.md#2-protect-main-and-promote-the-tested-code-commit).
+
 [Previous unit](../unit-05-make-a-local-feature-change/README.md) · [Tutorial index](../../README.md) · [Next unit](../../section-04-release-automation/unit-07-configure-and-preview-release/README.md)

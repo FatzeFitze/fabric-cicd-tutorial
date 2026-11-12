@@ -35,6 +35,21 @@ Your new branch and commits live locally until you push them. The pull request i
 
 A **merge conflict** means Git needs a person to decide how two changes fit together. If two branches edited the same line of a calculation, inspect both versions and decide what the final behavior should be. Edit the affected file, check the result, stage the resolution and finish the merge. When an already shared commit needs to be undone, `git revert` records an inverse change as a new commit and keeps the history visible. [Pro Git on remotes](https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes) · [Git revert](https://git-scm.com/docs/git-revert).
 
+## Check which commit is being released
+
+In Unit 10, the Test manifest gives you a full commit hash. `HEAD` identifies your current checkout. `origin/dev` and `origin/main` show the branch tips as of your last fetch. Run the commands in your local Code repository.
+
+| Command | What it does |
+| --- | --- |
+| `git fetch origin` | Refreshes your view of the shared repo and downloads commits. Your current branch and working files stay as they are. |
+| `git rev-parse origin/dev` or `git rev-parse origin/main` | Prints the full hash at that branch tip. Use `git rev-parse HEAD` for the commit checked out locally. |
+| `git branch release/unit-10 $testedCodeCommit` | Creates a local branch at the commit hash stored in the PowerShell variable `$testedCodeCommit`. Your checkout stays on its current branch. |
+| `git push origin release/unit-10` | Publishes that local branch so you can select it as a PR source in Azure Repos. |
+| `git merge-base --is-ancestor $testedCodeCommit origin/main` | Checks whether the exact tested commit is already in `main` history, including when it is the tip. In PowerShell, read `$LASTEXITCODE` immediately after the command. `0` means yes, `1` means no, and a higher value indicates a Git error. |
+| `git switch -c feature/prod-release origin/main` | Creates and switches to a local feature branch starting at the fetched `main` commit. |
+
+A merge commit can retain the exact tested hash in the target branch's history. Squashing the same file changes can produce a different hash. Unit 10 uses the original hash to retrieve the exact tested snapshot even after additional commits land on `main`.
+
 ## Try it in a disposable local folder
 
 In PowerShell, go to a folder where you can create `git-practice`, then run the following. If Git asks for an author name and email, configure those in this repo with `git config --local user.name "Your Name"` and `git config --local user.email "you@example.com"`, using your approved details. Then retry the commit.

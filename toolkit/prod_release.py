@@ -1,15 +1,13 @@
 """Publish the exact Tiny Sales snapshot evidenced by a selected Test run."""
 
 import argparse
-from base64 import urlsafe_b64decode
 from datetime import datetime, timezone
-import json
 import os
 from pathlib import Path
 import sys
 from tempfile import TemporaryDirectory
 
-from toolkit.fabric_preflight import fabric_reader, fabric_token, guid, read_environment_config
+from toolkit.fabric_preflight import fabric_reader, fabric_token, read_environment_config
 from toolkit.release_plan import PlanError, build_preview, commit_id, load_mask
 from toolkit.test_release import checkout_pins, git, read_json, run_release, stage_items, write_json
 
@@ -26,13 +24,6 @@ def reviewed_revisions(test, run_id, code_revision):
     if revisions["code"] != code_revision:
         raise PlanError("Test artifact Code revision differs from the selected Azure Pipelines run")
     return revisions
-
-
-def caller_object_id(token):
-    # Inspect only the oid of the CLI token. Fabric verifies the token on the live GETs.
-    payload = token.split(".")[1]
-    claims = json.loads(urlsafe_b64decode(payload + "=" * (-len(payload) % 4)))
-    return guid(claims.get("oid"), "Fabric token principal/object ID")
 
 
 def release(args, evidence):
@@ -67,13 +58,7 @@ def release(args, evidence):
             evidence["validation_logical_id"] = read_json(paths["validation"] / ".platform")["config"]["logicalId"]
 
             names, identity = read_environment_config(config, plan["targets"]["prod"]["workspaces"])
-            token = fabric_token()
-            caller = caller_object_id(token)
             evidence["configured_release_identity"] = identity
-            evidence["deployment_principal_id"] = caller
-            if caller != guid(variables["releasePrincipalId"], "configured Prod UAMI principal/object ID"):
-                raise PlanError("Authenticated principal does not match the assigned Prod UAMI")
-
             credential = AzureCliCredential()
 
             def publish(workspace, folder, types, value_set):
@@ -81,7 +66,7 @@ def release(args, evidence):
                                                   item_type_in_scope=types, environment=value_set,
                                                   token_credential=credential))
 
-            run_release(plan, plan["targets"]["dev"]["workspaces"], paths, names, fabric_reader(token),
+            run_release(plan, plan["targets"]["dev"]["workspaces"], paths, names, fabric_reader(fabric_token()),
                         publish, evidence, deploy=True, target="prod", first_creation=args.mode == "first")
         finally:
             git(args.release, "worktree", "remove", str(code))

@@ -1,7 +1,6 @@
 # Copy values from the assigned Prod inventory and approved Test run.
 variables:
   releaseUamiName: 'REPLACE_WITH_PROD_UAMI_NAME'
-  releasePrincipalId: 'REPLACE_WITH_PROD_UAMI_PRINCIPAL_ID'
   releaseServiceConnection: 'sc-tiny-sales-prod'
   codeWorkspaceName: 'REPLACE_WITH_CODE_PROD_DISPLAY_NAME'
   dataWorkspaceName: 'REPLACE_WITH_DATA_PROD_DISPLAY_NAME'
