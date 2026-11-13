@@ -1,6 +1,6 @@
 # Unit 10 - Approve and publish Tiny Sales to Prod
 
-Allow **30 minutes** once the Prod connection and release branch are ready. Use the Test release from Unit 9 to select the same Code, Data and Reporting commits for an approved release to simulated Prod. Then verify that the Prod managed identity created `validate_release` and that Tiny Sales runs against the Prod data.
+Allow **30 minutes** once the Prod connection and release branch are ready, plus **5–10 minutes** for the recap. Use the Test release from Unit 9 to select the same Code, Data and Reporting commits for an approved release to simulated Prod. Then verify that the Prod managed identity created `validate_release` and that Tiny Sales runs against the Prod data.
 
 You will connect a Test run to a Prod approval, verify both workspace bindings and item identities, and use Fabric runtime evidence to check the release.
 
@@ -30,7 +30,7 @@ If your team requires protected `main` branches in all three repos, add a promot
 
 ### 1. Select the tested snapshot and check the Prod targets
 
-1. In the Test artifact, check `environment: test`, `mode: deploy`, `status: published`, `phase: complete` and `active_value_set: Test`. Copy `run_id` and all three full hashes under `verified_source_revisions` to the [Prod release record](resources/prod-release-record.md). Link the required Code PR check from your earlier review and the Test runtime results. [Read the release manifest](../../reference/release-manifests.md).
+1. In the Test artifact, check `environment: test`, `mode: deploy`, `status: published`, `phase: complete` and `active_value_set: Test`. Copy `run_id` and all three full hashes under `verified_source_revisions` to your release record. Include the run name and link from the Test run page. Link the required Code PR check from your earlier review and the Test runtime results. [Prod release record](resources/prod-release-record.md) · [Read the release manifest](../../reference/release-manifests.md).
 2. In Azure Repos, open `config/tiny-sales-release.yml` **at the verified Code commit**. Confirm that the two repository names and pins match the Test artifact, and that `environments.prod.workspaces` lists your three assigned Prod IDs with `value_set: Prod`. Compare each ID and role with the facilitator's inventory. Keep the [Unit 7 Prod overrides](../unit-07-configure-and-preview-release/README.md) in view. The expected runtime values are `prod` and `tiny_sales_prod`.
 3. In the workspace UI, check the Prod names and IDs independently. Record the Data Prod lakehouse and SQL endpoint separately. Each has its own ID. The publisher will resolve the target IDs again after approval. [Logical and physical IDs](../../reference/fabric-item-identities.md).
 
@@ -105,15 +105,18 @@ Unit 6 added Notebook CI to `dev`. Set up `main` now because the Prod pipeline w
    git switch -c feature/prod-release origin/main
    ```
 
-3. Copy the following files from the tutorial into the same paths in your Code checkout. The revised publisher shares the binding and publish logic with Unit 9. The selected Test run and its artifact remain the source of the release candidate.
+3. Copy the following files from the tutorial into the same paths in your Code checkout. Test and Prod are separate Python entry points. Test chooses a source from `dev` and can run a read-only preflight. Prod selects a completed Test run and verifies its commits before publishing. Both call the shared Tiny Sales publisher for staging, target bindings, publishing and inventory checks.
 
    | Starter | What to configure |
    | --- | --- |
    | [`config/environments/prod.yml`](../../../../config/environments/prod.yml) | Enter the Prod UAMI name, confirm the service connection name, and enter the exact Prod workspace names and the Test artifact's `run_id`. Prod uses the same identity settings as Dev and Test. The additional run ID ties Prod to the selected Test run. |
    | [`.azuredevops/pipelines/prod-release.yml`](../../../../.azuredevops/pipelines/prod-release.yml) | Set the two literal repo names from the tested mask. Match `source` under `resources.pipelines` to your saved Unit 9 pipeline name. |
-   | [`toolkit/prod_release.py`](../../../../toolkit/prod_release.py) and [`toolkit/test_release.py`](../../../../toolkit/test_release.py) | Copy both publisher files together. They use the preflight module and requirements already added in Unit 9. |
+   | [`toolkit/prod_release.py`](../../../../toolkit/prod_release.py) | Entry point for the approved release. Reads the Test manifest and checks out the tested snapshot. |
+   | [`toolkit/tiny_sales_release.py`](../../../../toolkit/tiny_sales_release.py) and [`toolkit/test_release.py`](../../../../toolkit/test_release.py) | Use the versions from Unit 9. If you completed an earlier draft of Unit 9, copy both files from this revision together. The shared module uses the Tiny Sales item set and delegates Fabric publishing to `fabric-cicd`. |
 
-4. Commit these four files as **Add the approved Prod release**, push your feature branch and open a PR with the same title into `main`. Use the body below and update **Validation** with the observed results before completing the PR. Have the reviewer compare the Prod configuration with the assigned inventory. Complete the PR once the required review and Notebook CI pass. The Prod run will record the pipeline revision on `main` and use a separate checkout of the exact tested Code commit for the Fabric definitions and release mask.
+   For this first release, the Prod tooling PR starts from `main` so you can set up the release pipeline while keeping the already tested snapshot. Changes to shared publishing code should normally go through a feature PR into `dev`, a Test release, and then promotion to `main`. The recovery exercise starts by bringing the Prod tooling added here back into `dev` through a reviewed PR and verifying the shared publisher in Test. The Prod service connection stays scoped to the authorized release pipeline.
+
+4. Commit the added or updated files as **Add the approved Prod release**, push your feature branch and open a PR with the same title into `main`. Use the body below and update **Validation** with the observed results before completing the PR. Have the reviewer compare the Prod configuration with the assigned inventory. Complete the PR once the required review and Notebook CI pass. The Prod run will record the pipeline revision on `main` and use a separate checkout of the exact tested Code commit for the Fabric definitions and release mask.
 
    ```markdown
    ## Change
@@ -130,11 +133,16 @@ Unit 6 added Notebook CI to `dev`. Set up `main` now because the Prod pipeline w
 ### 4. Authorize and approve the Prod run
 
 1. Save the pipeline as **Tiny Sales - Prod Release** from the Code repo's `main` branch, using `/.azuredevops/pipelines/prod-release.yml`. Use the [Unit 9 save and authorization steps](../unit-09-release-to-test/README.md#3-authorize-and-run-the-test-release) for the Prod connection and the Data and Reporting repos. If Azure DevOps requests access to the referenced Test pipeline, have its resource administrator authorize the Prod pipeline. [Pipeline resource authorization](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/resources?view=azure-devops#resource-authorization).
-2. Have the connection administrator open **Project settings → Service connections → sc-tiny-sales-prod → Approvals and checks** and add an **Approvals** check. Select the designated approver. Keep the run requester's ability to approve their own run disabled and use a separate account to request the release. This approval lives on the connection in Azure DevOps. It gates the stage that uses the Prod deployment credential. [Azure Pipelines approvals and checks](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals?view=azure-devops#approvals).
-3. Choose **Run pipeline**, select `main` and use **Resources** to select the exact **Tiny Sales - Test Release** run from your record. Keep **Require first creation of validate_release** selected. Queue the run when no other release or edit is in progress in your Prod workspaces. [Manual resource version picker](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/resources?view=azure-devops#manual-resource-version-picker).
-4. In the waiting run, have the approver check the selected Test run, its artifact and runtime results, the reviewed Prod settings and the intended targets. Approve only if they match the release record. Capture the decision, approver and time with the run link. After approval, look for `PROD PREFLIGHT PASSED` before the publish begins. The preflight compares all three Git checkouts to the Test manifest and uses the Prod service connection's authenticated session to query the assigned workspaces before issuing writes.
+2. As the connection administrator, open **Project settings → Service connections → sc-tiny-sales-prod → Approvals and checks**. Select **+** (or **Add check**), choose **Approvals**, then select **Next**. Add the designated reviewer under **Approvers**, clear **Allow approvers to approve their own runs**, and set a timeout that gives your reviewer time to act, for example **1 hour** in the workshop. Under **Instructions**, enter the example below and select **Create**. Have a different account queue the release. The check is configured on the connection and gates the stage that uses the Prod deployment credential. [Azure Pipelines approvals and checks](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals?view=azure-devops#approvals).
+
+   > Open the selected Tiny Sales Test run and confirm it published successfully. Compare the three commits in its manifest and the passing Test runtime results with the promotion PR. Confirm the Prod workspace names and IDs and the Prod service connection against the release record. Approve when these match. If something differs, reject the run and describe the mismatch.
+
+3. Choose **Run pipeline** and select `main`. Keep **Require first creation of validate_release** selected for your first release. Continue past the parameters to **Pipeline artifacts** and open **Tiny Sales - Test Release [tested]**. In the picker, search for the Test **run name** shown on the Test run page. Confirm the run, `dev` branch and short Code hash, then choose **Use selected run**. Back in **Pipeline artifacts**, confirm the selected run name and select **Run** when the Prod workspaces are ready. The picker displays a run name such as `20261112.5`. The run URL and manifest carry its numeric ID, which is the value used by `approvedTestRunId`. A green status and a matching short commit can appear on more than one run, so check the exact run against your release record. [Manual resource version picker](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/resources?view=azure-devops#manual-resource-version-picker).
+4. In the waiting run, the approver opens the pending check, applies its instructions, and records the decision, approver and time with the run link. After approval, look for `PROD PREFLIGHT PASSED` before publishing begins. The preflight compares all three Git checkouts to the Test manifest and uses the Prod service connection's authenticated session to query the assigned workspaces before issuing writes.
 
 **Expected result** The Prod stage waits for the resource approval, then checks the exact tested snapshot and publishes through the Prod connection. This applies **MS-09 Production authorization** and exercises the **MS-13 Network & execution prerequisites** for the workshop's hosted runner and Fabric path. Workshop workspace Admins retain direct edit rights. Enforcing the production boundary also requires managing those rights and protecting the release branch and credential. [Fabric Minimum Standard](../../../source-guidelines/fabric-minimum-standard.md#minimum-standard-by-operating-model).
+
+An **Azure DevOps Environment** is a named pipeline resource that a deployment job can target. Separate Test and Prod Environments can give several pipelines a common deployment history and a place for target-wide checks. Fabric workspace IDs still determine where the publisher sends definitions. This unit uses the Prod service connection approval because the exercise protects one release credential and already records the target in its manifest. The recovery exercise is a natural place to use an Environment's deployment history to find the last known-good run. [Azure DevOps Environments](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/environments?view=azure-devops).
 
 ### 5. Observe the first creation and the existing-item update
 
@@ -173,5 +181,18 @@ For **MS-11 Recovery**, keep the known-good source revisions and target settings
 - [ ] The manifest shows first creation of `validate_release` and stable physical IDs for the existing items.
 - [ ] The record links approval, deployment, ownership observations and the actual Prod runtime checks.
 - [ ] You can explain who approved the run, who deployed the items and which identities the runtime evidence shows.
+
+### Recap and discuss
+
+Spend **5–10 minutes** on your own project or a familiar example. Write down one decision you would keep from Tiny Sales and one you would change.
+
+| Discuss | Apply it to your project |
+| --- | --- |
+| **What did we build?** | Trace one change from a Git commit through Test, review on `main`, Prod approval and runtime evidence. Identify which files describe the Fabric items, which select versions and targets, and which execute the release. |
+| **Where do we need separation of concerns?** | Decide who can edit a definition, change a target, approve a release, deploy it and run or support it. Which roles can overlap? Would one repo with role folders support that ownership, or would separate repos and commit pins help? |
+| **What does each control enforce?** | Pick a mistake you want to prevent, such as a developer accidentally writing to Prod. Which combination of branch policy, pipeline permissions, service connection approval and Fabric access would block it? Which practices, such as recording a manual smoke result, help reviewers make a decision? |
+| **What would we automate next?** | Pick a check to run automatically and a decision to keep with a person. For example, automate the smoke notebook and attach its output to the exact candidate, then have a reviewer decide whether to release it to Prod. If several pipelines can deploy to the same target, consider what an Azure DevOps Environment would add. |
+
+Share one boundary you would enforce and one practice you would encourage. Name who owns each and what evidence would show it is working.
 
 [Previous unit](../unit-09-release-to-test/README.md) · [Tutorial index](../../README.md)

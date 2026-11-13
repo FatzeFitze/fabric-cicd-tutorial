@@ -9,7 +9,7 @@ from tempfile import TemporaryDirectory
 
 from toolkit.fabric_preflight import fabric_reader, fabric_token, read_environment_config
 from toolkit.release_plan import PlanError, build_preview, commit_id, load_mask
-from toolkit.test_release import checkout_pins, git, read_json, run_release, stage_items, write_json
+from toolkit.tiny_sales_release import checkout_pins, fabric_publisher, git, read_json, run_release, stage_items, write_json
 
 
 def reviewed_revisions(test, run_id, code_revision):
@@ -27,9 +27,6 @@ def reviewed_revisions(test, run_id, code_revision):
 
 
 def release(args, evidence):
-    from azure.identity import AzureCliCredential
-    from fabric_cicd import FabricWorkspace, publish_all_items
-
     config = args.release / "config/environments/prod.yml"
     variables = load_mask(config)["variables"]
     if variables["approvedTestRunId"] != args.test_run_id:
@@ -59,15 +56,9 @@ def release(args, evidence):
 
             names, identity = read_environment_config(config, plan["targets"]["prod"]["workspaces"])
             evidence["configured_release_identity"] = identity
-            credential = AzureCliCredential()
-
-            def publish(workspace, folder, types, value_set):
-                publish_all_items(FabricWorkspace(workspace_id=workspace, repository_directory=str(folder),
-                                                  item_type_in_scope=types, environment=value_set,
-                                                  token_credential=credential))
-
+            publish = fabric_publisher()
             run_release(plan, plan["targets"]["dev"]["workspaces"], paths, names, fabric_reader(fabric_token()),
-                        publish, evidence, deploy=True, target="prod", first_creation=args.mode == "first")
+                        publish, evidence, deploy=True, target="prod", expect_validation_absent=args.mode == "first")
         finally:
             git(args.release, "worktree", "remove", str(code))
 

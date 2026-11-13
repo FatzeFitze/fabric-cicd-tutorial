@@ -32,6 +32,7 @@ Have the assigned Test UAMI name, the Azure subscriptions and resource groups fo
    | [Test environment settings](../../../../config/environments/test.yml) | `config/environments/test.yml` |
    | [Preflight command](../../../../toolkit/fabric_preflight.py) | `toolkit/fabric_preflight.py` |
    | [Test release command](../../../../toolkit/test_release.py) | `toolkit/test_release.py` |
+   | [Shared Tiny Sales publisher](../../../../toolkit/tiny_sales_release.py) | `toolkit/tiny_sales_release.py` |
    | [Release dependencies](../../../../toolkit/requirements-release.txt) | `toolkit/requirements-release.txt` |
    | [Test release pipeline](../../../../.azuredevops/pipelines/test-release.yml) | `.azuredevops/pipelines/test-release.yml` |
    | Validation notebook files [`.platform`](../../../../sample/tiny-sales/validate_release.Notebook/.platform) and [`notebook-content.py`](../../../../sample/tiny-sales/validate_release.Notebook/notebook-content.py) | `validate_release.Notebook/` |
@@ -60,7 +61,7 @@ Have the assigned Test UAMI name, the Azure subscriptions and resource groups fo
 5. Stage, commit and push the change.
 
    ```powershell
-   git add -- config/environments/test.yml toolkit/fabric_preflight.py toolkit/test_release.py toolkit/requirements-release.txt .azuredevops/pipelines/test-release.yml validate_release.Notebook
+   git add -- config/environments/test.yml toolkit/fabric_preflight.py toolkit/test_release.py toolkit/tiny_sales_release.py toolkit/requirements-release.txt .azuredevops/pipelines/test-release.yml validate_release.Notebook
    git diff --cached --name-only -- validate_release.Notebook
    git diff --cached --check
    git commit -m "Add the managed Test release"
@@ -117,6 +118,7 @@ The artifact records deployment evidence. If time allows, run `run_sales` in Cod
 | The run passed with `status: preflight_passed` | Select **Publish to Test after preflight** when queuing the release you intend to deploy. |
 | Azure DevOps cannot find a repository | Check the two literal repository names under `resources.repositories` in `test-release.yml` and confirm the pipeline has access to both repositories. |
 | `test_release.py: error: unrecognized arguments: --mode preflight` | Check the Code revision shown for the run. In Azure Repos, open `toolkit/test_release.py` at that revision and look for the `--mode` argument. Merge the matching pipeline and Python starters into `dev`, then queue a new run from `dev`. |
+| Python cannot import `toolkit.tiny_sales_release` | Copy the Test command and the shared publisher from the same tutorial revision. Verify both are committed at the queued Code revision. |
 | The release cannot find the validation notebook's `.platform` file | Check the committed filename in Azure Repos and remove any trailing `.txt` before committing the file. |
 | Fabric returns HTTP 403 or an unexpected workspace name | Compare the Test UAMI’s workspace roles and the physical IDs and expected names with your assigned Test inventory. |
 | The preflight rejects a pin or a source definition | Check the pinned commit is in the corresponding `dev` history and the definition matches the bindings inspected in Unit 8. |

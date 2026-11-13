@@ -1,6 +1,6 @@
 # Curriculum and sample growth
 
-Units 1-6 have organizer-reported success. The organizer accepted Unit 7's lesson with a clarification about static validation and reports that the Unit 8 Dev preflight passed. Unit 9 run 643 published to Test, followed by reported manual runtime checks. Unit 10 is drafted for the Prod rehearsal. Units 11-12 describe the proposed sequence and target state. [Unit 9 pilot evidence](../facilitator/unit-09-pilot-notes.md#live-test-release-12-november-2026) · [Unit 10 pilot checks](../facilitator/unit-10-pilot-notes.md).
+Units 1-6 have organizer-reported success. The organizer accepted Unit 7's lesson with a clarification about static validation and reports that the Unit 8 Dev preflight passed. Unit 9 run 643 published to Test, and Unit 10 run 654 published the same candidate to Prod. The organizer reported successful manual runtime checks in both. The shared publisher refactor awaits a live rerun. Units 11-12 describe the proposed sequence and target state. [Unit 9 pilot evidence](../facilitator/unit-09-pilot-notes.md#live-test-release-12-november-2026) · [Unit 10 pilot checks](../facilitator/unit-10-pilot-notes.md).
 
 ## Teaching journey
 
@@ -61,7 +61,7 @@ The observed pilot has three repos, whereas the recommended participant architec
 
 | Unit | Min | Work and observable checkpoint | Main controls |
 | --- | ---: | --- | --- |
-| **11. Diagnose a failure and recover** | 55 | Trigger a safe, rehearsed failure in Test after part of a release has succeeded. Use deployment/runtime evidence to identify the failed step, correct configuration or redeploy a known-good definition, and rerun to a verified state. Explain why source rollback does not restore data and why cross-workspace release is not a transaction. Record the owner and next action. | MS-01, 05, 06, 08, 10, 11, 14 |
+| **11. Diagnose a failure and recover** | 55 | First reconcile the Prod tooling into Code `dev` through a reviewed PR and verify the shared publisher in Test. Use Azure DevOps Environment deployment history alongside release manifests to find a known-good run. Trigger a safe, rehearsed failure in Test, use deployment/runtime evidence to identify the failed step, and recover to a verified state. Explain the limits of definition rollback and record the owner and next action. | MS-01, 05, 06, 08, 10, 11, 14 |
 | **12. Reuse the suite and choose the right controls** | 20 | Fill the mask for a small second example, select its project check and run validation and planning with the same functions. Explain which parts change for another project and identify when Model C controls or feature workspaces would help. | MS-01–14 recap, especially 05, 09–12, 14 |
 
 The second example is a small reuse check, not another complete cloud deployment. Full starter portability needs its own organizer feasibility test. Model C explainers cover independently protected production capability, separation of duties, stronger identity boundaries, monitoring/evidence retention, private execution where required, and risk-appropriate recovery. These remain obligations from the supplied guidelines, not claims that the sandbox implements them.

@@ -1,6 +1,6 @@
 # DNA Fabric Days: workshop planning
 
-Workshop preparation started 28 October 2026. Models A and B are hands-on. Model C and feature workspaces are explainer topics. The Unit 8 Dev preflight and Unit 9 managed Test publish passed in the pilot. The Test publish and reported manual runtime checks are recorded in the [Unit 9 pilot notes](docs/facilitator/unit-09-pilot-notes.md#live-test-release-12-november-2026).
+Workshop preparation started 28 October 2026. Models A and B are hands-on. Model C and feature workspaces are explainer topics. The Unit 8 Dev preflight and the managed Test and Prod releases passed in the pilot. The organizer also reported successful manual runtime checks. [Unit 9 Test evidence](docs/facilitator/unit-09-pilot-notes.md#live-test-release-12-november-2026) · [Unit 10 Prod evidence](docs/facilitator/unit-10-pilot-notes.md#live-prod-rehearsal-13-november-2026).
 
 ## Start here
 
@@ -14,7 +14,7 @@ Workshop preparation started 28 October 2026. Models A and B are hands-on. Model
 - Fill the release mask, add Test and Prod value sets and preview the declared targets through CI. The lesson includes the limits of the static workspace check. [Unit 7](docs/tutorial/section-04-release-automation/unit-07-configure-and-preview-release/README.md).
 - Verify Dev workspace names and item IDs through the Fabric API while Git integration remains the Dev update mechanism. [Unit 8](docs/tutorial/section-04-release-automation/unit-08-publish-shared-dev/README.md).
 - Verify the selected source and Test workspaces, publish Tiny Sales and retain the deployment evidence in one run. [Unit 9](docs/tutorial/section-04-release-automation/unit-09-release-to-test/README.md).
-- Approve the tested snapshot for Prod, publish with the Prod managed identity and retain first-creation and runtime evidence. [Unit 10 rehearsal draft](docs/tutorial/section-04-release-automation/unit-10-release-to-prod/README.md).
+- Approve the tested snapshot for Prod, publish with the Prod managed identity and retain first-creation and runtime evidence. [Unit 10](docs/tutorial/section-04-release-automation/unit-10-release-to-prod/README.md).
 - [Logical and physical Fabric IDs](docs/tutorial/reference/fabric-item-identities.md): source identity versus deployed instance, lookup locations and later release evidence.
 - [Optional conflict recovery](docs/tutorial/auxiliary/aux-01-recover-from-source-conflicts/README.md): concepts and entry point; intentional-conflict lab awaits rehearsal after Unit 5's local Git workflow.
 - [Later identity/ownership experiment](docs/planning/identity-and-ownership-experiment.md): create a new Test/Prod asset through managed identities, compare creation with updates and verify runtime/access implications.

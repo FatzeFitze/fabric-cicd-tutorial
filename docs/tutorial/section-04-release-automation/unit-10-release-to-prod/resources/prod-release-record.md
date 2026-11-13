@@ -5,7 +5,7 @@ Keep this record with your team's run evidence. Use full commit hashes and links
 | Release detail | Observation or link |
 | --- | --- |
 | Reviewed Code PR and check | |
-| Test pipeline run ID and link | |
+| Test pipeline run name, numeric run ID and link | |
 | Test manifest and Test pipeline/notebook runtime results | |
 | Verified Code, Data and Reporting commits | |
 | Completed Code promotion PR, its Notebook CI result and resulting `main` revision | |
