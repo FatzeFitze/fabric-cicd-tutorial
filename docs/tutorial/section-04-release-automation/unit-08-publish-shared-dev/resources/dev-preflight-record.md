@@ -14,6 +14,8 @@ Keep the record with your participant project.
 | Lakehouse, semantic model and report physical IDs | |
 | Dev Git connections by role, including pending updates and workspace edits | |
 | Observed Dev Variable Library active value set | |
+| Optional Dev sync result and applied revision for each updated workspace | |
+| Optional Dev runtime run link, parameters, sales totals and report result | |
 
 Record a file, field and intended target for each relationship you inspect. Include the form of the reference, such as a logical ID, physical ID or relative path.
 

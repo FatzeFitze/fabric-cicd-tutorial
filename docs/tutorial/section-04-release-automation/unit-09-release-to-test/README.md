@@ -4,7 +4,7 @@ Allow **45–55 minutes**. In one Azure Pipeline run, verify the reviewed source
 
 ### Before you begin
 
-Complete the [Unit 8 Dev preflight](../unit-08-publish-shared-dev/README.md). Keep the Data and Reporting pins from the reviewed release mask. In Data Test, confirm the `sales` table from [Unit 3](../../section-02-model-a/unit-03-native-promotion/README.md) is visible in the lakehouse's SQL analytics endpoint. In Code Test, locate the native `build_sales` notebook and record its displayed owner or creator if the workspace exposes one. The existing lakehouse and notebook are the starting point for this release. Use this pipeline as the writer for the exercise.
+Complete the [Unit 8 Dev preflight](../unit-08-publish-shared-dev/README.md). Bring the reviewed Code revision and the Data and Reporting pins from the release mask. This pipeline reads its source from Git, so you can proceed whether or not you ran the optional Dev sync and smoke check. In Data Test, confirm the `sales` table from [Unit 3](../../section-02-model-a/unit-03-native-promotion/README.md) is visible in the lakehouse's SQL analytics endpoint. In Code Test, locate the native `build_sales` notebook and record its displayed owner or creator if the workspace exposes one. The existing lakehouse and notebook are the starting point for this release. Use this pipeline as the writer for the exercise.
 
 Have the assigned Test UAMI name, the Azure subscriptions and resource groups for the identity and connection, and the names and IDs of your Code, Data and Reporting Test workspaces. You need Admin on those workspaces to grant the Test identity access.
 
