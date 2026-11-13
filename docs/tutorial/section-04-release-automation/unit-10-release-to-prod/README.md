@@ -215,4 +215,4 @@ Spend **5–10 minutes** on your own project or a familiar example. Write down o
 
 Share one boundary you would enforce and one practice you would encourage. Name who owns each and what evidence would show it is working.
 
-[Previous unit](../unit-09-release-to-test/README.md) · [Tutorial index](../../README.md)
+[Previous unit](../unit-09-release-to-test/README.md) · [Next unit](../../section-05-operate-and-reuse/unit-11-recover-a-test-release/README.md) · [Tutorial index](../../README.md)

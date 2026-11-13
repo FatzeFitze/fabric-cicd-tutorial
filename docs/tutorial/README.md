@@ -21,6 +21,7 @@ Coming to DNA Fabric Days? The [participant prep guide](pre-reads/README.md) cov
 | [8. Verify the shared Dev workspaces](section-04-release-automation/unit-08-publish-shared-dev/README.md) | Use the Dev identity to verify workspace names, item IDs and exported bindings | Organizer reports the live preflight passed and logical IDs matched. |
 | [9. Publish Tiny Sales to Test](section-04-release-automation/unit-09-release-to-test/README.md) | Run the preflight and managed publish together, then review evidence and item ownership | Managed Test publish verified from run 643. Manual Test pipeline and notebook checks reported successful. Ownership and rerun observations pending. |
 | [10. Approve and publish Tiny Sales to Prod](section-04-release-automation/unit-10-release-to-prod/README.md) | Approve the tested snapshot, publish with the Prod managed identity and record first creation and runtime results | First lesson version accepted at `b723a58`. Prod run 654 published the tested snapshot and runtime checks passed by organizer report. Shared publisher refactor awaits a live rerun. |
+| [11. Diagnose and recover a partial Test release](section-05-operate-and-reuse/unit-11-recover-a-test-release/README.md) | Track deployments, inspect a deliberate interruption and recover the same snapshot in Test | Rehearsal draft. Live walkthrough pending. |
 
 Reference: [Logical and physical IDs in Fabric](reference/fabric-item-identities.md). Introduced with Git capture, applied during local editing and revisited for target bindings/deployment evidence.
 

@@ -1,0 +1,105 @@
+trigger: none
+
+parameters:
+  - name: deployToTest
+    displayName: Publish to Test after preflight
+    type: boolean
+    default: false
+
+  - name: stopBeforeReporting
+    displayName: Rehearse a failure before Reporting
+    type: boolean
+    default: false
+  - name: expectedCodeRevision
+    displayName: Expected full Code commit (use current for the baseline)
+    type: string
+    default: current
+
+resources:
+  repositories:
+    # Azure Pipelines requires literal names here. Match the repositories in the release mask.
+    - repository: data
+      type: git
+      name: REPLACE_WITH_DATA_REPO
+      ref: refs/heads/dev
+    - repository: reports
+      type: git
+      name: REPLACE_WITH_REPORTING_REPO
+      ref: refs/heads/dev
+
+variables:
+  - template: /config/environments/test.yml
+
+pool:
+  vmImage: ubuntu-24.04
+
+jobs:
+  - deployment: DeployTinySalesTest
+    displayName: Record the Tiny Sales Test release
+    environment: Tiny Sales - Test
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - download: none
+            - bash: |
+                set -eu
+                test "$BUILD_SOURCEBRANCH" = refs/heads/dev || { echo 'Run this release from dev.' >&2; exit 1; }
+                if [ "$EXPECTED_CODE_REVISION" != current ] && [ "$BUILD_SOURCEVERSION" != "$EXPECTED_CODE_REVISION" ]; then
+                  echo 'The Code checkout does not match the requested Test revision.' >&2
+                  exit 1
+                fi
+                if [ "$REHEARSE_FAILURE" = true ] && { [ "$TEST_RELEASE_MODE" != deploy ] || [ "$EXPECTED_CODE_REVISION" = current ]; }; then
+                  echo 'For the rehearsal, select Publish and enter the full Code hash from the baseline.' >&2
+                  exit 1
+                fi
+              displayName: Verify the dev branch and expected Code commit
+              env:
+                EXPECTED_CODE_REVISION: ${{ parameters.expectedCodeRevision }}
+                REHEARSE_FAILURE: ${{ iif(parameters.stopBeforeReporting, 'true', 'false') }}
+                TEST_RELEASE_MODE: ${{ iif(parameters.deployToTest, 'deploy', 'preflight') }}
+            - checkout: self
+              path: s/code
+              clean: true
+            - checkout: data
+              path: s/data
+              fetchDepth: 0
+              clean: true
+            - checkout: reports
+              path: s/reports
+              fetchDepth: 0
+              clean: true
+            - task: UsePythonVersion@0
+              inputs:
+                versionSpec: '3.12'
+            - bash: python -m pip install --disable-pip-version-check -r toolkit/requirements-release.txt
+              displayName: Install the Fabric publisher
+              workingDirectory: $(Pipeline.Workspace)/s/code
+            - task: AzureCLI@2
+              displayName: Preflight and publish Tiny Sales to Test
+              inputs:
+                azureSubscription: ${{ variables.releaseServiceConnection }}
+                scriptType: bash
+                scriptLocation: inlineScript
+                workingDirectory: $(Pipeline.Workspace)/s/code
+                visibleAzLogin: false
+                inlineScript: |
+                  set -eu
+                  rehearsal_args=()
+                  if [ "$REHEARSE_FAILURE" = true ]; then
+                    rehearsal_args+=(--stop-before-reporting)
+                  fi
+                  python -B -m toolkit.test_release \
+                    --code "$PIPELINE_WORKSPACE/s/code" \
+                    --data "$PIPELINE_WORKSPACE/s/data" \
+                    --reports "$PIPELINE_WORKSPACE/s/reports" \
+                    --checkout-revision "$BUILD_SOURCEVERSION" \
+                    --evidence "$BUILD_ARTIFACTSTAGINGDIRECTORY/test-release.json" \
+                    --mode "$TEST_RELEASE_MODE" "${rehearsal_args[@]}"
+              env:
+                TEST_RELEASE_MODE: ${{ iif(parameters.deployToTest, 'deploy', 'preflight') }}
+                REHEARSE_FAILURE: ${{ iif(parameters.stopBeforeReporting, 'true', 'false') }}
+            - publish: $(Build.ArtifactStagingDirectory)
+              artifact: test-release-evidence
+              condition: succeededOrFailed()
+              displayName: Retain Test release evidence

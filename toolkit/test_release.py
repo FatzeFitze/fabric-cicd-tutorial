@@ -20,12 +20,16 @@ def main():
     parser.add_argument("--checkout-revision", required=True)
     parser.add_argument("--evidence", type=Path, required=True)
     parser.add_argument("--mode", choices=("preflight", "deploy"), default="preflight")
+    parser.add_argument("--stop-before-reporting", action="store_true",
+                        help="Rehearse a partial Test deployment after publishing Code")
     args = parser.parse_args()
     deploy = args.mode == "deploy"
     evidence = {"environment": "test", "run_id": os.getenv("BUILD_BUILDID"), "status": "failed",
                 "mode": args.mode,
                 "phase": "preflight", "started_utc": datetime.now(timezone.utc).isoformat()}
     try:
+        if args.stop_before_reporting and not deploy:
+            raise PlanError("The recovery rehearsal requires a Test publish run")
         mask = load_mask(args.code / "config/tiny-sales-release.yml")
         plan = build_preview(mask, args.code, args.checkout_revision)
         if "validation" in plan["items"]:
@@ -43,7 +47,7 @@ def main():
         with TemporaryDirectory(prefix="tiny-sales-test-") as directory:
             paths = stage_items(plan, repos, Path(directory))
             run_release(plan, dev, paths, names, fabric_reader(fabric_token()), publish, evidence,
-                        deploy=deploy, target="test")
+                        deploy=deploy, target="test", stop_before_reporting=args.stop_before_reporting)
         evidence.update(status="published" if deploy else "preflight_passed", phase="complete")
         if deploy:
             print("TEST RELEASE PUBLISHED. Review the Test release evidence artifact.")
