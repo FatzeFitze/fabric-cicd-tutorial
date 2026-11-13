@@ -184,6 +184,26 @@ For **MS-11 Recovery**, keep the known-good source revisions and target settings
 
 ### Recap and discuss
 
+#### What we built
+
+You first used Fabric's native Deployment pipelines to promote a lakehouse and notebook (Model A). Then you put the expanded Tiny Sales solution under source control and released it through Azure Pipelines (Model B). The Model B release moves the same tested source through Test and Prod, with each environment supplying its own settings and access.
+
+| Area | What we chose and what it controls |
+| --- | --- |
+| **Workspaces and repos** | Dev, Test and Prod each have Code, Data and Reporting workspaces. In the exercise, each role also has its own repo. Fabric Git integration updates shared Dev, and Azure Pipelines publishes to Test and Prod. Workspace boundaries control access to live items. Repo boundaries control who can change and review source. |
+| **Source and review** | Feature PRs feed Code `dev`, where required Notebook CI checks the proposed change. The Code release mask pins one Data commit and one Reporting commit. Test records all three commits. Code `main` also requires Notebook CI and adds a required reviewer and a merge policy that preserves the tested commit. |
+| **Targets and configuration** | The release mask declares workspace IDs and source pins. The environment settings name the service connection and expected workspaces. The shared Python publisher verifies the targets, binds the definitions to the target items, and checks the active Variable Library value set used at runtime. |
+| **Release authority** | The Dev pipeline reads through its own connection. Test and Prod publish through separate managed identities and restricted connections. Prod also waits for an approval on its connection. Fabric workspace roles govern what each identity can do. You record the deployment identity separately from the item owner, runtime identity and data-access identity. |
+| **Evidence** | PRs and CI runs show what was reviewed. The Test and Prod manifests show which commits were deployed, where they went and which items were created or updated. Fabric run results show whether the pipeline, notebook and report work in the target. |
+
+#### Workshop choices and their limits
+
+- **Manual release and runtime checks.** You select the Test run and start Prod deliberately. The pipeline automates source and target checks and publishing. You run the smoke checks in Fabric and attach the results to the release record. Model B calls for automated runtime validation in Test and Prod.
+- **A short path to the first Prod release.** Code is the only repo promoted to `main` in this exercise. Data and Reporting deploy from tested pins in their `dev` histories. The first Prod tooling PR starts on Code `main` to preserve the already tested candidate. The next exercise brings that tooling into `dev` and uses Azure DevOps Environment deployment history during recovery.
+- **A training sandbox.** Test and Prod start with the seeded items from Unit 3. Participants have workspace Admin access and can edit items directly. An empty-environment rebuild, stricter separation of duties, and private network execution are outside this exercise.
+
+#### Discuss your project
+
 Spend **5–10 minutes** on your own project or a familiar example. Write down one decision you would keep from Tiny Sales and one you would change.
 
 | Discuss | Apply it to your project |
