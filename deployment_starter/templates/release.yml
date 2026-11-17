@@ -8,15 +8,14 @@ parameters:
   - name: mask
     type: string
 
-pool:
-  vmImage: ubuntu-24.04
-
 stages:
   - ${{ if eq(parameters.target, 'test') }}:
     - stage: Validate
       displayName: Validate the selected Test candidate
       jobs:
         - job: Validate
+          pool:
+            vmImage: ubuntu-24.04
           steps:
             - template: validate-steps.yml
               parameters:
@@ -28,6 +27,8 @@ stages:
       - template: /config/environments/${{ parameters.target }}.yml
     jobs:
       - job: Release
+        pool:
+          vmImage: ubuntu-24.04
         steps:
           - bash: |
               set -eu
