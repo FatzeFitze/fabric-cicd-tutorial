@@ -1,6 +1,14 @@
 # Looking ahead — protecting historical data
 
-When Finance relies on the report to make decisions, the team takes responsibility for the history behind the numbers. Tiny Sales rebuilt its disposable table from six synthetic orders. Your project may hold years of orders and corrections, with older inputs already gone from the source. The persisted tables, input archives and processing progress are part of the solution's **runtime state**. Git gives you a record of the logic and versioned settings. How you preserve and recover the data needs its own design. [DataOps architectural state model](../../source-guidelines/dataops-principles-and-scope.md#5-architectural-state-model).
+## The morning the numbers change
+
+It's 7:55 a.m. The overnight run is green. Finance opens the sales report and finds that last quarter's revenue has changed. The meeting starts in five minutes. Which number should they use?
+
+We talk about becoming data-centric because we want decisions grounded in evidence. Once people rely on the numbers, the team takes responsibility for explaining them and keeping them dependable. The monster in the basement can be as ordinary as two plausible totals for the same quarter and nobody who can explain the difference.
+
+Reviewed changes, separate environments and release records give you a starting point. They help you establish which logic ran, where it ran and what was checked. To explain the difference and choose a safe fix, you also need to know which data the job read and wrote.
+
+Tiny Sales rebuilt its disposable table from six synthetic orders. Your project may hold years of orders and corrections, with older inputs already gone from the source. The persisted tables, input archives and processing progress are part of the solution's **runtime state**. Git gives you a record of the logic and versioned settings. How you preserve and recover the data needs its own design. [DataOps architectural state model](../../source-guidelines/dataops-principles-and-scope.md#5-architectural-state-model).
 
 ## Protect history during a release
 
