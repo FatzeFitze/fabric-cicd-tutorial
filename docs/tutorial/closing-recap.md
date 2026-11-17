@@ -17,6 +17,10 @@ Imagine Finance needs the sales report by **8 a.m. every working day**. An upstr
 
 Match these practices to the solution's impact, data sensitivity and recovery needs. A few focused checks and short recovery instructions can go a long way for a small internal report. A critical or sensitive workload may need independent approval, tighter access and a rehearsed recovery plan. Use the operating model for your solution to decide which controls apply. For example, the Fabric Minimum Standard calls for automated technical and runtime validation in Test and after Prod deployment for **Model B**. [Solution Classification Framework](../source-guidelines/solution-classification-framework.md) · [Fabric Minimum Standard](../source-guidelines/fabric-minimum-standard.md#minimum-standard-by-operating-model) · [Microsoft Fabric operational excellence guidance](https://learn.microsoft.com/en-us/azure/well-architected/microsoft-fabric/operational-excellence).
 
+## The history behind the report is part of the solution
+
+In Tiny Sales, you could rebuild the training table from six orders in the notebook. A productive solution may hold years of orders and corrections, some of which the source can no longer supply. That history is part of the solution's **runtime state**. Decide what a release may change, how you’ll verify that the rest stayed intact, and how you’ll recover if a bad write gets through. Those questions get harder with production-scale Test data and live streams. [Looking ahead — protecting historical data](reference/persisted-data-in-production.md).
+
 ## Choose one improvement for your project
 
 Take **5 minutes** after Unit 10 to close the main tutorial, or come back when you're ready to apply it to one of your projects. You can do the exercise on your own or discuss it with a partner. If you want a refresher on how the release fits together, start with the [Unit 10 recap](section-04-release-automation/unit-10-release-to-prod/README.md#recap-and-discuss).

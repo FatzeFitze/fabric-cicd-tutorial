@@ -21,4 +21,6 @@ The Model B column of **MS-08** calls for automated technical and runtime valida
 
 Pick one likely failure. Describe where you would catch it, what evidence the check would produce, and who would act on the result. For example, a missing batch could trigger a freshness alert before Finance opens the report. The support owner can then inspect the last successful batch and decide whether a replay is safe.
 
+For a workload that accumulates history, consider what a release may write, how to test at realistic scale, and how to restore or replay data. [Looking ahead — protecting historical data](persisted-data-in-production.md).
+
 [Back to the closing recap](../closing-recap.md) · [Tutorial index](../README.md)
