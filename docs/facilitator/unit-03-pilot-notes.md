@@ -2,6 +2,10 @@
 
 Updated 4 November 2026. Participant lesson: [Unit 3](../tutorial/section-02-model-a/unit-03-native-promotion/README.md). The organizer reports the unit now works nicely and accepts it as the first working version. Preserve its lesson body at `2fde5c0`; only a next-unit navigation link is added for Unit 4. The [Test rehearsal](unit-03-native-promotion-rehearsal.md) retains the initial sequence and evidence basis.
 
+## Review feedback on pipeline names
+
+17 November 2026. A reviewer reported a uniqueness-related error while creating a native Deployment pipeline. The exact error and whether it occurred during name entry or creation are unconfirmed. Microsoft's Fabric lab instructs learners to use unique pipeline names. The Create Deployment Pipeline API reference does not define the scope of the uniqueness check or a duplicate-name error code. Unit 3 now uses team-specific display names and explains when to reuse an existing pipeline. If the error recurs, capture the attempted name, the exact message and which action triggered it. [Fabric lab](https://microsoftlearning.github.io/mslearn-fabric/Instructions/Labs/21-implement-cicd.html#create-a-deployment-pipeline) · [Create Deployment Pipeline API](https://learn.microsoft.com/en-us/rest/api/fabric/core/deployment-pipelines/create-deployment-pipeline).
+
 ## First-version acceptance
 
 The 4 November feedback accepts the full current lesson, including its Prod extension, and asks to proceed to Unit 4. Record full-chain success by organizer report; exact source/runtime IDs, outputs and elapsed time were not supplied. This acceptance validates the demonstrated human/native training path, not the upcoming workload-identity API release path or enforcement of productive controls. The remaining-pilot text below describes the prior 30 October preparation state and is retained as history.

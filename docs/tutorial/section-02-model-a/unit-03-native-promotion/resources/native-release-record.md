@@ -15,6 +15,9 @@ Native promotion uses source-stage workspace items. These commits record the int
 
 ## Target and rule mappings
 
+- Data Deployment pipeline link:
+- Code Deployment pipeline link:
+
 | Environment | Code workspace | Data workspace | Lakehouse item link | Physical lakehouse ID | Data workspace ID |
 | --- | --- | --- | --- | --- | --- |
 | Dev | | | | | |

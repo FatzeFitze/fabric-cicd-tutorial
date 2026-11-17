@@ -72,21 +72,23 @@ Native Deployment pipelines promote saved source-workspace items; they do not au
 
 ## 2. Create the two Deployment pipelines
 
-1. Open **Workspaces → Deployment pipelines** and select **Create pipeline** or **New pipeline**.
-2. Create `tiny-sales-data` with **Dev → Test → Prod** stages. Assign the existing Data workspaces to their matching stages.
-3. Create `tiny-sales-code` with the same structure and assign the existing Code workspaces.
-4. Verify the mapping below. If the pipelines already exist, reuse them after checking their assignments. Do not create additional target workspaces.
+Give each Fabric Deployment pipeline a unique display name. Replace `<team-tag>` with a short identifier for your team, such as `team-07`. For that team, the Data pipeline would be `tiny-sales-data-team-07`. The tag helps teams find their pipelines in the shared Fabric tenant. [Microsoft's Fabric lab](https://microsoftlearning.github.io/mslearn-fabric/Instructions/Labs/21-implement-cicd.html#create-a-deployment-pipeline).
 
-| Deployment pipeline | Stage 1: Dev | Stage 2: Test | Stage 3: Prod |
+1. Open **Workspaces → Deployment pipelines**. If your team already has a Data or Code pipeline, verify its assignments against the table and reuse it when they match.
+2. For each pipeline you still need, select **Create pipeline** or **New pipeline**. Enter its team-specific name and set up **Dev → Test → Prod** stages.
+3. Assign your existing workspaces to the matching stages and verify the mapping below.
+4. Save both pipeline links in your [release record](resources/native-release-record.md) so you can reopen the right pipelines for Test and Prod.
+
+| Deployment pipeline name | Stage 1: Dev | Stage 2: Test | Stage 3: Prod |
 | --- | --- | --- | --- |
-| `tiny-sales-data` | Data Dev | Data Test | Data Prod |
-| `tiny-sales-code` | Code Dev | Code Test | Code Prod |
+| `tiny-sales-data-<team-tag>` | Data Dev | Data Test | Data Prod |
+| `tiny-sales-code-<team-tag>` | Code Dev | Code Test | Code Prod |
 
 **Expected result:** Two native pipelines cover six existing workspaces. Reporting is unchanged. Stage positions, not just labels, matter where native cross-pipeline binding applies. See [pipeline setup](https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/get-started-with-deployment-pipelines).
 
 ## 3. Deploy the Data prerequisite into Test
 
-1. Open **`tiny-sales-data`** and select the **Test target stage**.
+1. Open your team's **Data Deployment pipeline** and select the **Test target stage**.
 2. Check **Deploy from = Data Dev** (your assigned source workspace). In the source items shown for that target, select the **`sales` Lakehouse** from Data Dev.
 3. Review source **Data Dev**, target **Data Test** and the selected item. Deploy and wait for completion.
 4. Open `sales` in **Data Test** as a **Lakehouse**, not its SQL analytics endpoint. On a fresh target, confirm `dbo` exists and the sample table rows have not been copied. Existing data may remain if you ran the target previously.
@@ -96,10 +98,10 @@ Native Deployment pipelines promote saved source-workspace items; they do not au
 
 ## 4. Deploy the notebook and configure its Test rule
 
-1. Open **`tiny-sales-code` → Test target stage**. Check **Deploy from = Code Dev**, select `build_sales` from the source items and deploy. This establishes the target notebook; do not run all cells yet.
+1. Open your team's **Code Deployment pipeline → Test target stage**. Check **Deploy from = Code Dev**, select `build_sales` from the source items and deploy. This establishes the target notebook; do not run all cells yet.
 2. Stay in the **Code Deployment pipeline view**. On its **Test stage**, open the stage menu and choose **Deployment rules**. In the pane, select **`build_sales` → Default lakehouse** and add/configure the rule. The route is:
 
-   **Deployment pipelines → tiny-sales-code → Test → Deployment rules → build_sales → Default lakehouse**
+   **Deployment pipelines → your team's Code pipeline → Test → Deployment rules → build_sales → Default lakehouse**
 
 3. Inspect **From** and **To**. For this target, set **To = Other** and supply the **Data Test** lakehouse's ID, name `sales` and workspace ID recorded in Section 3.
 4. Save the rule. Return to the **Test target stage**, retain **Deploy from = Code Dev**, select `build_sales` and deploy again to apply the rule.
@@ -129,9 +131,9 @@ Saving a rule does not itself redeploy. The rule takes priority over automatic b
 ## 6. Authorize and promote to simulated Prod
 
 1. In your release record, enter the release purpose, your name/date, Code/Data baseline commits and the successful Test result. Explicitly record authorization for this training promotion. A partner may review it; this manual Model A decision is not an independently enforced approval gate.
-2. Open **`tiny-sales-data` → Prod target stage**. Check **Deploy from = Data Test**, select the tested `sales` Lakehouse, review the operation and deploy.
+2. Open your team's **Data Deployment pipeline → Prod target stage**. Check **Deploy from = Data Test**, select the tested `sales` Lakehouse, review the operation and deploy.
 3. Open the resulting **Data Prod** lakehouse. On first deployment, confirm schema support and the absence of copied sample rows. Record **its own** item ID, name and workspace ID; do not reuse Test IDs.
-4. Open **`tiny-sales-code` → Prod target stage**. Check **Deploy from = Code Test**, select the tested `build_sales` notebook and deploy. Do not run all cells yet.
+4. Open your team's **Code Deployment pipeline → Prod target stage**. Check **Deploy from = Code Test**, select the tested `build_sales` notebook and deploy. Do not run all cells yet.
 5. In the **Code Deployment pipeline view**, open **Prod → Deployment rules → build_sales → Default lakehouse**. Set **To = Other** with the **Data Prod** lakehouse ID, name and workspace ID. Save.
 6. Return to the **Prod target stage**, retain **Deploy from = Code Test** and redeploy `build_sales` to apply the Prod rule.
 7. Reopen the notebook from **Code Prod**, restarting an old session if needed. Run **Cell 1 only** and confirm `prod`, Code Prod and Data Prod with the recorded physical IDs.
@@ -155,6 +157,8 @@ If Prod still targets Test or Dev, correct the **Prod stage rule** and redeploy 
 
 | Symptom | What to check |
 | --- | --- |
+| Fabric says a pipeline name is already in use | If you are creating a new pipeline, append a short suffix to the team-specific name and retry. Use the name that Fabric accepts for the rest of the exercise. |
+| An existing workspace is missing from the assignment list | Check whether another Deployment pipeline already uses that workspace. Ask the facilitator to verify the assignment and your access. [Workspace assignment requirements](https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/assign-pipeline#considerations-and-limitations). |
 | Deployment direction looks wrong | Select the **target stage** first; inspect **Deploy from** and both workspace names before confirming. |
 | Cannot find Deployment rules in the notebook | Return to the **Deployment pipeline view**, select the target stage and open its **Deployment rules** pane, then select the notebook. |
 | Rule editing is unavailable | Check target item ownership and pipeline/workspace permissions with the facilitator. |
