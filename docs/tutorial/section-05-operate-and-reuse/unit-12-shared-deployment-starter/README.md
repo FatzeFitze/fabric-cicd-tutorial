@@ -141,6 +141,7 @@ Authorize **Tiny Sales - Notebook CI** for the Data and Reporting repos if requi
 | --- | --- |
 | CI waits for authorization | Check pipeline permissions for **Tiny Sales - Notebook CI** on both dependency repos. |
 | A template path fails to resolve | Compare the wrapper's `extends.template` and the location of `deployment_starter/` at the Code root. Check that both are committed to the branch the run uses. |
+| A shared template reports `Unexpected value` at `pool:` | Copy the current [CI](../../../../deployment_starter/templates/ci.yml) and [release](../../../../deployment_starter/templates/release.yml) templates. Each job declares its own agent pool. |
 | The publisher reports an unexpected item or binding | Check both notebook folders, the report's exported model reference, and the two added mask entries. |
 | The Test run finishes at preflight | Check the queue parameter and compare the source revision before starting a publishing run. |
 

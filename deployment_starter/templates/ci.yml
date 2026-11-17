@@ -3,12 +3,11 @@ parameters:
   - name: mask
     type: string
 
-pool:
-  vmImage: ubuntu-24.04
-
 jobs:
   # Reuse the Test validation steps so the PR policy sees the same project rules.
   - job: Validate
+    pool:
+      vmImage: ubuntu-24.04
     steps:
       - template: validate-steps.yml
         parameters:
