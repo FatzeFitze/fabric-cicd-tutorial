@@ -12,7 +12,7 @@ resources:
       ref: refs/heads/dev
   pipelines:
     - pipeline: tested
-      source: Tiny Sales - Starter Test
+      source: Tiny Sales - Test Release
       trigger: none
 
 extends:

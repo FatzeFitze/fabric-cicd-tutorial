@@ -1,12 +1,19 @@
-"""Require the business measure used by the Tiny Sales returns report."""
+"""Run the Tiny Sales notebook contract and check the measure used by the returns report."""
 
 import re
+
+from checks.validate_tiny_sales import check_tiny_sales
+from toolkit.notebook_validation import read_python_notebook
 
 
 REQUIRED_MEASURE = "Returned Orders"
 
 
 def run(repositories, plan):
+    notebook = plan["items"]["notebook"]
+    code = repositories["code"] / plan["sources"]["code"]["folder"]
+    check_tiny_sales(read_python_notebook(code / f"{notebook['name']}.Notebook"))
+
     if "returns_report" not in plan["items"]:
         raise ValueError("Declare returns_report in the release mask")
     model = plan["items"]["model"]
