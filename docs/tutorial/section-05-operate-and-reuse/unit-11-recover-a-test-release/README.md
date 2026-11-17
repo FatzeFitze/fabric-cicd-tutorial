@@ -1,11 +1,11 @@
-# Unit 11 - Diagnose and recover a partial Test release
+# Unit 11 - Diagnose and recover a failed Test release
 
-Allow **55 minutes** with an available Azure Pipelines agent and reviewer. Bring the release tooling into `dev`, track a successful Test deployment, and recover from a run that stops between publishing Code and Reporting.
+Allow **about 60 minutes** with an available Azure Pipelines agent and reviewer. Bring the release tooling into `dev`, track a known-good Test deployment, and recover from a configuration error caught by live preflight.
 
 ### What you will learn
 
-- Use deployment history and a release manifest to identify which steps completed.
-- Rerun the same reviewed snapshot and verify the recovered Test items and runtime results.
+- Use deployment history, logs and a release manifest to identify where a run failed.
+- Fix a Test configuration value through Git, then verify the corrected deployment and runtime results.
 - Explain what redeploying definitions can restore and which data and configuration checks still matter.
 
 ### Before you begin
@@ -39,7 +39,9 @@ Complete [Unit 10](../../section-04-release-automation/unit-10-release-to-prod/R
 
 ### 2. Track Test deployments in Azure DevOps
 
-1. In your Azure DevOps project, open **Pipelines → Environments** and select **New environment** or **Create environment**. Name it **Tiny Sales - Test**. Create it without a resource. In the environment's **Security → Pipeline permissions**, restrict access to **Tiny Sales - Test Release**. An empty Azure DevOps Environment gives the pipeline a place to record deployment history. Fabric workspace IDs still come from your release mask, and the Test service connection still supplies the deployment identity. [Azure DevOps Environments](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/environments?view=azure-devops).
+When several pipelines can deploy to the same target, a support engineer needs to know which one last touched it and whether that attempt succeeded. An Azure DevOps Environment gives the target its own deployment history across the jobs that declare it. It also gives the target owner a place to restrict which pipelines can use it and to add target-wide approvals or checks when needed. In this unit, use that history during recovery to find the last known-good run. Then use its manifest to verify the exact Fabric workspaces, revisions and item IDs. The release mask chooses the actual Fabric targets, and the service connection supplies the identity. [Azure DevOps Environments](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/environments?view=azure-devops#view-deployment-history) · [Approvals and checks](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals?view=azure-devops).
+
+1. In your Azure DevOps project, open **Pipelines → Environments** and select **New environment** or **Create environment**. Name it **Tiny Sales - Test**. Create it without a resource. In the environment's **Security → Pipeline permissions**, restrict access to **Tiny Sales - Test Release**. [Azure DevOps Environments](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/environments?view=azure-devops).
 2. Create a feature branch from the updated Code `dev`.
 
    ```powershell
@@ -55,12 +57,12 @@ Complete [Unit 10](../../section-04-release-automation/unit-10-release-to-prod/R
    | [Test entry point](../../../../toolkit/test_release.py) | `toolkit/test_release.py` |
    | [Shared publisher](../../../../toolkit/tiny_sales_release.py) | `toolkit/tiny_sales_release.py` |
 
-   The registered pipeline keeps the same YAML path. The new YAML uses a deployment job so Azure DevOps can record deployments against **Tiny Sales - Test**. Keep the Test service connection and its permissions from Unit 9. The rehearsal option defaults to off. [Deployment job with runOnce](https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/jobs-deployment-strategy-run-once?view=azure-pipelines).
-4. Commit as **Track Test deployments and add a recovery rehearsal**, push the feature branch and open a PR into `dev` with the same title. Update the validation results before completion.
+   The registered pipeline keeps the same YAML path. The new YAML uses a deployment job so Azure DevOps can record deployments against **Tiny Sales - Test**. Keep the Test service connection and its permissions from Unit 9. [Deployment job with runOnce](https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/jobs-deployment-strategy-run-once?view=azure-pipelines).
+4. Commit as **Track Test deployments in Azure DevOps**, push the feature branch and open a PR into `dev` with the same title. Update the validation results before completion.
 
    ```markdown
    ## Change
-   Record Test deployments in the Tiny Sales - Test environment and add a manual rehearsal stop before Reporting.
+   Record Test deployments in the Tiny Sales - Test environment and retain evidence of completed publish phases.
 
    ## Validation
    - Reviewed the Test connection and repo resource names: <result>
@@ -72,44 +74,66 @@ Complete [Unit 10](../../section-04-release-automation/unit-10-release-to-prod/R
 
 ### 3. Establish the known-good Test release
 
-1. Queue **Tiny Sales - Test Release** from `dev`. Select **Publish to Test after preflight**, leave **Rehearse a failure before Reporting** clear, and leave the expected Code commit as `current`. If the first run asks for Environment permission, authorize the existing Test pipeline on **Tiny Sales - Test**.
+1. Queue **Tiny Sales - Test Release** from `dev`. Select **Publish to Test after preflight**. If the first run asks for Environment permission, authorize the existing Test pipeline on **Tiny Sales - Test**.
 2. In **Pipelines → Environments → Tiny Sales - Test → Deployments**, find the run. Open **test-release-evidence → test-release.json**. Record the full verified Code, Data and Reporting hashes, the Test value set and the relevant physical item IDs. Expect `status: published`, `phase: complete` and **Test** active.
 3. Run `run_sales` in Code Test and confirm the activity parameters `test` and `tiny_sales_test`. Run `validate_release` and expect `SALES_SMOKE_PASSED` with **357.20 gross** and **204.70 revenue**. Open the report and confirm the Test model binding and **204.70 Total Revenue**. Record the runtime results and identify the owner who would respond to a failed Test run. [Unit 9 Test checks](../../section-04-release-automation/unit-09-release-to-test/README.md#4-review-what-changed) · [Recovery record](resources/test-recovery-record.md).
 
 **Expected result** You have one known-good run with its exact Git revisions, deployed state and separate runtime evidence. This applies **MS-01 Ownership**, **MS-08 Release validation** and **MS-14 Release evidence**. The workshop captures manual runtime results. Model B calls for automated technical and runtime validation in Test and after Prod deployment. [Fabric Minimum Standard](../../../source-guidelines/fabric-minimum-standard.md#minimum-standard-by-operating-model).
 
-### 4. Diagnose the deliberate partial release
+### 4. Diagnose a rejected Test deployment
 
-1. Queue the same Test pipeline from `dev`. Select **Publish to Test after preflight** and **Rehearse a failure before Reporting**. Enter the full Code hash from the known-good manifest in **Expected full Code commit**. The pipeline checks the queued commit before publishing. The two other revisions come from the release mask at that Code commit. If `dev` has advanced, use the exact-commit option in section 5.
-2. Open the failed run from the Environment history. In the release task log, find **Deliberate Test rehearsal stop after Data and Code publishing**. Open its `test-release.json`. Compare `verified_source_revisions` with the known-good run and locate `status: failed`, `phase: rehearsal stop before Reporting` and `completed_publish_phases`. The manifest lists the Data lakehouse, Code library and notebooks, and Code Data Pipeline publish calls that returned. The rehearsal stops before sending a publish request to Reporting.
-3. Compare the starting IDs in the failed manifest and the observed Code items with the live Test inventory. Open the existing Test report and find its model. The report can still be present from the baseline. Its presence does not establish that the failed run published it. Record the last successful step, the first unfinished step and the recovery action. [Recovery record](resources/test-recovery-record.md) · [Release manifests](../../reference/release-manifests.md).
+1. On a feature branch from the known-good Code `dev` commit, edit only `codeWorkspaceName` in `config/environments/test.yml`. Append `-typo` to the exact assigned name. Keep the workspace IDs, service connection, source pins and Fabric workspaces as recorded for the baseline. This simulates a configuration typo or a stale expected name after a workspace rename. Open a PR into `dev` titled **Rehearse a Test workspace name mismatch**. Tell the reviewer this is a deliberate workshop fault and complete it once the diff and normal CI checks have been reviewed.
 
-**Expected result** The history shows a failed deployment after several successful publish calls. You can explain why the affected workspaces need to be checked independently. This applies **MS-10** and **MS-11 Recovery**. [Fabric Minimum Standard](../../../source-guidelines/fabric-minimum-standard.md#minimum-standard-by-operating-model).
+   ```markdown
+   ## Change
+   Add a deliberate typo to the expected Code Test workspace name for the recovery exercise.
 
-### 5. Recover and verify the result
+   ## Validation
+   - Only codeWorkspaceName changed: <diff review result>
+   - [Notebook CI for this PR](<run-url>): <result>
+   - The next Test publish should reject the name mismatch during live preflight.
+   ```
 
-1. Queue a **new** run with **Publish to Test after preflight** selected, **Rehearse a failure before Reporting** clear and the same expected Code hash. If `dev` has advanced, ask the facilitator to queue the saved commit on `dev` with the same parameters. Confirm the run uses the same three hashes before treating its result as recovery evidence. [Queue a pipeline at a commit](https://learn.microsoft.com/en-us/cli/azure/pipelines?view=azure-cli-latest#az-pipelines-run).
-2. Compare the new manifest with the baseline and failed run. Expect all publish phases, `status: published`, the same physical IDs for existing items and **Test** active. Find the model and report in Reporting Test and inspect their bindings.
+2. Queue **Tiny Sales - Test Release** from the resulting `dev` commit with **Publish to Test after preflight** selected. Find the failed run in the Environment history. In the release task log, look for `TEST RELEASE FAILED during preflight` and a message with the Code workspace ID, the expected name with `-typo`, and the actual name returned by Fabric. The release reached the live workspace check. The Unit 6 notebook check and Unit 7 offline preview work from Git, so a well-formed but incorrect workspace name can get through those checks.
+3. Compare the failed `test-release.json` with the baseline. Expect `status: failed`, `phase: preflight`, a new Code hash and the same Data and Reporting hashes. The log shows the mismatch before `TEST PREFLIGHT PASSED`, and the manifest has no completed publish phases. The earlier Test report and table can still be present. Use deployment evidence to decide what this run changed and record who owns the fix. [Recovery record](resources/test-recovery-record.md) · [Release manifests](../../reference/release-manifests.md).
+
+**Expected result** The Test history records an attempted deployment that the live target check stopped before publishing. You can trace the failure to one configuration value in Git. This applies **MS-06 Environment configuration**, **MS-10 Operational visibility** and **MS-11 Recovery**. [Fabric Minimum Standard](../../../source-guidelines/fabric-minimum-standard.md#minimum-standard-by-operating-model).
+
+### 5. Fix the configuration and verify the release
+
+1. Create a feature branch from the current `dev`. Restore `codeWorkspaceName` to the exact assigned name, using the known-good configuration and workspace inventory as references. Commit as **Restore the Code Test workspace name** and open a PR into `dev` with the same title. Check that the diff contains only the intended fix. Complete the PR after review and CI, then record the corrected Code commit.
+
+   ```markdown
+   ## Change
+   Restore the expected name of the assigned Code Test workspace.
+
+   ## Validation
+   - [Failed Test preflight](<run-url>) showed <expected and actual names>.
+   - Confirmed the corrected name against the known-good configuration and Fabric inventory.
+   - [Notebook CI for this PR](<run-url>): <result>
+   ```
+
+2. Queue a **new** Test publish run from the corrected `dev` commit. Compare the manifest with the baseline and failed run. Expect `status: published`, `phase: complete`, **Test** active, and the same physical IDs for existing items. Verify that the Data and Reporting pins are unchanged and record which Code commit supplied the corrected settings.
 3. Repeat the runtime checks from section 3. Record the recovered run, its validation results and who signs off the recovery.
 
-The exercise repeats the same source because the deliberate failure interrupted publishing. In a real incident, first establish whether the cause was a transient failure, bad source, or target configuration. That determines whether you retry, correct the configuration, or select a previously verified release. A definition redeploy restores definitions and bindings. A rerun of `run_sales` regenerates the synthetic table. Historical data and external side effects need their own recovery actions. This applies **MS-05 Reproducible deployment**, **MS-06 Environment configuration** and **MS-11 Recovery**. [Fabric Minimum Standard](../../../source-guidelines/fabric-minimum-standard.md#minimum-standard-by-operating-model).
+This failure occurred before any Fabric writes. If a run fails during publishing, inspect the last completed phase, the failed phase and each affected workspace before deciding whether to retry or redeploy a known-good definition. A publish call that fails can still have made changes. Redeploying definitions restores definitions and bindings. Running `run_sales` separately regenerates the synthetic table. Historical data and external side effects need their own recovery actions. This applies **MS-05 Reproducible deployment** and **MS-11 Recovery**. [Fabric Minimum Standard](../../../source-guidelines/fabric-minimum-standard.md#minimum-standard-by-operating-model).
 
-**Expected result** The successful, failed and recovered runs appear in Test deployment history. The manifests and runtime results show that the same reviewed snapshot was recovered.
+**Expected result** The history shows a successful baseline, a rejected attempt and a successful release from the corrected commit. Your record connects each run to its source, the fix and the verified runtime results.
 
 ### If a check fails
 
 | Symptom | What to check |
 | --- | --- |
 | The run cannot use the Environment | Confirm the name matches exactly and the existing Test pipeline is listed in the Environment's pipeline permissions. |
-| The Code revision check stops the run | Compare the full expected hash with the run's Code commit. Queue the baseline commit and keep the guard in place. |
-| The run fails before the rehearsal stop | Read the failed task and manifest phase if one was produced. Resolve that failure before collecting rehearsal evidence. |
+| The typo run publishes successfully | Compare the run's Code revision with the deliberate change and check that the pipeline still uses the Unit 11 YAML and the checked-in Test config. |
+| The run fails for a different reason | Read the failed task and manifest phase if one was produced. Resolve access or setup failures before comparing the expected and actual workspace names. |
 | Definitions published but the smoke check failed | Check the latest `run_sales` result, parameter values and Data Test binding before interpreting the smoke notebook or report. |
 
 ### Completion checkpoint
 
 - [ ] The release tooling is reconciled into Code `dev` through review.
 - [ ] The Test Environment records the baseline, deliberate failure and recovery.
-- [ ] You can point to the last completed phase in the failed manifest and show the same three hashes in the recovered release.
+- [ ] You can show where preflight rejected the deployment and trace the corrected Code commit with the same Data and Reporting pins.
 - [ ] You retained the recovered item IDs, runtime results and recovery owner in your record.
 
 [Previous unit](../../section-04-release-automation/unit-10-release-to-prod/README.md) · [Tutorial index](../../README.md)

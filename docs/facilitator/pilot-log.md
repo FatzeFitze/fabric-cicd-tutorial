@@ -48,6 +48,7 @@ Pre-run revision: following the organizer's topology question, Unit 1 provisions
 | P11 accepted, 13 November | 10 - approved Prod release | First lesson version at `b723a58` | Accepted by organizer | Run 654 predates the shared publisher refactor. The refactor still awaits a live rerun. |
 | P09 follow-up, 13 November | 8 - shared Dev handoff | Optional Git update and manual smoke check | Participant guidance added | Connects the Unit 5 merge to the live Dev workspace and explains how the Git-based Test release can proceed independently. No new Dev sync or smoke result was supplied. |
 | P12 preparation, 13 November | 11 - partial Test release and recovery | New lesson and Test deployment job | Live rehearsal pending | Reconcile the release tooling into Code `dev`, establish a known-good Test run, stop before Reporting and verify recovery with the same three commits. [Unit 11 pilot notes](unit-11-pilot-notes.md). |
+| P12 feedback, 17 November | 11 - failed Test release and recovery | Revised lesson and Test deployment job | Live rehearsal pending | A name typo in the versioned Test configuration triggers the existing live workspace check. Learners diagnose the mismatch and restore the correct name through a PR. [Unit 11 pilot notes](unit-11-pilot-notes.md). |
 
 Do not interpret a cloud action as completed simply because the unit describes it. The learner reports the actual resources, result and time. A facilitator-provisioning delay is separate from learner exercise time.
 

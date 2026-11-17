@@ -21,6 +21,7 @@ Create the unit folder and README entry point immediately, even during preparati
 
 - Address the learner as "you". Use plain English, short explanations and step-by-step assignments.
 - Assume mixed ALM experience. Explain the reason for a control and let the learner observe it; avoid unexplained jargon or long theory before any result.
+- Motivate each new tool or concept at first use. Start with the practical problem it solves, explain why it fits this exercise and when a team would use it, and show what learners can check to see the benefit. Explain any important boundaries with tools already introduced before giving the setup steps.
 - Explain unfamiliar Fabric responsibilities at the point of use, especially workspace/item identities, resource linkage and environment bindings that may have been hidden by a centrally managed on-premises setup. Give the location, purpose, alternatives and observable check for a setting; a click path alone is insufficient. Do not assume every on-premises platform lacked such controls.
 - Give runnable starter code for business logic that is not the teaching objective. Require learners to read the relevant part, create the Fabric items themselves and verify outputs.
 - Use the UI's actual field names and distinguish conceptual mappings from visible input fields. Explain generated runtime content separately from authored source. For web editors, state whether edits autosave instead of assuming a Save button exists.

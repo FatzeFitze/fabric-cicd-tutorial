@@ -185,10 +185,7 @@ def read_items(plan, keys, workspaces, get):
     return verify_expected_items(items, workspaces, live)
 
 
-def run_release(plan, dev, paths, names, get, publish, evidence, *, deploy, target, expect_validation_absent=None,
-                stop_before_reporting=False):
-    if stop_before_reporting and (target != "test" or not deploy):
-        raise PlanError("The recovery rehearsal is only available for a Test publish run")
+def run_release(plan, dev, paths, names, get, publish, evidence, *, deploy, target, expect_validation_absent=None):
     notebook, validation, pipeline, activity, expression, model, sql, value_set = read_bindings(paths, plan, dev, target)
     workspaces = plan["targets"][target]["workspaces"]
     label = target.capitalize()
@@ -252,10 +249,6 @@ def run_release(plan, dev, paths, names, get, publish, evidence, *, deploy, targ
     activity.update(notebookId=code["notebook"]["itemId"], workspaceId=workspaces["code"])
     write_json(paths["pipeline"] / "pipeline-content.json", pipeline)
     publish_phase("code", ["DataPipeline"])
-
-    if stop_before_reporting:
-        evidence["phase"] = "rehearsal stop before Reporting"
-        raise PlanError("Deliberate Test rehearsal stop after Data and Code publishing")
 
     expression.write_text(model[:sql.start()] + f'Sql.Database("{host}", "{catalog}")' + model[sql.end():], encoding="utf-8")
     publish_phase("reports", ["SemanticModel", "Report"])

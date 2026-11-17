@@ -10,10 +10,11 @@ Keep this with your Test release evidence.
 | Verified Code, Data and Reporting hashes | |
 | Known-good workspace IDs, item IDs and active value set | |
 | Known-good Fabric pipeline, validation notebook and report results | |
+| Deliberate mismatch PR, Code hash and CI result | |
 | Failed run and manifest | |
-| Last completed publish phase, failure phase and exact message | |
+| Failure phase, expected and actual workspace names, and evidence of completed publish phases | |
 | Live inventory and binding observations after the failure | |
-| Recovery action, reason and owner | |
+| Fix PR, corrected Code hash, CI result and recovery owner | |
 | Recovered run and manifest, including revision and ID comparison | |
 | Recovered Fabric pipeline, validation notebook and report results | |
 | Any runtime or data state requiring separate recovery | |
