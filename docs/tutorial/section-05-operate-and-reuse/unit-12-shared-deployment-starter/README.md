@@ -56,10 +56,11 @@ If the validation notebook folder is missing from your checkout, first open the 
    | --- | --- |
    | [CI wrapper](../../../../sample/tiny-sales/unit-12/ci.yml) | Replace `.azuredevops/pipelines/notebook-ci.yml` |
    | [Test wrapper](../../../../sample/tiny-sales/unit-12/test.yml) | Replace `.azuredevops/pipelines/test-release.yml` |
-   | [Tiny Sales project check](../../../../sample/tiny-sales/unit-12/validate_returns.py) | Add `checks/validate_returns.py` |
+   | [Candidate validation entry point](../../../../sample/tiny-sales/unit-12/validate_candidate.py) | Add `checks/validate_candidate.py` |
+   | [Returns report check](../../../../sample/tiny-sales/unit-12/validate_returns.py) | Add `checks/validate_returns.py` |
 
 3. In **both** wrappers, replace `REPLACE_WITH_DATA_REPO` and `REPLACE_WITH_REPORTING_REPO` with the names already in `sources.data.repository` and `sources.reports.repository`. Use the same Azure Repos spelling as the Unit 9 YAML. Keep `mask: config/tiny-sales-release.yml` in both files and `target: test` in the Test wrapper.
-4. Confirm the Code files from Unit 6 are present. If restoring them, use [`checks/validate_tiny_sales.py`](../../../../sample/tiny-sales/validate_tiny_sales.py) and [`toolkit/notebook_validation.py`](../../../../toolkit/notebook_validation.py). The new project check calls that same notebook contract before testing the returns measure.
+4. Confirm the Code files from Unit 6 are present. If restoring them, use [`checks/validate_tiny_sales.py`](../../../../sample/tiny-sales/validate_tiny_sales.py) and [`toolkit/notebook_validation.py`](../../../../toolkit/notebook_validation.py). Open `checks/validate_candidate.py`. Its `run(repositories, plan)` function calls the existing Unit 6 notebook contract and the new returns report check. Add future project checks as calls here. The shared starter needs only this one entry point.
 5. Follow `extends.template` in the two wrappers. The [CI template](../../../../deployment_starter/templates/ci.yml) calls the validation steps. The [release template](../../../../deployment_starter/templates/release.yml) validates a Test candidate first, then hands it to the job with the Fabric connection. In [`release.py`](../../../../deployment_starter/release.py), find `run_project_check` and `publish` to see where each happens.
 
 **Expected result** Both registered YAML paths contain wrappers. The wrappers point to templates and pass project inputs, and the starter can load the project check from `checks/`.
@@ -69,7 +70,7 @@ If the validation notebook folder is missing from your checkout, first open the 
 1. In **Reporting Dev**, create a thin report named `returns_overview` over the existing `sales_model`. If your team already created it in a previous walkthrough, open that report and verify its model. Add or check the card using the model's **Returned Orders** measure. If the model needs that measure, use the [Tiny Sales measure definitions](../../../../sample/tiny-sales/sales-model-measures.dax). [Unit 4 report creation](../../section-03-team-delivery/unit-04-connect-orchestration-configuration-and-reporting/README.md).
 2. Commit the report and any model change through the Reporting `dev` workflow. If you are reusing the report, locate the reviewed commit on Reporting `dev` that already contains it. Open the resulting commit in Azure Repos. In the Reporting source folder, check that `returns_overview.Report/.platform` has its own logical ID and `definition.pbir` has `datasetReference.byPath.path: ../sales_model.SemanticModel`. The report and model are sibling folders. If the export differs, review the binding with the facilitator before queuing the release.
 3. In Code's `config/tiny-sales-release.yml`, set `sources.reports.revision` to that full Reporting commit hash. Use the existing Data pin unless you reviewed a Data change for this candidate.
-4. Copy the two entries under `items` in [mask-additions.yml](../../../../sample/tiny-sales/unit-12/mask-additions.yml) into your existing `items` block. **Replace** the old `project_checks` block with the one in the same file. It selects `checks.validate_returns`.
+4. Copy the two entries under `items` in [mask-additions.yml](../../../../sample/tiny-sales/unit-12/mask-additions.yml) into your existing `items` block. **Replace** the old `project_checks` block with the one in the same file. It selects `checks.validate_candidate`, which calls both checks.
 5. Review the edges. The `validation` notebook binds to `lakehouse`. The new `returns_report` binds to the existing `model`. Keep the other items, bindings and workspace mappings in the mask.
 
 ```mermaid
@@ -98,7 +99,7 @@ Authorize **Tiny Sales - Notebook CI** for the Data and Reporting repos if requi
 
 ## 6. Watch the same CI policy reject and accept the change
 
-1. Open `checks/validate_returns.py` and find `run(repositories, plan)`. It runs the notebook source contract, then checks for the required measure in the semantic model source. For this failure drill, set `REQUIRED_MEASURE` to `"Returns Count"` so the shared model stays usable while CI exercises the diagnostic.
+1. In `checks/validate_returns.py`, find `check_returns_report`. It looks for the required measure in the semantic model source. Set `REQUIRED_MEASURE` to `"Returns Count"` to demonstrate a reporting-specific CI failure against the same source exports.
 2. Review and commit the Code changes, push your feature branch, and open **Migrate Tiny Sales to the shared release starter** into `dev`. Use the usual required CI check on the PR. You can use this description:
 
    ```markdown

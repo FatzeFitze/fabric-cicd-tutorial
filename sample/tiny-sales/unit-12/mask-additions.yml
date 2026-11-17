@@ -13,4 +13,4 @@ items:
 
 # Replace the existing project_checks mapping with this mapping.
 project_checks:
-  static: checks.validate_returns
+  static: checks.validate_candidate
