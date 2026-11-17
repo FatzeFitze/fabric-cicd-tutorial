@@ -4,7 +4,7 @@
 
 It's 7:55 a.m. The overnight run is green. Finance opens the sales report and finds that last quarter's revenue has changed. The meeting starts in five minutes. Which number should they use?
 
-We talk about becoming data-centric because we want decisions grounded in evidence. Once people rely on the numbers, the team takes responsibility for explaining them and keeping them dependable. The monster in the basement can be as ordinary as two plausible totals for the same quarter and nobody who can explain the difference.
+We talk about becoming data-centric because we want decisions grounded in evidence. Once people rely on the numbers, the team takes responsibility for explaining them and keeping them dependable.
 
 Reviewed changes, separate environments and release records give you a starting point. They help you establish which logic ran, where it ran and what was checked. To explain the difference and choose a safe fix, you also need to know which data the job read and wrote.
 
