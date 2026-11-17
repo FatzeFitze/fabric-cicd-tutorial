@@ -15,6 +15,8 @@ The first version supports the three-repository Tiny Sales topology and addition
 
 In the teaching setup, commit the starter and its required toolkit files together in the Code repository. The evidence records Git object IDs for the starter directory and the required toolkit files. An adoption that packages these files separately should pin its template and Python code together and record that version with the release.
 
+For a guided look at implementation, see [Read the deployment starter YAML](../docs/tutorial/reference/deployment-starter-yaml.md) and [Follow the deployment starter Python](../docs/tutorial/reference/deployment-starter-python.md).
+
 ## Project inputs
 
 - Use the existing [release mask](../config/tiny-sales-release.yml) for source roles and repository pins, items and binding references, workspace IDs and desired Variable Library value sets. Keep the Code checkout as the selected Code revision.

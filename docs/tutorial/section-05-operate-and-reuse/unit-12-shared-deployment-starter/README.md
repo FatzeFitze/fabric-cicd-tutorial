@@ -62,6 +62,8 @@ If the validation notebook folder is missing from your checkout, first open the 
 4. Confirm the Code files from Unit 6 are present. If restoring them, use [`checks/validate_tiny_sales.py`](../../../../sample/tiny-sales/validate_tiny_sales.py) and [`toolkit/notebook_validation.py`](../../../../toolkit/notebook_validation.py). The new project check calls that same notebook contract before testing the returns measure.
 5. Follow `extends.template` in the two wrappers. The [CI template](../../../../deployment_starter/templates/ci.yml) calls the validation steps. The [release template](../../../../deployment_starter/templates/release.yml) validates a Test candidate first, then hands it to the job with the Fabric connection. In [`release.py`](../../../../deployment_starter/release.py), find `run_project_check` and `publish` to see where each happens.
 
+For a deeper read, [follow the pipeline templates](../../reference/deployment-starter-yaml.md) and [trace validation, bindings and publishing in Python](../../reference/deployment-starter-python.md).
+
 **Expected result** Both registered YAML paths contain wrappers. The wrappers point to templates and pass project inputs, and the starter can load the project check from `checks/`.
 
 ## 4. Add the report and update the release mask

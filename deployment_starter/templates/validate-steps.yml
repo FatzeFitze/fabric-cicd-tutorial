@@ -1,3 +1,4 @@
+# Notebook CI and Test both call these steps before Fabric login.
 parameters:
   - name: mask
     type: string
@@ -7,6 +8,8 @@ steps:
   - bash: python -m pip install --disable-pip-version-check -r toolkit/requirements-planning.txt
     displayName: Install release planning dependencies
     workingDirectory: $(Pipeline.Workspace)/s/code
+  # Pass the actual Code revision selected by Azure DevOps. Python reads Data
+  # and Reporting pins from the mask and runs the configured project check.
   - bash: |
       set -eu
       python -B -m deployment_starter.release validate \
@@ -20,6 +23,8 @@ steps:
     workingDirectory: $(Pipeline.Workspace)/s/code
     env:
       RELEASE_MASK: ${{ parameters.mask }}
+  # Keep a diagnostic after a failed validation if Python wrote one.
+  # Test's separate Release job downloads this artifact by name.
   - publish: $(Build.ArtifactStagingDirectory)
     artifact: candidate-validation
     condition: succeededOrFailed()

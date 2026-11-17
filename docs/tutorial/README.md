@@ -21,7 +21,7 @@ Coming to DNA Fabric Days? The [participant prep guide](pre-reads/README.md) cov
 | [8. Verify the shared Dev workspaces](section-04-release-automation/unit-08-publish-shared-dev/README.md) | Use the Dev identity to verify workspace names, item IDs and exported bindings | Organizer reports the live preflight passed and logical IDs matched. |
 | [9. Publish Tiny Sales to Test](section-04-release-automation/unit-09-release-to-test/README.md) | Run the preflight and managed publish together, then review evidence and item ownership | Managed Test publish verified from run 643. Manual Test pipeline and notebook checks reported successful. Ownership and rerun observations pending. |
 | [10. Approve and publish Tiny Sales to Prod](section-04-release-automation/unit-10-release-to-prod/README.md) | Approve the tested snapshot, publish with the Prod managed identity and record first creation and runtime results | First lesson version accepted at `b723a58`. Prod run 654 published the tested snapshot and runtime checks passed by organizer report. Shared publisher refactor awaits a live rerun. |
-| [Publish the Tiny Sales baseline](section-05-operate-and-reuse/README.md) | Reconcile the release tooling, validate in Test and publish the Code tag and release note for both advanced labs | Exercise draft. |
+| [Publish the Tiny Sales baseline](section-05-operate-and-reuse/README.md) | Reconcile the release tooling, validate in Test and publish the Code tag and release note for both advanced labs | Organizer reports a successful rehearsal. |
 | [11. Diagnose and recover a failed Test release](section-05-operate-and-reuse/unit-11-recover-a-test-release/README.md) | Track deployments, diagnose a live workspace name mismatch and verify a corrected release | First lesson version accepted at `b3ed5e0`. Live walkthrough pending. |
 | [12. Use a shared deployment starter](section-05-operate-and-reuse/unit-12-shared-deployment-starter/README.md) | Extend Tiny Sales with a report and project check, then verify the shared release path in Test | First draft. Local fixture checks passed; live Test walkthrough pending. |
 
@@ -32,6 +32,8 @@ Explore which checks can run from Git, where they help and when live evidence is
 See how a pipeline signs in as a managed identity and where to grant permissions. [Service connections, managed identities and federation](reference/release-service-connections.md).
 
 Read the Test release artifact and see how its fields support review, automated gates and recovery. [Read and design a release manifest](reference/release-manifests.md).
+
+Trace Unit 12 from pipeline entry points to tests and publishing. [Deployment starter YAML](reference/deployment-starter-yaml.md) · [Deployment starter Python](reference/deployment-starter-python.md).
 
 Where a step demonstrates a DataOps control, look for its **MS** number and the practical evidence it produces. Use the Solution Classification Framework to choose the operating model for a real solution, then read the matching column of the Fabric Minimum Standard. [DataOps guidelines](../source-guidelines/README.md).
 

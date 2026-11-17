@@ -1,3 +1,5 @@
+# The wrappers select the target. deploy controls whether the release stops
+# after live preflight or continues to apply the candidate to Fabric.
 parameters:
   - name: target
     type: string
@@ -12,6 +14,7 @@ pool:
   vmImage: ubuntu-24.04
 
 stages:
+  # Test validates this run's candidate. Prod consumes a completed Test publish.
   - ${{ if eq(parameters.target, 'test') }}:
     - stage: Validate
       displayName: Validate the selected Test candidate
@@ -24,11 +27,14 @@ stages:
 
   - stage: Release
     displayName: Preflight and release to ${{ parameters.target }}
+    # Resolve the protected service connection when Azure DevOps expands the
+    # plan. Python resolves workspace IDs later from the candidate's mask.
     variables:
       - template: /config/environments/${{ parameters.target }}.yml
     jobs:
       - job: Release
         steps:
+          # Check the actual queued branches and the selected upstream run.
           - bash: |
               set -eu
               if [ "$TARGET" = test ]; then
@@ -42,6 +48,8 @@ stages:
               TARGET: ${{ parameters.target }}
               ${{ if eq(parameters.target, 'prod') }}:
                 TEST_SOURCE_BRANCH: $(resources.pipeline.tested.sourceBranch)
+          # This job has its own checkout. It gets evidence from this run for Test,
+          # and from the selected tested pipeline resource for Prod.
           - template: checkout.yml
           - ${{ if eq(parameters.target, 'test') }}:
             - download: current
@@ -52,6 +60,8 @@ stages:
           - bash: python -m pip install --disable-pip-version-check -r toolkit/requirements-release.txt -r toolkit/requirements-planning.txt
             displayName: Install Fabric publishing dependencies
             workingDirectory: $(Pipeline.Workspace)/s/code
+          # AzureCLI@2 supplies the signed-in session for Fabric. Python compares
+          # evidence before it starts live preflight or writes.
           - task: AzureCLI@2
             displayName: Publish the validated Fabric candidate
             inputs:
@@ -85,6 +95,8 @@ stages:
               ${{ if eq(parameters.target, 'prod') }}:
                 TEST_RUN_ID: $(resources.pipeline.tested.runID)
                 TEST_CODE_REVISION: $(resources.pipeline.tested.sourceCommit)
+          # Keep JSON from success and failures after the Python command starts.
+          # Earlier failures may only have task logs.
           - publish: $(Build.ArtifactStagingDirectory)
             artifact: ${{ parameters.target }}-release-evidence
             condition: succeededOrFailed()

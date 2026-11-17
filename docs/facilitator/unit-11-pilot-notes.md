@@ -2,7 +2,7 @@
 
 17 November 2026. The revised draft uses the existing Fabric workspace verification to reject an incorrect expected Code Test workspace name. The previous draft used a forced stop after Code publishing. The current exercise rehearses a real check and a reviewed Git fix. Partial-publish recovery remains a discussion and backlog experiment. Start from the [Unit 10 pilot evidence](unit-10-pilot-notes.md). The live Test and Prod runs preceded the shared-publisher refactor.
 
-The Section 5 Git walkthrough was checked locally using a bundle to transfer the annotated tag. It preserved the release note and exact commit, and verified branching and restoring selected paths. Publishing the tag to Azure Repos and the opener's live Test checks still need rehearsal.
+The Section 5 Git walkthrough was checked locally using a bundle to transfer the annotated tag. It preserved the release note and exact commit, and verified branching and restoring selected paths. The organizer subsequently reported the Section 5 opening exercise worked. Exact run and tag evidence was not supplied.
 
 Local checks exercised the Test entry point with mocked Fabric responses and the actual workspace name comparison. The baseline and corrected run published through all four phases with stable IDs. The typo stopped before inventory or writes, and the failed manifest recorded the failed Code hash and unchanged dependency pins. Lesson links and pipeline wiring were checked. Azure DevOps deployment history, required CI and live Fabric behavior still need rehearsal.
 

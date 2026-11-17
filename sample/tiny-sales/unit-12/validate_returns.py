@@ -10,6 +10,7 @@ REQUIRED_MEASURE = "Returned Orders"
 
 
 def run(repositories, plan):
+    # Keep the Unit 6 notebook contract when composing the new project rule.
     notebook = plan["items"]["notebook"]
     code = repositories["code"] / plan["sources"]["code"]["folder"]
     check_tiny_sales(read_python_notebook(code / f"{notebook['name']}.Notebook"))
@@ -20,6 +21,8 @@ def run(repositories, plan):
     role = model["role"]
     tables = (repositories[role] / plan["sources"][role]["folder"]
               / f"{model['name']}.SemanticModel" / "definition" / "tables")
+    # Check a declaration in the pinned TMDL source. The Test run checks the
+    # resulting value in Fabric after publishing.
     name = re.escape(REQUIRED_MEASURE)
     measure = re.compile(rf"^\s*measure\s+(?:'{name}'|{name})\s*=", re.MULTILINE)
     if not any(measure.search(file.read_text(encoding="utf-8-sig")) for file in tables.glob("*.tmdl")):
