@@ -10,7 +10,7 @@ Working convention, 29 October 2026. The organizer asked for participant-ready M
 4. **Understand what you are building.** Explain concepts needed now, with a small diagram when useful. Separate delivery flow from data flow.
 5. **Numbered assignments.** Use imperative steps, exact item names and clear workspace/environment selection. Explain important choices next to the action. End each assignment with an expected result.
 6. **Troubleshooting.** Give specific symptoms and bounded checks. Do not invent alternate architectures to work around an unverified path.
-7. **Completion checkpoint.** Use observable outcomes, a short reflection and the state to retain for the next unit. Ask learners to retain item links/time/error details; keep private identifiers out of published answers.
+7. **Completion checkpoint.** Use observable outcomes, a short reflection and the state to retain for the next unit. Keep private identifiers out of published answers.
 8. **References and navigation.** Link relevant official pages near claims and in a compact reference list. Link only to future units that actually exist.
 
 Use ordinary Markdown headings, relative repository links, portable tables and Mermaid where appropriate. Each unit lives in its own folder with a `README.md`; resources used only by that lesson may live beside it. Reusable sample code, fixtures, toolkit and pipelines have canonical locations outside the unit. Avoid copying their implementation into multiple lessons. Code may be inline when the lesson is its single authoritative source.
@@ -20,6 +20,8 @@ Create the unit folder and README entry point immediately, even during preparati
 ## Voice and depth
 
 - Address the learner as "you". Use plain English, short explanations and step-by-step assignments.
+- Optimize for what learners can explain and verify after the exercise. Keep a deliberate failure, comparison or manual check when it makes a concept visible. Shorten repeated mechanics once learners have practiced them, and explain an intentional change in workflow.
+- Ask learners to record an observation only when they will compare it in the current unit, use it in a later unit, or use it to diagnose a blocker. Reuse links to existing PRs, manifests and run results as evidence.
 - Assume mixed ALM experience. Explain the reason for a control and let the learner observe it; avoid unexplained jargon or long theory before any result.
 - Motivate each new tool or concept at first use. Start with the practical problem it solves, explain why it fits this exercise and when a team would use it, and show what learners can check to see the benefit. Explain any important boundaries with tools already introduced before giving the setup steps.
 - Explain unfamiliar Fabric responsibilities at the point of use, especially workspace/item identities, resource linkage and environment bindings that may have been hidden by a centrally managed on-premises setup. Give the location, purpose, alternatives and observable check for a setting; a click path alone is insufficient. Do not assume every on-premises platform lacked such controls.

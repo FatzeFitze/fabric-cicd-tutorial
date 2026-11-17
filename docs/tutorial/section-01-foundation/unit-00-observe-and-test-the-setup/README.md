@@ -1,7 +1,5 @@
 # Unit 0 — Observe and test the setup
 
-Status: draft, 29 October 2026. The pilot's access checks have been reported successful; this new explanation and learner timing have not yet been piloted.
-
 Estimated learner time: 15–20 minutes. Resources are pre-provisioned; organizer provisioning time is separate.
 
 ## Objective
@@ -18,7 +16,7 @@ This unit inspects existing resources. Manual asset creation, the first Fabric G
 | Git repositories | Store versioned solution definitions and changes | README and `dev` branch initialized |
 | Fabric workspaces | Hold deployed items and environment-specific state | Nine empty workspaces |
 | Fabric capacity | Provides resources used by Fabric workloads | Assigned to the workspaces |
-| Workspace Git integration | Links a workspace to a repo, branch and directory | Three Dev roles prebound in this pilot |
+| Workspace Git integration | Links a workspace to a repo, branch and directory | Three Dev roles prebound for the exercise |
 | Participant access | Allows authoring and repository contributions | Workspace Admin plus separately granted DevOps access |
 | Deployment automation and workload identities | Support controlled release execution | Introduced later; not established by workspace creation |
 
@@ -42,14 +40,14 @@ Three roles across three environments form one solution. For example, a notebook
 
 ## 3. Inspect source control
 
-This pilot has three role-specific repositories in one project. Each Dev workspace connects to its own repository's `dev` branch and root directory (`/`). Test and Prod need not be Git-connected.
+Your training project has three role-specific repositories. Each Dev workspace connects to its own repository's `dev` branch and root directory (`/`). Test and Prod need not be Git-connected.
 
-One solution repo with role folders remains an alternative for the final tutorial. With three repos, matching branch names do not identify one shared commit or atomic release.
+Teams can also organize one solution repo into role folders. In this exercise, each repo has its own history. The three branches named `dev` will give you three separate commits to identify a release in Unit 7.
 
 **Exercise:**
 
 1. Open each role repository and find its README and `dev` branch.
-2. Confirm your participant account can contribute to the intended repos. An optional README edit can demonstrate this if not already checked; record that commit.
+2. Confirm your participant account can contribute to the intended repos. If the facilitator asks you to verify write access, make a small README edit and open its commit in Azure Repos to confirm it reached the shared repo.
 3. In each Dev workspace, inspect Git integration settings: repository, branch and directory.
 4. Open each Dev Source control pane as the participant. Sign in as yourself if prompted and report errors without disconnecting working bindings.
 
@@ -79,7 +77,7 @@ The **runtime flow** runs an orchestration pipeline/notebook, reads or writes da
 
 The Azure Pipelines agent orchestrates delivery; Fabric executes the Fabric workload. Deployment and runtime/data-access identities have different purposes. Managed identity creation and agent setup come later.
 
-**Exercise:** Find the native Deployment pipelines entry point and record whether it is available. No pipeline creation or deployment is needed here. Visibility does not prove promotion or target bindings work.
+**Exercise:** Find the native Deployment pipelines entry point and record whether it is available. You will open this entry point again in Unit 3 to create the pipelines and verify their target bindings.
 
 ## 5. Explain the current state
 
@@ -104,15 +102,12 @@ Nine workspaces accessible, empty, on intended capacity: yes / blocked
 Workspace Admin and Azure DevOps contribution access: yes / blocked
 Three Dev Git mappings and Source control panes checked: yes / blocked
 Native Deployment pipelines entry point available: yes / blocked
-Participant account differs from provisioning account: yes / no / unknown
-Learner inspection time (excluding provisioning):
-Unclear explanations, errors or deviations:
-Optional README edit commit, if made:
+Blocked step and exact error, if any:
 ```
 
-Do not repeat checks already completed in the pilot; report only missing observations or corrections. Do not include credentials in feedback. If blocked, record the operation and message and ask the facilitator for help. Provisioning instructions are in the [facilitator reference](../../../facilitator/project-and-environment-provisioning.md).
+Use the checkpoint to identify what needs fixing before you create any items. If blocked, share the operation and exact message with your facilitator, with credentials removed. Provisioning instructions are in the [facilitator reference](../../../facilitator/project-and-environment-provisioning.md).
 
-Next: create the first Fabric assets manually in the relevant Dev roles. That unit is prepared from this checkpoint; sample execution and Git sync are not considered passed by this inspection.
+Take the exact names of your assigned Code Dev and Data Dev workspaces into Unit 1. In Unit 2 you will use the Git mappings checked here to find the definitions you export. [Next: Unit 1](../unit-01-create-a-tiny-sales-solution/README.md).
 
 ## Coverage and reading
 

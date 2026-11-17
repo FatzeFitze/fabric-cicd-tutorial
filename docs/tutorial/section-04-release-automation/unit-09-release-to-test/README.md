@@ -4,9 +4,13 @@ Allow **45–55 minutes**. In one Azure Pipeline run, verify the reviewed source
 
 ### Before you begin
 
-Complete the [Unit 8 Dev preflight](../unit-08-publish-shared-dev/README.md). Bring the reviewed Code revision and the Data and Reporting pins from the release mask. This pipeline reads its source from Git, so you can proceed whether or not you ran the optional Dev sync and smoke check. In Data Test, confirm the `sales` table from [Unit 3](../../section-02-model-a/unit-03-native-promotion/README.md) is visible in the lakehouse's SQL analytics endpoint. In Code Test, locate the native `build_sales` notebook and record its displayed owner or creator if the workspace exposes one. The existing lakehouse and notebook are the starting point for this release. Use this pipeline as the writer for the exercise.
+Complete the [Unit 8 Dev preflight](../unit-08-publish-shared-dev/README.md). Bring the Code, Data and Reporting source selections and the Dev binding observations from Unit 8. The Code merge in section 2 will add the Test tooling and validation notebook. That resulting Code commit, together with the Data and Reporting pins, is the candidate you will publish. This pipeline reads its source from Git, so you can proceed whether or not you ran the optional Dev sync and smoke check. In Data Test, confirm the `sales` table from [Unit 3](../../section-02-model-a/unit-03-native-promotion/README.md) is visible in the lakehouse's SQL analytics endpoint. In Code Test, locate the native `build_sales` notebook and record its displayed owner or creator if the workspace exposes one. Compare the existing lakehouse and notebook with your Unit 3 release record. Their prior IDs let you see whether the managed release updates the original items. Use this pipeline as the writer for the exercise.
 
 Have the assigned Test UAMI name, the Azure subscriptions and resource groups for the identity and connection, and the names and IDs of your Code, Data and Reporting Test workspaces. You need Admin on those workspaces to grant the Test identity access.
+
+### From Dev inspection to a Test release
+
+Unit 8 verified the live Dev targets and inspected their references. Here the release verifies Test, then stages a temporary copy of the Git definitions. For example, it resolves the notebook's Data Test lakehouse and the model's Test SQL endpoint using the target inventory. This is the managed counterpart to the notebook rule you applied by hand in Unit 3. At the end, compare the before and after inventory to see what the release created or reused.
 
 ### 1. Set up the Test deployment identity
 
@@ -70,7 +74,7 @@ Have the assigned Test UAMI name, the Azure subscriptions and resource groups fo
 
    The staged file list should show `validate_release.Notebook/.platform` and `validate_release.Notebook/notebook-content.py`.
 
-6. Open a PR into `dev` titled **Add the managed Test release**. Complete it after the required CI check passes.
+6. Open a PR into `dev` titled **Add the managed Test release**. Complete it after the required CI check passes. Keep the PR link and the resulting Code commit so you can check which definition the queued Test run actually used.
 
    ```markdown
    ## Change
@@ -104,11 +108,11 @@ The checkbox makes intent explicit when someone queues a manual release into a s
 
 The Model B **MS-14 Release evidence** control asks you to connect the source state, deployment and validation result. Use the manifest for the source and deployment evidence, then add your validation observations to the same release record. [Fabric Minimum Standard](../../../source-guidelines/fabric-minimum-standard.md#minimum-standard-by-operating-model).
 
-1. Open `test-release.json` in the run artifact. Check `status` is `published`, compare the three verified source revisions with the selected source, and check `active_value_set` is `Test`. For help reading the fields and examples of how teams use this evidence in reviews, see [Read and design a release manifest](../../reference/release-manifests.md).
+1. Open `test-release.json` in the run artifact. Check `status` is `published`, compare the verified Code revision with the completed PR and the Data and Reporting revisions with the pins, and check `active_value_set` is `Test`. For help reading the fields and examples of how teams use this evidence in reviews, see [Read and design a release manifest](../../reference/release-manifests.md).
 2. Compare `before_item_ids` with `published_items`. Find the existing `build_sales` physical ID and the new `validate_release` physical ID. Inspect any owner or creator field the workspace shows for each notebook. Record the field's exact label and value. If the UI has no field, record that observation. [Fabric item ownership](https://learn.microsoft.com/en-us/fabric/fundamentals/item-ownership-take-over).
-3. Open `sales_overview` in Reporting Test and confirm it uses `sales_model` in Reporting Test. Record the run and your observations. [Test release record](resources/test-release-record.md).
+3. Open `sales_overview` in Reporting Test and confirm it uses `sales_model` in Reporting Test. Use the Unit 8 binding observations alongside the Test manifest to explain why the report should read Test data. Record the binding and run link. [Test release record](resources/test-release-record.md).
 
-The artifact records deployment evidence. If time allows, run `run_sales` in Code Test, then run `validate_release` to check the refreshed table for **357.20 gross** and **204.70 revenue**. Record both run links and the smoke result separately. A later release can automate the check, persist pass/fail run metadata and use evidence for the exact candidate as a PR gate to `main`.
+Run the Test smoke checks here if time allows, or return to them before requesting the Prod approval in Unit 10. In Code Test, run `run_sales` and check that it succeeded with `test` and `tiny_sales_test`. Then run `validate_release` against the refreshed table and expect **357.20 gross** and **204.70 revenue**. Reopen the report and check **204.70 Total Revenue**. Keep the run links and results with the exact Test deployment so the Prod reviewer can tell what passed in Fabric. A future automated gate can check that evidence against the promotion candidate.
 
 ### If a check fails
 

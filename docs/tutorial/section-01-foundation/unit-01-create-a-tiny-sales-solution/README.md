@@ -14,7 +14,7 @@ By the end of this unit, you can:
 
 ## Before you begin
 
-Complete [Unit 0](../unit-00-observe-and-test-the-setup/README.md). You need browser access to your assigned Code Dev and Data Dev workspaces, with permission to create and run items on their Fabric capacity. The notebook runs interactively using your signed-in identity, so that identity needs access to both workspaces. See Microsoft's [notebook execution guidance](https://learn.microsoft.com/en-us/fabric/data-engineering/how-to-use-notebook).
+Use the Code Dev and Data Dev workspaces you checked in Unit 0. You need browser access to your assigned Code Dev and Data Dev workspaces, with permission to create and run items on their Fabric capacity. The notebook runs interactively using your signed-in identity, so that identity needs access to both workspaces. See Microsoft's [notebook execution guidance](https://learn.microsoft.com/en-us/fabric/data-engineering/how-to-use-notebook).
 
 Keep the [notebook starter](../../../../sample/tiny-sales/unit-01-notebook.py) open in a second tab or editor. It contains all the supplied code; you do not need a local Python installation, package installation or external data source for this unit. If your viewer shows a preview, switch to its code/raw view before copying.
 
@@ -37,7 +37,7 @@ flowchart LR
     N -->|writes| T["Data Dev: sales lakehouse / dbo.sales table"]
 ```
 
-The **notebook** contains executable logic. The **lakehouse** stores files and tables in OneLake. Its **default lakehouse attachment** tells Spark where to resolve an unqualified table name such as `sales`. It is an environment-specific relationship, even though both workspaces belong to the same team. Microsoft's [lakehouse/notebook guide](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-notebook-explore) explains the default attachment.
+The **notebook** contains executable logic. The **lakehouse** stores files and tables in OneLake. The notebook's **default lakehouse attachment** tells Spark where to resolve an unqualified table name such as `sales`. It is an environment-specific relationship, even though both workspaces belong to the same team. Microsoft's [lakehouse/notebook guide](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-notebook-explore) explains the default attachment.
 
 This is a training sandbox. We will use a fictional low-risk productive scenario to learn Model A controls, then strengthen the workflow for Model B. Workspace separation alone does not determine an operating model. In this exercise, you are the solution owner and initial technical contact.
 
@@ -167,7 +167,7 @@ Your working Dev solution is not yet a reproducible release. Git capture, target
 - [ ] Both runs end with `UNIT_01_PASS`; the persisted table still has six rows and revenue 342.20.
 - [ ] You can explain why successful execution, Git capture and deployment are separate steps.
 
-Keep the two item links and record your approximate completion time. If a check failed, keep the exact error and the step where it occurred so the facilitator can help. Leave the items and table in place for Unit 2; Git capture is the next activity.
+Keep the two Fabric item links. In Unit 2 you will use them to compare the live items with their Git exports, and you will use the six rows and **342.20** revenue as your before-and-after check during the Git round trip. If a check failed, share the step and exact error with the facilitator.
 
 ## References
 

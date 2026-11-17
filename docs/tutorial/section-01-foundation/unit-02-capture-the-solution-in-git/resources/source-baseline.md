@@ -33,8 +33,6 @@ Notebook default-lakehouse reference representation observed in source:
 
 Physical/logical identity distinction you observed:
 
-Displayed commit author and signed-in account checked (do not record credentials):
-
 ## Runtime and completion
 
 - Markdown edit visible in the Fabric notebook:
@@ -42,5 +40,4 @@ Displayed commit author and signed-in account checked (do not record credentials
 - Final notebook success message:
 - Persisted rows / revenue (expected 6 / 342.20):
 - Data and Code Source control panes have no unexpected pending changes:
-- Approximate learner time:
-- UI differences, exact errors or facilitator help needed:
+- If blocked, step and exact error:

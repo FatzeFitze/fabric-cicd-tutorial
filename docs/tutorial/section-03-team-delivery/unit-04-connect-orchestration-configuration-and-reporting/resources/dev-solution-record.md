@@ -39,5 +39,5 @@ Logical IDs are source identities; physical IDs identify deployed instances and 
 - Code repo full commit ID/link:
 - Reporting repo full commit ID/link:
 - Retained Data repo baseline commit ID/link:
-- Actual generated file lists / reference fields needed for later deployment:
-- Approximate time / UI differences / exact errors:
+- Export paths and reference fields you will compare with the live inventory in Unit 8:
+- If blocked, step and exact error:

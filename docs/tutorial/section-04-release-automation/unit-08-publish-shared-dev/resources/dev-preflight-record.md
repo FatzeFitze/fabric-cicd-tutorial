@@ -4,14 +4,9 @@ Keep the record with your participant project.
 
 | Checkpoint | Observation |
 | --- | --- |
-| Reviewed PR and Code `dev` commit | |
-| Pinned Data and Reporting revisions | |
-| CI and Dev preflight run links | |
-| Configured release UAMI and service connection, checked against the connection setup | |
-| Dev UAMI role in Code, Data and Reporting Dev | |
-| Code, Data and Reporting Dev names and workspace IDs | |
-| Notebook, library and Fabric pipeline physical IDs | |
-| Lakehouse, semantic model and report physical IDs | |
+| Unit 7 passing preview and Dev preflight run links | |
+| One planned workspace identity verified against the live inventory | |
+| Service connection and assigned UAMI comparison, or access error to investigate | |
 | Dev Git connections by role, including pending updates and workspace edits | |
 | Observed Dev Variable Library active value set | |
 | Optional Dev sync result and applied revision for each updated workspace | |

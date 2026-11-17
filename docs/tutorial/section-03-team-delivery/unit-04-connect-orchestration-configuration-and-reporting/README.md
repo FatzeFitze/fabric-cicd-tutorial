@@ -13,11 +13,11 @@
 
 ## Before you begin
 
-Complete [Unit 3](../../section-02-model-a/unit-03-native-promotion/README.md). Keep its native pipelines and Test/Prod resources as the earlier working baseline. This unit develops the larger solution in **Dev**; its managed release follows later.
+Complete [Unit 3](../../section-02-model-a/unit-03-native-promotion/README.md). Keep the native Test and Prod deployments as your earlier baseline. You already know how to promote the lakehouse and notebook. Now connect the pieces that run the notebook, supply its settings and display its output. Build this larger solution in **Dev** for the later managed release.
 
 You need authoring access to **Code Dev**, **Data Dev** and **Reporting Dev**, including Power BI report/model authoring and browser model editing. Use the assigned workspaces; ask the facilitator to check licensing/tenant settings if those actions are unavailable. No Power BI Desktop installation is needed for this path.
 
-Confirm Data Dev's `sales` lakehouse has `dbo.sales` with six orders/revenue **342.20**. Keep the [parameter-cell source](../../../../sample/tiny-sales/unit-04-parameter-cells.py), [measure definitions](../../../../sample/tiny-sales/sales-model-measures.dax) and a personal copy of the [Dev solution record](resources/dev-solution-record.md) available.
+Use the Unit 3 record to confirm the Dev starting point. Data Dev's `sales` lakehouse contains `dbo.sales` with six orders and **342.20** revenue. Keep the [parameter-cell source](../../../../sample/tiny-sales/unit-04-parameter-cells.py), [measure definitions](../../../../sample/tiny-sales/sales-model-measures.dax) and a personal copy of the [Dev solution record](resources/dev-solution-record.md) available.
 
 ## Understand the complete flow
 
@@ -32,7 +32,7 @@ flowchart LR
 
 The **Fabric Data Pipeline** orchestrates this workload. It is different from the native Deployment pipelines used in Unit 3 and from the Azure Pipelines delivery automation we will add later.
 
-The **Variable Library** stores typed, non-secret configuration. A pipeline reads its active values and passes them as notebook parameters. A **semantic model** defines reportable fields and measures; a **report** presents them. The model and report are independent items with a relationship, even when both are in Reporting Dev.
+The **Variable Library** stores typed, non-secret configuration so the same notebook can receive different values in each environment. The **Fabric Data Pipeline** passes values from the active set into the notebook, which writes the table. A **semantic model** gives reports a common definition of fields and measures such as Total Revenue. The **report** presents those measures. The model and report remain separate items even when both live in Reporting Dev.
 
 We will use **Direct Lake on SQL** for this pilot: the model references Data Dev's SQL analytics endpoint for metadata, while Direct Lake reads Delta data from OneLake. This is one explicit sample choice, not a rule that every project should use this mode. Do not silently accept a different mode in the creation dialog; record an unavailable option with the facilitator. See [Direct Lake development choices](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-develop).
 
@@ -147,7 +147,7 @@ Model ownership, the connection's effective data-access identity and the report 
    | Travel mug revenue | 59.70 |
    | Lunch box revenue | 37.50 |
 
-6. Follow the visible-change exercise below. Record any readiness delay or refresh error.
+6. Follow the visible-change exercise below. If the report lags, note which refresh step made the new values visible so you know where to look next time.
 
 ### 6.1 Make a data change visible and capture the new baseline
 
@@ -188,7 +188,7 @@ Frequent changes, shared consumers and stronger release expectations motivate Mo
 | Model creation offers a different storage mode or workspace | Check the SQL endpoint entry point and selected Direct Lake option/destination. Report a missing option rather than silently creating an incompatible alternative. |
 | Model/report editing is unavailable | Check authoring license, tenant web-model setting and Reporting Dev permissions with the facilitator. |
 | A Revenue measure cannot be created | Use **Total Revenue** from the updated DAX starter; keep the existing `revenue` column. Update visuals to reference that measure if you used an earlier name. |
-| Notebook checks fail after the price edit | Change the one P01 fixture and both expected monetary totals together. Restore all three values after the demonstration; do not disable validation. |
+| Notebook checks fail after the price edit | Change the one P01 fixture and both expected monetary totals together. Keep the P01 price at 2490 cents and both expectations at 357.20 for Unit 5. Keep validation enabled. |
 | Report shows wrong totals or blanks | Remove filters, check measure definitions, source endpoint, model data access and refresh/readiness. A visually correct name is insufficient to identify the source. |
 | Reporting Git export differs from expected examples | Retain the actual file list, model mode and report format for the facilitator. Do not manually recreate `.platform` files or convert formats as an undocumented workaround. |
 
@@ -202,7 +202,7 @@ Frequent changes, shared consumers and stronger release expectations motivate Mo
 - [ ] The Dev solution record identifies dependencies, active value set, selected connections and visible ownership observations.
 - [ ] You can distinguish orchestration, deployment, runtime values, model data access and report consumption.
 
-Keep the final configuration correct, leave Dev items in place and record approximate time/UI differences/errors. The new Dev assets will be released through the later managed path; Test/Prod currently retain the Unit 3 baseline.
+Carry this record forward. Unit 5 uses the **2490-cent** price and **357.20** report result as its starting point. Unit 7 uses the Data and Reporting commit IDs, Unit 8 checks the exported bindings, and Units 9 and 10 compare live targets and ownership with this human-authored baseline.
 
 ## References
 

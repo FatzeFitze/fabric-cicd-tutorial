@@ -12,6 +12,6 @@ Use your participant project record for workspace IDs and Azure DevOps links.
 | Failing run link and duplicate-mapping diagnostic | |
 | Passing run link and Code checkout revision it checked | |
 | One dependency and its planned workspace in Dev and Test | |
-| Completed PR link and elapsed working time | |
+| Completed PR link | |
 
 Identify one check the preview can make from Git and one it leaves for the Fabric release.

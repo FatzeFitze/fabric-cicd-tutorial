@@ -43,7 +43,7 @@ Native promotion uses source-stage workspace items. These commits record the int
 - Test evidence reviewed before authorization:
 - Common source unchanged after Test validation:
 - Intended environment-specific differences:
-- Learner time / UI differences / exact errors:
+- If blocked, step and exact error:
 
 ## Bootstrap and recovery
 

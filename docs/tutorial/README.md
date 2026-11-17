@@ -57,7 +57,7 @@ From Unit 1 onward, lessons use a consistent participant-facing structure: outco
 
 ## Agreed section and unit journey
 
-The broad journey and minimal sample are organizer-approved. Future rows are planning references, not available or validated units:
+Use the status in the unit list above to see which lessons are available and what has been verified. The section map below includes planned work.
 
 Provisioning belongs to the [facilitator reference](../facilitator/project-and-environment-provisioning.md), outside learner exercise time. The earlier setup Unit 1 is superseded by the manual-asset Unit 1 linked above.
 
@@ -71,9 +71,20 @@ The [curriculum](../planning/curriculum.md) contains every unit's outcome, estim
 | 4. Automate the Model B release | 7–10: environment/dependency configuration, shared Dev, Test, approved Prod | One selected source released with explicit target bindings and runtime evidence |
 | 5. Operate, recover and reuse | 11–12: failure/recovery, starter reuse and control selection | Verified recovery and a small configuration-based reuse exercise |
 
-The working time budget is nine core hours with 1.5 hours of support reserve, still to measure. The native lakehouse/notebook path, Variable Library consumer/active-set automation, later reporting format and Model B mechanisms need validation. Prepared generic components and their config examples are introduced in Units 6–10, after they have been built/tested here. Unit 0 remains parked; future units are not authored merely by appearing in this table.
+The working time budget is nine core hours with 1.5 hours of support reserve, still to measure. The status table above records the observed native, Test and Prod checkpoints and the remaining live checks. Prepared generic components and their config examples are introduced in Units 6–10, after they have been built/tested here. Unit 0 remains parked; future units are not authored merely by appearing in this table.
 
 Unit boundaries and timing will change with pilot feedback. No future unit should assume the old reference lab's cloud behavior applies to this sample.
+
+## Carry evidence from one unit to the next
+
+Use the supplied records to link work you will reuse. A PR link can carry the diff and its review results. A manifest link can carry the deployed revisions, IDs and value set. Add your own notes when they explain an observation or connect a runtime result to the release.
+
+| From | Carry forward | Where you use it |
+| --- | --- | --- |
+| Units 0–3 | Assigned workspaces and Git mappings, captured source and native release record | Units 4 and 5 build from the Dev baseline. Units 9 and 10 use the seeded target items and compare their IDs. |
+| Units 4–6 | Dev definitions and runtime baseline, completed feature PR, notebook path and CI pipeline | Units 7 and 8 reuse the registered CI check, pinned revisions and observed dependencies. |
+| Units 7–8 | Passing release preview and live Dev preflight, including the binding observations | Unit 9 compares the intended Test deployment with the Dev source relationships. |
+| Units 9–10 | Test manifest, Test runtime results and Prod tooling PR | Unit 10 reviews the tested revisions for Prod. Unit 11 brings the tooling back into `dev` and uses Test evidence for recovery. |
 
 ## How to report a result
 

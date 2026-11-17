@@ -78,9 +78,9 @@ Fabric's [notebook source format](https://learn.microsoft.com/en-us/fabric/data-
 
 ## 4. Inspect what the source does and does not contain
 
-1. In each item's `.platform` file, find its display name/type and **`config.logicalId`**. Record the two logical IDs in the worksheet. Keep these generated IDs unchanged.
+1. In each item's `.platform` file, find its display name/type and **`config.logicalId`**. Put each ID beside its Fabric item link in the worksheet. Keep the generated IDs unchanged.
 2. In `notebook-content.py`, inspect the metadata describing its default lakehouse. It may include workspace/item IDs or logical references, depending on the saved settings. Record which representation you see; do not replace it by hand.
-3. Open the lakehouse and notebook links in Fabric. Compare the item IDs in their URLs with the logical IDs in `.platform`. They serve different purposes; do not assume they are interchangeable.
+3. Open the lakehouse and notebook links you kept from Unit 1. Compare the item IDs in their URLs with the logical IDs in `.platform`. They serve different purposes; do not assume they are interchangeable.
 4. Inspect the lakehouse source folder. Check whether it contains the six runtime table rows or a copy of the Delta data files. Inspect the notebook source for the displayed result grid.
 
 **Expected result:** You can explain this distinction:
@@ -125,8 +125,8 @@ Fabric supports [autosaved collaborative notebook editing](https://learn.microso
 1. In Azure DevOps, open the **Data** repository's lakehouse commit using **Repos → Commits** or the file-history view. Copy the full commit ID and its link into your worksheet.
 2. In the **Code** repository, open the latest commit containing your Markdown edit. Record that full commit ID/link as the final Code baseline; its snapshot includes the notebook logic from the earlier commit.
 3. Inspect the displayed commit author/message and compare them with the account/workflow you used. Author metadata supports traceability; it is not, by itself, proof of which authentication credential was used.
-4. Record the notebook/lakehouse item links and the successful runtime check. Reporting has no solution asset yet, so mark it **not used in this baseline** rather than inventing a third asset revision.
-5. Keep your worksheet locally for the next unit. It is an exercise record, not yet a generic deployment manifest or an approved production release record.
+4. Put the runtime check beside the source revisions. Use it to confirm the Markdown-only round trip preserved the Unit 1 result. This baseline includes Code and Data. You will add a Reporting revision in Unit 4.
+5. Keep your worksheet for Unit 3. Its Data commit carries forward into the native release record and its Code commit gives you the starting point before changing the notebook's target guard.
 
 **Expected result:** You have one exact source revision per participating repository. Another person can identify the definitions you captured without guessing which future `dev` branch head you meant. Microsoft's [commit-details guide](https://learn.microsoft.com/en-us/azure/devops/repos/git/commit-details?view=azure-devops) shows where to find the commit ID, files and author information.
 
@@ -162,7 +162,7 @@ Fabric supports [autosaved collaborative notebook editing](https://learn.microso
 - [ ] Your worksheet records the final Code and Data commit IDs/links separately.
 - [ ] You can explain why these commits are neither a lakehouse-data backup nor a Test/Prod deployment.
 
-Keep the items, repositories and table in place. Retain your worksheet, approximate completion time and any error text for the facilitator. The next unit introduces native promotion using this small solution.
+Leave the Dev items and six-row table in place so Unit 3 can promote the definitions and produce a new six-row result in Test. Share any blocked step and exact error with the facilitator.
 
 ## References
 
@@ -173,4 +173,4 @@ Keep the items, repositories and table in place. Retain your worksheet, approxim
 - [Fabric Git source format](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/source-code-format).
 - [Azure Repos commit details](https://learn.microsoft.com/en-us/azure/devops/repos/git/commit-details?view=azure-devops).
 
-[Previous: Unit 1](../unit-01-create-a-tiny-sales-solution/README.md) · [Next: Unit 3 rehearsal](../../section-02-model-a/unit-03-native-promotion/README.md) · [Tutorial index](../../README.md)
+[Previous: Unit 1](../unit-01-create-a-tiny-sales-solution/README.md) · [Next: Unit 3](../../section-02-model-a/unit-03-native-promotion/README.md) · [Tutorial index](../../README.md)

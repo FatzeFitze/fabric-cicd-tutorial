@@ -11,7 +11,7 @@ Allow **45–55 minutes** with local tools already installed. You will create a 
 
 ## Before you begin
 
-Complete Unit 4 and keep your solution record. The final Code revision contains the **2490-cent** P01 Travel mug price and **357.20** for both expected monetary totals. Data Dev and the report show **357.20** revenue. If you followed an earlier draft that restored the original price, finish the revised price exercise and capture the updated Code revision. If you already started the feature, bring the updated `dev` into your existing feature branch before completing its PR. [Unit 4](../unit-04-connect-orchestration-configuration-and-reporting/README.md).
+Use Unit 4’s Dev solution record to check your starting point. The final Code revision contains the **2490-cent** P01 Travel mug price and **357.20** for both expected monetary totals. Data Dev and the report show **357.20** revenue. If you still see **342.20**, finish the price-change exercise and capture the result before branching. [Unit 4 price change](../unit-04-connect-orchestration-configuration-and-reporting/README.md#61-make-a-data-change-visible-and-capture-the-new-baseline).
 
 You need **Git**, an **IDE** and access to clone, create a branch and open a PR in your assigned **Azure DevOps Code repository**. The examples use Visual Studio Code. With another IDE, open the same local Git folder and run the same Git commands in PowerShell. Install/sign in using your organization's approved method before this exercise. Run `git --version` in PowerShell to confirm Git is available. No local Spark installation, Power BI Desktop or Fabric VS Code extension is required.
 
@@ -155,11 +155,22 @@ The fictional business now wants **revenue to exclude returned orders**. Keep al
 1. Share the feature branch:
 
    ```powershell
-   git push --set-upstream origin feature/exclude-returned-orders
+   git push -u origin feature/exclude-returned-orders
    ```
 
+   `-u` is short for `--set-upstream`. It links your local feature branch to its counterpart on `origin` so later pushes on that branch can use `git push`.
+
 2. Open your **Code repo → Repos → Pull requests → New pull request** in Azure DevOps. Set **source = `feature/exclude-returned-orders`** and **target = `dev`** explicitly; do not accept `main` just because it is offered.
-3. Use the title **Exclude returned orders from Tiny Sales revenue**. State that returned rows contribute zero revenue and the expected result is **204.70**, with **357.20** gross. Record the diff review and whitespace check as the validation performed so far. Select **Create**. If you already have a draft from an earlier version of this exercise, check its base, updated amounts and file diff, then select **Publish** on that PR.
+3. Use the title **Exclude returned orders from Tiny Sales revenue**. Add the description below and select **Create**. Replace the placeholders with your actual review results.
+
+   ```markdown
+   ## Change
+   Keep returned orders in the table and count them as zero revenue.
+
+   ## Validation
+   - Reviewed the notebook diff and Git whitespace check: <result>
+   - Expected after Fabric execution: 357.20 gross and 204.70 revenue.
+   ```
 4. Open **Files** and **Commits**. Verify the intended notebook edit, its preserved logical ID and the feature commit. Record the PR URL and branches. Check the PR's merge status and satisfy any existing requirements. Review the diff yourself in a solo lab, or ask your partner to review if working in a pair.
 5. When the PR is ready, select **Complete**. Choose **Squash commit** if the training repo permits it, or use the merge type specified for your repo. Select **Complete merge** after checking the options. If a required policy or reviewer blocks completion, ask the facilitator how to satisfy it. Leave policy override unchecked. [Complete an Azure Repos PR](https://learn.microsoft.com/en-us/azure/devops/repos/git/complete-pull-requests?view=azure-devops#complete-a-pull-request).
 6. Confirm the PR status is **Completed**. Find the resulting commit on `dev` in Azure Repos and record its full ID alongside the feature commit. A squash merge creates a new target commit, so use the resulting `dev` commit as the integration checkpoint.
@@ -168,9 +179,9 @@ The fictional business now wants **revenue to exclude returned orders**. Keep al
 
 ## 7. Compare merged source with live Dev
 
-1. Open **Code Dev → Source control**, refresh the pane and confirm it tracks **`dev`**. Observe the incoming notebook update. Leave it pending for the pipeline publishing exercise so you can compare the merged revision with the live definition. [Update workspace from Git](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/git-get-started#update-workspace-from-git).
+1. Open **Code Dev → Source control**, refresh the pane and confirm it tracks **`dev`**. Observe the incoming notebook update. Leave it pending here so you can compare the merged revision with the live definition. Unit 8 offers an optional Git update and Dev smoke check; Unit 9 deploys the reviewed Git source to Test. [Update workspace from Git](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/git-get-started#update-workspace-from-git).
 2. Check the persisted Data Dev/report baseline of **357.20**. Record it separately from the feature's expected **204.70**. If the workspace or report is already showing the feature, check whether an update and run occurred and record the actual revision and result.
-3. Record the baseline, feature and resulting `dev` commits, completed PR, notebook path/logical ID, retained Data/Reporting revisions and workspace observations. [Feature record](resources/feature-record.md).
+3. In your feature record, link the completed PR and record the resulting `dev` commit, notebook path and observed Dev runtime state. The PR holds the feature branch and diff; keep the Unit 4 record for the Data and Reporting revisions. [Feature record](resources/feature-record.md).
 
 **Expected result** You can trace the change from local source through the completed PR to `dev` and explain which revision produced the current report.
 

@@ -10,7 +10,7 @@ Allow **45 minutes** with Azure Pipelines available. You will version a release 
 
 ## Before you begin
 
-Use the participant Code checkout with the completed Unit 6 PR and its required build policy. Bring the Data and Reporting source revisions from the Unit 4 solution record and the IDs of your assigned Code, Data and Reporting workspaces in Dev, Test and Prod. Open each workspace from its workspace list to confirm its role and environment. In a Fabric URL containing `/groups/<workspace-id>/`, use the workspace GUID after `/groups/`. Use your assigned workspace inventory if the link is ambiguous. [Unit 6](../../section-03-team-delivery/unit-06-required-pr-validation/README.md) · [Workspace and item IDs](../../reference/fabric-item-identities.md).
+Use the participant Code checkout with the completed Unit 6 PR. Open the pipeline link from your CI worksheet. You will add a second check to that same pipeline and keep its required `dev` policy. Bring the Data and Reporting source revisions from the Unit 4 solution record linked in Unit 5 and the IDs of your assigned Code, Data and Reporting workspaces in Dev, Test and Prod. Open each workspace from its workspace list to confirm its role and environment. In a Fabric URL containing `/groups/<workspace-id>/`, use the workspace GUID after `/groups/`. Use your assigned workspace inventory if the link is ambiguous. [Unit 6](../../section-03-team-delivery/unit-06-required-pr-validation/README.md) · [Workspace and item IDs](../../reference/fabric-item-identities.md).
 
 ## How the pieces fit
 
@@ -91,7 +91,7 @@ Fill and review these fields in `config/tiny-sales-release.yml`.
 | `variable_library` | Set `folder` to the actual item folder relative to `sources.code.folder`. Keep `environment_name` as the variable the planner checks. |
 | `project_checks` | `checks.validate_tiny_sales` records the project check. The existing Unit 6 pipeline step runs it. The preview displays this declaration. |
 
-The mask records identifiers such as repository names, commit IDs and workspace GUIDs. The preview reads those identifiers from the checkout. You will set up authentication when the pipeline connects to Fabric in Unit 8. The mask also describes intended relationships. For example, `items.notebook.bindings.default_lakehouse` names the `lakehouse` plan item. A Dev plan assigns that item to Data Dev, and a Test plan assigns it to Data Test.
+The mask records identifiers such as repository names, commit IDs and workspace GUIDs. The preview reads those identifiers from the checkout. You will set up authentication when the pipeline connects to Fabric in Unit 8. The mask also describes intended relationships. For example, `items.notebook.bindings.default_lakehouse` names the `lakehouse` plan item. A Dev plan assigns that item to Data Dev, and a Test plan assigns it to Data Test. The dependency declaration expresses what the solution needs; the publisher supplies the implementation that resolves and applies those bindings.
 
 The Data and Reporting pins let the Code repo select one combination to test and later release. When a new Data or Reporting commit should be part of a release, review the new pin in the Code repo so Test can validate that combination. [How one release spans three repositories](../unit-10-release-to-prod/README.md#how-one-release-spans-three-repositories).
 
@@ -134,12 +134,12 @@ The agent loads the mask and the Code export from the proposed PR merge. It disp
 4. Restore the Test Data ID. Use **Restore the Test Data workspace mapping** as the commit message and push to the same PR. Wait for the new required build and find `PLAN VALID`. Inspect the plan before completing the PR.
 
    - `sources` shows the Code checkout revision and both external pins.
-   - `definition_order` puts the lakehouse ahead of the notebook, the library and notebook ahead of the pipeline, and the model ahead of the report. The model also follows the pipeline in the declared order. The later release adds execution and data-readiness checks before publishing reporting items.
+   - `definition_order` puts the lakehouse ahead of the notebook, the library and notebook ahead of the pipeline, and the model ahead of the report. The model also follows the pipeline in the declared order. This expresses the data dependency. For this tutorial the Test publisher resolves the existing SQL endpoint and publishes reporting definitions; you run the Fabric workload and validate reporting afterward.
    - `targets` shows the planned item workspace IDs and expected environment values from `Default`, `Test` and `Prod`.
 
 5. Update **Validation** in the PR description with what actually happened and links to both runs. Review the final diff and complete the PR after its required check passes. Record the resulting `dev` commit and the Data and Reporting pins.
 
-**Expected result** The same policy blocks the conflicting mapping and accepts the corrected one. The merged mask and its preview give the next unit an agreed release intent to verify against Fabric.
+**Expected result** The same policy blocks the conflicting mapping and accepts the corrected one. Keep the passing preview and the assigned workspace inventory. In Unit 8 you will compare the planned Dev targets with the live identities Fabric returns.
 
 ## If something does not work
 

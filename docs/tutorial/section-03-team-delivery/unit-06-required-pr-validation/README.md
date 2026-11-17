@@ -10,11 +10,13 @@ Allow **35 minutes of working time** with an available Azure Pipelines agent. Yo
 
 ## Before you begin
 
-Use your participant **Code** repository and local checkout. Find the completed Unit 5 PR and the resulting `dev` commit. In the notebook export, the returned-order branch uses `F.lit(0)`, and `EXPECTED_METRICS` declares **357.20 gross** and **204.70 revenue**. Keep the incoming Fabric update pending for the later publishing exercise. [Unit 5](../unit-05-make-a-local-feature-change/README.md).
+Use your participant **Code** repository and local checkout. Find the completed Unit 5 PR and the resulting `dev` commit. In the notebook export, the returned-order branch uses `F.lit(0)`, and `EXPECTED_METRICS` declares **357.20 gross** and **204.70 revenue**. Leave the workspace update pending while you practice the Git-only review. You can apply it in the optional Unit 8 Dev check. [Unit 5](../unit-05-make-a-local-feature-change/README.md).
 
 You need permission to create an Azure Pipeline and queue it on the supplied agent. You or the facilitator need **Edit policies** permission for `dev`. This lesson uses a Microsoft-hosted Ubuntu agent with Python 3.12. Local Python 3.12 is optional. [Python on Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/customize-python) · [Azure Repos branch policies](https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies?view=azure-devops#set-build-validation).
 
 ## How the pieces fit
+
+In Unit 5 you inspected the diff and reviewed the expected totals yourself. Here you make a source check repeatable and connect it to a required PR policy. Watch the same policy reject a defect and accept its correction.
 
 ```mermaid
 flowchart LR
@@ -95,19 +97,28 @@ The **branch policy** queues this Azure Pipeline against the PR's proposed merge
 ## 3. Watch the policy block a faulty change
 
 1. In the exported `notebook-content.py` on your feature branch, change `F.lit(0)` to `F.lit(1)` in the `withColumn("revenue", ...)` expression. This is valid Python and would give each returned order 1.00 revenue. Keep the declared expectations and check files as reviewed.
-2. Review the one-line diff, commit the notebook file and push the feature branch. Open an **active** PR titled **Add required Tiny Sales source validation** from `feature/required-pr-validation` into `dev`. Note the intentional defect in the PR description so reviewers can follow the exercise. Use **Create** to open it for review.
+2. Review the one-line diff, commit the notebook file as **Introduce the rehearsal revenue defect**, and push the same feature branch. Open an **active** PR titled **Add required Tiny Sales source validation** from `feature/required-pr-validation` into `dev`. Use this body and select **Create**.
+
+   ```markdown
+   ## Change
+   Add required source validation for the Tiny Sales notebook.
+
+   ## Validation
+   The first run should reject the intentional change from zero to one for returns.
+   I will restore zero and link the passing run before completing the PR.
+   ```
 3. On the PR's **Overview**, wait for the required build to finish. Open its run from the policy result and find **Validate Tiny Sales notebook source**. Confirm the failure says `Returned orders must contribute zero revenue` and reports the actual `F.lit(1)` expression. Check that Azure Repos reports the required check as failed and blocks normal completion. Record the source commit, run link and failure in the worksheet. [CI evidence worksheet](resources/ci-evidence.md).
 
 **Expected result** The agent runs the checker and the checker returns a failure for the deliberate defect. If the job never starts, or the task cannot find the source file or Python, resolve that setup issue first. The exercise checkpoint is the specific business-rule diagnostic in the job log.
 
 ## 4. Fix the source and complete the PR
 
-1. Restore `F.lit(0)` in the same expression. Review the one-line fix, commit it and push to the same feature branch. Keep the same PR open.
+1. Restore `F.lit(0)` in the same expression. Review the one-line fix, commit as **Restore zero revenue for returned orders**, and push to the same feature branch. Keep the same PR open.
 2. Wait for the **new** required run. Find `VALIDATION PASSED` in the job log and check that the PR policy is green for the updated revision. Record the new source commit and run link. The build can show a generated PR merge commit, which is distinct from both your feature commit and the final `dev` commit.
 3. On the PR's **Files** tab, verify the final proposed changes are the three validation files. The temporary notebook edit should have disappeared from the final diff. Update the PR description with the failing and passing run links and ask for any required review.
 4. Complete the PR using the merge type permitted by your repo. Prefer squash if available so `dev` receives one commit with the validation files. Record the resulting `dev` commit and check that the build validation policy remains enabled. [Complete an Azure Repos PR](https://learn.microsoft.com/en-us/azure/devops/repos/git/complete-pull-requests?view=azure-devops#complete-a-pull-request).
 
-**Expected result** The completed PR links the failed and successful checks to the source revisions. Future PRs into `dev` use the required pipeline. Carry the merged revision and the worksheet into the configuration lesson.
+**Expected result** The completed PR links the failed and successful checks to the source revisions. Future PRs into `dev` use the required pipeline. In Unit 7 you will extend the registered pipeline from this worksheet and reuse the same `dev` policy. Keep the two run links to show how the policy behaved before and after the correction.
 
 ## If something does not work
 

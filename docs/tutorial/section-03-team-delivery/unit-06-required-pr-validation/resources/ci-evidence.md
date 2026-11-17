@@ -12,6 +12,6 @@ Record the actual results from your Azure DevOps project.
 | Diagnostic and blocked PR status | |
 | Corrected source commit, passing build link and build revision | |
 | Completed PR and resulting `dev` commit | |
-| Approximate working time, agent wait and setup issues | |
+| Blocked step and exact error, if any | |
 
 Explain what the source contract checked and which results the later Fabric runtime exercise will verify.

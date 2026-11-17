@@ -14,7 +14,7 @@
 
 ## Before you begin
 
-Complete [Unit 2](../../section-01-foundation/unit-02-capture-the-solution-in-git/README.md). Retain its source-baseline worksheet. Dev must still produce six rows and revenue 342.20.
+Complete [Unit 2](../../section-01-foundation/unit-02-capture-the-solution-in-git/README.md). Use its source-baseline worksheet to locate the Data commit you will carry forward and the Code commit you are about to extend. The last verified Dev runtime result is six rows and 342.20 revenue.
 
 Use the existing Code/Data Dev, Test and Prod workspaces on your assigned capacity. You need permission to create Deployment pipelines and assign those workspaces, plus ownership of the target notebook to configure its rule. Workspace and pipeline permissions are separate; ask the facilitator if an action is unavailable.
 
@@ -124,7 +124,7 @@ Saving a rule does not itself redeploy. The rule takes priority over automatic b
 4. Record deployment/history and runtime results. Use the native pipeline's **Deployment history** for promotion status and the notebook run output/history for execution evidence. A deliberately different lakehouse attachment is environment configuration, not necessarily a code difference.
 5. Confirm the recorded source has not changed since Test validation. If it has, stop and validate the new baseline before production promotion.
 
-**Expected result:** Initial and repeat deployments use the intended Test target. The notebook execution creates/replaces the sample table; definition promotion does not copy Dev's rows.
+**Expected result:** Initial and repeat deployments use the intended Test target. Compare the two Test run results to see that the saved rule produces the same binding and six-row result without re-entering the IDs. Each notebook run creates or replaces its local training table.
 
 ## 6. Authorize and promote to simulated Prod
 
@@ -177,7 +177,7 @@ If Prod still targets Test or Dev, correct the **Prod stage rule** and redeploy 
 - [ ] The release record captures revisions, target IDs/rules and validation results.
 - [ ] You can explain bindings, auto-binding limits, source versus data, and the bootstrap/recovery procedure.
 
-Record completion time, UI differences and exact errors. Keep the assets for the next section, where orchestration, a Variable Library and reporting expand the solution before managed delivery is introduced.
+Keep the native Test and Prod assets and your release record. Units 9 and 10 will update those same lakehouses and notebooks through Azure Pipelines. Their item links and IDs let you see which items the managed release reused. Next, expand the solution in Dev with orchestration, a Variable Library and reporting.
 
 ## References
 
