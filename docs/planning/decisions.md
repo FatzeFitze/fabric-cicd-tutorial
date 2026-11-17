@@ -16,6 +16,8 @@ Date: 28 October 2026. Explicit user decisions are recorded below. Other recomme
 
 ## Confirmed in the scoping discussion
 
+- 17 November. Section 5 opens by validating the reconciled Unit 10 source and publishing an annotated Code tag as a shared starting version for the advanced labs within each team. Teams use their dedicated repos and workspaces. The team release note records the exact Data and Reporting pins and the linked Test and Prod evidence. [Baseline exercise](../tutorial/section-05-operate-and-reuse/README.md).
+
 - 17 November. Unit 12 introduces dedicated shared YAML templates and Python plumbing in [deployment_starter](../../deployment_starter/README.md). The lab extends Tiny Sales with another report, its semantic-model binding and a named static project check, then exercises the shared workflow in Test. Unit 12 references the canonical starter. [Unit 12](../tutorial/section-05-operate-and-reuse/unit-12-shared-deployment-starter/README.md).
 
 - Keep Unit 8 as the read-only Dev preflight and use Git integration for shared Dev. Unit 9 uses one pipeline run to check the reviewed source and Test workspaces before publishing to Test. Automated smoke validation and a required PR gate to `main` are follow-on topics. The workshop uses the seeded Test lakehouse from Unit 3 for this first managed release. [Unit 8](../tutorial/section-04-release-automation/unit-08-publish-shared-dev/README.md) · [Unit 9](../tutorial/section-04-release-automation/unit-09-release-to-test/README.md).

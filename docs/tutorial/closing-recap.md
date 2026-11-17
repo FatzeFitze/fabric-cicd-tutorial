@@ -33,6 +33,6 @@ Use the Finance example above or choose a project you know. Name one result some
 
 Start with any PR, manifest or runtime result you have. If you're still planning the project, sketch what you would want that evidence to show. Write down **one control you'd add first**, the failure it addresses, what would show it worked, and who would act on the result. Use it as a discussion point in the workshop or keep it with your project notes for when you start implementing. [Production follow-up](reference/from-tiny-sales-to-production.md).
 
-To practice diagnosing a rejected deployment and verifying the fix, try the optional Test recovery lab. [Unit 11](section-05-operate-and-reuse/unit-11-recover-a-test-release/README.md).
+To continue into the optional Test recovery or shared starter lab, first publish a version of Tiny Sales your team can return to. [Section 5 · Publish the Tiny Sales baseline](section-05-operate-and-reuse/README.md).
 
 [Unit 10](section-04-release-automation/unit-10-release-to-prod/README.md) · [Tutorial index](README.md)

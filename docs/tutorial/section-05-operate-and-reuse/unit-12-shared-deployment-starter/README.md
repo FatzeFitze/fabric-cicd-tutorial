@@ -4,7 +4,7 @@
 
 ## Before you begin
 
-Start with the Code, Data and Reporting repositories and the Test and Prod releases from [Unit 10](../../section-04-release-automation/unit-10-release-to-prod/README.md). Open the successful Test release artifact from Unit 9 so you can compare the original revisions, target IDs and item IDs with this lab's evidence. Coordinate a time with your partner so your Test workspaces have one active release at a time.
+Use your team's [published Tiny Sales baseline](../README.md#start-an-advanced-lab-from-the-baseline) and assigned repositories and Fabric workspaces. Open the baseline Test manifest so you can compare its source revisions, targets and existing item IDs with this lab's release.
 
 ## 1. Identify the files the existing pipelines use
 
@@ -18,11 +18,10 @@ In Azure DevOps, open the existing pipelines under **Pipelines**. Match the Code
 
 Use the existing pipeline registrations and replace the files at the paths they already point to. This keeps the CI build validation policy attached to the same pipeline and lets the Test release continue using its scoped service connection permission. In Unit 10 the Prod pipeline took its YAML from Code `main`, so the changes to Code `dev` can be tested first.
 
-From a clean local **Code** checkout, create the feature branch:
+In your clean **Code** checkout, create the feature branch from the baseline tag you fetched in the section opener.
 
 ```powershell
-git fetch origin
-git switch -c feature/shared-release-starter origin/dev
+git switch -c feature/shared-release-starter refs/tags/tiny-sales-v1.0.0
 ```
 
 **Expected result** You are editing a feature branch of Code. You know which two YAML paths will pick up your changes after the PR.
@@ -33,7 +32,7 @@ Open the Code source root recorded in `sources.code.folder` in `config/tiny-sale
 
 | Notebook | Files and source |
 | --- | --- |
-| `build_sales.Notebook` | Use `.platform` and `notebook-content.py` from your Unit 10-tested Code revision. This is the notebook with the environment parameters and reviewed Tiny Sales revenue rule. |
+| `build_sales.Notebook` | Use `.platform` and `notebook-content.py` from your tagged Code revision. This is the notebook with the environment parameters and reviewed Tiny Sales revenue rule. |
 | `validate_release.Notebook` | Use the two files added in Unit 9. The copy-ready sources are [`.platform`](../../../../sample/tiny-sales/validate_release.Notebook/.platform) and [`notebook-content.py`](../../../../sample/tiny-sales/validate_release.Notebook/notebook-content.py). The notebook checks gross revenue of **357.20** and recognized revenue of **204.70**. |
 
 If the validation notebook folder is missing from your checkout, first open the verified Code revision in Azure Repos and recover both files from there. That gives you the same `config.logicalId` used by Test and Prod. If you are creating the notebook source for the first time, copy both starter files into `validate_release.Notebook/` and replace `REPLACE_WITH_STABLE_GUID` in `.platform` with one new GUID. In PowerShell, run `(New-Guid).Guid` to generate it. Use that value across environments. Save the metadata file as `.platform`, including the leading dot. [Unit 9 notebook creation](../../section-04-release-automation/unit-09-release-to-test/README.md#2-add-the-test-release-pipeline).
@@ -67,8 +66,8 @@ If the validation notebook folder is missing from your checkout, first open the 
 
 ## 4. Add the report and update the release mask
 
-1. In **Reporting Dev**, create a thin report named `returns_overview` over the existing `sales_model`. Add a card using its **Returned Orders** measure. If the model needs that measure, use the [Tiny Sales measure definitions](../../../../sample/tiny-sales/sales-model-measures.dax). [Unit 4 report creation](../../section-03-team-delivery/unit-04-connect-orchestration-configuration-and-reporting/README.md).
-2. Commit the report and any model change through the Reporting `dev` workflow. Open the resulting commit in Azure Repos. In the Reporting source folder, check that `returns_overview.Report/.platform` has its own logical ID and `definition.pbir` has `datasetReference.byPath.path: ../sales_model.SemanticModel`. The report and model are sibling folders. If the export differs, review the binding with the facilitator before queuing the release.
+1. In **Reporting Dev**, create a thin report named `returns_overview` over the existing `sales_model`. If your team already created it in a previous walkthrough, open that report and verify its model. Add or check the card using the model's **Returned Orders** measure. If the model needs that measure, use the [Tiny Sales measure definitions](../../../../sample/tiny-sales/sales-model-measures.dax). [Unit 4 report creation](../../section-03-team-delivery/unit-04-connect-orchestration-configuration-and-reporting/README.md).
+2. Commit the report and any model change through the Reporting `dev` workflow. If you are reusing the report, locate the reviewed commit on Reporting `dev` that already contains it. Open the resulting commit in Azure Repos. In the Reporting source folder, check that `returns_overview.Report/.platform` has its own logical ID and `definition.pbir` has `datasetReference.byPath.path: ../sales_model.SemanticModel`. The report and model are sibling folders. If the export differs, review the binding with the facilitator before queuing the release.
 3. In Code's `config/tiny-sales-release.yml`, set `sources.reports.revision` to that full Reporting commit hash. Use the existing Data pin unless you reviewed a Data change for this candidate.
 4. Copy the two entries under `items` in [mask-additions.yml](../../../../sample/tiny-sales/unit-12/mask-additions.yml) into your existing `items` block. **Replace** the old `project_checks` block with the one in the same file. It selects `checks.validate_returns`.
 5. Review the edges. The `validation` notebook binds to `lakehouse`. The new `returns_report` binds to the existing `model`. Keep the other items, bindings and workspace mappings in the mask.
@@ -153,4 +152,4 @@ Authorize **Tiny Sales - Notebook CI** for the Data and Reporting repos if requi
 
 Which inputs did Tiny Sales supply, and which steps came from the shared starter? Use your PR, validation artifact and Test lineage view to explain how the report got from a pinned source commit to the target model. This applies **MS-03 Change control and traceability**, **MS-06 Environment configuration**, **MS-08 Release validation** and **MS-14 Release evidence**. [Fabric Minimum Standard](../../../source-guidelines/fabric-minimum-standard.md#minimum-standard-by-operating-model).
 
-[Closing recap](../../closing-recap.md) · [Tutorial index](../../README.md)
+[Publish and use the baseline](../README.md) · [Closing recap](../../closing-recap.md) · [Tutorial index](../../README.md)

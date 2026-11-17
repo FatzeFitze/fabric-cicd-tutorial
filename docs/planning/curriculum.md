@@ -61,9 +61,11 @@ After Unit 10, allow **5 minutes** for the standalone closing exercise. Particip
 
 ### Section 5 — Operate, recover and reuse
 
+Open with [Publish the Tiny Sales baseline](../tutorial/section-05-operate-and-reuse/README.md). Reconcile Code `dev` with the reviewed Prod tooling, validate the reconciled commit in Test, and publish an annotated Code tag with the exact source pins and evidence. Unit 11 and Unit 12 each start from that tag and the team's assigned Test resources.
+
 | Unit | Min | Work and observable checkpoint | Main controls |
 | --- | ---: | --- | --- |
-| **[11. Diagnose and recover a failed Test release](../tutorial/section-05-operate-and-reuse/unit-11-recover-a-test-release/README.md)** | About 60 | Reconcile the Prod tooling into Code `dev` and verify the shared publisher in Test. Use the Azure DevOps Environment history, logs and manifests to diagnose a live workspace name mismatch. Restore the expected name through a reviewed PR, verify the corrected deployment and runtime, and discuss recovery from a partial publish. | MS-01, 03, 05, 06, 08, 10, 11, 14 |
+| **[11. Diagnose and recover a failed Test release](../tutorial/section-05-operate-and-reuse/unit-11-recover-a-test-release/README.md)** | About 60 | Start from the published baseline. Use the Azure DevOps Environment history, logs and manifests to diagnose a live workspace name mismatch. Restore the expected name through a reviewed PR, verify the corrected deployment and runtime, and discuss recovery from a partial publish. | MS-01, 03, 05, 06, 08, 10, 11, 14 |
 | **[12. Use a shared deployment starter](../tutorial/section-05-operate-and-reuse/unit-12-shared-deployment-starter/README.md)** | About 60 | Inspect the YAML and Python starter, declare an additional report and its model binding, and register a project static check. Observe the failed and corrected check, then publish and verify the new report in Test. | MS-03, 05–08, 14 |
 
 Unit 12 extends the existing Tiny Sales project and uses the same three Test workspaces. The starter's first version supports the existing item shapes and additional reports that use the declared semantic model. The Prod wrapper demonstrates selecting the validated Test candidate. A live Test walkthrough is pending. [Unit 12 pilot notes](../facilitator/unit-12-pilot-notes.md).
@@ -124,8 +126,8 @@ Current [Variable Library lifecycle guidance](https://learn.microsoft.com/en-us/
 ## Timing and supporting material
 
 - Units 0–6: **4 h 50 min**, proposed Day 1 core.
-- Units 7–12: **4 h 20 min**, proposed Day 2 core.
-- Total core is **9 h 10 min**. With 90 minutes of distributed reserve, plan for **10 h 40 min** of working time plus breaks.
+- Day 2: **4 h 20 min** planned. Complete Units 7–10 and the closing recap, then use any remaining time for the optional Section 5 opener and labs.
+- Total planned time is **9 h 10 min**. With 90 minutes of distributed reserve, plan for **10 h 40 min** of working time plus breaks.
 - A 12-hour working budget leaves up to 80 minutes for optional material.
 
 Pre-read/reference pages cover a short ALM/Git glossary, classification and four states, identity purposes, and a local-tool/access checklist. Recap concepts when used. Facilitator material holds provisioning, approvals/service-connection setup, solutions, checkpoint recovery and timing evidence. The learner must observe the identity/approval boundaries even when a facilitator performs an administrative step.

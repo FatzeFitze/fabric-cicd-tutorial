@@ -15,6 +15,7 @@ Workshop preparation started 28 October 2026. Models A and B are hands-on. Model
 - Verify Dev workspace names and item IDs through the Fabric API while Git integration remains the Dev update mechanism. [Unit 8](docs/tutorial/section-04-release-automation/unit-08-publish-shared-dev/README.md).
 - Verify the selected source and Test workspaces, publish Tiny Sales and retain the deployment evidence in one run. [Unit 9](docs/tutorial/section-04-release-automation/unit-09-release-to-test/README.md).
 - Approve the tested snapshot for Prod, publish with the Prod managed identity and retain first-creation and runtime evidence. [Unit 10](docs/tutorial/section-04-release-automation/unit-10-release-to-prod/README.md).
+- [Section 5 baseline exercise](docs/tutorial/section-05-operate-and-reuse/README.md) — reconcile Unit 10 tooling and publish a tested Git tag for the advanced labs.
 - Diagnose a Test deployment rejected during live preflight and release the corrected configuration. [Unit 11 rehearsal draft](docs/tutorial/section-05-operate-and-reuse/unit-11-recover-a-test-release/README.md).
 - [Unit 12 deployment starter lab](docs/tutorial/section-05-operate-and-reuse/unit-12-shared-deployment-starter/README.md): add a report and project check, then rehearse the shared YAML and Python release in Test.
 - [Logical and physical Fabric IDs](docs/tutorial/reference/fabric-item-identities.md): source identity versus deployed instance, lookup locations and later release evidence.

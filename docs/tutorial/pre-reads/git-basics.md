@@ -50,6 +50,24 @@ In Unit 10, the Test manifest gives you a full commit hash. `HEAD` identifies yo
 
 A merge commit can retain the exact tested hash in the target branch's history. Squashing the same file changes can produce a different hash. Unit 10 uses the original hash to retrieve the exact tested snapshot even after additional commits land on `main`.
 
+## Publish and use a Git tag
+
+The [Section 5 baseline exercise](../section-05-operate-and-reuse/README.md) marks the tested Code commit with `tiny-sales-v1.0.0`. An annotated tag carries the release note. Only the named tag is pushed in the example.
+
+| Command | What it does |
+| --- | --- |
+| `git show --no-patch --oneline $baselineCommit` | Shows the selected commit's hash and subject without a diff. |
+| `git tag -a tiny-sales-v1.0.0 $baselineCommit -F $releaseNotePath --cleanup=verbatim` | Creates a local annotated tag at that exact commit and reads the note from a file. |
+| `git show --no-patch refs/tags/tiny-sales-v1.0.0` | Shows the release note and tagged commit before you publish it. |
+| `git push origin refs/tags/tiny-sales-v1.0.0` | Publishes the named tag to the Code repo. |
+| `git fetch origin tag tiny-sales-v1.0.0` | Fetches the specific shared tag. |
+| `git rev-parse 'refs/tags/tiny-sales-v1.0.0^{commit}'` | Prints the commit hash the annotated tag points to. |
+| `git diff --name-status refs/tags/tiny-sales-v1.0.0 origin/dev` | Lists files whose contents differ between the tagged source and the fetched Dev source. |
+| `git switch -c feature/test-release-recovery refs/tags/tiny-sales-v1.0.0` | Creates a feature branch at the tagged commit. |
+| `git restore --source=refs/tags/tiny-sales-v1.0.0 --staged --worktree -- 'path/from-the-diff'` | In your clean restore branch, stages a reviewable change to return the specified path to its tagged contents. Review the change before committing. |
+
+[Git tag documentation](https://git-scm.com/docs/git-tag) · [Git restore documentation](https://git-scm.com/docs/git-restore).
+
 ## Try it in a disposable local folder
 
 In PowerShell, go to a folder where you can create `git-practice`, then run the following. If Git asks for an author name and email, configure those in this repo with `git config --local user.name "Your Name"` and `git config --local user.email "you@example.com"`, using your approved details. Then retry the commit.

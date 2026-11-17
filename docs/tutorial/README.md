@@ -21,6 +21,7 @@ Coming to DNA Fabric Days? The [participant prep guide](pre-reads/README.md) cov
 | [8. Verify the shared Dev workspaces](section-04-release-automation/unit-08-publish-shared-dev/README.md) | Use the Dev identity to verify workspace names, item IDs and exported bindings | Organizer reports the live preflight passed and logical IDs matched. |
 | [9. Publish Tiny Sales to Test](section-04-release-automation/unit-09-release-to-test/README.md) | Run the preflight and managed publish together, then review evidence and item ownership | Managed Test publish verified from run 643. Manual Test pipeline and notebook checks reported successful. Ownership and rerun observations pending. |
 | [10. Approve and publish Tiny Sales to Prod](section-04-release-automation/unit-10-release-to-prod/README.md) | Approve the tested snapshot, publish with the Prod managed identity and record first creation and runtime results | First lesson version accepted at `b723a58`. Prod run 654 published the tested snapshot and runtime checks passed by organizer report. Shared publisher refactor awaits a live rerun. |
+| [Publish the Tiny Sales baseline](section-05-operate-and-reuse/README.md) | Reconcile the release tooling, validate in Test and publish the Code tag and release note for both advanced labs | Exercise draft. |
 | [11. Diagnose and recover a failed Test release](section-05-operate-and-reuse/unit-11-recover-a-test-release/README.md) | Track deployments, diagnose a live workspace name mismatch and verify a corrected release | First lesson version accepted at `b3ed5e0`. Live walkthrough pending. |
 | [12. Use a shared deployment starter](section-05-operate-and-reuse/unit-12-shared-deployment-starter/README.md) | Extend Tiny Sales with a report and project check, then verify the shared release path in Test | First draft. Local fixture checks passed; live Test walkthrough pending. |
 
@@ -71,7 +72,7 @@ The [curriculum](../planning/curriculum.md) contains every unit's outcome, estim
 | 3. Grow the solution and introduce team development | 4–6: Variable Library, orchestration/reporting, local feature, reusable CI/PR controls | Full Dev sample and a reviewed, validated source change |
 | 4. Automate the Model B release | 7–10: environment/dependency configuration, shared Dev, Test, approved Prod | One selected source released with explicit target bindings and runtime evidence |
 | [Closing recap](closing-recap.md) | After Unit 10 | Choose one control to take into your own project. |
-| 5. Operate, recover and reuse | 11–12: failure/recovery, starter reuse and control selection | Verified recovery and a small configuration-based reuse exercise |
+| [5. Operate, recover and reuse](section-05-operate-and-reuse/README.md) | Publish the baseline, then pick Unit 11 or Unit 12 | A retrievable source version and a verified recovery or shared-starter release |
 
 The working time budget is nine core hours with 1.5 hours of support reserve, still to measure. The status table above records the observed native, Test and Prod checkpoints and the remaining live checks. Prepared generic components and their config examples are introduced in Units 6–10, after they have been built/tested here. Unit 0 remains parked; future units are not authored merely by appearing in this table.
 
@@ -95,7 +96,8 @@ Use the supplied records to link work you will reuse. A PR link can carry the di
 | Units 0–3 | Assigned workspaces and Git mappings, captured source and native release record | Units 4 and 5 build from the Dev baseline. Units 9 and 10 use the seeded target items and compare their IDs. |
 | Units 4–6 | Dev definitions and runtime baseline, completed feature PR, notebook path and CI pipeline | Units 7 and 8 reuse the registered CI check, pinned revisions and observed dependencies. |
 | Units 7–8 | Passing release preview and live Dev preflight, including the binding observations | Unit 9 compares the intended Test deployment with the Dev source relationships. |
-| Units 9–10 | Test manifest, Test runtime results and Prod tooling PR | Unit 10 reviews the tested revisions for Prod. Unit 11 brings the tooling back into `dev` and uses Test evidence for recovery. |
+| Units 9–10 | Test manifest, Test runtime results and Prod tooling PR | Unit 10 reviews the tested revisions for Prod. Section 5 uses the evidence to reconcile and validate a baseline. |
+| Section 5 opener | Code tag, source pins and release note | Units 11 and 12 start from the same tagged source and check the team's Test setup against the evidence. |
 
 ## How to report a result
 
