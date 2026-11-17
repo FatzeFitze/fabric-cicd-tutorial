@@ -82,7 +82,7 @@ Each unit ends with a short question about the result you just observed. At the 
 - Trace the manual release and the full Dev solution before you start working from a local feature branch. [After Unit 4](section-03-team-delivery/unit-04-connect-orchestration-configuration-and-reporting/README.md#what-weve-built-so-far).
 - Compare what source checks, preview and preflight can tell you before you deploy to Test. [After Unit 8](section-04-release-automation/unit-08-publish-shared-dev/README.md#what-you-can-now-explain).
 - Follow a change through review, Test and approved Prod. Discuss where your own project would use different controls. [After Unit 10](section-04-release-automation/unit-10-release-to-prod/README.md#recap-and-discuss).
-- Choose the first control you'd add if a team relied on Tiny Sales every morning. [After Unit 11](section-05-operate-and-reuse/unit-11-recover-a-test-release/README.md#from-tiny-sales-to-your-project) · [Production follow-up](reference/from-tiny-sales-to-production.md).
+- Choose the first control you'd add to a real project. Use the exercise after Unit 11 or return to it on your own when you have a project in mind. [Closing exercise](section-05-operate-and-reuse/unit-11-recover-a-test-release/README.md#from-tiny-sales-to-your-project) · [Production follow-up](reference/from-tiny-sales-to-production.md).
 
 ## Carry evidence from one unit to the next
 
