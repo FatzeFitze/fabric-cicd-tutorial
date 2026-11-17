@@ -21,9 +21,9 @@ A `bindings` edge describes a reference that the starter understands. An `after`
 
 ## Read `run_project_check`: add a project rule
 
-The mask entry `project_checks.static: checks.validate_returns` selects [the Unit 12 check](../../../sample/tiny-sales/unit-12/validate_returns.py). The starter loads the tracked Python file directly under `checks/` and calls `run(repositories, plan)`. The first argument maps role names to local repo paths. The second is a copy of the resolved plan. To add another rule, put it in that function or call a project helper from it. Read the source and plan without changing them.
+The mask entry `project_checks.static: checks.validate_candidate` selects [the project's entry point](../../../sample/tiny-sales/unit-12/validate_candidate.py). The starter loads that tracked Python file and calls `run(repositories, plan)`. The first argument maps role names to local repo paths. The second is a copy of the resolved plan. To add another check, define a helper in the project and call it from `run`. Read the source and plan without changing them.
 
-In the sample, `run` first calls the Unit 6 notebook contract. It then uses the plan to locate the pinned model's `definition/tables` folder and looks for a measure named `Returned Orders` in its TMDL files. Returning normally passes the check. Raising an exception fails validation and writes the diagnostic into `validation.json`. Changing the expected name to `Returns Count` demonstrates the failure on the same source. The Test report and notebook checks later verify what actually runs. [Static validation for Fabric items](static-fabric-validation.md).
+In the sample, `run` first calls the existing Unit 6 notebook contract. It then calls [the returns report check](../../../sample/tiny-sales/unit-12/validate_returns.py), which uses the plan to find the pinned model's `definition/tables` folder and looks for a measure named `Returned Orders` in its TMDL files. Returning normally passes the check. Raising an exception fails validation and writes the diagnostic into `validation.json`. Changing the expected name to `Returns Count` demonstrates the failure on the same source. The Test report and notebook checks later verify what actually runs. [Static validation for Fabric items](static-fabric-validation.md).
 
 ## Read `publish`: verify before writing
 

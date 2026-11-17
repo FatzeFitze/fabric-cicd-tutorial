@@ -14,6 +14,6 @@ items:
     bindings: {semantic_model: model}
 
 # Replace the existing project_checks mapping with this mapping.
-# The starter loads checks/validate_returns.py and calls run(repositories, plan).
+# The starter loads checks/validate_candidate.py and calls run(repositories, plan).
 project_checks:
-  static: checks.validate_returns
+  static: checks.validate_candidate

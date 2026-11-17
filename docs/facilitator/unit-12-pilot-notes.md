@@ -6,6 +6,8 @@ Draft prepared 17 November 2026. [Participant lab](../tutorial/section-05-operat
 
 Python 3.12 with PyYAML 6.0.3 parsed all starter and wrapper YAML. A temporary fixture used three real local Git repositories and simulated Fabric reads and writes. It exercised the missing-measure diagnostic, corrected pin and plan ordering, read-only Test preflight, rejection of mismatched validation evidence before writes, creation of the additional report in the Test inventory, same-candidate Prod promotion, and rejection of a changed starter version before writes. The migration follow-up also verified that the composed project check still rejects the Unit 6 notebook-rule regression and rejects a missing report measure independently.
 
+A local fixture called the candidate entry point through the starter's existing hook loader. It accepted the valid candidate and independently rejected a notebook contract regression, the wrong returns measure name and a missing report declaration.
+
 ## Live rehearsal
 
 1. Confirm Fabric exports a thin report created over Reporting Dev's model with a sibling-relative `datasetReference.byPath`. Inspect the actual exported measure declaration and adjust the example check if its format differs.
