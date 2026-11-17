@@ -199,7 +199,7 @@ You first used Fabric's native Deployment pipelines to promote a lakehouse and n
 #### Workshop choices and their limits
 
 - **Manual release and runtime checks.** You select the Test run and start Prod deliberately. The pipeline automates source and target checks and publishing. You run the smoke checks in Fabric and attach the results to the release record. Model B calls for automated runtime validation in Test and Prod.
-- **A short path to the first Prod release.** Code is the only repo promoted to `main` in this exercise. Data and Reporting deploy from tested pins in their `dev` histories. The first Prod tooling PR starts on Code `main` to preserve the already tested candidate. The next exercise brings that tooling into `dev` and uses Azure DevOps Environment deployment history during recovery.
+- **A short path to the first Prod release.** Code is the only repo promoted to `main` in this exercise. Data and Reporting deploy from tested pins in their `dev` histories. The first Prod tooling PR starts on Code `main` to preserve the already tested candidate. The Test recovery lab brings that tooling into `dev` and uses Azure DevOps Environment deployment history during recovery.
 - **A training sandbox.** Test and Prod start with the seeded items from Unit 3. Participants have workspace Admin access and can edit items directly. An empty-environment rebuild, stricter separation of duties, and private network execution are outside this exercise.
 
 #### Discuss your project
@@ -213,6 +213,6 @@ Spend **5–10 minutes** on your own project or a familiar example. Write down o
 | **What does each control enforce?** | Pick a mistake you want to prevent, such as a developer accidentally writing to Prod. Which combination of branch policy, pipeline permissions, service connection approval and Fabric access would block it? Which practices, such as recording a manual smoke result, help reviewers make a decision? |
 | **What would we automate next?** | Pick a check to run automatically and a decision to keep with a person. For example, automate the smoke notebook and attach its output to the exact candidate, then have a reviewer decide whether to release it to Prod. If several pipelines can deploy to the same target, consider what an Azure DevOps Environment would add. |
 
-Share one boundary you would enforce and one practice you would encourage. Name who owns each and what evidence would show it is working. Bring the Test run link and the release-tooling PR from `main` to Unit 11. You will use them to check the Test baseline and bring the tooling back into `dev`.
+Share one boundary you would enforce and one practice you would encourage. Name who owns each and what evidence would show it is working.
 
-[Previous unit](../unit-09-release-to-test/README.md) · [Next unit](../../section-05-operate-and-reuse/unit-11-recover-a-test-release/README.md) · [Tutorial index](../../README.md)
+[Previous unit](../unit-09-release-to-test/README.md) · [Closing recap](../../closing-recap.md) · [Tutorial index](../../README.md)

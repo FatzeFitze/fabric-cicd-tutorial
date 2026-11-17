@@ -57,6 +57,8 @@ The workshop uses Git integration for shared Dev. Managed deployment begins in T
 
 The observed pilot has three repos, whereas the recommended participant architecture is one solution repo with role folders. Resolve the workshop choice before finalizing Unit 2 and local-development instructions. A final three-repo path needs a release record pinning each repo revision; a single commit cannot represent all three. Avoid a mandatory repository migration exercise merely to reconcile our pilot with the recommendation.
 
+After Unit 10, allow **5 minutes** for the standalone closing exercise. Participants can also return to it later and apply it to their own projects. [Closing recap](../tutorial/closing-recap.md).
+
 ### Section 5 — Operate, recover and reuse
 
 | Unit | Min | Work and observable checkpoint | Main controls |

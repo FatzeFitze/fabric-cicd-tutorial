@@ -17,8 +17,8 @@ The Model B column of **MS-08** calls for automated technical and runtime valida
 
 - **Access and approval.** Name who can change the source or environment settings, approve a release, and operate the workload. Compare the broad training workspace roles with the grants those roles need in your project. Check the agent-to-Fabric path and the workload-to-source path separately.
 - **Operational ownership.** Assign someone to receive failed-run and stale-data alerts. Give them the run link, the affected dataset and a way to tell whether Finance is seeing the current batch.
-- **Rebuild and recovery.** The workshop seeds Test and Prod and rehearses a configuration fix before publishing. For a real project, establish how you would bootstrap a fresh target and how you would inspect a partial publish. Decide how to restore definitions and bindings, and whether to replay a batch, restore data or reconcile external side effects. Check whether replay can create duplicates.
+- **Rebuild and recovery.** The workshop seeds Test and Prod. The Test recovery lab rehearses a configuration fix caught before publishing. For a real project, establish how you would bootstrap a fresh target and how you would inspect a partial publish. Decide how to restore definitions and bindings, and whether to replay a batch, restore data or reconcile external side effects. Check whether replay can create duplicates.
 
 Pick one likely failure. Describe where you would catch it, what evidence the check would produce, and who would act on the result. For example, a missing batch could trigger a freshness alert before Finance opens the report. The support owner can then inspect the last successful batch and decide whether a replay is safe.
 
-[Back to the closing recap](../section-05-operate-and-reuse/unit-11-recover-a-test-release/README.md#from-tiny-sales-to-your-project) · [Tutorial index](../README.md)
+[Back to the closing recap](../closing-recap.md) · [Tutorial index](../README.md)

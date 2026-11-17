@@ -69,6 +69,7 @@ The [curriculum](../planning/curriculum.md) contains every unit's outcome, estim
 | 2. Release the small solution with Model A | 3: native promotion and verification | Minimal two-role slice works in Test and simulated Prod |
 | 3. Grow the solution and introduce team development | 4–6: Variable Library, orchestration/reporting, local feature, reusable CI/PR controls | Full Dev sample and a reviewed, validated source change |
 | 4. Automate the Model B release | 7–10: environment/dependency configuration, shared Dev, Test, approved Prod | One selected source released with explicit target bindings and runtime evidence |
+| [Closing recap](closing-recap.md) | After Unit 10 | Choose one control to take into your own project. |
 | 5. Operate, recover and reuse | 11–12: failure/recovery, starter reuse and control selection | Verified recovery and a small configuration-based reuse exercise |
 
 The working time budget is nine core hours with 1.5 hours of support reserve, still to measure. The status table above records the observed native, Test and Prod checkpoints and the remaining live checks. Prepared generic components and their config examples are introduced in Units 6–10, after they have been built/tested here. Unit 0 remains parked; future units are not authored merely by appearing in this table.
@@ -82,7 +83,7 @@ Each unit ends with a short question about the result you just observed. At the 
 - Trace the manual release and the full Dev solution before you start working from a local feature branch. [After Unit 4](section-03-team-delivery/unit-04-connect-orchestration-configuration-and-reporting/README.md#what-weve-built-so-far).
 - Compare what source checks, preview and preflight can tell you before you deploy to Test. [After Unit 8](section-04-release-automation/unit-08-publish-shared-dev/README.md#what-you-can-now-explain).
 - Follow a change through review, Test and approved Prod. Discuss where your own project would use different controls. [After Unit 10](section-04-release-automation/unit-10-release-to-prod/README.md#recap-and-discuss).
-- Choose the first control you'd add to a real project. Use the exercise after Unit 11 or return to it on your own when you have a project in mind. [Closing exercise](section-05-operate-and-reuse/unit-11-recover-a-test-release/README.md#from-tiny-sales-to-your-project) · [Production follow-up](reference/from-tiny-sales-to-production.md).
+- Choose the first control you'd add to a real project. Do this after Unit 10 or return to it later when you have a project in mind. [Standalone closing recap](closing-recap.md) · [Production follow-up](reference/from-tiny-sales-to-production.md).
 
 ## Carry evidence from one unit to the next
 
