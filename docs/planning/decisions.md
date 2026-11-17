@@ -16,6 +16,8 @@ Date: 28 October 2026. Explicit user decisions are recorded below. Other recomme
 
 ## Confirmed in the scoping discussion
 
+- 17 November. Unit 12 introduces dedicated shared YAML templates and Python plumbing in [deployment_starter](../../deployment_starter/README.md). The lab extends Tiny Sales with another report, its semantic-model binding and a named static project check, then exercises the shared workflow in Test. Unit 12 references the canonical starter. [Unit 12](../tutorial/section-05-operate-and-reuse/unit-12-shared-deployment-starter/README.md).
+
 - Keep Unit 8 as the read-only Dev preflight and use Git integration for shared Dev. Unit 9 uses one pipeline run to check the reviewed source and Test workspaces before publishing to Test. Automated smoke validation and a required PR gate to `main` are follow-on topics. The workshop uses the seeded Test lakehouse from Unit 3 for this first managed release. [Unit 8](../tutorial/section-04-release-automation/unit-08-publish-shared-dev/README.md) · [Unit 9](../tutorial/section-04-release-automation/unit-09-release-to-test/README.md).
 
 - 11 November. Use the existing-UAMI **Managed identity** connection form and facilitator-provided Azure subscription and resource group selections. Teams grant their deployment UAMI Fabric Contributor in the assigned workspaces. Start with shared Dev, Test and Prod UAMIs. Per-team identities may be automated later. The live Dev preflight passed by organizer report and logical IDs matched `.platform`. Start Unit 9 with Test setup and the before-release inventory. [Unit 8 pilot notes](../facilitator/unit-08-pilot-notes.md) · [Unit 9 pilot notes](../facilitator/unit-09-pilot-notes.md).

@@ -1,0 +1,16 @@
+steps:
+  - checkout: self
+    path: s/code
+    clean: true
+    fetchDepth: 0
+  - checkout: data
+    path: s/data
+    clean: true
+    fetchDepth: 0
+  - checkout: reports
+    path: s/reports
+    clean: true
+    fetchDepth: 0
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.12'

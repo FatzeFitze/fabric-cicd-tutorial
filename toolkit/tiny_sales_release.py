@@ -63,14 +63,17 @@ def checkout_pins(sources, repos):
             raise PlanError(f"{role}: expected the pinned revision and a clean checkout")
 
 
-def stage_items(plan, repos, root):
+def stage_items(plan, repos, root, *, allow_additional_reports=False):
     expected = {key: (item["role"], item["type"]) for key, item in plan["items"].items()}
-    if expected != ITEM_TYPES:
-        raise PlanError("Expected the Tiny Sales item set, including the validation notebook")
+    additional = expected.keys() - ITEM_TYPES.keys()
+    baseline = {key: value for key, value in expected.items() if key not in additional}
+    if (baseline != ITEM_TYPES or (additional and not allow_additional_reports)
+            or any(expected[key] != ("reports", "Report") for key in additional)):
+        raise PlanError("Expected the Tiny Sales item set and, when enabled, additional Reporting reports")
     paths = {}
     logical_ids = set()
     for key, item in plan["items"].items():
-        role, kind = ITEM_TYPES[key]
+        role, kind = expected[key]
         repo = repos[role].resolve()
         basename = f"{item['name']}.{kind}"
         if Path(basename).name != basename or "\\" in basename:
@@ -161,10 +164,12 @@ def read_bindings(paths, plan, dev, target):
             or not matches[0][1].lower().endswith(".datawarehouse.fabric.microsoft.com")
             or guid(matches[0][2], "source SQL catalog") == source_id):
         raise PlanError("Expected the observed Direct Lake SQL host and endpoint catalog")
-    report = read_json(paths["report"] / "definition.pbir")
     expected_path = {"byPath": {"path": f"../{paths['model'].name}"}}
-    if report["datasetReference"] != expected_path:
-        raise PlanError("Expected the report's relative path to the staged semantic model")
+    for key, item in plan["items"].items():
+        if item["type"] == "Report":
+            report = read_json(paths[key] / "definition.pbir")
+            if report["datasetReference"] != expected_path:
+                raise PlanError(f"{key}: expected a relative path to the staged semantic model")
     value_set = plan["targets"][target]["variable_library"]["desired_value_set"]
     if value_set not in read_json(paths["library"] / "settings.json")["valueSetsOrder"]:
         raise PlanError(f"Add the {value_set} value set to the Variable Library settings")

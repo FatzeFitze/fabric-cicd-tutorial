@@ -1,0 +1,90 @@
+parameters:
+  - name: target
+    type: string
+    values: [test, prod]
+  - name: deploy
+    type: boolean
+    default: false
+  - name: mask
+    type: string
+
+pool:
+  vmImage: ubuntu-24.04
+
+stages:
+  - ${{ if eq(parameters.target, 'test') }}:
+    - stage: Validate
+      displayName: Validate the selected Test candidate
+      jobs:
+        - job: Validate
+          steps:
+            - template: validate-steps.yml
+              parameters:
+                mask: ${{ parameters.mask }}
+
+  - stage: Release
+    displayName: Preflight and release to ${{ parameters.target }}
+    variables:
+      - template: /config/environments/${{ parameters.target }}.yml
+    jobs:
+      - job: Release
+        steps:
+          - bash: |
+              set -eu
+              if [ "$TARGET" = test ]; then
+                test "$BUILD_SOURCEBRANCH" = refs/heads/dev || { echo 'Queue Test from dev.' >&2; exit 1; }
+              else
+                test "$BUILD_SOURCEBRANCH" = refs/heads/main || { echo 'Queue Prod from main.' >&2; exit 1; }
+                test "$TEST_SOURCE_BRANCH" = refs/heads/dev || { echo 'Select a Test run from dev.' >&2; exit 1; }
+              fi
+            displayName: Check release branches
+            env:
+              TARGET: ${{ parameters.target }}
+              ${{ if eq(parameters.target, 'prod') }}:
+                TEST_SOURCE_BRANCH: $(resources.pipeline.tested.sourceBranch)
+          - template: checkout.yml
+          - ${{ if eq(parameters.target, 'test') }}:
+            - download: current
+              artifact: candidate-validation
+          - ${{ if eq(parameters.target, 'prod') }}:
+            - download: tested
+              artifact: test-release-evidence
+          - bash: python -m pip install --disable-pip-version-check -r toolkit/requirements-release.txt -r toolkit/requirements-planning.txt
+            displayName: Install Fabric publishing dependencies
+            workingDirectory: $(Pipeline.Workspace)/s/code
+          - task: AzureCLI@2
+            displayName: Publish the validated Fabric candidate
+            inputs:
+              azureSubscription: ${{ variables.releaseServiceConnection }}
+              scriptType: bash
+              scriptLocation: inlineScript
+              workingDirectory: $(Pipeline.Workspace)/s/code
+              visibleAzLogin: false
+              inlineScript: |
+                set -eu
+                args=()
+                if [ "$TARGET" = test ]; then
+                  args+=(--validation "$PIPELINE_WORKSPACE/candidate-validation/validation.json")
+                else
+                  args+=(--test-manifest "$PIPELINE_WORKSPACE/tested/test-release-evidence/test-release.json"
+                         --test-run-id "$TEST_RUN_ID" --test-code-revision "$TEST_CODE_REVISION")
+                fi
+                python -B -m deployment_starter.release publish \
+                  --code "$PIPELINE_WORKSPACE/s/code" \
+                  --data "$PIPELINE_WORKSPACE/s/data" \
+                  --reports "$PIPELINE_WORKSPACE/s/reports" \
+                  --checkout-revision "$BUILD_SOURCEVERSION" \
+                  --mask "$RELEASE_MASK" --target "$TARGET" --mode "$RELEASE_MODE" \
+                  --environment-file "config/environments/$TARGET.yml" \
+                  --evidence "$BUILD_ARTIFACTSTAGINGDIRECTORY/$TARGET-release.json" \
+                  "${args[@]}"
+            env:
+              TARGET: ${{ parameters.target }}
+              RELEASE_MASK: ${{ parameters.mask }}
+              RELEASE_MODE: ${{ iif(parameters.deploy, 'deploy', 'preflight') }}
+              ${{ if eq(parameters.target, 'prod') }}:
+                TEST_RUN_ID: $(resources.pipeline.tested.runID)
+                TEST_CODE_REVISION: $(resources.pipeline.tested.sourceCommit)
+          - publish: $(Build.ArtifactStagingDirectory)
+            artifact: ${{ parameters.target }}-release-evidence
+            condition: succeededOrFailed()

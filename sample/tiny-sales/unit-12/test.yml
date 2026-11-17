@@ -1,0 +1,25 @@
+trigger: none
+
+parameters:
+  - name: deployToTest
+    displayName: Publish to Test after preflight
+    type: boolean
+    default: false
+
+resources:
+  repositories:
+    - repository: data
+      type: git
+      name: REPLACE_WITH_DATA_REPO
+      ref: refs/heads/dev
+    - repository: reports
+      type: git
+      name: REPLACE_WITH_REPORTING_REPO
+      ref: refs/heads/dev
+
+extends:
+  template: /deployment_starter/templates/release.yml
+  parameters:
+    target: test
+    deploy: ${{ parameters.deployToTest }}
+    mask: config/tiny-sales-release.yml

@@ -1,0 +1,26 @@
+parameters:
+  - name: mask
+    type: string
+
+steps:
+  - template: checkout.yml
+  - bash: python -m pip install --disable-pip-version-check -r toolkit/requirements-planning.txt
+    displayName: Install release planning dependencies
+    workingDirectory: $(Pipeline.Workspace)/s/code
+  - bash: |
+      set -eu
+      python -B -m deployment_starter.release validate \
+        --code "$PIPELINE_WORKSPACE/s/code" \
+        --data "$PIPELINE_WORKSPACE/s/data" \
+        --reports "$PIPELINE_WORKSPACE/s/reports" \
+        --checkout-revision "$BUILD_SOURCEVERSION" \
+        --mask "$RELEASE_MASK" \
+        --evidence "$BUILD_ARTIFACTSTAGINGDIRECTORY/validation.json"
+    displayName: Validate the graph, pinned exports and project check
+    workingDirectory: $(Pipeline.Workspace)/s/code
+    env:
+      RELEASE_MASK: ${{ parameters.mask }}
+  - publish: $(Build.ArtifactStagingDirectory)
+    artifact: candidate-validation
+    condition: succeededOrFailed()
+    displayName: Retain validation and the resolved plan

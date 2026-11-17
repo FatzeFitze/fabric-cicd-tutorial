@@ -1,0 +1,17 @@
+trigger: none
+
+resources:
+  repositories:
+    - repository: data
+      type: git
+      name: REPLACE_WITH_DATA_REPO
+      ref: refs/heads/dev
+    - repository: reports
+      type: git
+      name: REPLACE_WITH_REPORTING_REPO
+      ref: refs/heads/dev
+
+extends:
+  template: /deployment_starter/templates/ci.yml
+  parameters:
+    mask: config/tiny-sales-release.yml

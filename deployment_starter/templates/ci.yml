@@ -1,0 +1,13 @@
+parameters:
+  - name: mask
+    type: string
+
+pool:
+  vmImage: ubuntu-24.04
+
+jobs:
+  - job: Validate
+    steps:
+      - template: validate-steps.yml
+        parameters:
+          mask: ${{ parameters.mask }}

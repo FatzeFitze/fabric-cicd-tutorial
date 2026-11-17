@@ -1,0 +1,23 @@
+trigger: none
+
+resources:
+  repositories:
+    - repository: data
+      type: git
+      name: REPLACE_WITH_DATA_REPO
+      ref: refs/heads/dev
+    - repository: reports
+      type: git
+      name: REPLACE_WITH_REPORTING_REPO
+      ref: refs/heads/dev
+  pipelines:
+    - pipeline: tested
+      source: Tiny Sales - Starter Test
+      trigger: none
+
+extends:
+  template: /deployment_starter/templates/release.yml
+  parameters:
+    target: prod
+    deploy: true
+    mask: config/tiny-sales-release.yml

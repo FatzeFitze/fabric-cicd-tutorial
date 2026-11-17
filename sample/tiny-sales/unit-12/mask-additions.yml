@@ -1,0 +1,16 @@
+# Merge the two items below into items in your existing release mask.
+items:
+  validation:
+    role: code
+    type: Notebook
+    name: validate_release
+    bindings: {default_lakehouse: lakehouse}
+  returns_report:
+    role: reports
+    type: Report
+    name: returns_overview
+    bindings: {semantic_model: model}
+
+# Replace the existing project_checks mapping with this mapping.
+project_checks:
+  static: checks.validate_returns

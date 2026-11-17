@@ -1,6 +1,6 @@
 # Curriculum and sample growth
 
-Units 1-6 have organizer-reported success. The organizer accepted Unit 7's lesson with a clarification about static validation and reports that the Unit 8 Dev preflight passed. Unit 9 run 643 published to Test, and Unit 10 run 654 published the same candidate to Prod. The organizer reported successful manual runtime checks in both. The shared publisher refactor awaits a live rerun. Units 11-12 describe the proposed sequence and target state. [Unit 9 pilot evidence](../facilitator/unit-09-pilot-notes.md#live-test-release-12-november-2026) · [Unit 10 pilot checks](../facilitator/unit-10-pilot-notes.md).
+Units 1-6 have organizer-reported success. The organizer accepted Unit 7's lesson with a clarification about static validation and reports that the Unit 8 Dev preflight passed. Unit 9 run 643 published to Test, and Unit 10 run 654 published the same candidate to Prod. The organizer reported successful manual runtime checks in both. The shared publisher refactor awaits a live rerun. Unit 11 and Unit 12 are optional lab drafts with live walkthroughs pending. [Unit 9 pilot evidence](../facilitator/unit-09-pilot-notes.md#live-test-release-12-november-2026) · [Unit 10 pilot checks](../facilitator/unit-10-pilot-notes.md).
 
 ## Teaching journey
 
@@ -64,16 +64,18 @@ After Unit 10, allow **5 minutes** for the standalone closing exercise. Particip
 | Unit | Min | Work and observable checkpoint | Main controls |
 | --- | ---: | --- | --- |
 | **[11. Diagnose and recover a failed Test release](../tutorial/section-05-operate-and-reuse/unit-11-recover-a-test-release/README.md)** | About 60 | Reconcile the Prod tooling into Code `dev` and verify the shared publisher in Test. Use the Azure DevOps Environment history, logs and manifests to diagnose a live workspace name mismatch. Restore the expected name through a reviewed PR, verify the corrected deployment and runtime, and discuss recovery from a partial publish. | MS-01, 03, 05, 06, 08, 10, 11, 14 |
-| **12. Reuse the suite and choose the right controls** | 20 | Fill the mask for a small second example, select its project check and run validation and planning with the same functions. Explain which parts change for another project and identify when Model C controls or feature workspaces would help. | MS-01–14 recap, especially 05, 09–12, 14 |
+| **[12. Use a shared deployment starter](../tutorial/section-05-operate-and-reuse/unit-12-shared-deployment-starter/README.md)** | About 60 | Inspect the YAML and Python starter, declare an additional report and its model binding, and register a project static check. Observe the failed and corrected check, then publish and verify the new report in Test. | MS-03, 05–08, 14 |
 
-The second example is a small reuse check, not another complete cloud deployment. Full starter portability needs its own organizer feasibility test. Model C explainers cover independently protected production capability, separation of duties, stronger identity boundaries, monitoring/evidence retention, private execution where required, and risk-appropriate recovery. These remain obligations from the supplied guidelines, not claims that the sandbox implements them.
+Unit 12 extends the existing Tiny Sales project and uses the same three Test workspaces. The starter's first version supports the existing item shapes and additional reports that use the declared semantic model. The Prod wrapper demonstrates selecting the validated Test candidate. A live Test walkthrough is pending. [Unit 12 pilot notes](../facilitator/unit-12-pilot-notes.md).
+
+Model C explainers cover independently protected production capability, separation of duties, stronger identity boundaries, monitoring/evidence retention, private execution where required, and risk-appropriate recovery. These remain obligations from the supplied guidelines, not claims that the sandbox implements them.
 
 ## Target state after Unit 12
 
 - **Delivery workflow.** Participants have completed a reviewed feature merge, seen required CI block a faulty follow-up change, and released one selected source snapshot through Dev, Test and approved simulated Prod. A snapshot records the required repository revisions and the configuration used for that release.
 - **Running solution.** The Tiny Sales items resolve to their intended workspace roles in each environment. Runtime evidence confirms the target Variable Library selection, six orders, 357.20 gross and 204.70 recognized revenue. The reporting check confirms the intended model and data source and shows 204.70 Total Revenue.
-- **Repeatability and ownership.** Participants can use the release record to identify the source revision, deployed physical IDs, bindings, caller, runtime result and approval. They compare first creation of a validation notebook by managed identity in Test and Prod with an update to a human-created item. They rehearse recovery from a partial failure in Test and verify the recovered result.
-- **Reusable handoff.** Participants leave with modular functions, Azure Pipelines templates, the filled Tiny Sales mask, a field reference and a second example. They can fill the mask, preview a plan and use a project-specific check while leaving the generic function suite intact.
+- **Repeatability and ownership.** Participants can use the release record to identify the source revision, deployed physical IDs, bindings, caller, runtime result and approval. They compare first creation of a validation notebook by managed identity in Test and Prod with an update to a human-created item. In Unit 11 they rehearse diagnosing a rejected Test preflight and verify the recovered result.
+- **Reusable handoff.** Participants can inspect the shared YAML and Python starter, extend the Tiny Sales mask with a second report, and register a project-specific check. They use the shared workflow to verify the report's binding and result in Test.
 
 ## Proposed function suite and configuration mask
 
@@ -103,7 +105,7 @@ Build, document and validate each starter here before its participant unit is of
 | 7 | Fill-in YAML mask, field reference, example values and plan validation | Fill role/workspace mappings, allowed references and intended active value set, then inspect a resolved plan |
 | 8 | One reusable deployment/validation entry point plus a parameterized Azure Pipelines job/stage template | Wire a thin project pipeline to the starter; select environment/config/source inputs and understand identity setup; do not copy and modify the deployment implementation per environment |
 | 9–10 | Tested Test/Prod stages, pinned-source handling, target checks and release record | Reuse the same implementation with the target's configuration; inspect approval and runtime evidence |
-| 11–12 | Rehearsed fault/recovery and a second tiny example with different configuration/checks | Recover through the same entry point and demonstrate reuse without editing generic internals |
+| 11–12 | Fault and recovery rehearsal; shared YAML and Python starter with a Tiny Sales extension | Verify recovery in Unit 11 or add a report dependency and project check in Unit 12 |
 
 Keep three parameterization concerns explicit:
 
@@ -174,7 +176,7 @@ This shows data flow and execution, not an executable deployment-order graph. Ea
 | Unit 7 | Explicit environment/dependency configuration and library value sets | Inspect notebook/lakehouse, pipeline/notebook, pipeline/library, model/data and report/model relationships; distinguish desired active-set configuration from versioned library definitions |
 | Unit 8 | Git-connected Dev with authenticated inventory checks | Check assigned workspace IDs and names, item IDs and source bindings |
 | Units 9–10 | Full solution reaches Test and simulated Prod | Use pinned source, proven target-specific ordering/binding and runtime checks; confirm a Test/Prod run does not write into Dev |
-| Units 11–12 | Recovery and portability evidence | Correct/redeploy and verify convergence; change a second example's config without changing generic implementation |
+| Units 11–12 | Recovery and starter evidence | Verify the corrected release or show the new report and its checked dependency in Test |
 
 The actual automated order may include create-then-bind steps: storage prerequisites, deployable definitions, bindings/settings, runtime execution and consumption readiness are separate operations. Derive that order from V04–V07, not solely from this illustration. Do not assume deploying a semantic model also executes the notebook or makes its data ready.
 
