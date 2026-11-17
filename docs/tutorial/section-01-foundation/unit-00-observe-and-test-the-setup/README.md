@@ -109,6 +109,10 @@ Use the checkpoint to identify what needs fixing before you create any items. If
 
 Take the exact names of your assigned Code Dev and Data Dev workspaces into Unit 1. In Unit 2 you will use the Git mappings checked here to find the definitions you export. [Next: Unit 1](../unit-01-create-a-tiny-sales-solution/README.md).
 
+## What you can now explain
+
+Fabric workspace access and Azure Repos access let you do different parts of the exercise. If your teammate can edit in the Code repo but can't open Data Dev, which access would you check before they try the notebook in Unit 1?
+
 ## Coverage and reading
 
 Introduces MS-01 (ownership), MS-02 (source location), MS-04 (environments), MS-07 (identity purposes), MS-12 (lab access), and MS-13 (initial access awareness). It is not a complete productive readiness assessment.

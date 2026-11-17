@@ -10,8 +10,9 @@ Working convention, 29 October 2026. The organizer asked for participant-ready M
 4. **Understand what you are building.** Explain concepts needed now, with a small diagram when useful. Separate delivery flow from data flow.
 5. **Numbered assignments.** Use imperative steps, exact item names and clear workspace/environment selection. Explain important choices next to the action. End each assignment with an expected result.
 6. **Troubleshooting.** Give specific symptoms and bounded checks. Do not invent alternate architectures to work around an unverified path.
-7. **Completion checkpoint.** Use observable outcomes, a short reflection and the state to retain for the next unit. Keep private identifiers out of published answers.
-8. **References and navigation.** Link relevant official pages near claims and in a compact reference list. Link only to future units that actually exist.
+7. **Completion checkpoint.** Use observable outcomes and identify the state to retain for the next unit. Keep private identifiers out of published answers.
+8. **Recap.** Give one observation and one question learners can answer using the exercise. At a turning point, use the recap to connect earlier work and discuss a choice. State the time for a longer pause and point to optional references for more depth.
+9. **References and navigation.** Link relevant official pages near claims and in a compact reference list. Link only to future units that actually exist.
 
 Use ordinary Markdown headings, relative repository links, portable tables and Mermaid where appropriate. Each unit lives in its own folder with a `README.md`; resources used only by that lesson may live beside it. Reusable sample code, fixtures, toolkit and pipelines have canonical locations outside the unit. Avoid copying their implementation into multiple lessons. Code may be inline when the lesson is its single authoritative source.
 

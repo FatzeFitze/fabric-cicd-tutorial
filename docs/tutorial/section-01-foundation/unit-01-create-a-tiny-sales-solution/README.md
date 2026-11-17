@@ -169,6 +169,10 @@ Your working Dev solution is not yet a reproducible release. Git capture, target
 
 Keep the two Fabric item links. In Unit 2 you will use them to compare the live items with their Git exports, and you will use the six rows and **342.20** revenue as your before-and-after check during the Git round trip. If a check failed, share the step and exact error with the facilitator.
 
+## What you can now explain
+
+You ran the notebook twice and replaced the sales table each time. Where would you look to confirm that the second run left six rows in the intended Data Dev lakehouse?
+
 ## References
 
 - [Explore lakehouse data with a notebook](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-notebook-explore) — lakehouse attachment and default selection.

@@ -183,6 +183,10 @@ If Prod still targets Test or Dev, correct the **Prod stage rule** and redeploy 
 
 Keep the native Test and Prod assets and your release record. Units 9 and 10 will update those same lakehouses and notebooks through Azure Pipelines. Their item links and IDs let you see which items the managed release reused. Next, expand the solution in Dev with orchestration, a Variable Library and reporting.
 
+## What you can now explain
+
+The same notebook logic ran in all three environments. The deployment rules set the default lakehouses in Test and Prod. If the Test deployment succeeds, where would you look to prove that the notebook actually wrote its result to Data Test?
+
 ## References
 
 - [Deployment pipeline setup](https://learn.microsoft.com/en-us/fabric/cicd/deployment-pipelines/get-started-with-deployment-pipelines).

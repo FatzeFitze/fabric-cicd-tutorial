@@ -211,6 +211,10 @@ The fictional business now wants **revenue to exclude returned orders**. Keep al
 
 Keep the local checkout and completed PR record for Unit 6. Start the next change from the updated `dev` and use it to exercise automated PR validation.
 
+## What you can now explain
+
+The completed PR identifies which notebook revision `dev` now contains. If the Dev report still shows 357.20, where would you look to tell whether the new definition reached Fabric and whether it has run?
+
 ## References
 
 - [Clone an Azure Repos repository](https://learn.microsoft.com/en-us/azure/devops/repos/git/clone?view=azure-devops).

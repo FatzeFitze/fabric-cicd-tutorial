@@ -138,6 +138,10 @@ This is where you can apply the feature merge from Unit 5. Fabric detects incomi
 - [ ] You can reopen the preview and preflight results to explain what each verified and which source revisions they refer to.
 - [ ] You recorded the workspace Git state, active value set and exported references. If you synced and tested Dev, you also recorded the revisions and runtime result.
 
+### What you can now explain
+
+Take a minute to compare three results. The PR check read the notebook source. The release preview read the declared source pins, targets and value sets. The Dev preflight used the Dev managed identity to check workspace names and inventory in Fabric. What would you open after a Test release to verify which definitions were deployed and whether they actually produced the expected report result?
+
 For the demonstration, we now proceed directly to a complete, structured **Test deployment** in Unit 9. The pipeline takes the reviewed Git revisions, verifies the Test targets, applies the bindings and records what it published. The optional Dev sync gives you a place to try the merged changes, and the Test release can proceed from Git either way.
 
 [Previous unit](../unit-07-configure-and-preview-release/README.md) · [Next unit](../unit-09-release-to-test/README.md) · [Tutorial index](../../README.md)

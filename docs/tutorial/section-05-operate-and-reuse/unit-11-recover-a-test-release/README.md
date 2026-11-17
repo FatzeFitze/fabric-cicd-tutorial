@@ -136,4 +136,18 @@ This failure occurred before any Fabric writes. If a run fails during publishing
 - [ ] You can show where preflight rejected the deployment and trace the corrected Code commit with the same Data and Reporting pins.
 - [ ] You retained the recovered item IDs, runtime results and recovery owner in your record.
 
+### What you can now explain
+
+The release task rejected the wrong workspace name during live preflight, and the corrected Git commit went through a new release and runtime checks. Which log or manifest field would help you decide whether to investigate an attempted write or start with the configuration in Git?
+
+### From Tiny Sales to your project
+
+Spend **5 minutes** with a partner or on your own. Imagine Tiny Sales now reads orders from an upstream system. Finance uses the report every morning to make decisions. What would you check before authorizing a release, and how would you know the report was ready the next day?
+
+- **Before merge**, consider a small unit test that exercises the returned-order calculation with known inputs.
+- **In Test**, try the connector with the intended runtime identity and run the pipeline through to the report. Choose a data-quality check for missing, duplicate or late orders.
+- **In operation**, decide who would respond to stale data or a failed run and what evidence they'd need to choose a safe retry or recovery.
+
+Use an existing PR, manifest or runtime result as a starting point. Share **one control you'd add first**, which failure it addresses, and who would act on its result. Apply the same questions when reusing the starter on another solution. [Production follow-up](../../reference/from-tiny-sales-to-production.md).
+
 [Previous unit](../../section-04-release-automation/unit-10-release-to-prod/README.md) · [Tutorial index](../../README.md)

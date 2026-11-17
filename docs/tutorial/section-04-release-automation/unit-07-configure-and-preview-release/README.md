@@ -158,4 +158,8 @@ The agent loads the mask and the Code export from the proposed PR merge. It disp
 - [ ] You can distinguish the source revisions, planned workspace IDs, desired value sets and the deployed state the next unit will verify.
 - [ ] Your worksheet records the merged `dev` commit, external pins and both runs.
 
+### What you can now explain
+
+The reviewable release mask describes the intended source, targets and value sets. If the preview lists the expected Dev workspace ID, how would you verify that the Dev managed identity can see that workspace?
+
 [Previous unit](../../section-03-team-delivery/unit-06-required-pr-validation/README.md) · [Tutorial index](../../README.md) · [Next unit](../unit-08-publish-shared-dev/README.md)

@@ -10,7 +10,7 @@ Coming to DNA Fabric Days? The [participant prep guide](pre-reads/README.md) cov
 
 | Unit | Outcome | Status |
 | --- | --- | --- |
-| [0. Observe and test the setup](section-01-foundation/unit-00-observe-and-test-the-setup/README.md) | Explain the components and inspect the provided workspace/repository layout | Parked as-is after organizer review; access checks reported successful; learner timing unmeasured |
+| [0. Observe and test the setup](section-01-foundation/unit-00-observe-and-test-the-setup/README.md) | Explain the components and inspect the provided workspace/repository layout | Setup exercise parked after organizer review; access checks reported successful; learner timing unmeasured |
 | [1. Create a tiny sales solution](section-01-foundation/unit-01-create-a-tiny-sales-solution/README.md) | Create a cross-workspace lakehouse/notebook slice, validate six synthetic orders and rerun without duplication | Organizer reports successful walkthrough in 20–30 minutes including reading; OneLake picker wording corrected |
 | [2. Capture the solution in Git](section-01-foundation/unit-02-capture-the-solution-in-git/README.md) | Capture real definitions, inspect identities/data boundaries, apply a Markdown-only Git update and record per-repo source revisions | Completed by organizer report; commit-diff review and open-editor guidance corrected; duration not supplied |
 | [3. Native promotion](section-02-model-a/unit-03-native-promotion/README.md) | Promote the common-source Data/Code slice through Test and simulated Prod, with explicit bindings and runtime/release evidence | First working version accepted by organizer on 4 November; retain lesson content |
@@ -53,7 +53,7 @@ docs/tutorial/
 
 Files needed only for one exercise belong in its unit folder. Reusable deployment code, shared sample definitions, pipeline templates and multi-unit examples remain in `toolkit/`, `sample/`, `.azuredevops/pipelines/` or `examples/`, and units link to their canonical files. Avoid maintaining duplicate copies of shared code beside each lesson. The old setup-draft redirect is retained for historical links and is not an active participant unit.
 
-From Unit 1 onward, lessons use a consistent participant-facing structure: outcomes/prerequisites, a short explanation, numbered assignments with expected results, troubleshooting, completion checkpoint and references. Organizer validation notes stay in [facilitator material](../facilitator/tutorial-authoring-guide.md).
+From Unit 1 onward, lessons use a consistent participant-facing structure: outcomes/prerequisites, a short explanation, numbered assignments with expected results, troubleshooting, completion checkpoint, recap and references. Organizer validation notes stay in [facilitator material](../facilitator/tutorial-authoring-guide.md).
 
 ## Agreed section and unit journey
 
@@ -74,6 +74,15 @@ The [curriculum](../planning/curriculum.md) contains every unit's outcome, estim
 The working time budget is nine core hours with 1.5 hours of support reserve, still to measure. The status table above records the observed native, Test and Prod checkpoints and the remaining live checks. Prepared generic components and their config examples are introduced in Units 6–10, after they have been built/tested here. Unit 0 remains parked; future units are not authored merely by appearing in this table.
 
 Unit boundaries and timing will change with pilot feedback. No future unit should assume the old reference lab's cloud behavior applies to this sample.
+
+## Pause and recap
+
+Each unit ends with a short question about the result you just observed. At the turning points, take a little more time to look across the units.
+
+- Trace the manual release and the full Dev solution before you start working from a local feature branch. [After Unit 4](section-03-team-delivery/unit-04-connect-orchestration-configuration-and-reporting/README.md#what-weve-built-so-far).
+- Compare what source checks, preview and preflight can tell you before you deploy to Test. [After Unit 8](section-04-release-automation/unit-08-publish-shared-dev/README.md#what-you-can-now-explain).
+- Follow a change through review, Test and approved Prod. Discuss where your own project would use different controls. [After Unit 10](section-04-release-automation/unit-10-release-to-prod/README.md#recap-and-discuss).
+- Choose the first control you'd add if a team relied on Tiny Sales every morning. [After Unit 11](section-05-operate-and-reuse/unit-11-recover-a-test-release/README.md#from-tiny-sales-to-your-project) · [Production follow-up](reference/from-tiny-sales-to-production.md).
 
 ## Carry evidence from one unit to the next
 

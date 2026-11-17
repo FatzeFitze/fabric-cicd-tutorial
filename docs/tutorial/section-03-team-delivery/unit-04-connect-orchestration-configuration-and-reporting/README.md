@@ -204,6 +204,20 @@ Frequent changes, shared consumers and stronger release expectations motivate Mo
 
 Carry this record forward. Unit 5 uses the **2490-cent** price and **357.20** report result as its starting point. Unit 7 uses the Data and Reporting commit IDs, Unit 8 checks the exported bindings, and Units 9 and 10 compare live targets and ownership with this human-authored baseline.
 
+## What you can now explain
+
+The same notebook received different runtime values through the Variable Library and the Fabric Data Pipeline. When you deliberately supplied `test` in Code Dev, what told you that the notebook checked the value it received?
+
+## What we've built so far
+
+Spend **3–5 minutes** tracing the solution with a partner or on your own.
+
+In Unit 3 you used native Deployment pipelines to promote a lakehouse and notebook, set a lakehouse binding for each target, and run the notebook to verify the result. In this unit you assembled the fuller solution in Dev. `sales_config` supplies values to `run_sales`, which calls `build_sales`. The notebook writes `dbo.sales` in Data Dev. `sales_model` reads that data through the SQL analytics endpoint, and `sales_overview` displays the model's measures.
+
+Use the Travel mug price change to trace what you edited, what the notebook recalculated, what you checked in the report and what you captured in Git. If you were releasing this fuller solution by hand, which dependencies would you prepare in Test, and which bindings and runtime values would you verify before running it? Pick one repeated check you'd automate first.
+
+Carry those questions into Unit 5. You'll review a change to the sales logic in Git. The Test release later shows how to verify its effect in Fabric.
+
 ## References
 
 - [Variable Library and pipelines](https://learn.microsoft.com/en-us/fabric/data-factory/variable-library-integration-with-data-pipelines).

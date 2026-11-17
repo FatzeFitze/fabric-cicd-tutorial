@@ -164,6 +164,10 @@ Fabric supports [autosaved collaborative notebook editing](https://learn.microso
 
 Leave the Dev items and six-row table in place so Unit 3 can promote the definitions and produce a new six-row result in Test. Share any blocked step and exact error with the facilitator.
 
+## What you can now explain
+
+The Git round trip preserved the notebook definition and let you apply a reviewed edit to Dev. If the training table disappeared, which captured definitions would help you rebuild it, and what would you run to recreate its rows?
+
 ## References
 
 - [Get started with Fabric Git integration](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/git-get-started).

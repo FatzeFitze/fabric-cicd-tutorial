@@ -139,6 +139,10 @@ The **branch policy** queues this Azure Pipeline against the PR's proposed merge
 - [ ] The corrected revision passed and the PR was completed through the branch's requirements.
 - [ ] The worksheet records both runs, the completed PR and the resulting `dev` commit.
 
+## What you can now explain
+
+The required PR check caught the deliberate defect by reading the notebook source. What evidence would you open to show that the corrected calculation produced 204.70 in recognized revenue in Test?
+
 For a deeper look at what a PR can check from Git and where live validation belongs, see [Static validation for Fabric items](../../reference/static-fabric-validation.md).
 
 The build policy in this unit applies to `dev`. When `main` becomes the Prod release branch, you will add its own policy and reuse this CI pipeline. [Unit 10 branch policies](../../section-04-release-automation/unit-10-release-to-prod/README.md#2-protect-main-and-promote-the-tested-code-commit).

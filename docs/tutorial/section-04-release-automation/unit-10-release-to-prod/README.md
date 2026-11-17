@@ -208,7 +208,7 @@ Spend **5–10 minutes** on your own project or a familiar example. Write down o
 
 | Discuss | Apply it to your project |
 | --- | --- |
-| **What did we build?** | Trace one change from a Git commit through Test, review on `main`, Prod approval and runtime evidence. Identify which files describe the Fabric items, which select versions and targets, and which execute the release. |
+| **How did this change reach Prod?** | Trace the returned-order change from its PR through the selected Test run, review on `main` and Prod approval. Which manifest fields link the Test and Prod candidates? Which Fabric result confirms 204.70 in Prod? |
 | **Where do we need separation of concerns?** | Decide who can edit a definition, change a target, approve a release, deploy it and run or support it. Which roles can overlap? Would one repo with role folders support that ownership, or would separate repos and commit pins help? |
 | **What does each control enforce?** | Pick a mistake you want to prevent, such as a developer accidentally writing to Prod. Which combination of branch policy, pipeline permissions, service connection approval and Fabric access would block it? Which practices, such as recording a manual smoke result, help reviewers make a decision? |
 | **What would we automate next?** | Pick a check to run automatically and a decision to keep with a person. For example, automate the smoke notebook and attach its output to the exact candidate, then have a reviewer decide whether to release it to Prod. If several pipelines can deploy to the same target, consider what an Azure DevOps Environment would add. |
