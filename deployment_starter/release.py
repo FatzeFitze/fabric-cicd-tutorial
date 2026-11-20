@@ -22,6 +22,8 @@ from toolkit.tiny_sales_release import (
 # Each phase corresponds to the publisher's supported Fabric binding order.
 PHASES = {"Lakehouse": 0, "VariableLibrary": 1, "Notebook": 1,
           "DataPipeline": 2, "SemanticModel": 3, "Report": 4}
+# Required edges for the starter's baseline item keys. Additional reports
+# reuse the existing model and take the default edge in validate_contract.
 BINDINGS = {
     "lakehouse": {}, "library": {},
     "notebook": {"default_lakehouse": "lakehouse"},
@@ -32,6 +34,7 @@ BINDINGS = {
 
 
 def source_file(repo, relative):
+    # Keep masks, environment settings and project checks inside reviewed Git source.
     path = PurePosixPath(relative)
     if path.is_absolute() or ".." in path.parts or "\\" in relative or ":" in relative:
         raise PlanError(f"{relative}: expected a file relative to the Code checkout")
@@ -65,6 +68,8 @@ def validate_contract(plan):
 
 
 def starter_version(repo):
+    # Git object IDs bind the release to the reviewed implementation. The
+    # starter tree covers YAML, Python and documentation in this directory.
     paths = ("deployment_starter", "toolkit/release_plan.py", "toolkit/fabric_preflight.py",
              "toolkit/tiny_sales_release.py", "toolkit/requirements-planning.txt",
              "toolkit/requirements-release.txt")
@@ -72,6 +77,8 @@ def starter_version(repo):
 
 
 def prepare(args, code, revision, staged_root):
+    # Both commands resolve the mask, verify the pins and inspect copies of
+    # the tracked exports before they can validate or publish.
     mask = load_mask(source_file(code, args.mask))
     plan = build_preview(mask, code, revision)
     validate_contract(plan)
@@ -101,6 +108,7 @@ def run_project_check(repos, plan):
     run = getattr(check, "run", None)
     if not callable(run):
         raise PlanError(f"{module} must define run(repositories, plan)")
+    # Let the project inspect the source paths and a copy of the resolved plan.
     run(dict(repos), deepcopy(plan))
 
 
@@ -110,6 +118,7 @@ def validate(args, evidence, root):
     evidence.update(plan=plan, phase="project static check", static_check=plan["project_checks"]["static"])
     run_project_check(repos, plan)
     checkout_pins(plan["sources"], repos)
+    # The check passed and the candidate still matches the tracked source.
     evidence.update(status="validated", phase="complete")
     print(f"STATIC CHECK PASSED: {evidence['static_check']}")
 
@@ -130,6 +139,8 @@ def source_candidate(args, root):
     if variables["approvedTestRunId"] != args.test_run_id:
         raise PlanError("Selected Test run differs from the reviewed Prod settings")
     git(args.code, "merge-base", "--is-ancestor", selected_revision, args.checkout_revision)
+    # Keep Prod settings on the running checkout. Read the workload mask and
+    # exports from the exact Test commit in a separate temporary worktree.
     code = root / "candidate"
     git(args.code, "worktree", "add", "--detach", str(code), selected_revision)
     try:
@@ -154,6 +165,8 @@ def publish(args, evidence, root):
                             active_value_set=plan["targets"]["test"]["variable_library"]["desired_value_set"])
             validation_run = args.test_run_id
             evidence["test_run_id"] = args.test_run_id
+        # Compare the prepared sources and validation result with the evidence
+        # from Test, then verify the running publisher's version.
         if any(prior.get(key) != value for key, value in expected.items()):
             raise PlanError("Candidate source, starter version or validation evidence does not match")
         if starter_version(args.code) != snapshot["starter_version"]:
@@ -164,6 +177,8 @@ def publish(args, evidence, root):
         evidence.update(validation_run_id=validation_run,
                         static_check=prior["static_check"], configured_release_identity=identity,
                         release_definition_revision=args.checkout_revision)
+        # The Fabric calls use the signed-in CLI session. Preflight mode still
+        # reads the workspace names and item IDs before returning.
         evidence["phase"] = "live preflight"
         run_release(plan, plan["targets"]["dev"]["workspaces"], staged, names,
                     fabric_reader(fabric_token()), fabric_publisher(), evidence,
@@ -209,6 +224,7 @@ def main():
         print(f"FAILED during {evidence['phase']}: {exc}", file=sys.stderr)
         return 1
     finally:
+        # Preserve the phase and diagnostic even when a started command fails.
         evidence["finished_utc"] = datetime.now(timezone.utc).isoformat()
         args.evidence.parent.mkdir(parents=True, exist_ok=True)
         write_json(args.evidence, evidence)

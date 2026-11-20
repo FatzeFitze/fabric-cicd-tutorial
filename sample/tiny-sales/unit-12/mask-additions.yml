@@ -5,6 +5,8 @@ items:
     type: Notebook
     name: validate_release
     bindings: {default_lakehouse: lakehouse}
+  # Use the graph key model here. definition.pbir also needs a sibling-relative
+  # path to the sales_model.SemanticModel folder in the Reporting repo.
   returns_report:
     role: reports
     type: Report
@@ -12,5 +14,6 @@ items:
     bindings: {semantic_model: model}
 
 # Replace the existing project_checks mapping with this mapping.
+# The starter loads checks/validate_candidate.py and calls run(repositories, plan).
 project_checks:
   static: checks.validate_candidate

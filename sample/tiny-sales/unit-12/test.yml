@@ -1,5 +1,7 @@
+# Keep this at the registered Test pipeline path to reuse its permissions.
 trigger: none
 
+# The queue option controls the write step. Both modes run live preflight.
 parameters:
   - name: deployToTest
     displayName: Publish to Test after preflight
@@ -7,6 +9,8 @@ parameters:
     default: false
 
 resources:
+  # Keep these aliases for checkout.yml. Enter the Azure Repos names from the
+  # mask. Python selects the exact commits from the branches fetched here.
   repositories:
     - repository: data
       type: git

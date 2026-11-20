@@ -1,8 +1,10 @@
+# The wrapper supplies the same release mask used by Test.
 parameters:
   - name: mask
     type: string
 
 jobs:
+  # Reuse the Test validation steps so the PR policy sees the same project rules.
   - job: Validate
     pool:
       vmImage: ubuntu-24.04

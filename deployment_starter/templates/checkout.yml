@@ -1,8 +1,12 @@
+# Keep these paths in sync with the Python arguments in the calling templates.
+# Paths are relative to Pipeline.Workspace. self is the pipeline's Code repo.
 steps:
   - checkout: self
     path: s/code
     clean: true
     fetchDepth: 0
+  # The wrappers declare the dependency branches. Full history lets
+  # checkout_pins in tiny_sales_release.py verify and select the reviewed SHAs.
   - checkout: data
     path: s/data
     clean: true
