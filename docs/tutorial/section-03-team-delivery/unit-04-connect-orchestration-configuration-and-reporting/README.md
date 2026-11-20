@@ -38,6 +38,14 @@ The **Variable Library** stores typed, non-secret configuration so the same note
 
 We will use **Direct Lake on SQL** for this pilot: the model references Data Dev's SQL analytics endpoint for metadata, while Direct Lake reads Delta data from OneLake. This is one explicit sample choice, not a rule that every project should use this mode. Do not silently accept a different mode in the creation dialog; record an unavailable option with the facilitator. See [Direct Lake development choices](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-develop).
 
+### Trace the handoffs behind one number
+
+When you open a report card, the number looks like the output of a single system. Follow **Total Revenue** backward. The report displays a measure from `sales_model`. The model uses the data produced by `build_sales`. The pipeline starts that notebook and passes it values from `sales_config`. Each handoff gives you something specific to inspect if the number surprises you.
+
+You’ll deliberately pass a Test value to a Dev run and watch the notebook respond. Before you try it, predict which evidence will tell you what really happened. Opening the Variable Library shows what you configured. The pipeline activity and notebook output show what the workload actually received. This matters whenever another team can change a setting that changes the behavior of your job.
+
+Think of the three roles on your team. Someone owns the sales calculation, someone decides which configuration a run should use, and someone defines what the report presents. One person may do all three today. Keeping the decisions visible in separate items will help you make and review changes when those responsibilities are shared.
+
 ## 1. Make the notebook accept runtime parameters
 
 1. Open **Code Dev → build_sales**. Retain the common environment-aware target guard from Unit 3.
@@ -208,13 +216,11 @@ Carry this record forward. Unit 5 uses the **2490-cent** price and **357.20** re
 
 ## What we've built so far
 
-Spend **3–5 minutes** tracing the solution with a partner or on your own.
+Spend **3–5 minutes** with the Travel mug price change. Start at the report and trace the number backwards with a partner or on your own. Can you show where the report gets its measure, which table supplied the rows, which notebook wrote it and which run carried the parameters? Use the run output, table preview and report for their respective parts of the trace.
 
-In Unit 3 you used native Deployment pipelines to promote a lakehouse and notebook, set a lakehouse binding for each target, and run the notebook to verify the result. In this unit you assembled the fuller solution in Dev. `sales_config` supplies values to `run_sales`, which calls `build_sales`. The notebook writes `dbo.sales` in Data Dev. `sales_model` reads that data through the SQL analytics endpoint, and `sales_overview` displays the model's measures.
+Now imagine the report still shows the previous total after a teammate applies the price change. Where would you look first? Check the deployed notebook definition and whether it ran. Then follow the written table to the semantic model and report. If the table already has the new values, you can investigate the reporting side with a narrower question about the binding or what the report is showing.
 
-Use the Travel mug price change to trace what you edited, what the notebook recalculated, what you checked in the report and what you captured in Git. If you were releasing this fuller solution by hand, which dependencies would you prepare in Test, and which bindings and runtime values would you verify before running it? Pick one repeated check you'd automate first.
-
-When the Travel mug price changed, you could see the effect in the notebook output, the table and the report. Each tells you something different about the run. Keep the figures and the dependency notes from this unit. They’ll give you a starting point for reviewing the next change and for checking whether the full solution is wired correctly in Test.
+You’ve also made the fuller solution ready for a more demanding release. In Unit 3 the notebook and lakehouse were the two items you had to account for. Promoting this version will also mean setting runtime values and resolving the model and report dependencies. Keep the Dev configuration and dependency notes you collected. In Unit 5 the report gives you a known starting result for the feature review. In Unit 9 those notes help you decide what must be verified when the same definition lands in Test.
 
 ## References
 

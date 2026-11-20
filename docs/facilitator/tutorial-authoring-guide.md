@@ -11,7 +11,7 @@ Working convention, 29 October 2026. The organizer asked for participant-ready M
 5. **Numbered assignments.** Use imperative steps, exact item names and clear workspace/environment selection. Explain important choices next to the action. End each assignment with an expected result.
 6. **Troubleshooting.** Give specific symptoms and bounded checks. Do not invent alternate architectures to work around an unverified path.
 7. **Completion checkpoint.** Use observable outcomes and identify the state to retain for the next unit. Keep private identifiers out of published answers.
-8. **Recap.** Give one observation and one question learners can answer using the exercise. At a turning point, use the recap to connect earlier work and discuss a choice. State the time for a longer pause and point to optional references for more depth.
+8. **Recap.** Use observations from the exercise to explain why its result matters and what uncertainty remains. Ask learners to interpret evidence, compare outcomes or make a decision. Link the idea to an earlier or later unit where it becomes useful.
 9. **References and navigation.** Link relevant official pages near claims and in a compact reference list. Link only to future units that actually exist.
 
 Use ordinary Markdown headings, relative repository links, portable tables and Mermaid where appropriate. Each unit lives in its own folder with a `README.md`; resources used only by that lesson may live beside it. Reusable sample code, fixtures, toolkit and pipelines have canonical locations outside the unit. Avoid copying their implementation into multiple lessons. Code may be inline when the lesson is its single authoritative source.
@@ -20,7 +20,9 @@ Create the unit folder and README entry point immediately, even during preparati
 
 ## Voice and depth
 
-- Address the learner as "you". Use plain English, short explanations and step-by-step assignments.
+- Address the learner as "you". Use plain English and step-by-step assignments. Budget 5–10 minutes in each session for reading, thinking and discussing the opening and recap.
+- Use the exercise to test an intuition. Ask for a prediction, trace a dependency, or put the learner in the role of a reviewer or operator. Choose the approach that makes the concept visible and identify evidence the learner can check.
+- Carry the same distinctions through the units. Git records source. Fabric workspaces hold deployed items and environment settings. Runtime produces observable results. Where review or approval enters the workflow, name who makes the decision, what they can verify and what authority the decision grants. Revisit these responsibilities when managed identities, recovery and shared tooling enter the tutorial.
 - Optimize for what learners can explain and verify after the exercise. Keep a deliberate failure, comparison or manual check when it makes a concept visible. Shorten repeated mechanics once learners have practiced them, and explain an intentional change in workflow.
 - Ask learners to record an observation only when they will compare it in the current unit, use it in a later unit, or use it to diagnose a blocker. Reuse links to existing PRs, manifests and run results as evidence.
 - Assume mixed ALM experience. Explain the reason for a control and let the learner observe it; avoid unexplained jargon or long theory before any result.

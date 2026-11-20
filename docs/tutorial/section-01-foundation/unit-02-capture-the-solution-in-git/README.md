@@ -40,6 +40,14 @@ Git records snapshots, identified by commits. A branch such as `dev` is a pointe
 
 This is our initial Model A bootstrap: we deliberately commit to the connected integration branch. Later Model B exercises introduce feature branches, PR checks and controlled deployment. A Git connection alone does not implement that workflow.
 
+### Predict what will change after each action
+
+You have a working notebook in Fabric and you want a colleague to review it. Saving it made the current definition available in the workspace. The colleague can review a particular version with confidence once you give them its Git commit. Try putting yourself on either side of the sync. When you **Commit** from Fabric, Git receives the saved definition. When someone changes that definition in Git and you choose **Update** in Fabric, the workspace receives the selected source.
+
+The Markdown edit makes the difference visible without changing the calculation. Before you do it, predict what you’ll find in three places immediately after the web commit. The new text should be visible in the Git diff. The live notebook should still show the previous text until you apply the incoming change and reopen it. The table should still contain the result of the last execution. You’ll be able to check all three against the same small change.
+
+Pay attention to the generated `.platform` file when you inspect the export. It helps source control recognize which item a definition belongs to. When we need to inspect one concrete notebook in Test, its workspace and deployed item ID will help us find the right instance.
+
 ## 1. Check where each workspace writes source
 
 1. Open **Data Dev → Workspace settings → Git integration**. Read the existing connection without disconnecting or changing it.
@@ -168,9 +176,11 @@ Leave the Dev items and six-row table in place so Unit 3 can promote the definit
 
 ## What you built and where it leads
 
-Your commit IDs let someone reopen the exact definitions you captured, even after `dev` has moved on. The Markdown edit also gave you a way to watch a Git change reach the live notebook. The sales rows are still in the lakehouse, where the run in Unit 1 wrote them.
+Read your worksheet as an answer to a future teammate. You can give them a Code commit to show the notebook definition and a Data commit to show the lakehouse definition. You recorded both because each repository has its own history. A week from now, the two branches can have moved while those commits still identify the versions you examined.
 
-In Unit 3 you’ll promote the live notebook and lakehouse definitions to a second environment. You’ll give the Test notebook its own lakehouse and run it there to produce a fresh result.
+Now imagine the six-row training table was deleted. What would you use to rebuild it? The captured definitions give you the notebook logic and the lakehouse metadata. You still need a lakehouse to write to and an execution that rebuilds the rows. Tiny Sales includes the inputs in the notebook, which makes regeneration practical here. A real project might need retained source data or a backup.
+
+In Unit 3 you’ll see those responsibilities come apart in a second environment. Fabric will promote the live definitions, you’ll point the Test notebook at its local lakehouse, and a run in Test will produce the evidence that the new environment works.
 
 ## References
 

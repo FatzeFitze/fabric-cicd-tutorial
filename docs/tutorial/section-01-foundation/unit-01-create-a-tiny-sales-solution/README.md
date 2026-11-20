@@ -43,6 +43,14 @@ The **notebook** contains executable logic. The **lakehouse** stores files and t
 
 This is a training sandbox. We will use a fictional low-risk productive scenario to learn Model A controls, then strengthen the workflow for Model B. Workspace separation alone does not determine an operating model. In this exercise, you are the solution owner and initial technical contact.
 
+### Follow the write from the notebook to the table
+
+You might expect a notebook in Code Dev to write to Code Dev. Before you run it, look at the lakehouse you attached. The workshop puts the logic and the stored data in different workspaces, so the **default lakehouse** gives Spark a specific place to resolve the table name. The notebook prints the target it sees. If you had two lakehouses called `sales`, which part of the output would help you tell them apart?
+
+There are two moments worth slowing down for. First, the notebook builds and checks the result in Spark. Then it writes the table and reads it back. Think of what you would tell a teammate at each moment. A correct in-memory result lets you say the calculation worked on these inputs. The read-back and the lakehouse preview let you say that the result is available in the intended Data Dev lakehouse. Try finding both pieces of evidence during the exercise.
+
+The notebook also needs enough access to carry out the write. You have that access in the training setup. Later, when a release pipeline deploys the notebook, you’ll ask a related question about the identity that actually runs it and needs access to the lakehouse.
+
 ## 1. Create the lakehouse in Data Dev
 
 1. Open your **Data Dev** workspace in Fabric. Check its full name before proceeding.
@@ -173,9 +181,11 @@ Keep the two Fabric item links. In Unit 2 you will use them to compare the live 
 
 ## What you built and where it leads
 
-You built a notebook that writes to a specific lakehouse, and you verified that running it again leaves the expected six rows. The notebook holds the instructions, the attachment directs the write, and the table holds the result of the run.
+The notebook, the attachment and the table give you three different places to investigate a surprising result. If the calculation is wrong in the notebook output, start with the inputs and logic. If the calculation looks right and the target table is missing, check the attachment, the target printed in the run and the write step. A correct preview in the intended workspace is the end of that trace.
 
-So far, you can see all three in Fabric. In Unit 2 you’ll commit the item definitions and inspect the exported files to see which parts of this working setup Git can capture.
+You also ran the notebook twice. Predict what the second run would have produced if the same six rows were appended every time. The six rows you actually observed are evidence of the behavior you designed for this exercise. The notebook deliberately replaces a small training table built from fixed inputs. When you work with business history, deciding what a rerun may replace becomes a design and recovery decision of its own.
+
+In Unit 2 you’ll capture the definitions so a teammate can inspect the logic. Use today’s output as a reference point when you check what a Git update actually changes in Fabric.
 
 ## References
 

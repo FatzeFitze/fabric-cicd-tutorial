@@ -28,6 +28,14 @@ For example, if a report-only change lands on Reporting `dev` after Test, the ex
 
 If your team requires protected `main` branches in all three repos, add a promotion PR in each affected repo that preserves the tested commit. For a dependent change, you can review and merge the prerequisite Data change before the Code and Reporting consumers. Configure the release pipeline to verify the tested pins against those protected branches, and start the coordinated Prod release once all required PRs are complete. The PR sequence governs source review, while the release pipeline governs deployment and binding order.
 
+#### Follow the two approval decisions
+
+A pull request into `main` is a decision about what source the team accepts. Think through what you would expect to see five minutes after that PR is complete, before anyone has queued the release. The reviewed commit is in branch history. To change the Prod workspace, an operator queues a release, an approver authorizes the run, and the pipeline applies the definitions.
+
+There are two opportunities to ask for evidence. As the PR reviewer, look at what is entering `main` and which tested source it refers to. As the release approver, look at the **specific run** waiting for the Prod credential. Does it name the same tested candidate? Did that Test run publish, and are its smoke results linked to it? Are the requested targets the assigned Prod workspaces? If a newer Test run shows up while you’re reviewing, its result belongs to whichever commits and targets that run actually used.
+
+The person queuing the release, the person approving it and the identity that writes to Fabric each have a distinct role. You’ll observe the stage wait for approval, then watch the Prod managed identity perform the live checks and publish. When you execute the workload afterward, read its run record separately so you can tell who launched it and which access identity is visible in the run or connection settings.
+
 ### 1. Select the tested snapshot and check the Prod targets
 
 1. In the Test artifact, check `environment: test`, `mode: deploy`, `status: published`, `phase: complete` and `active_value_set: Test`. Record the Test run name and numeric `run_id` alongside the manifest link so you can select the run and reopen its three full hashes during review. Link the required Code PR check from your earlier review and the Test runtime results. [Prod release record](resources/prod-release-record.md) · [Read the release manifest](../../reference/release-manifests.md).
@@ -201,6 +209,14 @@ You first used Fabric's native Deployment pipelines to promote a lakehouse and n
 - **Manual release and runtime checks.** You select the Test run and start Prod deliberately. The pipeline automates source and target checks and publishing. You run the smoke checks in Fabric and attach the results to the release record. Model B calls for automated runtime validation in Test and Prod.
 - **A short path to the first Prod release.** Code is the only repo promoted to `main` in this exercise. Data and Reporting deploy from tested pins in their `dev` histories. The first Prod tooling PR starts on Code `main` to preserve the already tested candidate. Section 5 starts by reconciling the tooling into `dev` and publishing a tagged baseline for the advanced labs.
 - **A training sandbox.** Test and Prod start with the seeded items from Unit 3. Participants have workspace Admin access and can edit items directly. An empty-environment rebuild, stricter separation of duties, and private network execution are outside this exercise.
+
+#### Reconstruct the release from its evidence
+
+Try reading your final release record from the point of view of someone who was away. Could they find the PR that accepted the tested content, the approval for the run that actually went ahead, the workspace and item IDs the publisher touched, and the runtime results users depend on? Those records exist at different points because the decisions happen at different points.
+
+Now imagine the approval is on record and live preflight rejects a Prod target. What should you infer? The approver let that attempt proceed. The pipeline checked the target after approval and stopped before publishing. The job’s log and manifest show the outcome. A well-placed approval lets a person assess the evidence they have, while the live check verifies a condition that can change before execution.
+
+The workshop gives team members broad workspace roles so you can inspect the whole path. In a real team, walk through who can merge pipeline changes, administer the credential, approve its use and write directly in the workspace. If a person has several of those permissions, decide which combination your risk and staffing can support. Use the discussion below to turn that reasoning into one concrete control for your own project.
 
 #### Discuss your project
 

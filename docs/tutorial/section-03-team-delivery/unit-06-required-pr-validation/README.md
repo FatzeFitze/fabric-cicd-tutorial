@@ -33,6 +33,14 @@ The reusable validator reads the notebook's `.platform` metadata and compiles it
 
 The **branch policy** queues this Azure Pipeline against the PR's proposed merge with `dev` and uses the run result when deciding whether completion is allowed. In Azure Repos Git, you configure that trigger on the target branch. The supplied YAML sets `trigger: none` so ordinary pushes do not queue a separate CI run. [Azure Repos PR triggers](https://learn.microsoft.com/en-us/azure/devops/pipelines/repos/azure-repos-git?view=azure-devops#pr-triggers).
 
+### Decide what a green check lets you say
+
+Think of the person reviewing your next PR. They can see what changed in the diff. A repeatable check gives them another piece of evidence without asking each reviewer to remember the same list. Here the check looks at the exported notebook and recognizes the expected returned-order expression. Watch how quickly the pipeline can tell you which rule the proposed edit broke.
+
+There are two responsibilities inside this setup. The job runs the checker and reports a result. The **branch policy** makes a passing result a condition of completing the PR. If the same job ran successfully on demand, its log would still be useful. Inspecting the PR tells you whether the branch actually required that result. This is the first required PR check in the team workflow you’re building.
+
+Before you start, predict what happens to a valid Python edit with the wrong revenue rule. Python compilation can succeed. The Tiny Sales rule check can still fail and the branch policy can stop completion. When you fix it, compare the two runs and look for the diagnostic that explains the change in outcome.
+
 ## 1. Add the validator and pipeline
 
 1. In your Code repository checkout, confirm `git status --short` is clean. Update `dev`, then start a second branch.
@@ -143,9 +151,17 @@ The **branch policy** queues this Azure Pipeline against the PR's proposed merge
 
 ## What you built and where it leads
 
-You saw the same policy block the faulty proposal and accept the fix. The two runs tell you what the checker found in the proposed source. To show that the corrected logic produces **204.70** in Test, you’ll need a Fabric run against the deployed notebook and its target data.
+A green badge can mean several things depending on what ran. In this exercise, read the badge as “the proposed source passed the checks we configured for this branch.” To explain what that means to a reviewer, connect it to a specific check and to the version the job inspected.
 
-In Unit 7 you’ll use the same PR workflow to review another source-controlled input, the plan that tells the release where to deploy.
+| Question a reviewer might ask | Evidence to open |
+| --- | --- |
+| Did the proposed source meet the rules we checked in Git? | The required CI run and its diagnostic or passing result |
+| Can this candidate be applied to the intended Test workspace? | The Test release’s preflight, deployment log and manifest |
+| Does the resulting report show **204.70** after a run? | The executed Test workload, table and report checks |
+
+Imagine the second row is all you have. Which question about the business result would you still ask? This is why you’ll see checks at more than one point in the tutorial. Each becomes valuable when it can see the evidence needed to answer its question.
+
+In Unit 7 you’ll add a check for another thing a reviewer can inspect before merge. This time the proposed change describes where the release should go and what it should contain.
 
 For a deeper look at what a PR can check from Git and where live validation belongs, see [Static validation for Fabric items](../../reference/static-fabric-validation.md).
 

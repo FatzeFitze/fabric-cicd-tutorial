@@ -22,6 +22,14 @@ The preview works offline. It checks declared workspace IDs for duplicate assign
 
 The duplicate-ID check is a deliberately simple teaching example. Each role and environment in this lab has its own workspace, so reusing a GUID catches a likely copy-and-paste error. A different but incorrect GUID can still pass. In Unit 8, you use the Fabric API to compare the workspace returned for a configured GUID with the expected name from your assigned inventory. [Fabric Get Workspace API](https://learn.microsoft.com/en-us/rest/api/fabric/core/workspaces/get-workspace).
 
+### Read the release plan before letting it act
+
+Imagine handing the release to a teammate while you’re away. “Use the latest code and deploy to Test” leaves an important choice open in each repository. The release mask makes those choices visible. The Code revision carries the plan, and the Data and Reporting pins name the exact companion revisions. A reviewer can read the plan and ask whether those three versions work together.
+
+Targets deserve the same care. Each environment has a Code, Data and Reporting workspace, each with its own ID. For this lab every role has a dedicated workspace. Pointing two role/environment combinations at one ID is a clue that somebody copied the wrong value. The preview can catch that relationship using the files already in Git.
+
+While you inspect the preview, find one entry for each of these questions. What source will the release pick up? Where will it try to put it? Which dependency has to exist first? The planned value set answers a related question about the settings the workload should receive in that environment. Later you’ll compare that declared choice with the active setting in Fabric and, finally, with the values actually seen by the notebook.
+
 ## 1. Branch from `dev` and add the value sets
 
 1. In a clean Code checkout, pull the Unit 6 merge and branch for the configuration change.
@@ -162,8 +170,10 @@ The agent loads the mask and the Code export from the proposed PR merge. It disp
 
 ### What you built and where it leads
 
-You made the release plan something a reviewer can inspect. The preview shows which revisions, targets and value sets the configuration asks for. It caught an ID used twice because this exercise gives each role its own workspace. A unique ID can still point to the wrong place.
+You gave a reviewer something they can reason about before Fabric is involved. When the duplicate-ID check fails, ask which two assignments collide and why that is suspicious in the workshop layout. After the correction, consider a subtler case. The intended Code Dev ID was replaced by a unique, valid ID from a different workspace. The preview can complete because the plan is internally consistent. The live check needs another source of information about the expected target.
 
-In Unit 8 the Dev managed identity will ask Fabric which workspace each configured ID actually identifies. Keep the passing preview so you can compare the answer with what you intended.
+That distinction is useful when deciding who can change what. Your project may allow developers to propose a source revision or a dependency mapping. Someone still needs to establish the trusted inventory of release targets and decide how changes to it are approved. Comparing two fields copied from the same mistaken spreadsheet would give the reviewer little confidence.
+
+Bring the passing preview to Unit 8. You’ll compare the declared Dev IDs with the names and items Fabric returns to the Dev managed identity. In Test you’ll see why doing that check before a write is worth the effort.
 
 [Previous unit](../../section-03-team-delivery/unit-06-required-pr-validation/README.md) · [Tutorial index](../../README.md) · [Next unit](../unit-08-publish-shared-dev/README.md)

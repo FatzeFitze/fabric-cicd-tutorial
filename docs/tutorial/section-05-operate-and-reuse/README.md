@@ -4,6 +4,10 @@ Publish a tested Tiny Sales baseline once, then use it as the starting point for
 
 ## Publish the Tiny Sales baseline
 
+Imagine coming back to Tiny Sales after a teammate has completed one of the advanced labs. The Code branch has moved and Test may have changed. How would you agree on a starting point for the next lab? The tag gives the team a name for a specific Code commit. The release note connects it to the companion commits and the Test evidence. Publishing the baseline is a team decision about which starting point everyone can reproduce.
+
+The approval you captured in Unit 10 belonged to its Prod run. Here you’re reconciling the tooling into `dev` and establishing fresh Test evidence for that Code commit. The release note can link both records and explain what each one verified.
+
 ### 1. Reconcile the release tooling into Code dev
 
 Start from the completed [Unit 10 release](../section-04-release-automation/unit-10-release-to-prod/README.md). Open your Prod tooling PR and the Test manifest used for promotion. The PR identifies which tooling changes to bring back. The manifest records the Code, Data and Reporting revisions used for that release.
@@ -122,5 +126,11 @@ Review the staged changes, commit them and complete a PR into `dev` after CI. Fe
 - [ ] The Code tag resolves to the reconciled commit verified by the new Test run.
 - [ ] The release note identifies the Data and Reporting pins, Test evidence, Unit 10 Prod evidence and live prerequisites.
 - [ ] You can explain which state you get from Git and what you check in Fabric before a live lab.
+
+## What the baseline lets you reproduce
+
+If a teammate fetches the tag tomorrow, they can identify the exact Code source and find the Data and Reporting pins. Ask them what they’d check before starting a live lab. Their current `dev` can have moved, the pipeline can point to different settings, and Test can hold the effects of a later publish. The procedure above uses Git to compare source and Fabric to inspect what is deployed and running. Changing `dev` to restore baseline files goes through the same review you practiced in Unit 5.
+
+Use the tag and evidence as a reference point in either lab. In recovery you’ll need a known-good state to compare against a failed run. In the starter lab you’ll use the baseline to identify what change the new tooling delivered.
 
 [Closing recap](../closing-recap.md) · [Tutorial index](../README.md)

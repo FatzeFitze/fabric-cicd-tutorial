@@ -6,6 +6,14 @@ Estimated learner time: 15–20 minutes. Resources are pre-provisioned; organize
 
 You’re starting with an empty environment that has already been set up for your team. Take a few minutes to find the Fabric workspaces and the Azure Repos project before you create anything. Later, when a notebook and a lakehouse have the same names in Dev and Test, the workspace names you record here will tell you which copy you’re looking at.
 
+## Read the setup as a map of responsibilities
+
+Picture a teammate asking for two things. First, they want to inspect the sales calculation before accepting a change. Then they want to see yesterday’s result. Where would you send them for each? Azure Repos will give them the versioned definition. Fabric will give them the workspace items and the output of a run. Today you’ll check that you can reach those places and find out which ones your team has been assigned.
+
+Read a workspace name in two parts. **Code, Data and Reporting** tell you what the workspace is for. **Dev, Test and Prod** tell you where in the delivery process it belongs. A notebook in Code Test can use a lakehouse in Data Test. Those two workspaces serve different roles in the same environment. Keep that pair in mind when you find all nine workspaces. It will make more sense once you have real items to follow.
+
+The workshop gives you broad access so your team can try the workflow end to end. As you open Azure Repos and Fabric, notice which system is granting access. In a shared project, a person might review source in Azure Repos while a designated operator handles releases to Prod. You’ll practice the separate decisions later, even if you’re wearing several hats here.
+
 ## 1. Meet the components
 
 | Component | Purpose | Starting state |
@@ -109,9 +117,9 @@ Take the exact names of your assigned Code Dev and Data Dev workspaces into Unit
 
 ## What you built and where it leads
 
-You now have a map of where your team will work and what your account can access. Keep the workspace and repository names handy. They help you tell whether to look in Azure Repos for an access issue or in Fabric for a workspace issue.
+You can now locate the places where Tiny Sales will be edited, executed and eventually released. If a teammate can open the Code repo and gets an error opening Data Dev, you have a specific place to start. Check the Fabric workspace assignment and access. If they can open Fabric and get an error pushing a branch, check their repository access.
 
-The empty workspaces give you a starting point. In Unit 1 you’ll see the first relationship on that map in action when a notebook in Code Dev writes a table in Data Dev.
+Take a minute to sketch where the first notebook will live, where its table will live and where its definition will eventually be reviewed. Point to the three places in your team’s setup. In Unit 1 you’ll connect the first two and verify a real write. In Unit 2 you’ll take the first definition across the boundary to Git. The access checks today give you the starting conditions for those exercises.
 
 ## Coverage and reading
 

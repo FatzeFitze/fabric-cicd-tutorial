@@ -18,6 +18,20 @@ Your browser session was enough for the runs in Unit 4. An Azure Pipelines agent
 
 Put the Dev UAMI name, service connection name and expected workspace names in `config/environments/dev.yml`. The release mask holds workspace IDs and repository references. Azure DevOps expands the service connection name from the environment file when it prepares the pipeline, before it starts the job. The UAMI name records the expected identity in the evidence. Check the service connection in Azure DevOps to confirm which identity it uses. [Azure Pipelines variable templates](https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/variables-template?view=azure-pipelines) · [Template expressions for service connection inputs](https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/reference/azure-powershell-v5?view=azure-pipelines#inputs).
 
+#### Follow the request from Azure DevOps to Fabric
+
+You can open Dev in your browser. Imagine the Azure Pipelines job receives an access error a minute later. Whose access should you investigate? The browser session belongs to you. The agent signs in as the Dev managed identity through the configured service connection. The two sessions can see different things.
+
+| Who makes the decision? | What do they check? |
+| --- | --- |
+| Azure DevOps | Whether this pipeline is allowed to use the named service connection |
+| Microsoft Entra | Whether the assertion supplied for that connection matches the federated credential and can be exchanged for a token |
+| Fabric | Whether the signed-in identity has permission for the requested action in the workspace |
+
+Follow that order if the job fails. A job that never gets permission to use the connection is a different case from one that signs in and receives a Fabric access error. In this unit you grant **Viewer** because the job needs to read inventory. Later you’ll give the Test publisher a different identity with the access needed for publishing.
+
+One detail to watch in the log is the difference between what the YAML calls the identity and who can actually see the workspace. The configured UAMI name helps label the record. The service connection and the sign-in establish the identity used for the Fabric call. Use the connection’s settings when you need to find out which UAMI it uses.
+
 ### 1. Create your Dev service connection
 
 1. In Azure DevOps, open **Project settings → Service connections → New service connection**. Select **Azure Resource Manager → Next**, then set **Identity type** to **Managed identity**.
@@ -142,8 +156,10 @@ This is where you can apply the feature merge from Unit 5. Fabric detects incomi
 
 ### What you built and where it leads
 
-The preview told you what the plan asked for. The preflight told you what the Dev managed identity could see in Fabric. If you also applied the optional Git update, the Source control pane and the smoke run give you separate evidence of what reached Dev and what executed there.
+Compare the evidence you now have across Units 6–8. The notebook check saw the proposed source. The preview saw what your release configuration declared. The Dev preflight asked Fabric, using the pipeline’s identity, which workspaces and items it could see. If someone asks which notebook logic actually ran, follow that question to an execution record and its output.
 
-Unit 9 starts with the reviewed commits in Git and repeats the live checks for Test before writing there. Your Dev observations will help you recognize the same dependencies when they point to Test items.
+Now think about a team deciding whether to grant this identity more access. What would it gain from Contributor in Dev for this particular pipeline? Inventory was the requirement, and Viewer fulfilled it. You can keep the read-only job’s authority narrow while letting a developer apply an optional Git update through Fabric. Both actions work with the same environment and have different responsibilities.
+
+Take both the Git plan and the live inventory into Unit 9. There, the release will need permission to write and the evidence to show what it wrote. This is where the decision about who can use the Test credential starts to matter.
 
 [Previous unit](../unit-07-configure-and-preview-release/README.md) · [Next unit](../unit-09-release-to-test/README.md) · [Tutorial index](../../README.md)

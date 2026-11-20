@@ -36,6 +36,14 @@ A local branch isolates **source files**, not Fabric runtime data. Saving these 
 
 Open the **cloned folder** in VS Code. Fabric's **Open in VS Code / VFS** experience is a different route: its saves synchronize to the remote workspace. We use ordinary Git files here so saving an unfinished feature does not publish it into shared Dev. See [Fabric VFS behavior](https://learn.microsoft.com/en-us/fabric/data-engineering/author-notebook-with-vs-code-vfs-mode).
 
+### Give the change a place to be reviewed
+
+Picture a teammate checking the Dev report while you’re halfway through the returned-order change. They need a stable place to keep working, and you need room to try an edit. Your local branch gives the experiment a place in Git, and the PR gives the reviewer a clear question. Does this diff implement the new revenue rule while preserving the notebook’s identity and the rest of the calculation?
+
+The fact that both routes use VS Code can be confusing. Before saving, ask yourself where the file lives. A file in your clone belongs to your local Git checkout. The Fabric workspace editing route saves to the live workspace. Opening the clone here lets you choose when the edit is committed, pushed and proposed for integration.
+
+A reviewer can approve the proposed change. Completing the PR then integrates it. Predict what you’ll see after completion. The resulting commit becomes part of `dev`. The Dev workspace needs its incoming update applied, and a run needs to use the resulting definition before the new calculation can show up in the persisted result. Check those boundaries at the end of the exercise.
+
 ## 1. Confirm and retain the integration baseline
 
 1. In **Code Dev → Source control**, confirm Unit 4's final items are synchronized with `dev`. Resolve any unexplained changes with the facilitator before continuing; do not discard them or overwrite incoming content.
@@ -215,9 +223,11 @@ Keep the local checkout and completed PR record for Unit 6. Start the next chang
 
 ## What you built and where it leads
 
-Your PR records the revised calculation and the commit that reached `dev`. If the report still shows **357.20**, start by checking whether Fabric has applied that commit. Then look at the latest run and its output table. The expected **204.70** is an outcome to verify when the new logic runs.
+Open the completion record and imagine someone asks you whether returns are already excluded from the Dev report. The PR can show exactly what was accepted into `dev`. The Fabric **Source control** pane can show whether the notebook update is pending. The last run and table can show which result users are seeing. Follow that trace through execution before saying that **204.70** is already live.
 
-You reviewed the change by reading the diff. In Unit 6 you’ll give future PRs a repeatable source check and see what happens when it fails.
+How would you explain an accepted change and a report that still shows **357.20**? In this exercise, leaving the workspace update pending makes that combination easy to observe. Even after a definition is synchronized, the table reflects the last write until a new run changes it. A teammate troubleshooting the result can use that reasoning to decide whether to inspect Git, check the workspace, or look at runtime evidence.
+
+Your review caught what you knew to look for. In Unit 6 you’ll make one of those expectations repeatable with a required check. The reviewer still has a decision about the meaning of the change and whether the evidence is sufficient.
 
 ## References
 

@@ -14,6 +14,14 @@ Have the assigned Test UAMI name, the Azure subscriptions and resource groups fo
 
 Picture the notebook attachment from Unit 3. The source says which lakehouse the notebook needs, and the Test inventory tells the publisher which physical lakehouse fits that role. The publisher stages the resolved reference in a temporary copy of the definitions, so the reviewed files in Git remain the source for the next release. It does the same kind of work for the model’s Test SQL endpoint. After publishing, you’ll inspect the live report binding and compare the published item IDs with the starting inventory.
 
+#### Make the case for the write before it happens
+
+A preflight asks whether the release is ready to try a write. A publish applies the definitions. Reading both outcomes as “a green Test run” would make it easy to pick the wrong run later. Pay attention to the queue checkbox and the status in the artifact. With the box clear, a successful preflight records the verified inputs and starting inventory without publishing. With publishing selected, the run repeats preflight before it applies definitions.
+
+Think through who is allowed to make that happen. In Unit 8, the Dev job just needed to read. This pipeline must be authorized to use the Test connection, and the Test identity has Contributor in the target workspaces. Choosing to queue a Test deployment is a decision about this run. Allowing the pipeline to request a credential is a separate decision about its ongoing access. You’ll use both ideas again when you place an approval on the Prod credential.
+
+Before the release, predict what the before-and-after IDs will show for two notebooks. The Unit 3 `build_sales` is already present, so an update should preserve its physical ID. The new `validate_release` gives you a chance to see what creation looks like. If Fabric displays a field such as **Owner**, record what it actually says and keep the publisher’s identity in its own part of your record.
+
 ### 1. Set up the Test deployment identity
 
 1. Follow [Unit 8’s service connection steps](../unit-08-publish-shared-dev/README.md#1-create-your-dev-service-connection) with the supplied **Test** values and the name `sc-tiny-sales-test`. Leave **Grant access permission to all pipelines** clear.
@@ -139,8 +147,10 @@ Run the Test smoke checks here if time allows, or return to them before requesti
 
 ### What you built and where it leads
 
-You now have a Test manifest that ties three exact commits to the target workspaces, item IDs and active value set. The before-and-after IDs show whether the release updated an existing item or created a new one. Once you run the smoke checks and inspect the report, you can add evidence of how those deployed items behave.
+Say a colleague asks if Test is ready to support a Prod decision. Open the manifest and give each observation a job. The three verified commit hashes identify the candidate. The workspaces, active value set and item IDs describe the deployment. An existing ID before and after tells you that the release reused the item. A new ID with no prior entry shows creation. Any ownership fields you observed tell you how Fabric presents those particular items.
 
-Keep both kinds of evidence with the run you plan to promote. If someone publishes to Test again, check what was live when you collected the smoke result. In Unit 10 the approver uses that record to decide whether the same candidate can go to Prod.
+Then follow the workload as a user would. Check that the report reaches the Test model, that the Fabric Data Pipeline receives the Test values, and that the smoke run and report show the expected revenue. Keep these results with the deployment run. If someone publishes again, check which candidate was live when you measured the result. A perfectly good smoke result from a different deployment gives the approver evidence about a different release.
+
+In Unit 10 you’ll put this record in front of the person approving Prod. They can see exactly what was tested and check whether the requested release is for that same candidate.
 
 [Previous unit](../unit-08-publish-shared-dev/README.md) · [Tutorial index](../../README.md) · [Next: Approve and publish Tiny Sales to Prod](../unit-10-release-to-prod/README.md)

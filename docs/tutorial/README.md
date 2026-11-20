@@ -8,6 +8,8 @@ The working scenario is a small synthetic sales solution that progresses from co
 
 Coming to DNA Fabric Days? The [participant prep guide](pre-reads/README.md) covers what you'll get, what to set up and which background reading to pick.
 
+Set aside **5–10 minutes in each session** to read the opening and think through the recap. Make a prediction before an exercise, then check it against something you can see in Git, Azure DevOps or Fabric. As Tiny Sales grows, keep asking where the source lives, what’s deployed, which settings the environment uses and what the workload actually did. When you reach a review or approval, ask who makes the decision, what evidence they have and what their decision allows.
+
 | Unit | Outcome | Status |
 | --- | --- | --- |
 | [0. Observe and test the setup](section-01-foundation/unit-00-observe-and-test-the-setup/README.md) | Explain the components and inspect the provided workspace/repository layout | Setup exercise parked after organizer review; access checks reported successful; learner timing unmeasured |

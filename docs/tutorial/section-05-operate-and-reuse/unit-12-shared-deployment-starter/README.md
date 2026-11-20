@@ -8,6 +8,14 @@ By Unit 10 you had a release path that worked for Tiny Sales. Imagine starting a
 
 Use your team's [published Tiny Sales baseline](../README.md#start-an-advanced-lab-from-the-baseline) and assigned repositories and Fabric workspaces. Open the baseline Test manifest so you can compare its source revisions, targets and existing item IDs with this lab's release.
 
+## Decide what belongs in the project and what belongs in the starter
+
+Imagine two teams sharing a release process. Both need to check out the reviewed revisions, verify their workspaces and keep a deployment record. Only Tiny Sales needs a test for a measure named **Returned Orders**. Where would you put that rule so the other team can use the same release process? In this lab it lives with the Tiny Sales checks. The shared CI code calls it as part of validating this project.
+
+As you read the files you’re about to install, look for three places to make project decisions. The project’s wrappers select the shared workflow and environment. The release mask describes the project’s items and their dependencies. Project checks express acceptance rules specific to the workload. The shared YAML and Python take care of the repeatable steps those decisions feed into.
+
+A team could adopt identical YAML and still have different people authorized to deploy. Recall the existing pipeline registration, the branch policies and the service connection permissions from Units 6 and 10. Azure DevOps holds those controls and the project must configure them. Keep that thought while you replace the YAML at the paths the existing registrations already use.
+
 ## 1. Identify the files the existing pipelines use
 
 In Azure DevOps, open the existing pipelines under **Pipelines**. Match the Code repository and YAML paths to the table. If your team chose different pipeline names, use those names throughout the lab.
@@ -170,9 +178,11 @@ Here, each project versions a copy of the starter. For wider community reuse, pu
 
 ## Take the pattern into your project
 
-Follow `returns_report` through your PR, the Test manifest and the Test lineage view. You supplied the definition, its model dependency and the project check. The starter ran the release and recorded the evidence. That distinction helps you decide where the next change belongs. Another report over the existing model fits the configuration you just used. An item type the starter doesn’t support needs changes to the shared release code.
+Walk through your new report as if you were helping a second team adopt the starter. Its definition and model dependency came from the project. The measure check expresses what the Tiny Sales team expects to find in source. The shared CI runs that check and records its result. In Test, the publisher resolves the model binding, applies the definition and records what it created. Finally, the lineage view confirms the live binding and the card showing **2** gives you evidence of the report’s result.
 
-The closing recap takes that decision back to a real project. Consider which rules belong to your team and what evidence you’d want the shared tooling to produce every time.
+Try one more design decision. If your next report uses the existing model, the exercise shows where to describe it and where to put its checks. If your project needs a new item type or binding pattern, check the starter’s supported inputs and work with its maintainers on the release behavior. If the project needs an automated runtime test, decide how it will launch the workload and capture its result alongside the manifest. Those are different kinds of change with different owners.
+
+If you take the optional Prod path, use the source revisions and the starter version in the Test evidence. Ask whether the candidate and the release implementation are the ones you reviewed. Approval still belongs to the people and resources that protect the Prod target. For your own project, choose one shared check you’d adopt and one decision your own team would keep. [Closing recap](../../closing-recap.md).
 
 This applies **MS-03 Change control and traceability**, **MS-06 Environment configuration**, **MS-08 Release validation** and **MS-14 Release evidence**. [Fabric Minimum Standard](../../../source-guidelines/fabric-minimum-standard.md#minimum-standard-by-operating-model).
 

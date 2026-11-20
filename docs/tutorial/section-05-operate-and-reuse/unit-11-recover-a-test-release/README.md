@@ -14,6 +14,14 @@ Unit 9 gave you a Test manifest, and Unit 10 used release evidence to support a 
 
 Use your team's [published Tiny Sales baseline](../README.md#start-an-advanced-lab-from-the-baseline). Open its Test record for the established source pins, Test wiring and smoke checks. Use the **Code** repo, the existing **Tiny Sales - Test Release** pipeline, and your assigned Test workspaces and authorized managed identity from [Unit 9](../../section-04-release-automation/unit-09-release-to-test/README.md). Arrange permission to create and authorize an Azure DevOps Environment, or have the facilitator do that step with you.
 
+### Find the last known good state before retrying
+
+It’s tempting to see a red Test run and choose **Rerun**. First, predict what would happen if the next attempt reads the same wrong workspace name from the same commit. The live comparison still has the same two inputs. Waiting a minute won’t change either one. The error message gives you a reason to inspect the configuration in Git before trying again.
+
+When you’re on call, three views help you decide where to look. The Azure DevOps Environment history tells you which deployment jobs were recorded against the Test Environment and when. The manifest tells you what source and Fabric targets the publisher selected and which phase it reached. Fabric itself can tell you what items are present and what their last execution did. You’ll practice moving between those views using one controlled fault.
+
+One decision belongs with the person diagnosing the failure, and another belongs with whoever can authorize a change. Here you’ll fix the expected name in Git and send it through review. The reviewer can see the narrow fix and its evidence. The operator then starts a fresh deployment from the corrected commit and verifies recovery.
+
 ### 1. Track Test deployments in Azure DevOps
 
 When several pipelines can deploy to the same target, a support engineer needs to know which one last touched it and whether that attempt succeeded. An Azure DevOps Environment gives the target its own deployment history across the jobs that declare it. It also gives the target owner a place to restrict which pipelines can use it and to add target-wide approvals or checks when needed. In this unit, use that history during recovery to find the last known-good run. Then use its manifest to verify the exact Fabric workspaces, revisions and item IDs. The release mask chooses the actual Fabric targets, and the service connection supplies the identity. [Azure DevOps Environments](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/environments?view=azure-devops#view-deployment-history) · [Approvals and checks](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals?view=azure-devops).
@@ -114,8 +122,10 @@ This failure occurred before any Fabric writes. If a run fails during publishing
 
 ### What you built and where it leads
 
-You have three runs that tell the story of the failure and recovery. The baseline shows the known-good state. The failed run stopped at preflight, which tells you to start with the workspace name in Git. The corrected run and fresh smoke results show what is working again.
+Put the known-good, failed and recovered runs in order. In the failed run you can point to a target mismatch during preflight. The exercise stopped before publishing, so the existing report can still display the result of the previous successful run. This is an important diagnostic habit. An old result can still look right when the new release failed to reach it.
 
-A failure during publishing would call for a different investigation. Check the last completed phase and the live items before deciding what to rerun. Use the closing recap to carry that reasoning into recovery of data or external side effects, where redeploying definitions is only one part of the job.
+Imagine a different run that reached publishing and failed after updating Code. Would you start with the same fix? Look at the completed phases and check the live workspace before deciding what to retry. A partially updated solution might need a controlled retry, a redeployment from a known-good snapshot, or a coordinated fix to the affected configuration. Use the live state to choose the recovery.
+
+Give your recovery evidence to someone who didn’t see the exercise. They should be able to identify the bad input, the reviewed fix, the new deployment and the fresh runtime check. Tiny Sales can rebuild its synthetic table from the notebook. If a real workload already changed historical data or sent results elsewhere, the recovery decision also needs a plan for those effects. [Looking ahead — protecting historical data](../../reference/persisted-data-in-production.md).
 
 [Publish and use the baseline](../README.md) · [Closing recap](../../closing-recap.md) · [Tutorial index](../../README.md)

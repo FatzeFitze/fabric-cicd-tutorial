@@ -60,6 +60,14 @@ Configure each target-stage rule once, then subsequent deployments apply it. Thi
 
 The rule is environment state, separate from the versioned Python logic. Recording its values makes the manual process reproducible. Later Model B units introduce reusable tooling and configuration for resolving such mappings.
 
+### Walk through a release from the target’s point of view
+
+A natural first guess is that promoting a working notebook brings its working environment along with it. Picture looking at Test immediately after the Data deployment. You can find a `sales` lakehouse there. Where would the six rows come from? The platform can promote the lakehouse definition. The test data for Tiny Sales will come from a notebook run against that target. This is why the exercise has a Data deployment, a Code deployment, a target binding and a runtime check.
+
+Fabric’s native Deployment pipelines give the stages a relationship. You can see the corresponding items in the UI and set a rule on the stage that will receive the notebook. Think like the person about to deploy to Test. Which stage is about to change? Which lakehouse will its notebook use? Which of those questions can you answer from the stage configuration? Keep your answers in mind when you look at the Test notebook and its run output.
+
+You’ll also make a deliberate decision before promoting to simulated Prod. Ask what someone else would need to see to agree that the same logic is ready to go there. Your Test result, the selected source and the intended target give them a basis for the decision.
+
 ## 1. Prepare one common notebook source
 
 1. In **Code Dev**, replace only `build_sales`'s **first PySpark code cell** with the [environment-aware target cell](../../../../sample/tiny-sales/environment-aware-target-cell.py). Keep the Markdown and remaining three code cells unchanged.
@@ -187,9 +195,11 @@ Keep the native Test and Prod assets and your release record. Units 9 and 10 wil
 
 ## What you built and where it leads
 
-You promoted one set of notebook logic and checked that each environment produced its own result. The deployment rule specifies the lakehouse for a stage. The notebook run and the table it writes give you evidence that the binding worked when the code executed.
+You’ve used the Test and Prod runs to show that the notebook reached the intended lakehouse in each environment. Pick three pieces of evidence from your release record and give each a job. The deployed item link identifies the instance. The target rule describes the attachment you asked Fabric to apply. The Test run and the table preview show the effect where it belongs. A later operator can use those observations to investigate a failed deploy or a green run with the wrong output.
 
-Later, you’ll use the item IDs you recorded here to see whether a managed release updates the same Fabric items. Unit 9 will resolve the Test bindings from configuration and live inventory, then record them alongside the source that was deployed.
+This was a human-operated release. The person working through the exercise checked the target, made the promotion decision and ran the notebook. For a team release, you may want those decisions recorded or made by different people. When you get to Unit 10, compare the authorization you exercised here with the branch review, service connection approval and managed identity used there.
+
+Keep the Test and Prod physical IDs. They give you a baseline when the managed publisher in Units 9 and 10 touches the same items, where the question will be whether it updated the existing instances or created new ones.
 
 ## References
 
