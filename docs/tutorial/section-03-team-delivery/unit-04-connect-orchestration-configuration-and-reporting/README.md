@@ -2,6 +2,8 @@
 
 **Time:** approximately 60 minutes.
 
+You’ve run the notebook directly and used a deployment rule to point it at the right lakehouse in another environment. Now make Tiny Sales something a teammate can run and report on in Dev. You’ll pass configuration into the notebook through a Fabric Data Pipeline, then follow a change to the sales data all the way to the report.
+
 **You will add:** a Variable Library and Fabric Data Pipeline in Code Dev, plus an explicit semantic model and one-page report in Reporting Dev.
 
 ## What you will learn
@@ -204,10 +206,6 @@ Frequent changes, shared consumers and stronger release expectations motivate Mo
 
 Carry this record forward. Unit 5 uses the **2490-cent** price and **357.20** report result as its starting point. Unit 7 uses the Data and Reporting commit IDs, Unit 8 checks the exported bindings, and Units 9 and 10 compare live targets and ownership with this human-authored baseline.
 
-## What you can now explain
-
-The same notebook received different runtime values through the Variable Library and the Fabric Data Pipeline. When you deliberately supplied `test` in Code Dev, what told you that the notebook checked the value it received?
-
 ## What we've built so far
 
 Spend **3–5 minutes** tracing the solution with a partner or on your own.
@@ -216,7 +214,7 @@ In Unit 3 you used native Deployment pipelines to promote a lakehouse and notebo
 
 Use the Travel mug price change to trace what you edited, what the notebook recalculated, what you checked in the report and what you captured in Git. If you were releasing this fuller solution by hand, which dependencies would you prepare in Test, and which bindings and runtime values would you verify before running it? Pick one repeated check you'd automate first.
 
-Carry those questions into Unit 5. You'll review a change to the sales logic in Git. The Test release later shows how to verify its effect in Fabric.
+When the Travel mug price changed, you could see the effect in the notebook output, the table and the report. Each tells you something different about the run. Keep the figures and the dependency notes from this unit. They’ll give you a starting point for reviewing the next change and for checking whether the full solution is wired correctly in Test.
 
 ## References
 

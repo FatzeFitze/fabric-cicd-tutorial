@@ -1,6 +1,8 @@
 # Unit 8 — Verify the shared Dev workspaces
 
-Allow **35-40 minutes** for the preflight and inspection. You will create a Dev service connection and run a read-only Azure Pipeline that verifies the shared Dev workspaces and records the physical IDs of the existing Tiny Sales items. Fabric Git integration provides the Dev update path. After the preflight, you can optionally sync the merged changes and try a smoke check in Dev.
+Allow **35–40 minutes** for the preflight and inspection.
+
+Unit 7 gave you a release plan that passed its checks in Git. Now ask Fabric what the plan’s Dev IDs actually point to. You’ll set up a service connection so an Azure Pipelines job can sign in as the Dev managed identity, then compare the workspace names and items it sees with your team’s inventory.
 
 ### Before you begin
 
@@ -8,7 +10,7 @@ Use your Code checkout with the Unit 7 release mask merged into `dev`. Keep the 
 
 ### Understand the checks and the update
 
-Unit 7 catches repeated GUIDs from Git. This checkpoint asks Fabric which workspace each configured GUID identifies, then compares the returned name with your assigned inventory. A valid GUID for someone else's workspace can pass a static uniqueness check. Comparing with an independently recorded name catches many of those mistakes, and the item inventory adds context. A production release can use a protected inventory of approved workspace IDs and apply its own deployment permissions. [Get Workspace](https://learn.microsoft.com/en-us/rest/api/fabric/core/workspaces/get-workspace) · [List Items](https://learn.microsoft.com/en-us/rest/api/fabric/core/items/list-items).
+Suppose the release mask contains a valid GUID from another team. The uniqueness check in Git can pass. The live check asks Fabric for the workspace behind that GUID and compares the returned name with the expected name you recorded independently. The item inventory then helps you confirm you’re looking at the expected solution. A production release can use a protected inventory of approved workspace IDs and apply its own deployment permissions. [Get Workspace](https://learn.microsoft.com/en-us/rest/api/fabric/core/workspaces/get-workspace) · [List Items](https://learn.microsoft.com/en-us/rest/api/fabric/core/items/list-items).
 
 A **preflight** is a check you run before attempting a release. Here it asks Fabric which workspaces and items the managed identity can see. The Dev exercise ends at inspection, and Unit 9 uses the same kind of check before it publishes. The revisions in its log describe the Code checkout and the pins in the release mask. To see which Git changes have reached a Dev workspace, check Fabric **Source control**. To see which logic actually ran, check the Fabric execution and its output.
 
@@ -138,10 +140,10 @@ This is where you can apply the feature merge from Unit 5. Fabric detects incomi
 - [ ] You can reopen the preview and preflight results to explain what each verified and which source revisions they refer to.
 - [ ] You recorded the workspace Git state, active value set and exported references. If you synced and tested Dev, you also recorded the revisions and runtime result.
 
-### What you can now explain
+### What you built and where it leads
 
-Take a minute to compare three results. The PR check read the notebook source. The release preview read the declared source pins, targets and value sets. The Dev preflight used the Dev managed identity to check workspace names and inventory in Fabric. What would you open after a Test release to verify which definitions were deployed and whether they actually produced the expected report result?
+The preview told you what the plan asked for. The preflight told you what the Dev managed identity could see in Fabric. If you also applied the optional Git update, the Source control pane and the smoke run give you separate evidence of what reached Dev and what executed there.
 
-For the demonstration, we now proceed directly to a complete, structured **Test deployment** in Unit 9. The pipeline takes the reviewed Git revisions, verifies the Test targets, applies the bindings and records what it published. The optional Dev sync gives you a place to try the merged changes, and the Test release can proceed from Git either way.
+Unit 9 starts with the reviewed commits in Git and repeats the live checks for Test before writing there. Your Dev observations will help you recognize the same dependencies when they point to Test items.
 
 [Previous unit](../unit-07-configure-and-preview-release/README.md) · [Next unit](../unit-09-release-to-test/README.md) · [Tutorial index](../../README.md)

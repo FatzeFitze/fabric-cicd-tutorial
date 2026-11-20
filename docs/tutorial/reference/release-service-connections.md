@@ -1,6 +1,6 @@
 # Service connections, managed identities and federation
 
-In Unit 8, you queue the pipeline with your Azure DevOps account. An authorized pipeline task then signs in as a user-assigned managed identity (UAMI) to read Fabric. A UAMI is a reusable Azure resource with its own Microsoft Entra service principal and a lifecycle independent of the agent. The Azure DevOps service connection stores the sign-in configuration and controls which pipelines can use it. [Managed identities overview](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview) · [Azure DevOps service connections](https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops).
+When you ran the notebook in the browser, you were already signed in. In Unit 8, your Azure DevOps account starts a job on an agent. That job needs its own sign-in. The service connection lets an authorized task sign in as a user-assigned managed identity (UAMI) to read Fabric. A UAMI is a reusable Azure resource with its own Microsoft Entra service principal and a lifecycle independent of the agent. The Azure DevOps service connection stores the sign-in configuration and controls which pipelines can use it. [Managed identities overview](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview) · [Azure DevOps service connections](https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops).
 
 ## How the sign-in works
 

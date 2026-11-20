@@ -2,6 +2,8 @@
 
 Allow **45 minutes** with Azure Pipelines available. You will version a release mask, add the Test and Prod Variable Library value sets, and review a release preview in your PR.
 
+Unit 6 gave you a way to catch problems in a definition before merging it. A release can still go wrong if someone pastes the Dev workspace ID into the Test settings. You’ll put the source revisions, workspace targets and dependencies into a versioned release mask, then use a preview to catch that mistake in a PR.
+
 ## What you will learn
 
 - Identify the source revisions and target workspace IDs for a release.
@@ -158,8 +160,10 @@ The agent loads the mask and the Code export from the proposed PR merge. It disp
 - [ ] You can distinguish the source revisions, planned workspace IDs, desired value sets and the deployed state the next unit will verify.
 - [ ] Your worksheet records the merged `dev` commit, external pins and both runs.
 
-### What you can now explain
+### What you built and where it leads
 
-The reviewable release mask describes the intended source, targets and value sets. If the preview lists the expected Dev workspace ID, how would you verify that the Dev managed identity can see that workspace?
+You made the release plan something a reviewer can inspect. The preview shows which revisions, targets and value sets the configuration asks for. It caught an ID used twice because this exercise gives each role its own workspace. A unique ID can still point to the wrong place.
+
+In Unit 8 the Dev managed identity will ask Fabric which workspace each configured ID actually identifies. Keep the passing preview so you can compare the answer with what you intended.
 
 [Previous unit](../../section-03-team-delivery/unit-06-required-pr-validation/README.md) · [Tutorial index](../../README.md) · [Next unit](../unit-08-publish-shared-dev/README.md)

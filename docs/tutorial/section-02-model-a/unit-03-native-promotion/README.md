@@ -2,6 +2,8 @@
 
 **Time:** approximately 60 minutes.
 
+In Unit 2 you captured a notebook that works in Dev. Imagine its first Test run still points at Data Dev. It could finish successfully and write to the wrong place. Use Fabric Deployment pipelines to promote the same notebook logic, specify the lakehouse each stage should use, and verify the result where it belongs.
+
 **You will create:** Data and Code Deployment pipelines, target-specific notebook rules, and a verified Tiny Sales result in Test and simulated Prod.
 
 ## What you will learn
@@ -183,9 +185,11 @@ If Prod still targets Test or Dev, correct the **Prod stage rule** and redeploy 
 
 Keep the native Test and Prod assets and your release record. Units 9 and 10 will update those same lakehouses and notebooks through Azure Pipelines. Their item links and IDs let you see which items the managed release reused. Next, expand the solution in Dev with orchestration, a Variable Library and reporting.
 
-## What you can now explain
+## What you built and where it leads
 
-The same notebook logic ran in all three environments. The deployment rules set the default lakehouses in Test and Prod. If the Test deployment succeeds, where would you look to prove that the notebook actually wrote its result to Data Test?
+You promoted one set of notebook logic and checked that each environment produced its own result. The deployment rule specifies the lakehouse for a stage. The notebook run and the table it writes give you evidence that the binding worked when the code executed.
+
+Later, you’ll use the item IDs you recorded here to see whether a managed release updates the same Fabric items. Unit 9 will resolve the Test bindings from configuration and live inventory, then record them alongside the source that was deployed.
 
 ## References
 

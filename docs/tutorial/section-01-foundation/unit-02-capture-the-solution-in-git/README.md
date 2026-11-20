@@ -3,6 +3,8 @@
 **Time:** approximately 25–35 minutes.  
 **You will create:** versioned lakehouse/notebook definitions in Azure Repos and a recorded source baseline.
 
+Unit 1 left you with a working notebook, a lakehouse and a result you can check in Fabric. Suppose a teammate wants to review the notebook you ran. What could you give them so they can open that exact version next week? You’ll capture the two item definitions in Git, then send a small edit back to Dev to see when the workspace picks it up.
+
 ## What you will learn
 
 By the end of this unit, you can:
@@ -164,9 +166,11 @@ Fabric supports [autosaved collaborative notebook editing](https://learn.microso
 
 Leave the Dev items and six-row table in place so Unit 3 can promote the definitions and produce a new six-row result in Test. Share any blocked step and exact error with the facilitator.
 
-## What you can now explain
+## What you built and where it leads
 
-The Git round trip preserved the notebook definition and let you apply a reviewed edit to Dev. If the training table disappeared, which captured definitions would help you rebuild it, and what would you run to recreate its rows?
+Your commit IDs let someone reopen the exact definitions you captured, even after `dev` has moved on. The Markdown edit also gave you a way to watch a Git change reach the live notebook. The sales rows are still in the lakehouse, where the run in Unit 1 wrote them.
+
+In Unit 3 you’ll promote the live notebook and lakehouse definitions to a second environment. You’ll give the Test notebook its own lakehouse and run it there to produce a fresh result.
 
 ## References
 

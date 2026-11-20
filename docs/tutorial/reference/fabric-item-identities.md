@@ -1,6 +1,6 @@
 # Logical and physical IDs in Fabric
 
-A name such as `build_sales` helps people recognize an item. An ID lets Fabric or deployment tooling identify it precisely. Two identifiers matter here:
+Open `build_sales` in Code Dev and Code Test. Both tabs can show the same display name, while their URLs identify two different items. Now look at `.platform` in the repo. The logical ID there answers a different question from the ID in either browser tab. Use this table to decide where to look for each identifier.
 
 | Identifier | Meaning | Where to find it |
 | --- | --- | --- |

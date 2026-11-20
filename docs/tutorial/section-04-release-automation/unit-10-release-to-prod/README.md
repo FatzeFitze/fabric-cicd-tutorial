@@ -1,8 +1,8 @@
 # Unit 10 - Approve and publish Tiny Sales to Prod
 
-Allow **30 minutes** once the Prod connection and release branch are ready, plus **5–10 minutes** for the recap. Use the Test release from Unit 9 to select the same Code, Data and Reporting commits for an approved release to simulated Prod. Then verify that the Prod managed identity created `validate_release` and that Tiny Sales runs against the Prod data.
+Allow **30 minutes** once the Prod connection and release branch are ready, plus **5–10 minutes** for the recap.
 
-You will connect a Test run to a Prod approval, verify both workspace bindings and item identities, and use Fabric runtime evidence to check the release.
+Your Unit 9 Test run identifies the exact Code, Data and Reporting commits it published. If a teammate has merged more work into `dev` since then, the Test evidence still belongs to the earlier snapshot. Here you’ll ask for approval to release that snapshot to simulated Prod, then verify what the Prod managed identity published and what happened when you ran Tiny Sales there.
 
 ### Before you begin
 
@@ -214,5 +214,7 @@ Spend **5–10 minutes** on your own project or a familiar example. Write down o
 | **What would we automate next?** | Pick a check to run automatically and a decision to keep with a person. For example, automate the smoke notebook and attach its output to the exact candidate, then have a reviewer decide whether to release it to Prod. If several pipelines can deploy to the same target, consider what an Azure DevOps Environment would add. |
 
 Share one boundary you would enforce and one practice you would encourage. Name who owns each and what evidence would show it is working.
+
+So far, you’ve used the release record to decide whether to proceed. When a run fails, the same record helps you decide where to investigate and whether it’s safe to try again. If you take the optional recovery lab, you’ll start with a known-good baseline and practice making that call. [Unit 11 recovery lab](../../section-05-operate-and-reuse/unit-11-recover-a-test-release/README.md).
 
 [Previous unit](../unit-09-release-to-test/README.md) · [Closing recap](../../closing-recap.md) · [Tutorial index](../../README.md)

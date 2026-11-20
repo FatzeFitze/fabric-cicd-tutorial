@@ -1,6 +1,8 @@
 # Unit 12 — Use a shared Fabric deployment starter
 
-**Optional advanced lab · about 60 minutes after setup.** Migrate your Tiny Sales CI and Test pipelines to the shared starter. Add a report, see its project check fail and pass, then verify the new report in Test.
+**Optional advanced lab · about 60 minutes after setup.**
+
+By Unit 10 you had a release path that worked for Tiny Sales. Imagine starting a second project now. You’d still need to verify the target and record what was deployed, but you’d have different assets and different rules for deciding whether the result is right. In this lab you’ll move the common release process into a shared starter and try extending it with a new report and its own check.
 
 ## Before you begin
 
@@ -152,9 +154,7 @@ Authorize **Tiny Sales - Notebook CI** for the Data and Reporting repos if requi
 
 ## Why reuse this setup?
 
-Unit 10 gave you a working release for Tiny Sales. In this unit, you moved the repeated validation and publishing steps into shared YAML and Python. Projects using that implementation can follow the same source checks, target verification and evidence format. A fix to a binding or evidence check can be reviewed, tested and adopted by each consuming project.
-
-You also exercised two ways to extend the solution. The new report joined the dependency graph through the mask and its exported model reference. The new report check joined the existing notebook check through `validate_candidate.run`. The project supplies the assets and acceptance rules, while the shared implementation handles their release.
+Think back to the deliberate failure in the PR. The shared CI found your project’s check and ran it alongside the notebook checks. Later, the shared publisher used the dependency in your mask and the report’s exported model reference to bind the report in Test. Each project can supply its own inputs and checks while using the same release steps and evidence format. That also gives teams one place to review a fix to the shared binding or publishing logic.
 
 | What your project chooses | Where you configure or customize it |
 | --- | --- |
@@ -168,8 +168,12 @@ The first starter supports the Tiny Sales topology and additional reports over i
 
 Here, each project versions a copy of the starter. For wider community reuse, publish the YAML and matching Python together as a versioned release, and have projects adopt and test a chosen version. Assign maintainers to review changes and document supported inputs. The evidence's starter fingerprint lets reviewers check which implementation was used and keeps Test and Prod on the same version. [Starter responsibilities and inputs](../../../../deployment_starter/README.md).
 
-## What you can now explain
+## Take the pattern into your project
 
-Which inputs did Tiny Sales supply, and which steps came from the shared starter? For your own project, which settings and checks would you supply, and what would require an extension to the shared implementation? Use your PR, validation artifact and Test lineage view to explain how the report got from a pinned source commit to the target model. This applies **MS-03 Change control and traceability**, **MS-06 Environment configuration**, **MS-08 Release validation** and **MS-14 Release evidence**. [Fabric Minimum Standard](../../../source-guidelines/fabric-minimum-standard.md#minimum-standard-by-operating-model).
+Follow `returns_report` through your PR, the Test manifest and the Test lineage view. You supplied the definition, its model dependency and the project check. The starter ran the release and recorded the evidence. That distinction helps you decide where the next change belongs. Another report over the existing model fits the configuration you just used. An item type the starter doesn’t support needs changes to the shared release code.
+
+The closing recap takes that decision back to a real project. Consider which rules belong to your team and what evidence you’d want the shared tooling to produce every time.
+
+This applies **MS-03 Change control and traceability**, **MS-06 Environment configuration**, **MS-08 Release validation** and **MS-14 Release evidence**. [Fabric Minimum Standard](../../../source-guidelines/fabric-minimum-standard.md#minimum-standard-by-operating-model).
 
 [Publish and use the baseline](../README.md) · [Closing recap](../../closing-recap.md) · [Tutorial index](../../README.md)

@@ -4,9 +4,7 @@ Estimated learner time: 15–20 minutes. Resources are pre-provisioned; organize
 
 ## Objective
 
-Understand your training environment, identify what already exists and check that you can use it. Explain where source lives, where Fabric items run and how changes will eventually reach Test and simulated Prod.
-
-This unit inspects existing resources. Manual asset creation, the first Fabric Git commit, deployment and execution follow in later units.
+You’re starting with an empty environment that has already been set up for your team. Take a few minutes to find the Fabric workspaces and the Azure Repos project before you create anything. Later, when a notebook and a lakehouse have the same names in Dev and Test, the workspace names you record here will tell you which copy you’re looking at.
 
 ## 1. Meet the components
 
@@ -109,9 +107,11 @@ Use the checkpoint to identify what needs fixing before you create any items. If
 
 Take the exact names of your assigned Code Dev and Data Dev workspaces into Unit 1. In Unit 2 you will use the Git mappings checked here to find the definitions you export. [Next: Unit 1](../unit-01-create-a-tiny-sales-solution/README.md).
 
-## What you can now explain
+## What you built and where it leads
 
-Fabric workspace access and Azure Repos access let you do different parts of the exercise. If your teammate can edit in the Code repo but can't open Data Dev, which access would you check before they try the notebook in Unit 1?
+You now have a map of where your team will work and what your account can access. Keep the workspace and repository names handy. They help you tell whether to look in Azure Repos for an access issue or in Fabric for a workspace issue.
+
+The empty workspaces give you a starting point. In Unit 1 you’ll see the first relationship on that map in action when a notebook in Code Dev writes a table in Data Dev.
 
 ## Coverage and reading
 

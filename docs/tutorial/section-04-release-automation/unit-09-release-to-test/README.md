@@ -1,6 +1,8 @@
 # Unit 9 — Publish Tiny Sales to Test
 
-Allow **45–55 minutes**. In one Azure Pipeline run, verify the reviewed source and the Test workspaces, then publish Tiny Sales under the Test deployment identity. Compare the before and after item IDs in the release evidence.
+Allow **45–55 minutes**.
+
+In Unit 8 the pipeline signed in and inspected Dev. In Unit 3 you promoted a smaller solution by hand and set the Test notebook’s lakehouse rule. Bring those two experiences together now. The Test pipeline will verify its own targets, publish the reviewed Git snapshot under the Test managed identity, and record what changed in Fabric.
 
 ### Before you begin
 
@@ -10,7 +12,7 @@ Have the assigned Test UAMI name, the Azure subscriptions and resource groups fo
 
 ### From Dev inspection to a Test release
 
-Unit 8 verified the live Dev targets and inspected their references. Here the release verifies Test, then stages a temporary copy of the Git definitions. For example, it resolves the notebook's Data Test lakehouse and the model's Test SQL endpoint using the target inventory. This is the managed counterpart to the notebook rule you applied by hand in Unit 3. At the end, compare the before and after inventory to see what the release created or reused.
+Picture the notebook attachment from Unit 3. The source says which lakehouse the notebook needs, and the Test inventory tells the publisher which physical lakehouse fits that role. The publisher stages the resolved reference in a temporary copy of the definitions, so the reviewed files in Git remain the source for the next release. It does the same kind of work for the model’s Test SQL endpoint. After publishing, you’ll inspect the live report binding and compare the published item IDs with the starting inventory.
 
 ### 1. Set up the Test deployment identity
 
@@ -135,8 +137,10 @@ Run the Test smoke checks here if time allows, or return to them before requesti
 - [ ] The release artifact records the selected source, target IDs and `Test` value set.
 - [ ] The worksheet records the report's Test model and the observable differences between creating and updating an item.
 
-### What you can now explain
+### What you built and where it leads
 
-The Test manifest ties the three Git revisions to the Fabric targets and active value set. If Test is redeployed before your Prod review, how would you show that your smoke results belong to the candidate you're promoting?
+You now have a Test manifest that ties three exact commits to the target workspaces, item IDs and active value set. The before-and-after IDs show whether the release updated an existing item or created a new one. Once you run the smoke checks and inspect the report, you can add evidence of how those deployed items behave.
+
+Keep both kinds of evidence with the run you plan to promote. If someone publishes to Test again, check what was live when you collected the smoke result. In Unit 10 the approver uses that record to decide whether the same candidate can go to Prod.
 
 [Previous unit](../unit-08-publish-shared-dev/README.md) · [Tutorial index](../../README.md) · [Next: Approve and publish Tiny Sales to Prod](../unit-10-release-to-prod/README.md)

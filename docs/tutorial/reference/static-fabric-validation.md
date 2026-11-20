@@ -1,6 +1,6 @@
 # Static validation for Fabric items
 
-Static validation reads the definitions and configuration in Git. It can give a quick answer during a pull request, before an agent needs Fabric access. Choose checks that catch a specific failure your team cares about.
+Suppose a PR changes the notebook’s return rule and introduces a typo in a workspace mapping. Some clues are already in the diff. A static check reads definitions and configuration in Git, so it can give the author feedback before a release ever contacts Fabric. Start with a mistake your team cares about and ask what evidence is available at review time.
 
 | What to check | A useful starting point | What still needs evidence |
 | --- | --- | --- |

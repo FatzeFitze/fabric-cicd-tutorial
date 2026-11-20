@@ -2,6 +2,8 @@
 
 Allow **45–55 minutes** with local tools already installed. You will create a local feature branch, then complete the first Azure Repos pull request into `dev`.
 
+In Unit 4 you could see a price change move from the notebook to the Dev report. This time, someone else should be able to review the change before it reaches shared Dev. You’ll edit the returned-order rule in a local Git branch, show the difference in a pull request, then check what completing that PR changes in Azure Repos and what you can still see in Fabric.
+
 ## What you will learn
 
 - Clone your existing Fabric source into an ordinary local Git working folder.
@@ -211,9 +213,11 @@ The fictional business now wants **revenue to exclude returned orders**. Keep al
 
 Keep the local checkout and completed PR record for Unit 6. Start the next change from the updated `dev` and use it to exercise automated PR validation.
 
-## What you can now explain
+## What you built and where it leads
 
-The completed PR identifies which notebook revision `dev` now contains. If the Dev report still shows 357.20, where would you look to tell whether the new definition reached Fabric and whether it has run?
+Your PR records the revised calculation and the commit that reached `dev`. If the report still shows **357.20**, start by checking whether Fabric has applied that commit. Then look at the latest run and its output table. The expected **204.70** is an outcome to verify when the new logic runs.
+
+You reviewed the change by reading the diff. In Unit 6 you’ll give future PRs a repeatable source check and see what happens when it fails.
 
 ## References
 

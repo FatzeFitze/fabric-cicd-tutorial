@@ -2,6 +2,8 @@
 
 Allow **35 minutes of working time** with an available Azure Pipelines agent. You will add a reusable source validator and a Tiny Sales check, then make a successful build a requirement for completing PRs into `dev`.
 
+You reviewed the returned-order change by hand in Unit 5. Suppose the next edit gives each returned order 1.00 in revenue. It takes one character in the notebook to introduce that error. You’ll turn part of your review into a check that runs for every PR into `dev`, then watch the branch policy stop a deliberately faulty change.
+
 ## What you will learn
 
 - Run the same source check from the command line and Azure Pipelines.
@@ -16,7 +18,7 @@ You need permission to create an Azure Pipeline and queue it on the supplied age
 
 ## How the pieces fit
 
-In Unit 5 you inspected the diff and reviewed the expected totals yourself. Here you make a source check repeatable and connect it to a required PR policy. Watch the same policy reject a defect and accept its correction.
+The check runs in Azure Pipelines and reports back to the pull request. Azure Repos uses that result to decide whether the author can complete the PR.
 
 ```mermaid
 flowchart LR
@@ -139,9 +141,11 @@ The **branch policy** queues this Azure Pipeline against the PR's proposed merge
 - [ ] The corrected revision passed and the PR was completed through the branch's requirements.
 - [ ] The worksheet records both runs, the completed PR and the resulting `dev` commit.
 
-## What you can now explain
+## What you built and where it leads
 
-The required PR check caught the deliberate defect by reading the notebook source. What evidence would you open to show that the corrected calculation produced 204.70 in recognized revenue in Test?
+You saw the same policy block the faulty proposal and accept the fix. The two runs tell you what the checker found in the proposed source. To show that the corrected logic produces **204.70** in Test, you’ll need a Fabric run against the deployed notebook and its target data.
+
+In Unit 7 you’ll use the same PR workflow to review another source-controlled input, the plan that tells the release where to deploy.
 
 For a deeper look at what a PR can check from Git and where live validation belongs, see [Static validation for Fabric items](../../reference/static-fabric-validation.md).
 

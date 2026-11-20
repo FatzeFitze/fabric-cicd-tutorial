@@ -3,6 +3,8 @@
 **Time:** approximately 45 minutes, including the first Spark startup.  
 **You will create:** one lakehouse in Data Dev, one notebook in Code Dev, and one curated sales table.
 
+In Unit 0 you found Code Dev and Data Dev. Now you’ll put them to work together. You’ll create a notebook in one workspace, attach a lakehouse in the other, and check where Spark actually writes the result. Then you’ll run the notebook again to see what happens to the table when the logic runs twice.
+
 ## What you will learn
 
 By the end of this unit, you can:
@@ -169,9 +171,11 @@ Your working Dev solution is not yet a reproducible release. Git capture, target
 
 Keep the two Fabric item links. In Unit 2 you will use them to compare the live items with their Git exports, and you will use the six rows and **342.20** revenue as your before-and-after check during the Git round trip. If a check failed, share the step and exact error with the facilitator.
 
-## What you can now explain
+## What you built and where it leads
 
-You ran the notebook twice and replaced the sales table each time. Where would you look to confirm that the second run left six rows in the intended Data Dev lakehouse?
+You built a notebook that writes to a specific lakehouse, and you verified that running it again leaves the expected six rows. The notebook holds the instructions, the attachment directs the write, and the table holds the result of the run.
+
+So far, you can see all three in Fabric. In Unit 2 you’ll commit the item definitions and inspect the exported files to see which parts of this working setup Git can capture.
 
 ## References
 

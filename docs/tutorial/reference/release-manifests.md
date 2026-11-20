@@ -1,6 +1,6 @@
 # Read and design a release manifest
 
-A release manifest is a structured record of one release attempt. It gives reviewers and operators a way to answer three questions without searching the entire pipeline log. Which source revisions ran? What happened in the target environment? What did the pipeline verify?
+Imagine you’re approving a Prod release and see two green Test runs. Before picking one, check which commits each run used, which workspaces it reached and whether it actually published. The release manifest puts those answers in one place so you can tie the deployment and its evidence to a specific attempt.
 
 In Tiny Sales, `config/tiny-sales-release.yml` is an input that declares the release plan. The Test pipeline writes `test-release.json` as evidence of what happened during the run. Open it under **test-release-evidence** on the pipeline run page. [Unit 9](../section-04-release-automation/unit-09-release-to-test/README.md) · [Azure Pipelines artifacts](https://learn.microsoft.com/en-us/azure/devops/pipelines/artifacts/pipeline-artifacts?view=azure-devops).
 

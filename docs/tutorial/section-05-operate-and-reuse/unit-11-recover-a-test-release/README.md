@@ -1,6 +1,8 @@
 # Unit 11 - Diagnose and recover a failed Test release
 
-Allow **about 60 minutes** with an available Azure Pipelines agent and reviewer. Track a known-good Test deployment and recover from a configuration error caught by live preflight.
+Allow **about 60 minutes** with an available Azure Pipelines agent and reviewer.
+
+Unit 9 gave you a Test manifest, and Unit 10 used release evidence to support a Prod decision. Now try reading that evidence from the point of view of the person on call. You’ll introduce one wrong workspace name and follow the failed attempt from the Azure DevOps Environment history to the configuration that caused it. Then you’ll fix it through Git and verify the recovered release.
 
 ### What you will learn
 
@@ -110,7 +112,10 @@ This failure occurred before any Fabric writes. If a run fails during publishing
 - [ ] You can show where preflight rejected the deployment and trace the corrected Code commit with the same Data and Reporting pins.
 - [ ] You retained the recovered item IDs, runtime results and recovery owner in your record.
 
-### What you can now explain
+### What you built and where it leads
 
-The release task rejected the wrong workspace name during live preflight, and the corrected Git commit went through a new release and runtime checks. Which log or manifest field would help you decide whether to investigate an attempted write or start with the configuration in Git?
+You have three runs that tell the story of the failure and recovery. The baseline shows the known-good state. The failed run stopped at preflight, which tells you to start with the workspace name in Git. The corrected run and fresh smoke results show what is working again.
+
+A failure during publishing would call for a different investigation. Check the last completed phase and the live items before deciding what to rerun. Use the closing recap to carry that reasoning into recovery of data or external side effects, where redeploying definitions is only one part of the job.
+
 [Publish and use the baseline](../README.md) · [Closing recap](../../closing-recap.md) · [Tutorial index](../../README.md)
