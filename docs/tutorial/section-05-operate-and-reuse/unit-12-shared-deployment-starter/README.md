@@ -150,8 +150,26 @@ Authorize **Tiny Sales - Notebook CI** for the Data and Reporting repos if requi
 - [ ] The Test release evidence records the reviewed candidate and the starter version.
 - [ ] The new report is bound to the Test model and shows **2** returned orders.
 
+## Why reuse this setup?
+
+Unit 10 gave you a working release for Tiny Sales. In this unit, you moved the repeated validation and publishing steps into shared YAML and Python. Projects using that implementation can follow the same source checks, target verification and evidence format. A fix to a binding or evidence check can be reviewed, tested and adopted by each consuming project.
+
+You also exercised two ways to extend the solution. The new report joined the dependency graph through the mask and its exported model reference. The new report check joined the existing notebook check through `validate_candidate.run`. The project supplies the assets and acceptance rules, while the shared implementation handles their release.
+
+| What your project chooses | Where you configure or customize it |
+| --- | --- |
+| Source repositories and revisions | The mask's `sources` and the wrappers' repository resources select the source folders, repository names and reviewed commit pins. |
+| Assets and dependencies | The mask's `items`, `bindings` and `after` describe the supported graph. Keep each exported item's metadata and references consistent with it, as you did for `returns_report`. |
+| Environment targets and settings | Workspace IDs and desired value sets are in the mask. Expected workspace names and service connection references are in `config/environments/`. The Variable Library export supplies the values for each set. |
+| Project acceptance rules | `project_checks.static` selects `checks.validate_candidate`. Its `run(repositories, plan)` calls the checks for each concern. Add your own static checks there, using the selected source and resolved plan. |
+| Release timing and authority | The wrappers select Test or Prod and preflight or publishing. Configure branch policies, connection permissions and approval checks in Azure DevOps to enforce your project's release responsibilities. |
+
+The first starter supports the Tiny Sales topology and additional reports over its existing model. Supporting another item type or binding requires changes to the shared planner or publisher, with verification against real exports. Automated runtime tests would need an execution step and retained results. The current exercise verifies runtime behavior manually.
+
+Here, each project versions a copy of the starter. For wider community reuse, publish the YAML and matching Python together as a versioned release, and have projects adopt and test a chosen version. Assign maintainers to review changes and document supported inputs. The evidence's starter fingerprint lets reviewers check which implementation was used and keeps Test and Prod on the same version. [Starter responsibilities and inputs](../../../../deployment_starter/README.md).
+
 ## What you can now explain
 
-Which inputs did Tiny Sales supply, and which steps came from the shared starter? Use your PR, validation artifact and Test lineage view to explain how the report got from a pinned source commit to the target model. This applies **MS-03 Change control and traceability**, **MS-06 Environment configuration**, **MS-08 Release validation** and **MS-14 Release evidence**. [Fabric Minimum Standard](../../../source-guidelines/fabric-minimum-standard.md#minimum-standard-by-operating-model).
+Which inputs did Tiny Sales supply, and which steps came from the shared starter? For your own project, which settings and checks would you supply, and what would require an extension to the shared implementation? Use your PR, validation artifact and Test lineage view to explain how the report got from a pinned source commit to the target model. This applies **MS-03 Change control and traceability**, **MS-06 Environment configuration**, **MS-08 Release validation** and **MS-14 Release evidence**. [Fabric Minimum Standard](../../../source-guidelines/fabric-minimum-standard.md#minimum-standard-by-operating-model).
 
 [Publish and use the baseline](../README.md) · [Closing recap](../../closing-recap.md) · [Tutorial index](../../README.md)

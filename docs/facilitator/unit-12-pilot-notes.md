@@ -12,6 +12,8 @@ A local fixture called the candidate entry point through the starter's existing 
 
 Run **666** on PR **265** failed during Azure Pipelines YAML expansion at `deployment_starter/templates/ci.yml` line 5. That line was the template-root `pool:`. The shared CI and release templates now declare the Ubuntu image on their jobs. The run stopped before the project check. Re-run the PR validation to confirm it reaches that check. [Azure Pipelines job schema](https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/jobs-job?view=azure-pipelines).
 
+Organizer feedback on 20 November reports that the correction works. The available evidence for this follow-up is the organizer's report.
+
 1. Confirm Fabric exports a thin report created over Reporting Dev's model with a sibling-relative `datasetReference.byPath`. Inspect the actual exported measure declaration and adjust the example check if its format differs.
 2. Replace the Code YAML at the original CI and Test paths. Verify that the existing required PR build uses the wrapper and can read both dependency repos. Confirm template expansion, artifact transfer between jobs, and the Test service connection authorization. Check that the original notebook rule and the new missing-measure diagnostic both fail the validation job on their faulty inputs.
 3. Queue Test preflight, then publish. Check all bound targets, new report inventory and the physical semantic model shown in Reporting Test lineage. Run Tiny Sales and verify **Returned Orders = 2** on the new report.
