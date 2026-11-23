@@ -1,5 +1,6 @@
-# Earlier setup draft — superseded
+# Start the Fabric workshop
 
-The participant sequence starts with [Unit 0 — Observe and test the setup](unit-00-observe-and-test-the-setup/README.md).
+1. [Unit 0 — Observe and test the setup](unit-00-observe-and-test-the-setup/README.md) helps you check access to your assigned workspaces and repositories.
+2. [Unit 1 — Create a tiny sales solution](unit-01-create-a-tiny-sales-solution/README.md) takes you through creating and running your first Fabric notebook.
 
-The earlier provisioning instructions are retained as a [facilitator reference](../../facilitator/project-and-environment-provisioning.md). Historical pilot records may refer to the old Unit 1 title. This page preserves those links; it is not a second required exercise. The next participant Unit 1 will cover manual asset creation and has not yet been authored.
+If you’re setting up resources for participants, use the [facilitator provisioning guide](../../facilitator/project-and-environment-provisioning.md).

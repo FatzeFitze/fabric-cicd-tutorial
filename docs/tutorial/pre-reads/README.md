@@ -12,7 +12,7 @@ You’ll most likely work in pairs, with the option to work solo. Each pair or s
 | Data | Data repository | Data Dev, Data Test, Data Prod |
 | Reporting | Reporting repository | Reporting Dev, Reporting Test, Reporting Prod |
 
-Prod is simulated for the event. We'll also provide the Azure managed identities used by release automation. Depending on the final setup, those identities may be shared or assigned to your pair or solo setup.
+Prod is simulated for the workshop. Your facilitator will provide the Azure managed identity names your team will use in the release exercises.
 
 ## Before the event
 

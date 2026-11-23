@@ -51,7 +51,7 @@ Before you start, predict what happens to a valid Python edit with the wrong rev
    git switch -c feature/required-pr-validation
    ```
 
-2. Copy the three supplied files into the paths below, relative to the participant Code repository root. On GitHub, open each file and use **Raw** to get the source text.
+2. Copy the three supplied files into the paths below, relative to the participant Code repository root. Copy the files from a local checkout of the workshop materials or open each linked file and copy its source text.
 
    | Supplied file | Destination in your Code repo | Responsibility |
    | --- | --- | --- |
@@ -107,7 +107,7 @@ Before you start, predict what happens to a valid Python edit with the wrong rev
 ## 3. Watch the policy block a faulty change
 
 1. In the exported `notebook-content.py` on your feature branch, change `F.lit(0)` to `F.lit(1)` in the `withColumn("revenue", ...)` expression. This is valid Python and would give each returned order 1.00 revenue. Keep the declared expectations and check files as reviewed.
-2. Review the one-line diff, commit the notebook file as **Introduce the rehearsal revenue defect**, and push the same feature branch. Open an **active** PR titled **Add required Tiny Sales source validation** from `feature/required-pr-validation` into `dev`. Use this body and select **Create**.
+2. Review the one-line diff, commit the notebook file as **Introduce a deliberate revenue defect**, and push the same feature branch. Open an **active** PR titled **Add required Tiny Sales source validation** from `feature/required-pr-validation` into `dev`. Use this body and select **Create**.
 
    ```markdown
    ## Change

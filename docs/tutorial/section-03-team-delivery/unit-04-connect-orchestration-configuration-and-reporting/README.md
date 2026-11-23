@@ -36,7 +36,7 @@ The **Fabric Data Pipeline** orchestrates this workload. It is different from th
 
 The **Variable Library** stores typed, non-secret configuration so the same notebook can receive different values in each environment. The **Fabric Data Pipeline** passes values from the active set into the notebook, which writes the table. A **semantic model** gives reports a common definition of fields and measures such as Total Revenue. The **report** presents those measures. The model and report remain separate items even when both live in Reporting Dev.
 
-We will use **Direct Lake on SQL** for this pilot: the model references Data Dev's SQL analytics endpoint for metadata, while Direct Lake reads Delta data from OneLake. This is one explicit sample choice, not a rule that every project should use this mode. Do not silently accept a different mode in the creation dialog; record an unavailable option with the facilitator. See [Direct Lake development choices](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-develop).
+Choose **Direct Lake on SQL** for Tiny Sales. The model uses Data Dev’s SQL analytics endpoint for metadata, and Direct Lake reads Delta data from OneLake. This gives you a specific endpoint to inspect when you verify the model’s binding in Test and Prod. If you don’t see this option in the creation dialog, ask your facilitator to help you check your setup. [Direct Lake development choices](https://learn.microsoft.com/en-us/fabric/fundamentals/direct-lake-develop).
 
 ### Trace the handoffs behind one number
 

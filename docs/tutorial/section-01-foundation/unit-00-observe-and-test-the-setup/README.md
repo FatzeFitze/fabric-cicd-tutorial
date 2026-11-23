@@ -1,6 +1,6 @@
 # Unit 0 — Observe and test the setup
 
-Estimated learner time: 15–20 minutes. Resources are pre-provisioned; organizer provisioning time is separate.
+Allow **15–20 minutes** to check the resources already set up for your team.
 
 ## Objective
 
@@ -57,9 +57,9 @@ Teams can also organize one solution repo into role folders. In this exercise, e
 3. In each Dev workspace, inspect Git integration settings: repository, branch and directory.
 4. Open each Dev Source control pane as the participant. Sign in as yourself if prompted and report errors without disconnecting working bindings.
 
-**Expected result:** The mappings match the facilitator's assignment, and the panes are accessible. In this pilot's automatic-credential setup, prebinding does not make the organizer everyone's Git identity: each participant needs usable repository access. A configured shared connection would be a separate design choice.
+**Expected result:** The mappings match the facilitator's assignment, and the panes are accessible. The workshop uses your own Git credentials. Each participant needs access to the assigned repositories, even when the Dev workspaces are already connected.
 
-These checks do not yet prove a Fabric item commit/update works. That will be tested using the first real asset. A README edit in Azure Repos only demonstrates repository contribution access.
+A README edit checks your repository contribution access. In Unit 2, you’ll commit a Fabric item definition and apply a Git change back to the workspace.
 
 ## 4. Trace delivery and execution
 
@@ -100,7 +100,7 @@ This is a training sandbox. Models A/B describe controls for the fictional produ
 
 ## Checkpoint
 
-Explain where you will edit source and inspect deployed items, which repository mapping belongs to each Dev role, why roles/environments are separated, and what remains untested.
+Explain where you will edit source and inspect deployed items, which repository mapping belongs to each Dev role, and why the workshop separates roles and environments.
 
 ```text
 Unit: 0 — observe and test the setup

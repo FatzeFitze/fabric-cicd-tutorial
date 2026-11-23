@@ -17,7 +17,7 @@ Use Unit 4’s Dev solution record to check your starting point. The final Code 
 
 You need **Git**, an **IDE** and access to clone, create a branch and open a PR in your assigned **Azure DevOps Code repository**. The examples use Visual Studio Code. With another IDE, open the same local Git folder and run the same Git commands in PowerShell. Install/sign in using your organization's approved method before this exercise. Run `git --version` in PowerShell to confirm Git is available. No local Spark installation, Power BI Desktop or Fabric VS Code extension is required.
 
-Continue the existing pilot's three role repositories and `dev` integration branch. Only the **Code repo** changes here; Data and Reporting retain their recorded source revisions. Do not clone the GitHub tutorial preparation repo as your participant solution or reorganize workspace/repo bindings. If your assigned layout differs, use its confirmed Code folder and integration branch with the facilitator.
+Use your team’s three assigned repositories and the `dev` integration branch. Make this change in the **Code repo**. Keep the Data and Reporting revisions and the existing workspace bindings. If your assigned layout differs, confirm the Code folder and integration branch with your facilitator before you start.
 
 Keep a private copy of the [feature record](resources/feature-record.md). Read the short [logical/physical ID reference](../../reference/fabric-item-identities.md); you will preserve the existing notebook's logical identity during the edit.
 

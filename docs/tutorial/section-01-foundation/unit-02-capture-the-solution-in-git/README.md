@@ -58,7 +58,7 @@ Pay attention to the generated `.platform` file when you inspect the export. It 
 
 **Expected result:** You can point from Data Dev to its repository and from Code Dev to its repository. You have not changed a workspace connection or created a branch.
 
-Do not use the GitHub preparation repository as the destination. That repository supplies this tutorial; your Azure DevOps repositories hold the solution you are building.
+Commit the item definitions to your team’s assigned Azure Repos repositories. Use the workshop materials repository to read the instructions and find starter files.
 
 ## 2. Commit the lakehouse definition from Data Dev
 
