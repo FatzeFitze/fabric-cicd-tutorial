@@ -4,7 +4,7 @@
 
 It's 7:55 a.m. The overnight run is green. Finance opens the sales report and finds that last quarter's revenue has changed. The meeting starts in five minutes. Which number should they use?
 
-We talk about becoming data-centric because we want decisions grounded in evidence. Once people rely on the numbers, the team takes responsibility for explaining them and keeping them dependable.
+Finance needs a number they can use in the meeting and a way to explain any correction later. The support owner needs to know whether the overnight run touched closed months, and someone who owns the metric needs to decide how to communicate a correction.
 
 Reviewed changes, separate environments and release records give you a starting point. They help you establish which logic ran, where it ran and what was checked. To explain the difference and choose a safe fix, you also need to know which data the job read and wrote.
 
@@ -18,6 +18,8 @@ Suppose a release changes how returns are recognized from next month. Finance ex
 - **After Prod changes**, compare the before and after data for that same period. Check for missing or unexpected keys and reconcile business totals. Compare the relevant rows when the requirement is that they stay unchanged. Account for legitimate new arrivals and any approved recalculation before deciding whether to accept the result.
 
 A rehearsal gives you evidence about the inputs and conditions it covered. Live data, concurrent jobs and later executions can expose new failure modes. Plan a tested way to recover any state the business depends on, including history that is normally left untouched. [Safe deployments](https://learn.microsoft.com/en-us/azure/well-architected/operational-excellence/safe-deployments) · [Fabric Minimum Standard](../../source-guidelines/fabric-minimum-standard.md#minimum-standard-by-operating-model).
+
+Before signing off on a change that should affect only new orders, ask the reviewer to name the closed period they expect to preserve and the evidence they would compare after the first Prod run. A single total can stay the same even when individual rows changed. Pick a check that fits the promise you made to Finance.
 
 ## Make data recovery something you can run
 
@@ -42,5 +44,9 @@ Keep enough input history to cover detection, recovery and catch-up. Give Dev an
 ## Put the release evidence to work
 
 If yesterday's figure changes unexpectedly, start with what the tutorial taught you to record. Find the reviewed revision, deployed target, configuration and runtime result. Then identify the input batch or event range and the table version that fed the report. With that evidence and a rehearsed recovery path, you can work out what changed, which period was affected and how to repair it.
+
+## Rehearse the decision before the incident
+
+Suppose last quarter changed overnight. Identify the last known-good recovery point, the inputs you can still replay and the latest time the report can reopen. Give the release record to the person checking the deployed logic and the data comparison to the person validating the recovery. Agree who can authorize the cutover after both have checked their evidence.
 
 [Back to the closing recap](../closing-recap.md) · [Production follow-up](from-tiny-sales-to-production.md)

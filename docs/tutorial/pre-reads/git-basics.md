@@ -4,6 +4,8 @@
 
 Git is a version control system. It records changes to files so you can see what changed, compare versions, work on a change in isolation and combine work with teammates. Teams use it for code, configuration and documentation. A service such as Azure Repos, GitHub or GitLab can host a shared copy and provide a place to review changes.
 
+Imagine you saved a fix in VS Code and a teammate still sees the old line in Azure Repos. Trace where the fix could be. It starts in your working files, joins a local commit when you record it, and reaches the shared server when you push. If the PR later completes, check the target branch to see which revision it received. This sequence gives you a way to diagnose “I changed it” without guessing which copy someone is looking at.
+
 ## Where your work lives
 
 | Term | What it means |
@@ -66,7 +68,7 @@ The [Section 5 baseline exercise](../section-05-operate-and-reuse/README.md) mar
 | `git switch -c feature/test-release-recovery refs/tags/tiny-sales-v1.0.0` | Creates a feature branch at the tagged commit. |
 | `git restore --source=refs/tags/tiny-sales-v1.0.0 --staged --worktree -- 'path/from-the-diff'` | In your clean restore branch, stages a reviewable change to return the specified path to its tagged contents. Review the change before committing. |
 
-[Git tag documentation](https://git-scm.com/docs/git-tag) · [Git restore documentation](https://git-scm.com/docs/git-restore).
+Suppose a teammate adds another PR to `dev` after you publish the tag. Ask which source they’ll get when they fetch the tag for the lab. The tag still gives them the chosen Code commit. Before they run the lab in Fabric, they also need to check what the Test workspaces contain. A Git comparison and a Fabric inspection give them different parts of the answer. [Git tag documentation](https://git-scm.com/docs/git-tag) · [Git restore documentation](https://git-scm.com/docs/git-restore).
 
 ## Try it in a disposable local folder
 

@@ -23,6 +23,8 @@ Prod is simulated for the event. We'll also provide the Azure managed identities
 
 The hands-on setup uses your browser, IDE and Git. Spark runs in Fabric, and the report exercises run in the browser.
 
+Think about one moment at the workshop you’d like to feel comfortable with. If you can already use Git and open a PR, you might spend your preparation time following how a Fabric notebook writes to a lakehouse in another workspace. If you know Fabric well and haven’t used a release pipeline, start with the path from a PR to an approved release. Bring one question you want the exercises to answer.
+
 ## Pick a pre-read
 
 If one of these sounds weird, start there. The technical primers are optional and each stands on its own. Please also skim the internal DataOps guide summary to see how we apply these ideas at work.

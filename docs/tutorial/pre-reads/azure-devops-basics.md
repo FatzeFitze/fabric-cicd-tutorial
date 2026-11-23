@@ -33,7 +33,7 @@ An Azure DevOps pipeline definition can live in a **YAML** file in Git. YAML is 
 | **Agent and pool** | The agent is the worker that executes the job. A pool is a group of agents available to run jobs. Microsoft-hosted agents and self-hosted agents offer different choices for installed tools and network access. |
 | **Run** | One execution of the pipeline, with a status and logs for the work it performed. A run may publish artifacts such as reports or deployable files. |
 
-If a job sits in the queue, look at the pool and available agents. If the job runs but a step fails, open that step's log. If a stage is waiting for a check or approval, inspect that resource's check status. Each points to a different next action. [Azure Pipelines overview](https://learn.microsoft.com/en-us/azure/devops/pipelines/get-started/what-is-azure-pipelines?view=azure-devops) · [Agents](https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/agents?view=azure-devops).
+Picture three runs with a similar-looking status. One is queued, one is waiting for approval, and one failed in a script. In the first case, look for an available agent. In the second, open the resource’s check. In the third, open the step log. Practise saying who can move each run forward and what evidence they need. This makes it easier to ask the right person for help during the workshop. [Azure Pipelines overview](https://learn.microsoft.com/en-us/azure/devops/pipelines/get-started/what-is-azure-pipelines?view=azure-devops) · [Agents](https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/agents?view=azure-devops).
 
 ## How a release reaches another service
 

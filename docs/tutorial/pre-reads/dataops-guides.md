@@ -14,6 +14,8 @@ The guides ask two questions. Has this solution become something the business de
 
 A report can become productive as soon as a team relies on it for a recurring decision, even if the project still calls it a pilot. User counts and duration can prompt a review. Business dependency and impact determine the classification. [DataOps Principles & Scope](../../source-guidelines/dataops-principles-and-scope.md).
 
+During exploration, an analyst tests a new revenue definition on sample orders. A month later, Finance uses the same report to prepare a recurring review. The report may look the same in Fabric, but a late or incorrect number now affects somebody else’s work. Identify who relies on it, what they would do if it were wrong, and who owns the response. That gives you a reasoned basis for the classification discussion.
+
 ## Then choose the operating model
 
 The solution owner proposes a classification based on business criticality, delivery complexity, downstream dependencies, data and security sensitivity, and operational and recovery requirements.

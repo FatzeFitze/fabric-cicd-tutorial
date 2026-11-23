@@ -2,6 +2,8 @@
 
 Both pipeline paths call [`deployment_starter/release.py`](../../../deployment_starter/release.py). Start with its two commands. `validate` prepares a candidate and calls your project check. `publish` prepares the candidate again, compares it with earlier evidence, and then does live preflight or deployment. The common modules underneath it still do the planning and Fabric work introduced in Units 7–10. [Follow the calling YAML](deployment-starter-yaml.md).
 
+Start with one question from the Unit 12 PR. How does the Python code know that **Returned Orders** is missing from the candidate? First it has to find the right model, in the right repository, at the exact revision under review. Follow one report from the mask to the staged export, then see how the same selection is recorded in the evidence. This trace is also useful when the measure exists on someone’s branch and CI still reports it missing.
+
 ## Read `prepare`: turn the mask into a verified candidate
 
 | Step | What to read | What it establishes |
@@ -39,3 +41,9 @@ The running starter must match the starter recorded with the candidate. Its fing
 Once the evidence matches, `run_release` reads the target workspaces by ID, verifies their names and inventories the items. In deploy mode it publishes in phases. It reads the target lakehouse and SQL endpoint for notebook and model bindings, uses the target notebook ID for the pipeline activity, and checks the active Variable Library value set. The final inventory records created items such as `returns_report` and verifies that existing item IDs stayed stable. A failed release record can show completed phases. Use it and the live inventory when assessing how far a run got. [Read and design a release manifest](release-manifests.md).
 
 To trace one real run, pick `returns_report` in the resolved plan, find its Reporting source revision and then find the physical ID under `published_items`. Open the report in Fabric and check its semantic-model binding and returned-order count. Those checks connect the source declaration, the published item and the result a report reader sees. [Unit 12 Test checks](../section-05-operate-and-reuse/unit-12-shared-deployment-starter/README.md#7-preflight-and-publish-through-the-existing-test-pipeline).
+
+## Decide where a fix belongs
+
+Use three changes to navigate the code. If a check expects the wrong measure name, start in the project’s check module. If a supported report points to the wrong model folder, inspect its export and mask together. If a team needs a new binding shape, start by tracing what the shared planner and publisher currently accept. A project rule belongs with the team that owns the measure. A change to a shared binding also needs review from the people maintaining the release code.
+
+For a Prod candidate, ask which tested source and which release implementation you’re authorizing. The evidence can identify both. Use the smoke run and report result to see how the deployed definition behaves.

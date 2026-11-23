@@ -19,6 +19,8 @@ Try this with `build_sales` and `validate_release`. Find the physical ID of the 
 
 The DataOps guidelines distinguish code, deployment, environment and runtime state. This artifact ties the first three together through the source revisions, deployed item IDs and observed environment settings. Adding a linked validation result addresses the Model B evidence expected by **MS-14 Release evidence**. The manual smoke exercise gives you a validation result to link. Model B’s **MS-08 Release validation** calls for automated technical and runtime validation in Test and after Prod deployment. [DataOps Principles & Scope](../../source-guidelines/dataops-principles-and-scope.md#5-architectural-state-model) · [Fabric Minimum Standard](../../source-guidelines/fabric-minimum-standard.md#minimum-standard-by-operating-model).
 
+Try a decision with two green Test runs. The first says `preflight_passed`. The second says `published` and records three verified commits. Which one gives the approver a deployment to inspect? Before authorizing Prod, open the smoke evidence linked to that deployment and check that it covers the same candidate. If Test was redeployed before the check ran, use the run and workspace records to establish what was live at the time.
+
 ## Decide what to capture
 
 Start with the decisions people or automation need to make after a release. For each field, ask who will read it, what decision it supports and where its value comes from.

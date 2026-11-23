@@ -16,6 +16,8 @@ A team changes how an inventory report counts reserved stock. The change takes t
 
 CI gives the team feedback about a proposed or integrated change. Delivery takes a known version through release steps and records how it performed in the target environment. [Continuous delivery overview](https://learn.microsoft.com/en-us/devops/deliver/what-is-continuous-delivery).
 
+Imagine the inventory PR is approved on Friday and the warehouse needs the old calculation for a weekend stocktake. The team can accept the change into source on Friday and authorize its deployment for Monday. When you follow the steps below, notice where the team decides what version is acceptable and where it decides when that version may reach users.
+
 ## What happens between a PR and production?
 
 1. **Review and validate the change.** A reviewer checks the business logic and the scope of the diff. Automated checks can verify syntax, configuration and expected results on known inputs.

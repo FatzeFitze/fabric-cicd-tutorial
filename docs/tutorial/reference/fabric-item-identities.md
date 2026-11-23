@@ -8,7 +8,7 @@ Open `build_sales` in Code Dev and Code Test. Both tabs can show the same displa
 | **Physical item ID**, also called **object ID** in lifecycle documentation | Identity of one concrete deployed item in a workspace | Its Fabric item URL or an item API response's `id` field |
 | **Workspace ID** | Identity of the workspace containing the deployed item | Workspace URL or item API response's `workspaceId` field |
 
-The `.platform` file is not an inventory of every environment's physical IDs. Finding only a logical ID there is expected. Other definition files can contain physical dependency references, logical references, names or relative paths; inspect the actual format rather than interpreting every GUID as a physical item ID. See [Fabric source-control identities](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/source-code-format#platform-file).
+Look in `.platform` for the source item’s logical ID. For references to dependencies, inspect the export’s actual format. Depending on the item, you may find a physical ID, a logical ID, a name or a relative path. See [Fabric source-control identities](https://learn.microsoft.com/en-us/fabric/cicd/git-integration/source-code-format#platform-file).
 
 ## One definition, several deployed items
 
@@ -23,6 +23,8 @@ This is an illustration, not a manifest format or a claim about your actual IDs:
 The same controlled definition can correspond to distinct deployed items. Updating an existing item is different from deleting and recreating it; recreation can give it a new physical ID. Names and previous run records are therefore insufficient to establish current identity.
 
 Preserve the generated logical ID when editing an existing definition. Do not regenerate `.platform`, copy another item's logical ID or replace it with a Dev/Test/Prod physical ID. That changes how source control identifies the item; it does not configure its environment.
+
+Suppose the Test notebook is recreated with the same display name. A teammate pastes the old item link into the release record and says the notebook is back. What would settle it? Open the current notebook from Code Test and compare the physical ID with the earlier record. Then inspect the source definition to see which logical ID the team intended to preserve. The two checks answer different questions about the same name.
 
 ## Assign a logical ID to a new source item
 
@@ -43,5 +45,9 @@ A release must connect the source item to its deployed target and bind consumers
 For example, a Test notebook must reach the intended Test lakehouse, not the Dev lakehouse merely because its display name is also `sales`. Supported Git binding can resolve some logical references, while remaining physical references need the appropriate supported binding/configuration mechanism. Behavior depends on item type and deployment mechanism; preserving logical IDs alone does not configure every cross-workspace link. See [dependency binding](https://learn.microsoft.com/en-us/fabric/cicd/cross-workspace-dependency-binding).
 
 We introduced actual target binding in Unit 3. Unit 4 records the expanded Dev dependencies; Unit 5 preserves source identities during local edits. The later environment/deployment lessons will resolve and verify target mappings and show them in release evidence. An item ID is also distinct from the user, managed identity or connection used to deploy or execute it.
+
+## Try it on the release evidence
+
+Pick `build_sales` or `validate_release` in the Unit 9 manifest. Find its source revision and logical ID in Git, then match the physical ID to the item in Test. If the task is to prove that the notebook wrote to the correct lakehouse, keep tracing. Check the deployed attachment and the run result in the environment that executed it. [Read the Unit 9 manifest](release-manifests.md#read-the-unit-9-artifact).
 
 [Tutorial index](../README.md)

@@ -2,6 +2,8 @@
 
 In Unit 6, Notebook CI ran a source check. In Units 9 and 10, separate pipelines released Tiny Sales to Test and Prod. Unit 12 keeps those pipeline registrations and gives them a common implementation. Open the Test wrapper and follow `extends.template` to see where a project decision becomes a pipeline step. [Unit 12](../section-05-operate-and-reuse/unit-12-shared-deployment-starter/README.md#3-install-the-starter-and-replace-the-two-pipeline-files).
 
+Suppose you leave **Publish to Test after preflight** clear. Predict where the run will get its instructions and what evidence you can open afterward. Start at the queue option in the Test wrapper, follow it through the shared template, and find the argument that reaches Python. Then compare that path with Prod, where selecting a Test run supplies an artifact the release will verify.
+
 ## Start with the wrappers
 
 Each wrapper supplies the resources Azure DevOps must authorize and the values the shared template needs. A path such as `/deployment_starter/templates/release.yml` starts at the Code repo root. The files in the sample directory are the copy sources for your registered pipeline YAML files. [Azure Pipelines templates](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/templates?view=azure-devops).
@@ -33,4 +35,8 @@ Read the timing in `release.yml`. Azure DevOps expands `${{ ... }}` as it builds
 
 The service connection field selects the login used by the Azure CLI task. The connection's pipeline permissions and approvals live in Azure DevOps. The Test and Prod workspace IDs are read later from the release mask. This starter uses a regular Azure Pipelines job called `Release`. Unit 11 adds deployment history by explicitly declaring a deployment job that targets an Azure DevOps Environment. [Service connections and identities](release-service-connections.md) · [Unit 11](../section-05-operate-and-reuse/unit-11-recover-a-test-release/README.md).
 
-When a run fails, find the last successful handoff. A missing measure points to the **Validate** job and its diagnostic. A workspace name mismatch points to the release task and its live preflight evidence. [Follow the Python release](deployment-starter-python.md) · [Read a release manifest](release-manifests.md).
+## Work backwards from a run
+
+Pick a failed or successful Unit 12 run and find the first useful log. If Azure DevOps rejects the YAML before a job starts, follow the file and line in the expansion error. If the run reached **Validate**, find the candidate and the project check. If it reached **Release**, follow the selected evidence and connection before inspecting Fabric. A missing measure sends you to the project check. A workspace name mismatch sends you to the live preflight log and manifest. [Follow the Python release](deployment-starter-python.md) · [Read a release manifest](release-manifests.md).
+
+Imagine someone registers a new pipeline that points to the same YAML. Which permissions would you check before its first release? Open the service connection permissions and find the registration they authorize. In Prod, also open the check for the specific run waiting to use the connection. The YAML describes the requested workflow. Azure DevOps resource settings govern access to the credential.

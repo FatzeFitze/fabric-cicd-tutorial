@@ -13,13 +13,15 @@ Finance needs the sales report each morning. Orders now come from an upstream sy
 
 The Model B column of **MS-08** calls for automated technical and runtime validation in Test and after Prod deployment. The workshop's manual checks give you an example of the evidence such checks can produce. Link results to the exact released revisions and target, so reviewers can tell which candidate passed. [Static validation](static-fabric-validation.md) · [Release manifests](release-manifests.md) · [Fabric Minimum Standard](../../source-guidelines/fabric-minimum-standard.md#minimum-standard-by-operating-model).
 
+Take one possible failure and decide when it can be detected. A revenue rule that mishandles returns can be checked against known inputs while reviewing the change. A batch that arrives at 8:15 a.m. needs an operational signal at 8:00 a.m. Ask who sees each signal and who decides whether Finance can use the result.
+
 ## Decide how to run and recover it
 
 - **Access and approval.** Name who can change the source or environment settings, approve a release, and operate the workload. Compare the broad training workspace roles with the grants those roles need in your project. Check the agent-to-Fabric path and the workload-to-source path separately.
 - **Operational ownership.** Assign someone to receive failed-run and stale-data alerts. Give them the run link, the affected dataset and a way to tell whether Finance is seeing the current batch.
 - **Rebuild and recovery.** The workshop seeds Test and Prod. The Test recovery lab rehearses a configuration fix caught before publishing. For a real project, establish how you would bootstrap a fresh target and how you would inspect a partial publish. Decide how to restore definitions and bindings, and whether to replay a batch, restore data or reconcile external side effects. Check whether replay can create duplicates.
 
-Pick one likely failure. Describe where you would catch it, what evidence the check would produce, and who would act on the result. For example, a missing batch could trigger a freshness alert before Finance opens the report. The support owner can then inspect the last successful batch and decide whether a replay is safe.
+Sketch the decision for your own workload. Name one failure that should hold up a release and one that should alert the support owner after a scheduled run. For each, choose the evidence that would let somebody decide what to do next. If a batch is missing, for example, the support owner can inspect the last successful batch and decide whether a replay is safe.
 
 For a workload that accumulates history, consider what a release may write, how to test at realistic scale, and how to restore or replay data. [Looking ahead — protecting historical data](persisted-data-in-production.md).
 
