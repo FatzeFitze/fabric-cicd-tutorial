@@ -152,9 +152,12 @@ def read_bindings(paths, plan, dev, target):
     aliases = properties["libraryVariables"]
     for parameter, alias, variable in (("runtime_environment", "EnvironmentName", "environment_name"),
                                         ("run_label", "RunLabel", "run_label")):
+        binding = activity["parameters"][parameter]["value"]
+        if isinstance(binding, dict) and binding.get("type") == "Expression":
+            binding = binding.get("value")
         if (aliases[alias]["libraryName"] != plan["items"]["library"]["name"]
                 or aliases[alias]["variableName"] != variable
-                or activity["parameters"][parameter]["value"] != f"@pipeline().libraryVariables.{alias}"):
+                or binding != f"@pipeline().libraryVariables.{alias}"):
             raise PlanError(f"Unexpected pipeline Variable Library binding for {parameter}")
 
     expression = paths["model"] / "definition" / "expressions.tmdl"
