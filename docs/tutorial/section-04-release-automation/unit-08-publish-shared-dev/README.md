@@ -61,20 +61,19 @@ You use your workspace Admin role to grant access. Azure DevOps controls which p
    git switch -c feature/dev-release-preflight
    ```
 
-2. Copy the supplied files into the matching paths in your Code checkout.
+2. Copy these three files into the matching paths in your Code checkout. The Dev preflight reuses `toolkit/release_plan.py`, which you added in Unit 7.
 
    | Starter | Destination |
    | --- | --- |
    | [Dev environment settings](../../../../config/environments/dev.yml) | `config/environments/dev.yml` |
    | [Preflight command](../../../../toolkit/fabric_preflight.py) | `toolkit/fabric_preflight.py` |
-   | [Release planner](../../../../toolkit/release_plan.py) | `toolkit/release_plan.py` |
    | [Dev preflight pipeline](../../../../.azuredevops/pipelines/dev-release-preflight.yml) | `.azuredevops/pipelines/dev-release-preflight.yml` |
 
 3. In `config/environments/dev.yml`, set `releaseUamiName` to your assigned UAMI name and `releaseServiceConnection` to the name of the connection you created. Enter the three exact workspace display names from the assigned inventory. Compare the inventory with `environments.dev.workspaces` in your release mask. The pipeline reads the environment file for the connection name and the preflight reads it for the expected names.
-4. Stage, commit and push the four files.
+4. Stage, commit and push the three files.
 
    ```powershell
-   git add -- config/environments/dev.yml toolkit/fabric_preflight.py toolkit/release_plan.py .azuredevops/pipelines/dev-release-preflight.yml
+   git add -- config/environments/dev.yml toolkit/fabric_preflight.py .azuredevops/pipelines/dev-release-preflight.yml
    git diff --cached --check
    git diff --cached --stat
    git commit -m "Add read-only Fabric preflight for shared Dev"
