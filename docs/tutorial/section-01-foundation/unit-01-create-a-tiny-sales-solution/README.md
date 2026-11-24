@@ -175,7 +175,6 @@ Your working Dev solution is not yet a reproducible release. Git capture, target
 - [ ] A separate introductory Markdown cell displays **Tiny Sales — initial build**, your name/team and the notebook's purpose.
 - [ ] The target check prints the intended workspace/lakehouse names.
 - [ ] Both runs end with `UNIT_01_PASS`; the persisted table still has six rows and revenue 342.20.
-- [ ] You can explain why successful execution, Git capture and deployment are separate steps.
 
 Keep the two Fabric item links. In Unit 2 you will use them to compare the live items with their Git exports, and you will use the six rows and **342.20** revenue as your before-and-after check during the Git round trip. If a check failed, share the step and exact error with the facilitator.
 
